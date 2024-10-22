@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="green_high_90">#EEFFFE</color>
+    <color name="green_high_60">#CCFFFB</color>
+    <color name="green_high_40">#66FFF4</color>
+    <color name="green_high_10">#00CCBD</color>
+    <color name="green_base">#00998E</color>
+    <color name="green_low_10">#00665F</color>
+    <color name="green_low_20">#00332F</color>
+    <color name="gray_high_70">#E6E9E7</color>
+    <color name="gray_high_60">#CBD1CE</color>
+    <color name="gray_high_40">#95A19B</color>
+    <color name="gray_high_20">#626E68</color>
+    <color name="gray_high_10">#4A534F</color>
+    <color name="gray_base">#323835</color>
+    <color name="gray_low_10">#1A1D1B</color>
+    <color name="gray_low_20">#020202</color>
+    <color name="error">#FC503C</color>
+    <color name="error_background">#FFEBEB</color>
+
+</resources>
