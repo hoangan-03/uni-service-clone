@@ -109,6 +109,8 @@ extension TabItem on TabType {
 }
 
 class TabbarPage extends GetView {
+  const TabbarPage({super.key});
+
   List<Widget> _buildScreens() {
     return TabType.values.map((e) => e.page).toList();
   }

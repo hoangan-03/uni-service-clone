@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_base_v2/base/domain/base_usecase.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
 import 'package:flutter_base_v2/features/authentication/domain/repositories/auth_repo.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginWithEmailUseCase extends UseCaseIO<LoginBody, void> {
   final AuthRepo _authRepo;

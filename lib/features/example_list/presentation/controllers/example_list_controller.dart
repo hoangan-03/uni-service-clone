@@ -7,9 +7,7 @@ import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/common_paging_controller.dart';
 import 'package:flutter_base_v2/features/example_list/domain/entities/history_paging.dart';
 import 'package:flutter_base_v2/features/example_list/domain/usecases/get_list_history_uc.dart';
-import 'package:flutter_base_v2/features/home/domain/entities/user.dart';
 import 'package:flutter_base_v2/utils/config/app_constants.dart';
-import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:get/get.dart';
 
 class ExampleListController extends BaseController {

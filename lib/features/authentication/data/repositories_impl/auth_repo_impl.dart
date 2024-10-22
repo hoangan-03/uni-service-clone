@@ -7,7 +7,6 @@ import 'package:flutter_base_v2/features/authentication/data/providers/local/loc
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/register_body.dart';
 import 'package:flutter_base_v2/features/authentication/domain/repositories/auth_repo.dart';
-import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';

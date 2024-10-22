@@ -5,7 +5,6 @@ import 'package:flutter_base_v2/base/domain/dispose_bag.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 class BaseController<T> extends SuperController with FullLifeCycleMixin {
   late Future<OkCancelResult> Function(AppException e) showRetryError;

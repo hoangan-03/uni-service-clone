@@ -3,9 +3,7 @@ import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/authentication/domain/repositories/auth_repo.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
-import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 enum AuthServiceType { google, apple }

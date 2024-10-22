@@ -1,4 +1,3 @@
-import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';

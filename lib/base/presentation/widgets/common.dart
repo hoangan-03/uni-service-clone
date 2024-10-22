@@ -13,32 +13,24 @@ part 'common.g.dart';
 
 class BaseAppBar extends AppBar {
   BaseAppBar({
-    ShapeBorder? shape,
-    Color? shadowColor = Colors.black26,
+    super.shape,
+    super.shadowColor = Colors.black26,
     String? title,
-    double? titleSpacing,
-    List<Widget>? actions,
-    Widget? leading = const CommonBackButton(),
-    double? elevation = 3,
-    bool centerTitle = true,
-    Key? key,
+    super.titleSpacing,
+    super.actions,
+    super.leading = const CommonBackButton(),
+    super.elevation = 3,
+    bool super.centerTitle = true,
+    super.key,
   }) : super(
-          key: key,
-          shape: shape,
-          centerTitle: centerTitle,
           title: title == null
               ? null
               : Text(
                   title,
                   style: Get.context?.theme.textTheme.titleMedium,
                 ),
-          titleSpacing: titleSpacing,
           titleTextStyle: Get.context?.theme.textTheme.titleLarge,
           backgroundColor: Get.context?.theme.appBarTheme.backgroundColor,
-          elevation: elevation,
-          leading: leading,
-          actions: actions,
-          shadowColor: shadowColor,
         );
 }
 
@@ -174,7 +166,7 @@ Widget commonBackButton({void Function()? onPressed}) {
     },
     child: Icon(
       CupertinoIcons.back,
-      color: colorScheme.onBackground,
+      color: colorScheme.onSurface,
     ),
   );
 }

@@ -17,7 +17,7 @@ class CommonPagedListView<T> extends StatelessWidget {
     this.newPageProgressIndicator,
     this.noItemsFoundIndicator,
     this.noMoreItemsIndicator,
-    Key? key,
+    super.key,
     this.scrollController,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
@@ -36,7 +36,7 @@ class CommonPagedListView<T> extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
     this.separatorBuilder,
     this.itemSize,
-  }) : super(key: key);
+  });
 
   final CommonPagingController<T> pagingController;
   final Widget Function(
@@ -157,7 +157,7 @@ class CommonPagedListView<T> extends StatelessWidget {
 }
 
 class CommonFirstPageErrorIndicator extends StatelessWidget {
-  const CommonFirstPageErrorIndicator({Key? key}) : super(key: key);
+  const CommonFirstPageErrorIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +166,7 @@ class CommonFirstPageErrorIndicator extends StatelessWidget {
 }
 
 class CommonNewPageErrorIndicator extends StatelessWidget {
-  const CommonNewPageErrorIndicator({Key? key}) : super(key: key);
+  const CommonNewPageErrorIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +175,7 @@ class CommonNewPageErrorIndicator extends StatelessWidget {
 }
 
 class CommonFirstPageProgressIndicator extends StatelessWidget {
-  const CommonFirstPageProgressIndicator({Key? key}) : super(key: key);
+  const CommonFirstPageProgressIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +184,7 @@ class CommonFirstPageProgressIndicator extends StatelessWidget {
 }
 
 class CommonNewPageProgressIndicator extends StatelessWidget {
-  const CommonNewPageProgressIndicator({Key? key}) : super(key: key);
+  const CommonNewPageProgressIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -198,7 +198,7 @@ class CommonNewPageProgressIndicator extends StatelessWidget {
 }
 
 class CommonNoItemsFoundIndicator extends StatelessWidget {
-  const CommonNoItemsFoundIndicator({Key? key}) : super(key: key);
+  const CommonNoItemsFoundIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +207,7 @@ class CommonNoItemsFoundIndicator extends StatelessWidget {
 }
 
 class CommonNoMoreItemsIndicator extends StatelessWidget {
-  const CommonNoMoreItemsIndicator({Key? key}) : super(key: key);
+  const CommonNoMoreItemsIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -28,8 +28,6 @@ class AppTheme {
       onSecondary: ColorName.greenBase,
       error: ColorName.errorBackground,
       onError: ColorName.error,
-      background: Colors.white,
-      onBackground: ColorName.grayLow10,
       surface: Colors.white,
       onSurface: ColorName.grayLow10,
     ),

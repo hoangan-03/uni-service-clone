@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/common.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/common_paged_list_view.dart';
 import 'package:flutter_base_v2/features/example_list/domain/entities/history_paging.dart';
 import 'package:flutter_base_v2/features/example_list/presentation/controllers/example_list_controller.dart';
-import 'package:flutter_base_v2/features/home/domain/entities/user.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ExampleListPage extends BaseGetView<ExampleListController> {

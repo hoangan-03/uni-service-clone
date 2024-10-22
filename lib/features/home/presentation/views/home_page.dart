@@ -4,7 +4,6 @@ import 'package:flutter_base_v2/base/presentation/widgets/common.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
-import 'package:flutter_base_v2/utils/gen/colors.gen.dart';
 import 'package:get/get.dart';
 
 class HomePage extends BaseGetView<HomeController> {
