@@ -172,34 +172,29 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // Today's menu section
               _buildSectionHeader(
                   'Thực đơn hôm nay', 'Xem menu', context, todayMenuItems),
               const SizedBox(height: 10),
               _buildFoodList(todayMenuItems),
 
-              // Tomorrow's menu section
               const SizedBox(height: 16),
               _buildSectionHeader(
                   'Chọn món ngày mai', 'Xem menu', context, tomorrowMenuItems),
               const SizedBox(height: 10),
               _buildFoodList(tomorrowMenuItems),
 
-              // Drinks section
               const SizedBox(height: 16),
               _buildSectionHeader(
                   'Đồ uống', 'Xem menu', context, drinksMenuItems),
               const SizedBox(height: 10),
               _buildFoodList(drinksMenuItems),
 
-              // Food Court section
               const SizedBox(height: 16),
               _buildSectionHeader(
                   'Food Court', 'Xem menu', context, foodCourtMenuItems),
               const SizedBox(height: 10),
               _buildFoodList(foodCourtMenuItems),
 
-              // Local Specialties section
               const SizedBox(height: 16),
               _buildSectionHeader('Đặc sản địa phương', 'Xem menu', context,
                   localSpecialtiesMenuItems),
@@ -232,7 +227,7 @@ class HomePage extends StatelessWidget {
             label: 'Tài khoản',
           ),
         ],
-        currentIndex: 0, // default selected index
+        currentIndex: 0, 
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
