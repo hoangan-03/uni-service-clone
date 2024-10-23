@@ -15,6 +15,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 
 class LoginController extends BaseController {
+
   final emailTextEditingController = TextEditingController();
   final passwordTextEditingController = TextEditingController();
   final formKey = GlobalKey<FormBuilderState>();
@@ -38,8 +39,8 @@ class LoginController extends BaseController {
   @override
   void onInit() {
     super.onInit();
-    emailTextEditingController.text = 'vinhthv1@yopmail.com';
-    passwordTextEditingController.text = '123456Aa!';
+    emailTextEditingController.text = 'test02dev@yopmail.com';
+    passwordTextEditingController.text = '123456@Aa';
     emailTextEditingController.disposeBy(disposeBag);
     passwordTextEditingController.disposeBy(disposeBag);
     updateLoginButtonState(); // TODO remove
