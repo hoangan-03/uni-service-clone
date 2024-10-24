@@ -103,4 +103,6 @@ class HomeController extends BaseController<HomeInput> {
     _localStorage.saveThemeMode(newThemeMode);
     Get.changeThemeMode(newThemeMode);
   }
+
+ 
 }

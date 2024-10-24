@@ -8,6 +8,6 @@ class MenuItem {
     required this.name,
     required this.description,
     required this.price,
-    required this.imageUrl,
+    required this.imageUrl, required int stock,
   });
 }

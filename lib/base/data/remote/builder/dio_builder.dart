@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_base_v2/base/data/remote/interceptor/header_interceptor.dart';
 import 'package:flutter_base_v2/base/data/remote/interceptor/log_interceptor.dart';
 import 'package:flutter_base_v2/base/data/remote/interceptor/token_interceptor.dart';
 
@@ -12,7 +13,7 @@ class DioBuilder extends DioMixin implements Dio {
   final int readTimeOutMls = 30000;
   final int writeTimeOutMls = 30000;
 
-  DioBuilder(
+   DioBuilder(
       {bool ignoredToken = false,
       required BaseOptions options,
       Dio? dioRefresh}) {
@@ -26,12 +27,11 @@ class DioBuilder extends DioMixin implements Dio {
 
     this.options = options;
 
-
+    interceptors.add(HeaderInterceptor());
+    
     if (!ignoredToken && dioRefresh != null) {
       interceptors.add(TokenInterceptor(dioRefresh));
     }
-
-    // Debug mode
     if (kDebugMode) {
       interceptors.add(
         CustomLogInterceptor(
@@ -46,29 +46,6 @@ class DioBuilder extends DioMixin implements Dio {
       );
     }
 
-    // Create default http client
     httpClientAdapter = IOHttpClientAdapter();
-
-    // final proxy = AppConfig.currentProxy;
-    // if (proxy != null) {
-    //   (httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-    //       (client) {
-    //     client.badCertificateCallback =
-    //         (X509Certificate cert, String host, int port) {
-    //       return Platform.isAndroid;
-    //     };
-    //     client.findProxy = (url) {
-    //       return 'PROXY $proxy';
-    //     };
-
-    //     return null;
-    //   };
-    // }
-  }
-  
-  @override
-  Future<Response> download(String urlPath, savePath, {ProgressCallback? onReceiveProgress, Map<String, dynamic>? queryParameters, CancelToken? cancelToken, bool deleteOnError = true, String lengthHeader = Headers.contentLengthHeader, Object? data, Options? options}) {
-    // TODO: implement download
-    throw UnimplementedError();
   }
 }

@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/menu/menu.dart';
 import 'package:flutter_base_v2/features/home/data/repositories/menu_mockdata.dart';
 import "package:flutter_base_v2/features/home/data/types/menu_item.dart";
+import 'package:flutter_base_v2/features/home/presentation/utils/greetings.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   String _currentMenu = 'Tất cả';
 
   @override
@@ -33,13 +35,28 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('Chào buổi sáng', style: TextStyle(fontSize: 18)),
-                      Text('Nguyễn Văn A',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
+                  Row(
+                    children: [
+                      ClipOval(
+                        child: Image.network(
+                          'https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360',
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                          alignment: Alignment(0, -1),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(getGreeting(),
+                              style: const TextStyle(fontSize: 18)),
+                          const Text('Nguyễn Hoàng Ân',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                        ],
+                      )
                     ],
                   ),
                   IconButton(
@@ -55,17 +72,19 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   children: [
                     _buildTopNavButton(
-                        Icons.restaurant_menu, 'Tất cả', context),
+                        FontAwesomeIcons.bellConcierge, 'Tất cả', context),
                     const SizedBox(width: 10),
                     _buildTopNavButton(
-                        Icons.restaurant, 'Thực đơn chính', context),
-                    const SizedBox(width: 10),
-                    _buildTopNavButton(Icons.local_drink, 'Đồ uống', context),
-                    const SizedBox(width: 10),
-                    _buildTopNavButton(Icons.food_bank, 'Food court', context),
+                        FontAwesomeIcons.utensils, 'Thực đơn chính', context),
                     const SizedBox(width: 10),
                     _buildTopNavButton(
-                        Icons.local_offer, 'Đặc sản địa phương', context),
+                        FontAwesomeIcons.martiniGlass, 'Đồ uống', context),
+                    const SizedBox(width: 10),
+                    _buildTopNavButton(
+                        FontAwesomeIcons.bowlRice, 'Food court', context),
+                    const SizedBox(width: 10),
+                    _buildTopNavButton(FontAwesomeIcons.wheatAwn,
+                        'Đặc sản địa phương', context),
                   ],
                 ),
               ),

@@ -1,29 +1,29 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
+import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/utils/config/app_config.dart';
-import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:get/instance_manager.dart';
-
 import '../../local/local_storage.dart';
 
 class TokenInterceptor extends QueuedInterceptorsWrapper {
   final Dio _dio;
   final _authHeaderKey = 'Authorization';
   final _bearer = 'Bearer';
-  final _refreshTokenUrl = '${AppConfig.baseUrl}/auth/refresh';
+  final _refreshTokenUrl = '${AppConfig.baseUrl}/api/v1/auth/refresh';
   final _accessTokenKey = 'access_token';
   final _refreshTokenKey = 'refresh_token';
 
   final _localStorage = Get.find<LocalStorage>();
+
 
   TokenInterceptor(this._dio);
 
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    L.info('onRequest TokenInterceptor ${options.uri}');
+
+    print("onRequest TokenInterceptor ${options.uri}");
     final localToken = await _localStorage.accessToken ?? '';
     if (localToken.isNotEmpty) {
       options.headers[_authHeaderKey] = '$_bearer $localToken';
@@ -33,21 +33,21 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    L.error('onError TokenInterceptor ${err.requestOptions.uri}');
-    if (err.response?.statusCode == HttpStatus.unauthorized) {
+  
+    print("onRequest TokenInterceptor ${err.requestOptions.uri}");
+    final error = err.error;
+    if (error is AppException) {
+      handler.next(err);
+    } else if (err.response?.statusCode == HttpStatus.unauthorized) {
       try {
         final requestOptions = err.requestOptions;
         final requestToken = requestOptions.headers[_authHeaderKey] ?? '';
         final localToken = await _localStorage.accessToken ?? '';
         if ((requestToken == '$_bearer $localToken')) {
           final localRefreshToken = await _localStorage.refreshToken ?? '';
-          final refreshTokenHeaders = {
-            _authHeaderKey: '$_bearer $localRefreshToken'
-          };
-          final Response response = await _dio.get(_refreshTokenUrl,
-              options: Options(
-                  headers: refreshTokenHeaders,
-                  responseType: ResponseType.json));
+          final Response response = await _dio.post(_refreshTokenUrl,
+              data: {_refreshTokenKey: localRefreshToken},
+              options: Options(responseType: ResponseType.json));
           final responseObject = response.data['data'];
           await _localStorage.saveAccessToken(responseObject[_accessTokenKey]);
           await _localStorage
@@ -61,10 +61,11 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
         // Re-call request
         final Response response = await recallOriginalApi(requestOptions);
         return handler.resolve(response);
-      } on DioException {
+      } on DioException catch (_) {
         handler.next(err);
       }
-    } else {
+    } 
+    else {
       handler.next(err);
     }
   }
@@ -92,4 +93,5 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
       onReceiveProgress: options.onReceiveProgress,
     );
   }
+
 }

@@ -1,4 +1,7 @@
-import "package:flutter_base_v2/features/home/data/types/menu_item.dart";
+import 'dart:math';
+import 'package:flutter_base_v2/features/home/data/types/menu_item.dart'; // Import for random stock generation
+
+final Random random = Random();
 
 final List<MenuItem> todayMenuItems = [
   MenuItem(
@@ -7,6 +10,7 @@ final List<MenuItem> todayMenuItems = [
     price: '40.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/plate-food-with-chicken-rice-vegetables-it_1220-7940.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Cơm bò',
@@ -14,6 +18,7 @@ final List<MenuItem> todayMenuItems = [
     price: '45.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/white-bowl-food-with-meat-vegetables-meat_1220-7948.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Phở',
@@ -21,6 +26,7 @@ final List<MenuItem> todayMenuItems = [
     price: '45.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bánh mì',
@@ -28,6 +34,7 @@ final List<MenuItem> todayMenuItems = [
     price: '25.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Cháo gà',
@@ -35,6 +42,7 @@ final List<MenuItem> todayMenuItems = [
     price: '30.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bún thịt nướng',
@@ -42,6 +50,7 @@ final List<MenuItem> todayMenuItems = [
     price: '35.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Cơm chiên',
@@ -49,6 +58,7 @@ final List<MenuItem> todayMenuItems = [
     price: '40.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Mì xào',
@@ -56,6 +66,7 @@ final List<MenuItem> todayMenuItems = [
     price: '30.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bánh cuốn',
@@ -63,6 +74,7 @@ final List<MenuItem> todayMenuItems = [
     price: '35.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Cơm sườn',
@@ -70,9 +82,11 @@ final List<MenuItem> todayMenuItems = [
     price: '45.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
 ];
 
+// Tomorrow Menu Items
 final List<MenuItem> tomorrowMenuItems = [
   MenuItem(
     name: 'Cơm gà',
@@ -80,6 +94,7 @@ final List<MenuItem> tomorrowMenuItems = [
     price: '30.000 - 40.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/plate-food-with-chicken-rice-vegetables-it_1220-7940.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Cơm bò',
@@ -87,6 +102,7 @@ final List<MenuItem> tomorrowMenuItems = [
     price: '30.000 - 40.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/white-bowl-food-with-meat-vegetables-meat_1220-7948.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Phở',
@@ -94,6 +110,7 @@ final List<MenuItem> tomorrowMenuItems = [
     price: '45.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bánh canh',
@@ -101,6 +118,7 @@ final List<MenuItem> tomorrowMenuItems = [
     price: '35.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Mì xào',
@@ -108,6 +126,7 @@ final List<MenuItem> tomorrowMenuItems = [
     price: '40.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Cháo sườn',
@@ -115,6 +134,7 @@ final List<MenuItem> tomorrowMenuItems = [
     price: '30.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Cơm tấm',
@@ -122,6 +142,7 @@ final List<MenuItem> tomorrowMenuItems = [
     price: '45.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bánh bèo',
@@ -129,6 +150,7 @@ final List<MenuItem> tomorrowMenuItems = [
     price: '20.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Hủ tiếu',
@@ -136,6 +158,7 @@ final List<MenuItem> tomorrowMenuItems = [
     price: '40.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bún mắm',
@@ -143,9 +166,11 @@ final List<MenuItem> tomorrowMenuItems = [
     price: '50.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
 ];
 
+// Drinks Menu Items
 final List<MenuItem> drinksMenuItems = [
   MenuItem(
     name: 'Cà phê đá',
@@ -153,6 +178,7 @@ final List<MenuItem> drinksMenuItems = [
     price: '20.000 đ',
     imageUrl:
         'https://img.freepik.com/free-vector/white-cup-hot-coffee-with-cinnamon-saucer-beans-wooden-table-realistic_1284-56783.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bạc sỉu nóng',
@@ -160,6 +186,7 @@ final List<MenuItem> drinksMenuItems = [
     price: '20.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/cup-coffee-with-bowl-with-cookies-teaspoon_1232-904.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Trà đào',
@@ -167,6 +194,7 @@ final List<MenuItem> drinksMenuItems = [
     price: '30.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/glass-peach-tea-with-ice-cubes_123827-21615.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Trà chanh',
@@ -174,6 +202,7 @@ final List<MenuItem> drinksMenuItems = [
     price: '15.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Nước cam',
@@ -181,6 +210,7 @@ final List<MenuItem> drinksMenuItems = [
     price: '25.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Sinh tố dâu',
@@ -188,6 +218,7 @@ final List<MenuItem> drinksMenuItems = [
     price: '35.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Trà sữa trân châu',
@@ -195,6 +226,7 @@ final List<MenuItem> drinksMenuItems = [
     price: '40.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Soda chanh',
@@ -202,6 +234,7 @@ final List<MenuItem> drinksMenuItems = [
     price: '30.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Nước dừa',
@@ -209,6 +242,7 @@ final List<MenuItem> drinksMenuItems = [
     price: '20.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Sữa đậu nành',
@@ -216,9 +250,11 @@ final List<MenuItem> drinksMenuItems = [
     price: '10.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
 ];
 
+// Food Court Menu Items
 final List<MenuItem> foodCourtMenuItems = [
   MenuItem(
     name: 'Bánh ngọt',
@@ -226,6 +262,7 @@ final List<MenuItem> foodCourtMenuItems = [
     price: '35.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/delicious-cake-with-forest-fruits-composition_23-2149095722.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bánh xếp',
@@ -233,6 +270,7 @@ final List<MenuItem> foodCourtMenuItems = [
     price: '25.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/flat-lay-asian-dumplings-dish-with-herbs-copy-space_23-2148694348.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Hamburger',
@@ -240,6 +278,7 @@ final List<MenuItem> foodCourtMenuItems = [
     price: '40.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/big-sandwich-hamburger-burger-with-beef-red-onion-tomato-fried-bacon_2829-5398.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Pizza',
@@ -247,6 +286,7 @@ final List<MenuItem> foodCourtMenuItems = [
     price: '70.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Hotdog',
@@ -254,6 +294,7 @@ final List<MenuItem> foodCourtMenuItems = [
     price: '30.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Tacos',
@@ -261,6 +302,7 @@ final List<MenuItem> foodCourtMenuItems = [
     price: '50.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bánh mì que',
@@ -268,6 +310,7 @@ final List<MenuItem> foodCourtMenuItems = [
     price: '20.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Khoai tây chiên',
@@ -275,6 +318,7 @@ final List<MenuItem> foodCourtMenuItems = [
     price: '25.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bánh tráng nướng',
@@ -282,6 +326,7 @@ final List<MenuItem> foodCourtMenuItems = [
     price: '30.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Gà rán',
@@ -289,9 +334,11 @@ final List<MenuItem> foodCourtMenuItems = [
     price: '45.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
 ];
 
+// Local Specialties Menu Items
 final List<MenuItem> localSpecialtiesMenuItems = [
   MenuItem(
     name: 'Mì Quảng',
@@ -299,6 +346,7 @@ final List<MenuItem> localSpecialtiesMenuItems = [
     price: '35.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/tasty-assortment-noodles-table_23-2148803848.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bún bò Huế',
@@ -306,6 +354,7 @@ final List<MenuItem> localSpecialtiesMenuItems = [
     price: '40.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/noodles-with-pork-pork-balls-chilli-paste-with-soup-thai-style-vegetable-boat-noodles-selective-focus-top-view_1150-45664.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Cơm Tấm',
@@ -313,6 +362,7 @@ final List<MenuItem> localSpecialtiesMenuItems = [
     price: '45.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/rice-with-chinese-pork-stewed-pork-beautiful-side-dishes-thai-food_1150-24212.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bánh hỏi',
@@ -320,6 +370,7 @@ final List<MenuItem> localSpecialtiesMenuItems = [
     price: '30.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Gỏi cuốn',
@@ -327,6 +378,7 @@ final List<MenuItem> localSpecialtiesMenuItems = [
     price: '35.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bánh bột lọc',
@@ -334,6 +386,7 @@ final List<MenuItem> localSpecialtiesMenuItems = [
     price: '20.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Lẩu mắm',
@@ -341,6 +394,7 @@ final List<MenuItem> localSpecialtiesMenuItems = [
     price: '120.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bánh ít trần',
@@ -348,6 +402,7 @@ final List<MenuItem> localSpecialtiesMenuItems = [
     price: '15.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bún cá',
@@ -355,6 +410,7 @@ final List<MenuItem> localSpecialtiesMenuItems = [
     price: '40.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
   MenuItem(
     name: 'Bánh tét',
@@ -362,5 +418,6 @@ final List<MenuItem> localSpecialtiesMenuItems = [
     price: '30.000 đ',
     imageUrl:
         'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
+    stock: random.nextInt(100),
   ),
 ];
