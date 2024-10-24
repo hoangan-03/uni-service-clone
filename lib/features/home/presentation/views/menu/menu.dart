@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:flutter_base_v2/features/home/data/types/menu_item.dart";
+import "package:flutter_base_v2/features/home/presentation/views/order_slider/order_slider.dart";
 
 class MenuPage extends StatelessWidget {
   final String title;
@@ -26,7 +27,8 @@ class MenuPage extends StatelessWidget {
                 ),
                 Text(
                   title,
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -54,40 +56,44 @@ class MenuPage extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        const SizedBox(width: 10), 
+                        const SizedBox(width: 10),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center, 
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 item.name,
-                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 item.description,
-                                style: const TextStyle(fontSize: 14, color: Colors.grey), // Optional description styling
+                                style: const TextStyle(
+                                    fontSize: 14, color: Colors.grey),
                               ),
                               const SizedBox(height: 4),
                               Text(
                                 item.price,
-                                style: const TextStyle(fontSize: 14, color: Colors.green),
+                                style: const TextStyle(
+                                    fontSize: 14, color: Colors.green),
                               ),
                             ],
                           ),
                         ),
                         IconButton(
-                            icon: Container(
-                            width: 32, // Set the width
-                            height: 32, // Set the height
+                          icon: Container(
+                            width: 24,
+                            height: 24,
                             decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(12),
+                              color: Color.fromRGBO(66, 63, 255, 1),
+                              borderRadius: BorderRadius.circular(6),
                             ),
-                            child: const Icon(Icons.add, color: Colors.white, size: 24),
-                            ),
+                            child: const Icon(Icons.add,
+                                color: Colors.white, size: 18),
+                          ),
                           onPressed: () {
-
+                            showOrderSlider(context, item);
                           },
                         ),
                       ],

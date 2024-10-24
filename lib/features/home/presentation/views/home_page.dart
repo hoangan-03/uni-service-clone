@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_v2/features/home/presentation/views/menu/menu.dart';
+import 'package:flutter_base_v2/features/home/data/types/menu_item.dart';
 import 'package:flutter_base_v2/features/home/data/repositories/menu_mockdata.dart';
-import "package:flutter_base_v2/features/home/data/types/menu_item.dart";
-import 'package:flutter_base_v2/features/home/presentation/utils/greetings.dart';
+import 'package:flutter_base_v2/features/home/presentation/views/menu/menu.dart';
+import 'package:flutter_base_v2/features/home/presentation/views/order_slider/order_slider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
+import 'package:flutter_base_v2/features/qrcode/presentation/views/qrcode.dart';
+import 'package:flutter_base_v2/features/services/presentation/views/services.dart';
+import 'package:flutter_base_v2/features/history/presentation/views/history.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,89 +17,47 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
   String _currentMenu = 'Tất cả';
+
+  late List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    _pages = <Widget>[
+      HomePageContent(
+        currentMenu: _currentMenu,
+        onMenuSelected: _onMenuSelected,
+      ),
+      const ServicePage(),
+      const QRPage(),
+      const HistoryPage(),
+      const AccountPage(),
+    ];
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  void _onMenuSelected(String menu) {
+    setState(() {
+      _currentMenu = menu;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, List<MenuItem>> menuItems = {
-      'Tất cả': [...todayMenuItems, ...tomorrowMenuItems],
-      'Thực đơn chính': todayMenuItems,
-      'Đồ uống': drinksMenuItems,
-      'Food court': foodCourtMenuItems,
-      'Đặc sản địa phương': localSpecialtiesMenuItems,
-    };
-
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 60.0, horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      ClipOval(
-                        child: Image.network(
-                          'https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360',
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
-                          alignment: Alignment(0, -1),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(getGreeting(),
-                              style: const TextStyle(fontSize: 18)),
-                          const Text('Nguyễn Hoàng Ân',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold)),
-                        ],
-                      )
-                    ],
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.notifications_outlined,
-                        color: Colors.black),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    _buildTopNavButton(
-                        FontAwesomeIcons.bellConcierge, 'Tất cả', context),
-                    const SizedBox(width: 10),
-                    _buildTopNavButton(
-                        FontAwesomeIcons.utensils, 'Thực đơn chính', context),
-                    const SizedBox(width: 10),
-                    _buildTopNavButton(
-                        FontAwesomeIcons.martiniGlass, 'Đồ uống', context),
-                    const SizedBox(width: 10),
-                    _buildTopNavButton(
-                        FontAwesomeIcons.bowlRice, 'Food court', context),
-                    const SizedBox(width: 10),
-                    _buildTopNavButton(FontAwesomeIcons.wheatAwn,
-                        'Đặc sản địa phương', context),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              _currentMenu == 'Tất cả'
-                  ? _buildAllMenuLayout()
-                  : _buildMenuPageLayout(menuItems[_currentMenu]!),
-            ],
-          ),
-        ),
-      ),
+      body: _selectedIndex == 0
+          ? HomePageContent(
+              currentMenu: _currentMenu,
+              onMenuSelected: _onMenuSelected,
+            )
+          : _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -119,22 +81,128 @@ class HomePageState extends State<HomePage> {
             label: 'Tài khoản',
           ),
         ],
-        currentIndex: 0,
+        currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+class HomePageContent extends StatelessWidget {
+  final String currentMenu;
+  final Function(String) onMenuSelected;
+
+  const HomePageContent({
+    super.key,
+    required this.currentMenu,
+    required this.onMenuSelected,
+  });
+
+  String getGreeting() {
+    final hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Chào buổi sáng';
+    } else if (hour < 14) {
+      return 'Chào buổi trưa';
+    } else if (hour < 18) {
+      return 'Chào buổi chiều';
+    } else {
+      return 'Chào buổi tối';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Map<String, List<MenuItem>> menuItems = {
+      'Tất cả': [...todayMenuItems, ...tomorrowMenuItems],
+      'Thực đơn chính': todayMenuItems,
+      'Đồ uống': drinksMenuItems,
+      'Food court': foodCourtMenuItems,
+      'Đặc sản địa phương': localSpecialtiesMenuItems,
+    };
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 60.0, horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeader(),
+            const SizedBox(height: 16),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  _buildTopNavButton(
+                      FontAwesomeIcons.bellConcierge, 'Tất cả', context),
+                  const SizedBox(width: 10),
+                  _buildTopNavButton(
+                      FontAwesomeIcons.utensils, 'Thực đơn chính', context),
+                  const SizedBox(width: 10),
+                  _buildTopNavButton(
+                      FontAwesomeIcons.martiniGlass, 'Đồ uống', context),
+                  const SizedBox(width: 10),
+                  _buildTopNavButton(
+                      FontAwesomeIcons.bowlRice, 'Food court', context),
+                  const SizedBox(width: 10),
+                  _buildTopNavButton(FontAwesomeIcons.wheatAwn,
+                      'Đặc sản địa phương', context),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            currentMenu == 'Tất cả'
+                ? _buildAllMenuLayout(context)
+                : _buildMenuPageLayout(menuItems[currentMenu]!),
+          ],
+        ),
       ),
     );
   }
 
+  Widget _buildHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            ClipOval(
+              child: Image.network(
+                'https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360',
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text('Chào buổi sáng', style: TextStyle(fontSize: 18)),
+                Text('Nguyễn Hoàng Ân',
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              ],
+            )
+          ],
+        ),
+        IconButton(
+          icon: const Icon(Icons.notifications_outlined, color: Colors.black),
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+
   Widget _buildTopNavButton(IconData icon, String label, BuildContext context) {
-    final bool isSelected = _currentMenu == label;
+    final bool isSelected = currentMenu == label;
 
     return GestureDetector(
       onTap: () {
-        setState(() {
-          _currentMenu = label;
-        });
+        onMenuSelected(label);
       },
       child: Container(
         padding: const EdgeInsets.all(8.0),
@@ -167,33 +235,33 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildAllMenuLayout() {
+  Widget _buildAllMenuLayout(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSectionHeader(
             'Thực đơn hôm nay', 'Xem menu', context, todayMenuItems),
         const SizedBox(height: 10),
-        _buildFoodList(todayMenuItems),
+        _buildFoodList(todayMenuItems, context),
         const SizedBox(height: 16),
         _buildSectionHeader(
             'Chọn món ngày mai', 'Xem menu', context, tomorrowMenuItems),
         const SizedBox(height: 10),
-        _buildFoodList(tomorrowMenuItems),
+        _buildFoodList(tomorrowMenuItems, context),
         const SizedBox(height: 16),
         _buildSectionHeader('Đồ uống', 'Xem menu', context, drinksMenuItems),
         const SizedBox(height: 10),
-        _buildFoodList(drinksMenuItems),
+        _buildFoodList(drinksMenuItems, context),
         const SizedBox(height: 16),
         _buildSectionHeader(
             'Food Court', 'Xem menu', context, foodCourtMenuItems),
         const SizedBox(height: 10),
-        _buildFoodList(foodCourtMenuItems),
+        _buildFoodList(foodCourtMenuItems, context),
         const SizedBox(height: 16),
         _buildSectionHeader('Đặc sản địa phương', 'Xem menu', context,
             localSpecialtiesMenuItems),
         const SizedBox(height: 10),
-        _buildFoodList(localSpecialtiesMenuItems),
+        _buildFoodList(localSpecialtiesMenuItems, context),
       ],
     );
   }
@@ -249,15 +317,17 @@ class HomePageState extends State<HomePage> {
               ),
               IconButton(
                 icon: Container(
-                  width: 32,
-                  height: 32,
+                  width: 24,
+                  height: 24,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(12),
+                    color: Color.fromRGBO(66, 63, 255, 1),
+                    borderRadius: BorderRadius.circular(6),
                   ),
-                  child: const Icon(Icons.add, color: Colors.white, size: 24),
+                  child: const Icon(Icons.add, color: Colors.white, size: 18),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  showOrderSlider(context, item);
+                },
               ),
             ],
           ),
@@ -302,21 +372,21 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildFoodList(List<MenuItem> items) {
+  Widget _buildFoodList(List<MenuItem> items, BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: items
             .map((item) => Padding(
                   padding: const EdgeInsets.only(right: 10),
-                  child: _buildFoodCard(item),
+                  child: _buildFoodCard(item, context),
                 ))
             .toList(),
       ),
     );
   }
 
-  Widget _buildFoodCard(MenuItem item) {
+  Widget _buildFoodCard(MenuItem item, BuildContext context) {
     return Container(
       width: 140,
       margin: const EdgeInsets.only(top: 10, bottom: 10),
@@ -353,16 +423,21 @@ class HomePageState extends State<HomePage> {
             ],
           ),
           const SizedBox(height: 10),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(
-              color: const Color.fromRGBO(66, 63, 255, 0.08),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              'Chọn món',
-              style: TextStyle(
-                  color: const Color.fromRGBO(66, 63, 255, 1), fontSize: 14),
+          GestureDetector(
+            onTap: () {
+              showOrderSlider(context, item);
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(66, 63, 255, 0.08),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                'Chọn món',
+                style: TextStyle(
+                    color: const Color.fromRGBO(66, 63, 255, 1), fontSize: 14),
+              ),
             ),
           ),
         ],

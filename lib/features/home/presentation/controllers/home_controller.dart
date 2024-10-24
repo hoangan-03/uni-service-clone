@@ -38,10 +38,10 @@ class HomeController extends BaseController<HomeInput> {
       N.toNotifications();
     }
   }
-
   @override
   void onClose() {
     pushNotiService.cancelNotification();
+    _getProfileUseCase.dispose();
     super.onClose();
   }
 
@@ -103,6 +103,8 @@ class HomeController extends BaseController<HomeInput> {
     _localStorage.saveThemeMode(newThemeMode);
     Get.changeThemeMode(newThemeMode);
   }
+
+
 
  
 }
