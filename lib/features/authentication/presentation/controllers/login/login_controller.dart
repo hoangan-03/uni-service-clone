@@ -39,10 +39,10 @@ class LoginController extends BaseController {
   @override
   void onInit() {
     super.onInit();
-    emailTextEditingController.text = 'vinhthv1@yopmail.com';
-    passwordTextEditingController.text = '123456Aa!';
-    // emailTextEditingController.text = 'test02dev@yopmail.com';
-    // passwordTextEditingController.text = '123456@Aa';
+    // emailTextEditingController.text = 'vinhthv1@yopmail.com';
+    // passwordTextEditingController.text = '123456Aa!';
+    emailTextEditingController.text = 'test02dev@yopmail.com';
+    passwordTextEditingController.text = '123456@Aa';
     emailTextEditingController.disposeBy(disposeBag);
     passwordTextEditingController.disposeBy(disposeBag);
     updateLoginButtonState();

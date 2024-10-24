@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "package:flutter_base_v2/features/home/data/types/menu_item.dart";
 
 class MenuPage extends StatelessWidget {
   final String title;
@@ -100,17 +101,4 @@ class MenuPage extends StatelessWidget {
       ),
     );
   }
-}
-class MenuItem {
-  final String name;
-  final String description;
-  final String price;
-  final String imageUrl;
-
-  MenuItem({
-    required this.name,
-    required this.description,
-    required this.price,
-    required this.imageUrl,
-  });
 }

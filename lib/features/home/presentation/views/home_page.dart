@@ -1,130 +1,27 @@
 import 'package:flutter/material.dart';
-import '../../data/types/menu.dart';
+import 'package:flutter_base_v2/features/home/presentation/views/menu/menu.dart';
+import 'package:flutter_base_v2/features/home/data/repositories/menu_mockdata.dart';
+import "package:flutter_base_v2/features/home/data/types/menu_item.dart";
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String _currentMenu = 'Tất cả';
+
+  @override
   Widget build(BuildContext context) {
-    final List<MenuItem> todayMenuItems = [
-      MenuItem(
-        name: 'Cơm gà',
-        description: 'Cơm gà mềm, sốt đậm đà.',
-        price: '40.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/plate-food-with-chicken-rice-vegetables-it_1220-7940.jpg',
-      ),
-      MenuItem(
-        name: 'Cơm bò',
-        description: 'Cơm thịt bò xào kèm rau sống.',
-        price: '45.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/white-bowl-food-with-meat-vegetables-meat_1220-7948.jpg',
-      ),
-      MenuItem(
-        name: 'Phở',
-        description: 'Phở bò nước dùng ngon, bánh mềm.',
-        price: '45.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
-      ),
-    ];
-
-    final List<MenuItem> tomorrowMenuItems = [
-      MenuItem(
-        name: 'Cơm gà',
-        description: 'Cơm gà thơm ngon, sốt đặc biệt.',
-        price: '30.000 - 40.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/plate-food-with-chicken-rice-vegetables-it_1220-7940.jpg',
-      ),
-      MenuItem(
-        name: 'Cơm bò',
-        description: 'Cơm bò sốt đậm đà, rau tươi.',
-        price: '30.000 - 40.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/white-bowl-food-with-meat-vegetables-meat_1220-7948.jpg',
-      ),
-      MenuItem(
-        name: 'Phở',
-        description: 'Phở bò nước dùng thanh, bánh mềm.',
-        price: '45.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/bowl-food-with-bowl-food-that-says-noodle_1220-7952.jpg',
-      ),
-    ];
-
-    final List<MenuItem> drinksMenuItems = [
-      MenuItem(
-        name: 'Cà phê đá',
-        description: 'Cà phê lạnh, đậm đà vị cà phê.',
-        price: '20.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-vector/white-cup-hot-coffee-with-cinnamon-saucer-beans-wooden-table-realistic_1284-56783.jpg',
-      ),
-      MenuItem(
-        name: 'Bạc sỉu nóng',
-        description: 'Cà phê sữa nóng, ngọt ngào.',
-        price: '20.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/cup-coffee-with-bowl-with-cookies-teaspoon_1232-904.jpg',
-      ),
-      MenuItem(
-        name: 'Trà đào',
-        description: 'Trà đào thơm mát, giải khát tuyệt vời.',
-        price: '30.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/glass-peach-tea-with-ice-cubes_123827-21615.jpg',
-      ),
-    ];
-
-    final List<MenuItem> foodCourtMenuItems = [
-      MenuItem(
-        name: 'Bánh ngọt',
-        description: 'Bánh ngọt ngọt ngào, thơm ngon.',
-        price: '35.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/delicious-cake-with-forest-fruits-composition_23-2149095722.jpg',
-      ),
-      MenuItem(
-        name: 'Bánh xếp',
-        description: 'Bánh xếp nhân hấp dẫn.',
-        price: '25.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/flat-lay-asian-dumplings-dish-with-herbs-copy-space_23-2148694348.jpg',
-      ),
-      MenuItem(
-        name: 'Hamburger',
-        description: 'Hamburger với thịt và rau tươi.',
-        price: '40.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/big-sandwich-hamburger-burger-with-beef-red-onion-tomato-fried-bacon_2829-5398.jpg',
-      ),
-    ];
-
-    final List<MenuItem> localSpecialtiesMenuItems = [
-      MenuItem(
-        name: 'Mì Quảng',
-        description: 'Mì Quảng với nước dùng đậm đà.',
-        price: '35.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/tasty-assortment-noodles-table_23-2148803848.jpg',
-      ),
-      MenuItem(
-        name: 'Bún bò Huế',
-        description: 'Bún bò Huế cay nồng, hấp dẫn.',
-        price: '40.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/noodles-with-pork-pork-balls-chilli-paste-with-soup-thai-style-vegetable-boat-noodles-selective-focus-top-view_1150-45664.jpg',
-      ),
-      MenuItem(
-        name: 'Cơm Tấm',
-        description: 'Cơm tấm với sườn nướng thơm ngon.',
-        price: '45.000 đ',
-        imageUrl:
-            'https://img.freepik.com/free-photo/rice-with-chinese-pork-stewed-pork-beautiful-side-dishes-thai-food_1150-24212.jpg',
-      ),
-    ];
+    final Map<String, List<MenuItem>> menuItems = {
+      'Tất cả': [...todayMenuItems, ...tomorrowMenuItems],
+      'Thực đơn chính': todayMenuItems,
+      'Đồ uống': drinksMenuItems,
+      'Food court': foodCourtMenuItems,
+      'Đặc sản địa phương': localSpecialtiesMenuItems,
+    };
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -153,53 +50,29 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
-
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    _buildTopNavButton(Icons.restaurant_menu, 'Tất cả'),
+                    _buildTopNavButton(
+                        Icons.restaurant_menu, 'Tất cả', context),
                     const SizedBox(width: 10),
-                    _buildTopNavButton(Icons.restaurant, 'Thực đơn chính'),
+                    _buildTopNavButton(
+                        Icons.restaurant, 'Thực đơn chính', context),
                     const SizedBox(width: 10),
-                    _buildTopNavButton(Icons.local_drink, 'Đồ uống'),
+                    _buildTopNavButton(Icons.local_drink, 'Đồ uống', context),
                     const SizedBox(width: 10),
-                    _buildTopNavButton(Icons.food_bank, 'Food court'),
+                    _buildTopNavButton(Icons.food_bank, 'Food court', context),
                     const SizedBox(width: 10),
-                    _buildTopNavButton(Icons.local_offer, 'Đặc biệt'),
+                    _buildTopNavButton(
+                        Icons.local_offer, 'Đặc sản địa phương', context),
                   ],
                 ),
               ),
               const SizedBox(height: 16),
-
-              _buildSectionHeader(
-                  'Thực đơn hôm nay', 'Xem menu', context, todayMenuItems),
-              const SizedBox(height: 10),
-              _buildFoodList(todayMenuItems),
-
-              const SizedBox(height: 16),
-              _buildSectionHeader(
-                  'Chọn món ngày mai', 'Xem menu', context, tomorrowMenuItems),
-              const SizedBox(height: 10),
-              _buildFoodList(tomorrowMenuItems),
-
-              const SizedBox(height: 16),
-              _buildSectionHeader(
-                  'Đồ uống', 'Xem menu', context, drinksMenuItems),
-              const SizedBox(height: 10),
-              _buildFoodList(drinksMenuItems),
-
-              const SizedBox(height: 16),
-              _buildSectionHeader(
-                  'Food Court', 'Xem menu', context, foodCourtMenuItems),
-              const SizedBox(height: 10),
-              _buildFoodList(foodCourtMenuItems),
-
-              const SizedBox(height: 16),
-              _buildSectionHeader('Đặc sản địa phương', 'Xem menu', context,
-                  localSpecialtiesMenuItems),
-              const SizedBox(height: 10),
-              _buildFoodList(localSpecialtiesMenuItems),
+              _currentMenu == 'Tất cả'
+                  ? _buildAllMenuLayout()
+                  : _buildMenuPageLayout(menuItems[_currentMenu]!),
             ],
           ),
         ),
@@ -227,7 +100,7 @@ class HomePage extends StatelessWidget {
             label: 'Tài khoản',
           ),
         ],
-        currentIndex: 0, 
+        currentIndex: 0,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
@@ -235,19 +108,142 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildTopNavButton(IconData icon, String label) {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(16.0),
+  Widget _buildTopNavButton(IconData icon, String label, BuildContext context) {
+    final bool isSelected = _currentMenu == label;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _currentMenu = label;
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? const Color.fromRGBO(66, 63, 255, 0.08)
+              : Colors.transparent,
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Column(
+          children: [
+            Icon(icon,
+                size: 24,
+                color: isSelected
+                    ? const Color.fromRGBO(66, 63, 255, 1)
+                    : Colors.black),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 16,
+                color: isSelected
+                    ? const Color.fromRGBO(66, 63, 255, 1)
+                    : Colors.black,
+              ),
+            ),
+          ],
+        ),
       ),
-      child: Column(
-        children: [
-          Icon(icon, size: 24, color: Colors.black),
-          Text(label, style: const TextStyle(fontSize: 16)),
-        ],
-      ),
+    );
+  }
+
+  Widget _buildAllMenuLayout() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSectionHeader(
+            'Thực đơn hôm nay', 'Xem menu', context, todayMenuItems),
+        const SizedBox(height: 10),
+        _buildFoodList(todayMenuItems),
+        const SizedBox(height: 16),
+        _buildSectionHeader(
+            'Chọn món ngày mai', 'Xem menu', context, tomorrowMenuItems),
+        const SizedBox(height: 10),
+        _buildFoodList(tomorrowMenuItems),
+        const SizedBox(height: 16),
+        _buildSectionHeader('Đồ uống', 'Xem menu', context, drinksMenuItems),
+        const SizedBox(height: 10),
+        _buildFoodList(drinksMenuItems),
+        const SizedBox(height: 16),
+        _buildSectionHeader(
+            'Food Court', 'Xem menu', context, foodCourtMenuItems),
+        const SizedBox(height: 10),
+        _buildFoodList(foodCourtMenuItems),
+        const SizedBox(height: 16),
+        _buildSectionHeader('Đặc sản địa phương', 'Xem menu', context,
+            localSpecialtiesMenuItems),
+        const SizedBox(height: 10),
+        _buildFoodList(localSpecialtiesMenuItems),
+      ],
+    );
+  }
+
+  Widget _buildMenuPageLayout(List<MenuItem> items) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final item = items[index];
+        return Container(
+          margin: const EdgeInsets.only(bottom: 12.0),
+          padding: const EdgeInsets.only(bottom: 12.0),
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: Colors.grey, width: 0.5),
+            ),
+          ),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(
+                  item.imageUrl,
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      item.name,
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      item.description,
+                      style: const TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      item.price,
+                      style: const TextStyle(fontSize: 14, color: Colors.green),
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                icon: Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(Icons.add, color: Colors.white, size: 24),
+                ),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -284,6 +280,20 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildFoodList(List<MenuItem> items) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: items
+            .map((item) => Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: _buildFoodCard(item),
+                ))
+            .toList(),
+      ),
     );
   }
 
@@ -340,22 +350,6 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildFoodList(List<MenuItem> items) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: items
-            .map((item) => Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: _buildFoodCard(item),
-                ))
-            .toList(),
-      ),
-    );
-  }
 }
 
-void main() => runApp(const MaterialApp(
-      home: HomePage(),
-    ));
+void main() => runApp(const MaterialApp(home: HomePage()));
