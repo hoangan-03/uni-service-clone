@@ -8,8 +8,10 @@ import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/user.dart';
-import 'package:flutter_base_v2/features/home/domain/usecases/profile/get_profile_uc.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
+import 'package:flutter_base_v2/features/home/domain/usecases/profile/get_profile_uc.dart';
+import 'package:flutter_base_v2/features/home/domain/usecases/branch/get_branch_uc.dart';
+import 'package:flutter_base_v2/features/home/domain/entities/branch.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -18,10 +20,12 @@ import 'package:get/get.dart';
 
 class HomeController extends BaseController<HomeInput> {
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
+  GetBranchUseCase get _getBranchUseCase => Get.find<GetBranchUseCase>();
 
   final pushNotiService = Get.find<PushNotificationService>();
 
   final user = User().obs;
+  final branches = <Branch>[].obs;
   final LocalStorage _localStorage = Get.find();
 
   @override
@@ -29,19 +33,20 @@ class HomeController extends BaseController<HomeInput> {
     super.onInit();
     pushNotiService.listenNotification();
     getProfile();
+    getBranches();
     final notificationAppLaunchDetails =
         await pushNotiService.getNotificationAppLaunchDetails();
 
     if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
-      // selectedNotificationPayload =
-      //     notificationAppLaunchDetails!.notificationResponse?.payload;
       N.toNotifications();
     }
   }
+
   @override
   void onClose() {
     pushNotiService.cancelNotification();
     _getProfileUseCase.dispose();
+    _getBranchUseCase.dispose();
     super.onClose();
   }
 
@@ -75,7 +80,20 @@ class HomeController extends BaseController<HomeInput> {
             if (data != null) user.value = data;
           },
           onError: (AppException e) {
-            // fetchDataState.onError(e.message);
+            handleError(e);
+          },
+        ),
+        input: null);
+  }
+
+  Future<void> getBranches() {
+    return _getBranchUseCase.execute(
+        observer: Observer(
+          onSuccess: (Branch? data) {
+            L.info(data);
+            if (data != null) branches.add(data);
+          },
+          onError: (AppException e) {
             handleError(e);
           },
         ),
@@ -87,10 +105,8 @@ class HomeController extends BaseController<HomeInput> {
   }
 
   void printIcons() async {
-    // >> To get paths you need these 2 lines
     final manifestContent = await rootBundle.loadString('AssetManifest.json');
     final Map<String, dynamic> manifestMap = json.decode(manifestContent);
-    // >> To get paths you need these 2 lines
     final imagePaths = manifestMap.keys
         .where((String key) => key.contains('icons/'))
         .where((String key) => key.contains('.svg'))
@@ -103,8 +119,4 @@ class HomeController extends BaseController<HomeInput> {
     _localStorage.saveThemeMode(newThemeMode);
     Get.changeThemeMode(newThemeMode);
   }
-
-
-
- 
 }

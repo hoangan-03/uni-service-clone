@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/home/data/types/menu_item.dart';
 import 'package:flutter_base_v2/features/home/data/repositories/menu_mockdata.dart';
+import 'package:flutter_base_v2/features/home/domain/entities/branch.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/greetings.dart';
+import 'package:flutter_base_v2/features/home/presentation/views/branch_select/branch_select.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/menu/menu.dart';
-import 'package:flutter_base_v2/features/home/presentation/views/order_slider/order_slider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
 import 'package:flutter_base_v2/features/qrcode/presentation/views/qrcode.dart';
-import 'package:flutter_base_v2/features/services/presentation/views/services.dart';
 import 'package:flutter_base_v2/features/history/presentation/views/history.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,6 +20,8 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   String _currentMenu = 'Tất cả';
+  Branch? selectedBranch;
+  bool _hasSelectedBranch = false;
 
   late List<Widget> _pages;
 
@@ -29,8 +32,8 @@ class HomePageState extends State<HomePage> {
       HomePageContent(
         currentMenu: _currentMenu,
         onMenuSelected: _onMenuSelected,
+        selectedBranch: selectedBranch,
       ),
-      const ServicePage(),
       const QRPage(),
       const HistoryPage(),
       const AccountPage(),
@@ -49,24 +52,32 @@ class HomePageState extends State<HomePage> {
     });
   }
 
+  void _onBranchSelected(Branch branch) {
+    setState(() {
+      selectedBranch = branch;
+      _hasSelectedBranch = true;
+
+      _pages[0] = HomePageContent(
+        currentMenu: _currentMenu,
+        onMenuSelected: _onMenuSelected,
+        selectedBranch: selectedBranch,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (!_hasSelectedBranch) {
+      return BranchSelectPage(onBranchSelected: _onBranchSelected);
+    }
+    
     return Scaffold(
-      body: _selectedIndex == 0
-          ? HomePageContent(
-              currentMenu: _currentMenu,
-              onMenuSelected: _onMenuSelected,
-            )
-          : _pages[_selectedIndex],
+      body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Trang chủ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.room_service),
-            label: 'Dịch vụ',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.qr_code),
@@ -93,26 +104,16 @@ class HomePageState extends State<HomePage> {
 
 class HomePageContent extends StatelessWidget {
   final String currentMenu;
+  final String greeting = getGreeting();
   final Function(String) onMenuSelected;
+  final Branch? selectedBranch;
 
-  const HomePageContent({
+  HomePageContent({
     super.key,
     required this.currentMenu,
     required this.onMenuSelected,
+    required this.selectedBranch,
   });
-
-  String getGreeting() {
-    final hour = DateTime.now().hour;
-    if (hour < 12) {
-      return 'Chào buổi sáng';
-    } else if (hour < 14) {
-      return 'Chào buổi trưa';
-    } else if (hour < 18) {
-      return 'Chào buổi chiều';
-    } else {
-      return 'Chào buổi tối';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,26 +131,21 @@ class HomePageContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeader(),
+            _buildHeader(selectedBranch),
             const SizedBox(height: 16),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _buildTopNavButton(
-                      FontAwesomeIcons.bellConcierge, 'Tất cả', context),
+                  _buildTopNavButton(FontAwesomeIcons.bellConcierge, 'Tất cả', context),
                   const SizedBox(width: 10),
-                  _buildTopNavButton(
-                      FontAwesomeIcons.utensils, 'Thực đơn chính', context),
+                  _buildTopNavButton(FontAwesomeIcons.utensils, 'Thực đơn chính', context),
                   const SizedBox(width: 10),
-                  _buildTopNavButton(
-                      FontAwesomeIcons.martiniGlass, 'Đồ uống', context),
+                  _buildTopNavButton(FontAwesomeIcons.martiniGlass, 'Đồ uống', context),
                   const SizedBox(width: 10),
-                  _buildTopNavButton(
-                      FontAwesomeIcons.bowlRice, 'Food court', context),
+                  _buildTopNavButton(FontAwesomeIcons.bowlRice, 'Food court', context),
                   const SizedBox(width: 10),
-                  _buildTopNavButton(FontAwesomeIcons.wheatAwn,
-                      'Đặc sản địa phương', context),
+                  _buildTopNavButton(FontAwesomeIcons.wheatAwn, 'Đặc sản địa phương', context),
                 ],
               ),
             ),
@@ -163,7 +159,7 @@ class HomePageContent extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(Branch? selectedBranch) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -180,13 +176,13 @@ class HomePageContent extends StatelessWidget {
             const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text('Chào buổi sáng', style: TextStyle(fontSize: 18)),
-                Text('Nguyễn Hoàng Ân',
-                    style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              children: [
+                // Text(greeting, style: const TextStyle(fontSize: 18)),
+                const Text('Nguyễn Hoàng Ân',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Text(selectedBranch?.name ?? '', style: const TextStyle(fontSize: 14, color: Colors.black)),
               ],
-            )
+            ),
           ],
         ),
         IconButton(
@@ -210,23 +206,17 @@ class HomePageContent extends StatelessWidget {
           color: isSelected
               ? const Color.fromRGBO(66, 63, 255, 0.08)
               : Colors.transparent,
-          border: Border.all(color: Colors.grey),
+          border: Border.all(color: const Color.fromARGB(255, 220, 220, 220)),
           borderRadius: BorderRadius.circular(16.0),
         ),
         child: Column(
           children: [
-            Icon(icon,
-                size: 24,
-                color: isSelected
-                    ? const Color.fromRGBO(66, 63, 255, 1)
-                    : Colors.black),
+            Icon(icon, size: 24, color: isSelected ? const Color.fromRGBO(66, 63, 255, 1) : Colors.black),
             Text(
               label,
               style: TextStyle(
                 fontSize: 16,
-                color: isSelected
-                    ? const Color.fromRGBO(66, 63, 255, 1)
-                    : Colors.black,
+                color: isSelected ? const Color.fromRGBO(66, 63, 255, 1) : Colors.black,
               ),
             ),
           ],
@@ -239,13 +229,11 @@ class HomePageContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSectionHeader(
-            'Thực đơn hôm nay', 'Xem menu', context, todayMenuItems),
+        _buildSectionHeader('Thực đơn hôm nay', 'Xem menu', context, todayMenuItems),
         const SizedBox(height: 10),
         _buildFoodList(todayMenuItems, context),
         const SizedBox(height: 16),
-        _buildSectionHeader(
-            'Chọn món ngày mai', 'Xem menu', context, tomorrowMenuItems),
+        _buildSectionHeader('Chọn món ngày mai', 'Xem menu', context, tomorrowMenuItems),
         const SizedBox(height: 10),
         _buildFoodList(tomorrowMenuItems, context),
         const SizedBox(height: 16),
@@ -253,13 +241,11 @@ class HomePageContent extends StatelessWidget {
         const SizedBox(height: 10),
         _buildFoodList(drinksMenuItems, context),
         const SizedBox(height: 16),
-        _buildSectionHeader(
-            'Food Court', 'Xem menu', context, foodCourtMenuItems),
+        _buildSectionHeader('Food Court', 'Xem menu', context, foodCourtMenuItems),
         const SizedBox(height: 10),
         _buildFoodList(foodCourtMenuItems, context),
         const SizedBox(height: 16),
-        _buildSectionHeader('Đặc sản địa phương', 'Xem menu', context,
-            localSpecialtiesMenuItems),
+        _buildSectionHeader('Đặc sản địa phương', 'Xem menu', context, localSpecialtiesMenuItems),
         const SizedBox(height: 10),
         _buildFoodList(localSpecialtiesMenuItems, context),
       ],
@@ -300,8 +286,7 @@ class HomePageContent extends StatelessWidget {
                   children: [
                     Text(
                       item.name,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       item.description,
@@ -320,13 +305,13 @@ class HomePageContent extends StatelessWidget {
                   width: 24,
                   height: 24,
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(66, 63, 255, 1),
+                    color: const Color.fromRGBO(66, 63, 255, 1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: const Icon(Icons.add, color: Colors.white, size: 18),
                 ),
                 onPressed: () {
-                  showOrderSlider(context, item);
+                  // Handle add action
                 },
               ),
             ],
@@ -336,8 +321,7 @@ class HomePageContent extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionHeader(String title, String actionText,
-      BuildContext context, List<MenuItem> menuItems) {
+  Widget _buildSectionHeader(String title, String actionText, BuildContext context, List<MenuItem> menuItems) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -350,8 +334,7 @@ class HomePageContent extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    MenuPage(title: title, menuItems: menuItems),
+                builder: (context) => MenuPage(title: title, menuItems: menuItems),
               ),
             );
           },
@@ -410,10 +393,7 @@ class HomePageContent extends StatelessWidget {
             children: [
               Text(
                 item.name,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 4),
               Text(
@@ -422,28 +402,8 @@ class HomePageContent extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 10),
-          GestureDetector(
-            onTap: () {
-              showOrderSlider(context, item);
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(66, 63, 255, 0.08),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                'Chọn món',
-                style: TextStyle(
-                    color: const Color.fromRGBO(66, 63, 255, 1), fontSize: 14),
-              ),
-            ),
-          ),
         ],
       ),
     );
   }
 }
-
-void main() => runApp(const MaterialApp(home: HomePage()));

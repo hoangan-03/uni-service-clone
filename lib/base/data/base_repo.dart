@@ -14,6 +14,8 @@ abstract class BaseMappingRepo<Entity, Model> extends GetxService {
   Model mappingModel(Entity entity) {
     return mapper.mappingModel(entity);
   }
+
+  List<Entity> mappingEntities(List<Model> models) {
+    return models.map((model) => mapper.mappingEntity(model)).toList();
+  }
 }
-
-

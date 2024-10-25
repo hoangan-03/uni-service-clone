@@ -13,7 +13,7 @@ void showOrderSlider(BuildContext context, MenuItem item) {
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
           ),
           child: Column(
             children: [

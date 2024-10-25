@@ -13,7 +13,7 @@ class ExampleListPage extends BaseGetView<ExampleListController> {
   Widget myBuild(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
-        title: 'Example list',
+        title: 'Example listd',
         leading: null,
       ),
       body: CommonPagedListView<History>(

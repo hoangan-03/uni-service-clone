@@ -73,8 +73,11 @@ class AppRoute {
       binding: LoginBinding(),
       transition: Transition.noTransition,
     ),
-    // Add new pages
-    GetPage(name: service, page: ServicePage.new),
+    GetPage(
+        name: service,
+        page: ServicesPage.new,
+        binding: HomeBinding(),
+        transition: Transition.noTransition),
     GetPage(name: qr, page: QRPage.new),
     GetPage(name: history, page: HistoryPage.new),
     GetPage(name: account, page: AccountPage.new),

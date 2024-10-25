@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/token_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/user_response.dart';
+import 'package:flutter_base_v2/features/home/data/models/branch_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
 import 'package:flutter_base_v2/features/example_list/data/models/history_response.dart';
 import 'package:flutter_base_v2/utils/config/app_constants.dart';
@@ -14,11 +15,15 @@ part 'api_service.g.dart';
 abstract class ApiService {
   factory ApiService(Dio dioBuilder) = _ApiService;
 
+
   @POST('/auth/login')
   Future<TokenResponse> loginWithEmail(@Body() LoginBody body);
 
   @GET('/auth/me')
   Future<UserResponse> getProfile();
+
+  @GET('/branches/options?o=true')
+  Future<BranchResponse> getListBrands();
 
   @GET("/users/user-history")
   Future<HistoryResponse> getListHistory(@Query("page") int page,

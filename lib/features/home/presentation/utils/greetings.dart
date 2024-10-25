@@ -1,5 +1,6 @@
 String getGreeting() {
   final hour = DateTime.now().hour;
+  print('hour: $hour');
   if (hour < 10) {
     return 'Chào buổi sáng';
   } else if (hour < 14) {

@@ -6,6 +6,7 @@ import 'package:flutter_base_v2/features/authentication/data/repositories_impl/a
 import 'package:flutter_base_v2/features/authentication/domain/repositories/auth_repo.dart';
 import 'package:flutter_base_v2/features/example_list/data/repositories/history_repo.dart';
 import 'package:flutter_base_v2/features/home/data/repositories/profile_repo.dart';
+import 'package:flutter_base_v2/features/home/data/repositories/branch_repo.dart'; // Import BranchRepo
 import 'package:flutter_base_v2/utils/config/app_config.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -67,6 +68,7 @@ class AppBinding extends Bindings {
     Get.put<AuthRepo>(AuthRepoImpl());
     Get.put<ProfileRepo>(ProfileRepoImpl());
     Get.put<HistoryRepo>(HistoryRepoImpl());
+    Get.put<BranchRepo>(BranchRepoImpl()); 
   }
 
   void injectService() {
