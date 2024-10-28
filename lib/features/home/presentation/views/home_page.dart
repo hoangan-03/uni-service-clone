@@ -3,6 +3,7 @@ import 'package:flutter_base_v2/features/home/data/types/menu_item.dart';
 import 'package:flutter_base_v2/features/home/data/repositories/menu_mockdata.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/branch.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/greetings.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/truncate_text.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/branch_select/branch_select.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/menu/menu.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
@@ -180,7 +181,7 @@ class HomePageContent extends StatelessWidget {
                 // Text(greeting, style: const TextStyle(fontSize: 18)),
                 const Text('Nguyễn Hoàng Ân',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                Text(selectedBranch?.name ?? '', style: const TextStyle(fontSize: 14, color: Colors.black)),
+                Text(truncateText(selectedBranch!.name , 30), style: const TextStyle(fontSize: 14, color: Colors.black)),
               ],
             ),
           ],
