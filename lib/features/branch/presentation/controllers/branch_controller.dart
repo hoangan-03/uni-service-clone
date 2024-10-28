@@ -9,6 +9,8 @@ import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/branch/domain/usecases/get_branch_uc.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/branch.dart';
+import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
+import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:get/get.dart';
@@ -18,7 +20,7 @@ class BranchController extends BaseController {
 
   BaseState<List<Branch>?> getBranchsState = BaseState();
   final LocalStorage _localStorage = Get.find();
-  final selectedBranch = Rxn<Branch>(); // Observable for selected branch
+  final selectedBranch = Rxn<Branch>();
 
   @override
   void onInit() async {
@@ -55,6 +57,12 @@ class BranchController extends BaseController {
     // _localStorage.saveSelectedBranch(branch); // Save selected branch if needed
   }
 
+  void navigateToHome() {
+    if (selectedBranch.value != null) {
+      N.toHome(input: HomeInput('Vinh Truong', 'vinhthv1@yopmail.com'));
+    }
+  }
+
   void setAccessToken() {
     _localStorage.saveAccessToken('accessToken123123123');
   }
@@ -86,4 +94,7 @@ class BranchController extends BaseController {
     _localStorage.saveThemeMode(newThemeMode);
     Get.changeThemeMode(newThemeMode);
   }
+
+
+  
 }
