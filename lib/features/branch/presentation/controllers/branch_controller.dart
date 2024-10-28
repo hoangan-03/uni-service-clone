@@ -19,9 +19,12 @@ import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_base_v2/utils/service/push_notification_service.dart';
 import 'package:get/get.dart';
 
-class BranchController extends BaseController {
-  BranchController(this._getBranchUsecase);
-  final GetBranchUseCase _getBranchUsecase; 
+class BranchController extends BaseController{
+
+   GetBranchUseCase get _getBranchUsecase => Get.find<GetBranchUseCase>();
+   
+  // BranchController(this._getBranchUsecase);
+  // final GetBranchUseCase _getBranchUsecase; 
 
   Branch? selectedBranch;
 

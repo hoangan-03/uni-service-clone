@@ -7,6 +7,7 @@ class HomeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(HomeController.new);
+
     Get.lazyPut(() => GetProfileUseCase(Get.find()));
     Get.lazyPut(()=> GetBranchUseCase(Get.find()));
   }

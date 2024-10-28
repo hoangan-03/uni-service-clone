@@ -12,6 +12,11 @@ class N {
     type.navigate(name: AppRoute.uniLogin);
   }
 
+
+  static void toBranchPage({RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.branch);
+  } 
+
   static void toLandingPage({RouteType type = RouteType.offAll}) {
     type.navigate(name: AppRoute.landing);
   }

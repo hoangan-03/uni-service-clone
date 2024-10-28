@@ -1,6 +1,9 @@
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/login/login_binding.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/login/login_page.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/login/uni_login_page.dart';
+import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_binding.dart';
+import 'package:flutter_base_v2/features/branch/presentation/pages/branch_select.dart';
+import 'package:flutter_base_v2/features/branch/presentation/pages/branchs_page.dart';
 import 'package:flutter_base_v2/features/example_list/presentation/controllers/example_list_binding.dart';
 import 'package:flutter_base_v2/features/example_list/presentation/views/example_list_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_binding.dart';
@@ -32,6 +35,7 @@ class AppRoute {
   static String notifications = '/notifications';
   static String service = '/service';
   static String qr = '/qr';
+  static String branch = '/branches';
   static String history = '/history';
   static String account = '/account';
 
@@ -74,9 +78,9 @@ class AppRoute {
       transition: Transition.noTransition,
     ),
     GetPage(
-        name: service,
-        page: ServicesPage.new,
-        binding: HomeBinding(),
+        name: branch,
+        page: BranchsPage.new,
+        binding: BranchBinding(),
         transition: Transition.noTransition),
     GetPage(name: qr, page: QRPage.new),
     GetPage(name: history, page: HistoryPage.new),

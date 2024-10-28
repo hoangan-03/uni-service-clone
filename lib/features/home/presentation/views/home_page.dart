@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/features/branch/presentation/pages/branchs_page.dart';
 import 'package:flutter_base_v2/features/home/data/types/menu_item.dart';
 import 'package:flutter_base_v2/features/home/data/repositories/menu_mockdata.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/branch.dart';
@@ -35,6 +36,7 @@ class HomePageState extends State<HomePage> {
         onMenuSelected: _onMenuSelected,
         selectedBranch: selectedBranch,
       ),
+      const BranchsPage(),
       const QRPage(),
       const HistoryPage(),
       const AccountPage(),
@@ -79,6 +81,10 @@ class HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Trang chủ',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.design_services),
+            label: 'Tiện ích',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.qr_code),
