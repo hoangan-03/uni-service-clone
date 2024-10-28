@@ -2,7 +2,6 @@ import 'package:flutter_base_v2/features/authentication/presentation/controllers
 import 'package:flutter_base_v2/features/authentication/presentation/views/login/login_page.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/login/uni_login_page.dart';
 import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_binding.dart';
-import 'package:flutter_base_v2/features/branch/presentation/pages/branch_select.dart';
 import 'package:flutter_base_v2/features/branch/presentation/pages/branchs_page.dart';
 import 'package:flutter_base_v2/features/example_list/presentation/controllers/example_list_binding.dart';
 import 'package:flutter_base_v2/features/example_list/presentation/views/example_list_page.dart';
@@ -20,7 +19,6 @@ import 'package:get/get.dart';
 // Import the new pages
 import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
 import 'package:flutter_base_v2/features/qrcode/presentation/views/qrcode.dart';
-import 'package:flutter_base_v2/features/services/presentation/views/services.dart';
 import 'package:flutter_base_v2/features/history/presentation/views/history.dart';
 
 class AppRoute {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_binding.dart';
 import 'package:flutter_base_v2/features/branch/presentation/pages/branchs_page.dart';
 import 'package:flutter_base_v2/features/home/data/types/menu_item.dart';
 import 'package:flutter_base_v2/features/home/data/repositories/menu_mockdata.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_base_v2/features/account/presentation/views/account.dart
 import 'package:flutter_base_v2/features/qrcode/presentation/views/qrcode.dart';
 import 'package:flutter_base_v2/features/history/presentation/views/history.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,8 +24,7 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   String _currentMenu = 'Tất cả';
-  Branch? selectedBranch;
-  bool _hasSelectedBranch = false;
+
 
   late List<Widget> _pages;
 
@@ -34,7 +35,6 @@ class HomePageState extends State<HomePage> {
       HomePageContent(
         currentMenu: _currentMenu,
         onMenuSelected: _onMenuSelected,
-        selectedBranch: selectedBranch,
       ),
       const BranchsPage(),
       const QRPage(),
@@ -55,25 +55,11 @@ class HomePageState extends State<HomePage> {
     });
   }
 
-  void _onBranchSelected(Branch branch) {
-    setState(() {
-      selectedBranch = branch;
-      _hasSelectedBranch = true;
 
-      _pages[0] = HomePageContent(
-        currentMenu: _currentMenu,
-        onMenuSelected: _onMenuSelected,
-        selectedBranch: selectedBranch,
-      );
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    if (!_hasSelectedBranch) {
-      return BranchSelectPage(onBranchSelected: _onBranchSelected);
-    }
-    
+
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -103,7 +89,13 @@ class HomePageState extends State<HomePage> {
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
-        onTap: _onItemTapped,
+        onTap: (index) {
+          if (index == 1) {
+            Get.to(() => const BranchsPage(), binding: BranchBinding());
+          } else {
+            _onItemTapped(index);
+          }
+        },
       ),
     );
   }
@@ -113,13 +105,11 @@ class HomePageContent extends StatelessWidget {
   final String currentMenu;
   final String greeting = getGreeting();
   final Function(String) onMenuSelected;
-  final Branch? selectedBranch;
 
   HomePageContent({
     super.key,
     required this.currentMenu,
     required this.onMenuSelected,
-    required this.selectedBranch,
   });
 
   @override
@@ -138,7 +128,7 @@ class HomePageContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeader(selectedBranch),
+            _buildHeader(),
             const SizedBox(height: 16),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -166,7 +156,7 @@ class HomePageContent extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(Branch? selectedBranch) {
+  Widget _buildHeader() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -187,7 +177,7 @@ class HomePageContent extends StatelessWidget {
                 // Text(greeting, style: const TextStyle(fontSize: 18)),
                 const Text('Nguyễn Hoàng Ân',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                Text(truncateText(selectedBranch!.name , 30), style: const TextStyle(fontSize: 14, color: Colors.black)),
+                Text(truncateText("Sample", 30), style: const TextStyle(fontSize: 14, color: Colors.black)),
               ],
             ),
           ],

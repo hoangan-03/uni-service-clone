@@ -27,7 +27,8 @@ class RootController extends BaseController {
   }
 
   void _handleAuthenticated() {
-    N.toBranchPage();
+    // N.toBranchPage();
+    N.toHome(input: HomeInput('Vinh Truong', 'vinhthv1@yopmail.com'));
     Future.delayed(
         const Duration(milliseconds: 100), FlutterNativeSplash.remove);
   }
