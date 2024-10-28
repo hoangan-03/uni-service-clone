@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/token_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/user_response.dart';
-import 'package:flutter_base_v2/features/home/data/models/branch_response.dart';
+import 'package:flutter_base_v2/features/branch/data/models/branch_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
 import 'package:flutter_base_v2/features/example_list/data/models/history_response.dart';
 import 'package:flutter_base_v2/utils/config/app_constants.dart';

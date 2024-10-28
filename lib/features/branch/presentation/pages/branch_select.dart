@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/branch.dart';
-import 'package:flutter_base_v2/features/home/data/repositories/branch_repo.dart';
+import 'package:flutter_base_v2/features/branch/data/repositories/branch_repo.dart';
 
 class BranchSelectPage extends StatefulWidget {
   final void Function(Branch branch) onBranchSelected;

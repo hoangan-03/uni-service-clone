@@ -4,7 +4,7 @@ import 'package:flutter_base_v2/features/home/data/repositories/menu_mockdata.da
 import 'package:flutter_base_v2/features/home/domain/entities/branch.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/greetings.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/truncate_text.dart';
-import 'package:flutter_base_v2/features/home/presentation/views/branch_select/branch_select.dart';
+import 'package:flutter_base_v2/features/branch/presentation/pages/branch_select.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/menu/menu.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
 import 'package:flutter_base_v2/features/qrcode/presentation/views/qrcode.dart';
