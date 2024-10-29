@@ -14,7 +14,7 @@ class Menu with PrettyJsonMixin {
   String menu = '';
   Branch? branch;
   List<Item> items = [];
-  Product? product;
+  Product product;
 
   Menu({
     required this.id,
@@ -26,21 +26,21 @@ class Menu with PrettyJsonMixin {
     required this.menu,
     this.branch,
     required this.items,
-    this.product,
+    required this.product,
   });
 
-  factory Menu.fromJson(Map<String, dynamic> json) {
-    return Menu(
-      id: json['id'],
-      branchId: json['branchId'],
-      quantity: json['quantity'],
-      orignialQuantity: json['orignialQuantity'],
-      orderedQuantity: json['orderedQuantity'],
-      status: json['status'],
-      menu: json['menu'],
-      branch: json['branch'] != null ? Branch.fromJson(json['branch']) : null,
-      items: List<Item>.from(json['items'].map((item) => Item.fromJson(item))), 
-      product: Product.fromJson(json['product']),
-    );
-  }
+  // factory Menu.fromJson(Map<String, dynamic> json) {
+  //   return Menu(
+  //     id: json['id'],
+  //     branchId: json['branchId'],
+  //     quantity: json['quantity'],
+  //     orignialQuantity: json['orignialQuantity'],
+  //     orderedQuantity: json['orderedQuantity'],
+  //     status: json['status'],
+  //     menu: json['menu'],
+  //     branch: json['branch'] != null ? Branch.fromJson(json['branch']) : null,
+  //     items: List<Item>.from(json['items'].map((item) => Item.fromJson(item))), 
+  //     product: Product.fromJson(json['product']),
+  //   );
+  // }
 }

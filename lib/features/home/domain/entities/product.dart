@@ -11,21 +11,21 @@ class Product with PrettyJsonMixin {
 
   Product({
     required this.id,
-    required this.name,
-    required this.isLimit,
-    required this.imageURL,
-    required this.isActive,
+    this.name = '',
+    this.isLimit = false,
+    this.imageURL = '',
+    this.isActive = true,
     this.description = '',
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      imageURL: json['imageURL'],
-      isActive: json['isActive'],
-      isLimit: json['isLimit'],
-    );
-  }
+  // factory Product.fromJson(Map<String, dynamic> json) {
+  //   return Product(
+  //     id: json['id'],
+  //     name: json['name'],
+  //     description: json['description'],
+  //     imageURL: json['imageURL'],
+  //     isActive: json['isActive'],
+  //     isLimit: json['isLimit'],
+  //   );
+  // }
 }

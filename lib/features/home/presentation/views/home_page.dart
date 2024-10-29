@@ -47,25 +47,16 @@ class HomePage extends BaseGetView<HomeController> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: menu.items.length,
-                              itemBuilder: (context, itemIndex) {
-                                final item = menu.items[itemIndex];
-                                return ListTile(
-                                  title: Text(item.name),
-                                  subtitle: item.description != null &&
-                                          item.description!.isNotEmpty
-                                      ? Text(
-                                          item.description!,
-                                          style: AppTextStyle.regular12()
-                                              .copyWith(color: appColors?.gray),
-                                        )
-                                      : null,
-                                );
-                              },
-                            ),
+                            ListTile(
+                              title: Text(menu.product?.id ?? 'sfdf'),
+                              // subtitle: item.id != null && item.id!.isNotEmpty
+                              //     ? Text(
+                              //         item.id!,
+                              //         style: AppTextStyle.regular12()
+                              //             .copyWith(color: appColors?.gray),
+                              //       )
+                              //     : null,
+                            )
                           ],
                         );
                       },
