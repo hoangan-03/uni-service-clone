@@ -4,9 +4,11 @@ import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get_storage/get_storage.dart'; 
 
 class RootController extends BaseController {
   final AuthService _authService;
+  final GetStorage _localStorage = GetStorage();
 
   RootController(this._authService);
 
@@ -14,7 +16,6 @@ class RootController extends BaseController {
   Future<void> onInit() async {
     super.onInit();
     try {
-      // Handle transition
       if (await _authService.isAuthenticated()) {
         _handleAuthenticated();
       } else {
@@ -27,16 +28,26 @@ class RootController extends BaseController {
   }
 
   void _handleAuthenticated() {
-    N.toBranchPage();
-    // N.toHome(input: HomeInput('Vinh Truong', 'vinhthv1@yopmail.com'));
+
+    final selectedBranchJson = _localStorage.read('selectedBranch');
+    if (selectedBranchJson != null) {
+      N.toHome(input: HomeInput('Vinh Truong', 'vinhthv1@yopmail.com'));
+    } else {
+      N.toBranchPage();
+    }
+
     Future.delayed(
-        const Duration(milliseconds: 100), FlutterNativeSplash.remove);
+      const Duration(milliseconds: 100),
+      FlutterNativeSplash.remove,
+    );
   }
 
   void _handleUnauthenticated() {
     _authService.logout().then((_) {
       Future.delayed(
-          const Duration(milliseconds: 100), FlutterNativeSplash.remove);
+        const Duration(milliseconds: 100),
+        FlutterNativeSplash.remove,
+      );
     });
   }
 }

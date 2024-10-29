@@ -10,7 +10,7 @@ import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/branch/domain/usecases/get_branch_uc.dart';
-import 'package:flutter_base_v2/features/home/domain/entities/branch.dart';
+import 'package:flutter_base_v2/features/branch/domain/entities/branch.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';

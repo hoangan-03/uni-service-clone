@@ -3,7 +3,7 @@ import 'package:flutter_base_v2/features/home/data/repositories/menu_mockdata.da
 import 'package:flutter_base_v2/features/home/presentation/widgets/item_list.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/section_header.dart';
 
-Widget buildMainPage(BuildContext context) {
+Widget buildMainPage(BuildContext context, String branchId) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

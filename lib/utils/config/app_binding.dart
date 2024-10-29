@@ -4,6 +4,7 @@ import 'package:flutter_base_v2/base/data/remote/api/api_service.dart';
 import 'package:flutter_base_v2/base/data/remote/builder/dio_builder.dart';
 import 'package:flutter_base_v2/features/authentication/data/repositories_impl/auth_repo_impl.dart';
 import 'package:flutter_base_v2/features/authentication/domain/repositories/auth_repo.dart';
+import 'package:flutter_base_v2/features/branch/domain/repositories/branch_repo.dart';
 import 'package:flutter_base_v2/features/example_list/data/repositories/history_repo.dart';
 import 'package:flutter_base_v2/features/home/data/repositories/profile_repo.dart';
 import 'package:flutter_base_v2/features/branch/data/repositories/branch_repo.dart'; // Import BranchRepo

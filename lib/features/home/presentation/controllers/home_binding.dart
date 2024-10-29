@@ -1,4 +1,4 @@
-import 'package:flutter_base_v2/features/home/domain/usecases/profile/get_profile_uc.dart';
+import 'package:flutter_base_v2/features/home/domain/usecases/get_profile_uc.dart';
 import 'package:flutter_base_v2/features/branch/domain/usecases/get_branch_uc.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:get/get.dart';

@@ -1,17 +1,19 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
+import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
+import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/user.dart';
+import 'package:flutter_base_v2/features/home/domain/usecases/get_menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
-import 'package:flutter_base_v2/features/home/domain/usecases/profile/get_profile_uc.dart';
+import 'package:flutter_base_v2/features/home/domain/usecases/get_profile_uc.dart';
 import 'package:flutter_base_v2/features/branch/domain/usecases/get_branch_uc.dart';
-import 'package:flutter_base_v2/features/home/domain/entities/branch.dart';
+import 'package:flutter_base_v2/features/branch/domain/entities/branch.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -20,20 +22,26 @@ import 'package:get/get.dart';
 
 class HomeController extends BaseController<HomeInput> {
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
+
   GetBranchUseCase get _getBranchUseCase => Get.find<GetBranchUseCase>();
 
+  GetMenuUseCase get _getMenuUseCase => Get.find<GetMenuUseCase>();
+  BaseState<List<Menu>?> getMenusState = BaseState();
   final pushNotiService = Get.find<PushNotificationService>();
 
   final user = User().obs;
   final branches = <Branch>[].obs;
+  final menus = <Menu>[].obs;
   final LocalStorage _localStorage = Get.find();
+
+  var currentMenu = ''.obs;
 
   @override
   void onInit() async {
     super.onInit();
     pushNotiService.listenNotification();
     getProfile();
-    getBranches();
+    getMenus('', '');
     final notificationAppLaunchDetails =
         await pushNotiService.getNotificationAppLaunchDetails();
 
@@ -47,6 +55,7 @@ class HomeController extends BaseController<HomeInput> {
     pushNotiService.cancelNotification();
     _getProfileUseCase.dispose();
     _getBranchUseCase.dispose();
+    _getMenuUseCase.dispose();
     super.onClose();
   }
 
@@ -98,6 +107,28 @@ class HomeController extends BaseController<HomeInput> {
           },
         ),
         input: null);
+  }
+
+  Future<void> getMenus(String category, String branchId) {
+    return _getMenuUseCase.execute(
+      observer: Observer(
+        onSubscribe: () {
+          getMenusState.onLoading();
+        },
+        onSuccess: (List<Menu>? menus) {
+          getMenusState.onSuccess(data: menus);
+        },
+        onError: (AppException e) {
+          getMenusState.onError(e.message);
+          handleError(e);
+        },
+      ),
+      input: GetMenuParams(branchId: branchId, category: category),
+    );
+  }
+
+  void selectMenu(String menu) {
+    currentMenu.value = menu; // Update the current menu
   }
 
   void logout() {

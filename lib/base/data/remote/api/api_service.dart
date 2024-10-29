@@ -4,6 +4,7 @@ import 'package:flutter_base_v2/features/authentication/data/models/user_respons
 import 'package:flutter_base_v2/features/branch/data/models/branch_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
 import 'package:flutter_base_v2/features/example_list/data/models/history_response.dart';
+import 'package:flutter_base_v2/features/home/data/models/menu_response.dart';
 import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
@@ -24,6 +25,12 @@ abstract class ApiService {
 
   @GET('/branches/options?o=true')
   Future<BranchResponse> getListBrands();
+
+  @GET('/menu')
+  Future<MenuResponse> getMenu(
+    @Query('menu') String category,
+    @Query('branchId') String branchid,
+  );
 
   @GET("/users/user-history")
   Future<HistoryResponse> getListHistory(@Query("page") int page,

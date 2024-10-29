@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_controller.dart';
-import 'package:flutter_base_v2/features/home/domain/entities/branch.dart';
+import 'package:flutter_base_v2/features/branch/domain/entities/branch.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -33,10 +33,10 @@ class BranchsPage extends BaseGetView<BranchController> {
                         final branch = branches![index];
                         return Obx(() => ListTile(
                               title: Text(branch.name),
-                              subtitle: branch.description.isNotEmpty
+                             subtitle: branch.description?.isNotEmpty == true
                                   ? Text(
-                                      branch.description,
-                                       style: AppTextStyle.regular12().copyWith(color: appColors?.gray), 
+                                      branch.description ?? '',
+                                      style: AppTextStyle.regular12().copyWith(color: appColors?.gray),
                                     )
                                   : null,
                               trailing: Radio<Branch>(
