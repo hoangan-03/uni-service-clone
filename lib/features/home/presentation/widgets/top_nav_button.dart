@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/utils/config/app_text_style.dart';
+import 'package:flutter_base_v2/utils/config/app_theme.dart';
 
 class TopNavButton extends StatelessWidget {
   final IconData icon;
@@ -16,6 +18,7 @@ class TopNavButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     final bool isSelected = currentMenu == label;
 
     return GestureDetector(
@@ -26,19 +29,18 @@ class TopNavButton extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: isSelected
-              ? const Color.fromRGBO(66, 63, 255, 0.08)
-              : Colors.transparent,
-          border: Border.all(color: const Color.fromARGB(255, 220, 220, 220)),
+              ? appColors?.primary
+              : appColors?.transparent,
+          border: Border.all(color: appColors?.gray ?? Colors.grey),
           borderRadius: BorderRadius.circular(16.0),
         ),
         child: Column(
           children: [
-            Icon(icon, size: 24, color: isSelected ? const Color.fromRGBO(66, 63, 255, 1) : Colors.black),
+            Icon(icon, size: 24, color: isSelected ? appColors?.white : appColors?.secondary),
             Text(
               label,
-              style: TextStyle(
-                fontSize: 16,
-                color: isSelected ? const Color.fromRGBO(66, 63, 255, 1) : Colors.black,
+              style: AppTextStyle.regular16().copyWith(
+                color: isSelected ? appColors?.white : appColors?.secondary,
               ),
             ),
           ],

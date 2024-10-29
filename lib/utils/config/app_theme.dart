@@ -6,18 +6,23 @@ import 'package:get/get.dart';
 
 // ColorScheme colorScheme(context) => Theme.of(context).colorScheme;
 
-AppColors colors = Get.context?.theme.extension<AppColors>() ?? const AppColors();
+AppColors colors =
+    Get.context?.theme.extension<AppColors>() ?? const AppColors();
 
-ColorScheme colorScheme = Get.context?.theme.colorScheme ?? const ColorScheme.light();
+ColorScheme colorScheme =
+    Get.context?.theme.colorScheme ?? const ColorScheme.light();
 
 class AppTheme {
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: ColorName.grayHigh70,
     extensions: const <ThemeExtension<AppColors>>[
       AppColors(
-        color1: Colors.cyan,
-        color2: Colors.yellow,
-        color3: Colors.pink,
+        primary: Color.fromRGBO(66, 63, 255, 1),
+        secondary: Colors.black,
+        background: Color.fromRGBO(66, 63, 255, 0.08),
+        gray: Color.fromRGBO(172, 172, 176, 1),
+        white: Colors.white,
+        transparent: Colors.transparent,
       ),
     ],
     colorScheme: const ColorScheme(
@@ -34,49 +39,59 @@ class AppTheme {
   );
 
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
-      scaffoldBackgroundColor: ColorName.grayBase,
-      extensions: const <ThemeExtension<AppColors>>[
-        AppColors(
-          color1: Colors.blue,
-          color2: Colors.orange,
-          color3: Colors.red,
-        ),
-      ],
-      // colorScheme: const ColorScheme(
-      //     brightness: Brightness.light,
-      //     primary: ColorName.greenBase,
-      //     onPrimary: Colors.white,
-      //     secondary: ColorName.grayBase,
-      //     onSecondary: ColorName.greenBase,
-      //     error: ColorName.errorBackground,
-      //     onError: ColorName.error,
-      //     background: ColorName.grayBase,
-      //     onBackground: Colors.white,
-      //     surface: Colors.white,
-      //     onSurface: ColorName.grayLow10),
-      );
+    scaffoldBackgroundColor: ColorName.grayBase,
+    extensions: const <ThemeExtension<AppColors>>[
+      AppColors(
+        primary: Colors.blue,
+        secondary: Colors.orange,
+        gray: Colors.red,
+      ),
+    ],
+    // colorScheme: const ColorScheme(
+    //     brightness: Brightness.light,
+    //     primary: ColorName.greenBase,
+    //     onPrimary: Colors.white,
+    //     secondary: ColorName.grayBase,
+    //     onSecondary: ColorName.greenBase,
+    //     error: ColorName.errorBackground,
+    //     onError: ColorName.error,
+    //     background: ColorName.grayBase,
+    //     onBackground: Colors.white,
+    //     surface: Colors.white,
+    //     onSurface: ColorName.grayLow10),
+  );
 }
 
 class AppColors extends ThemeExtension<AppColors> {
-  final Color color1;
-  final Color color2;
-  final Color color3;
+  final Color primary;
+  final Color secondary;
+  final Color background;
+  final Color gray;
+  final Color white;
+  final Color transparent;
 
   const AppColors(
-      {this.color1 = Colors.white,
-      this.color2 = Colors.white,
-      this.color3 = Colors.white});
+      {this.primary = Colors.white,
+      this.secondary = Colors.white,
+      this.gray = Colors.white,
+      this.background = Colors.white, this.white =  Colors.white, this.transparent = Colors.transparent});
 
   @override
   AppColors copyWith({
-    Color? color1,
-    Color? color2,
-    Color? color3,
+    Color? primary,
+    Color? secondary,
+    Color? gray,
+    Color? background,
+    Color? white,
+    Color? transparent,
   }) {
     return AppColors(
-      color1: color1 ?? this.color1,
-      color2: color2 ?? this.color2,
-      color3: color3 ?? this.color3,
+      primary: primary ?? this.primary,
+      secondary: secondary ?? this.secondary,
+      gray: gray ?? this.gray,
+      background: background ?? this.background,
+      white: white ?? this.white,
+      transparent: transparent ?? this.transparent,
     );
   }
 
@@ -86,9 +101,9 @@ class AppColors extends ThemeExtension<AppColors> {
       return this;
     }
     return AppColors(
-      color1: Color.lerp(color1, other.color1, t) ?? color1,
-      color2: Color.lerp(color2, other.color2, t) ?? color2,
-      color3: Color.lerp(color3, other.color3, t) ?? color3,
+      primary: Color.lerp(primary, other.primary, t) ?? primary,
+      secondary: Color.lerp(secondary, other.secondary, t) ?? secondary,
+      gray: Color.lerp(gray, other.gray, t) ?? gray,
     );
   }
 }

@@ -60,6 +60,10 @@ class AppTextStyle {
     return _styleWith(FontWeight.w700, 18, color: color);
   }
 
+  static TextStyle bold20({Color color = ColorName.grayBase}) {
+    return _styleWith(FontWeight.w700, 20, color: color);
+  }
+
   static TextStyle _styleWith(
     FontWeight weight,
     double size, {

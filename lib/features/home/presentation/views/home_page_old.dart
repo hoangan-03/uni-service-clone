@@ -136,7 +136,7 @@ class HomePage extends BaseGetView<HomeController> {
                     )),
                 const SizedBox(height: 8),
                 CommonButton(
-                    fillColor: colors.color1,
+                    fillColor: colors.primary,
                     onPressed: controller.switchTheme,
                     child: Text(
                       'Switch theme',

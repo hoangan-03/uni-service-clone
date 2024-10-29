@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/home/data/types/menu_item.dart';
+import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 
 Widget buildItemCard(MenuItem item, BuildContext context) {
     return Container(
@@ -26,12 +27,12 @@ Widget buildItemCard(MenuItem item, BuildContext context) {
             children: [
               Text(
                 item.name,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: AppTextStyle.bold16(),
               ),
               const SizedBox(height: 4),
               Text(
                 item.price,
-                style: const TextStyle(fontSize: 14),
+                style: AppTextStyle.regular14(),
               ),
             ],
           ),

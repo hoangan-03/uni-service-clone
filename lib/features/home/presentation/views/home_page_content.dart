@@ -35,53 +35,56 @@ class HomePageContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildHeader(),
+            buildHeader(context),
             const SizedBox(height: 16),
-            SingleChildScrollView(
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  TopNavButton(
-                    icon: FontAwesomeIcons.bellConcierge,
-                    label: 'Tất cả',
-                    currentMenu: currentMenu,
-                    onMenuSelected: onMenuSelected,
-                  ),
-                  const SizedBox(width: 10),
-                  TopNavButton(
-                    icon: FontAwesomeIcons.utensils,
-                    label: 'Thực đơn chính',
-                    currentMenu: currentMenu,
-                    onMenuSelected: onMenuSelected,
-                  ),
-                  const SizedBox(width: 10),
-                  TopNavButton(
-                    icon: FontAwesomeIcons.martiniGlass,
-                    label: 'Đồ uống',
-                    currentMenu: currentMenu,
-                    onMenuSelected: onMenuSelected,
-                  ),
-                  const SizedBox(width: 10),
-                  TopNavButton(
-                    icon: FontAwesomeIcons.bowlRice,
-                    label: 'Food court',
-                    currentMenu: currentMenu,
-                    onMenuSelected: onMenuSelected,
-                  ),
-                  const SizedBox(width: 10),
-                  TopNavButton(
-                    icon: FontAwesomeIcons.wheatAwn,
-                    label: 'Đặc sản địa phương',
-                    currentMenu: currentMenu,
-                    onMenuSelected: onMenuSelected,
-                  ),
+                TopNavButton(
+                  icon: FontAwesomeIcons.bellConcierge,
+                  label: 'Tất cả',
+                  currentMenu: currentMenu,
+                  onMenuSelected: onMenuSelected,
+                ),
+                const SizedBox(width: 10),
+                TopNavButton(
+                  icon: FontAwesomeIcons.utensils,
+                  label: 'Thực đơn chính',
+                  currentMenu: currentMenu,
+                  onMenuSelected: onMenuSelected,
+                ),
+                const SizedBox(width: 10),
+                TopNavButton(
+                  icon: FontAwesomeIcons.martiniGlass,
+                  label: 'Đồ uống',
+                  currentMenu: currentMenu,
+                  onMenuSelected: onMenuSelected,
+                ),
+                const SizedBox(width: 10),
+                TopNavButton(
+                  icon: FontAwesomeIcons.bowlRice,
+                  label: 'Food court',
+                  currentMenu: currentMenu,
+                  onMenuSelected: onMenuSelected,
+                ),
+                const SizedBox(width: 10),
+                TopNavButton(
+                  icon: FontAwesomeIcons.wheatAwn,
+                  label: 'Đặc sản địa phương',
+                  currentMenu: currentMenu,
+                  onMenuSelected: onMenuSelected,
+                ),
                 ],
               ),
+              ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             currentMenu == 'Tất cả'
                 ? buildMainPage(context)
-                : buildMenuPage(menuItems[currentMenu]!),
+                : buildMenuPage(menuItems[currentMenu]!, context),
           ],
         ),
       ),

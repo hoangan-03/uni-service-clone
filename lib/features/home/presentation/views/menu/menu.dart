@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import "package:flutter_base_v2/features/home/data/types/menu_item.dart";
 import "package:flutter_base_v2/features/home/presentation/views/order_slider/order_slider.dart";
+import "package:flutter_base_v2/utils/config/app_text_style.dart";
+import "package:flutter_base_v2/utils/config/app_theme.dart";
 
 class MenuPage extends StatelessWidget {
   final String title;
@@ -10,8 +12,9 @@ class MenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: appColors?.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 40.0),
         child: Column(
@@ -27,8 +30,7 @@ class MenuPage extends StatelessWidget {
                 ),
                 Text(
                   title,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                  style: AppTextStyle.bold20(),
                 ),
               ],
             ),
@@ -40,9 +42,9 @@ class MenuPage extends StatelessWidget {
                   return Container(
                     margin: const EdgeInsets.only(bottom: 12.0),
                     padding: const EdgeInsets.only(bottom: 12.0),
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       border: Border(
-                        bottom: BorderSide(color: Colors.grey, width: 0.5),
+                        bottom: BorderSide(color: appColors?.gray ?? Colors.grey, width: 0.5),
                       ),
                     ),
                     child: Row(
@@ -64,19 +66,19 @@ class MenuPage extends StatelessWidget {
                             children: [
                               Text(
                                 item.name,
-                                style: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                style: AppTextStyle.bold16()
+                                    .copyWith(color: appColors?.secondary),
                               ),
                               Text(
                                 item.description,
-                                style: const TextStyle(
-                                    fontSize: 14, color: Colors.grey),
+                                style: AppTextStyle.regular14()
+                                    .copyWith(color: appColors?.gray),
                               ),
                               const SizedBox(height: 4),
                               Text(
                                 item.price,
-                                style: const TextStyle(
-                                    fontSize: 14, color: Colors.green),
+                                style: AppTextStyle.regular14()
+                                    .copyWith(color: appColors?.secondary),
                               ),
                             ],
                           ),
@@ -86,11 +88,11 @@ class MenuPage extends StatelessWidget {
                             width: 24,
                             height: 24,
                             decoration: BoxDecoration(
-                              color: Color.fromRGBO(66, 63, 255, 1),
+                              color: appColors?.primary,
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: const Icon(Icons.add,
-                                color: Colors.white, size: 18),
+                            child: Icon(Icons.add,
+                                color: appColors?.white, size: 18),
                           ),
                           onPressed: () {
                             showOrderSlider(context, item);
