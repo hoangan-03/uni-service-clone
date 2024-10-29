@@ -1,6 +1,7 @@
 import 'package:flutter_base_v2/base/data/models/pretty_json_mixin.dart';
 import 'package:flutter_base_v2/features/branch/domain/entities/branch.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/item.dart';
+import 'package:flutter_base_v2/features/home/domain/entities/product.dart';
 
 @jsonSerializable
 class Menu with PrettyJsonMixin {
@@ -13,6 +14,7 @@ class Menu with PrettyJsonMixin {
   String menu = '';
   Branch? branch;
   List<Item> items = [];
+  Product? product;
 
   Menu({
     required this.id,
@@ -24,6 +26,7 @@ class Menu with PrettyJsonMixin {
     required this.menu,
     this.branch,
     required this.items,
+    this.product,
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) {
@@ -36,9 +39,8 @@ class Menu with PrettyJsonMixin {
       status: json['status'],
       menu: json['menu'],
       branch: json['branch'] != null ? Branch.fromJson(json['branch']) : null,
-      items: List<Item>.from(json['items'].map((item) => Item.fromJson(item))),
+      items: List<Item>.from(json['items'].map((item) => Item.fromJson(item))), 
+      product: Product.fromJson(json['product']),
     );
   }
 }
-
-

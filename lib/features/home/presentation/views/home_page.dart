@@ -36,7 +36,7 @@ class HomePage extends BaseGetView<HomeController> {
           child: Column(
             children: [
               const SizedBox(height: 32.0),
-                            Expanded(
+              Expanded(
                 child: controller.getMenusState.widget(
                   onLoading: const Center(child: CircularProgressIndicator()),
                   onSuccess: (menus) {
@@ -55,10 +55,12 @@ class HomePage extends BaseGetView<HomeController> {
                                 final item = menu.items[itemIndex];
                                 return ListTile(
                                   title: Text(item.name),
-                                  subtitle: item.description != null && item.description!.isNotEmpty
+                                  subtitle: item.description != null &&
+                                          item.description!.isNotEmpty
                                       ? Text(
                                           item.description!,
-                                          style: AppTextStyle.regular12().copyWith(color: appColors?.gray),
+                                          style: AppTextStyle.regular12()
+                                              .copyWith(color: appColors?.gray),
                                         )
                                       : null,
                                 );
