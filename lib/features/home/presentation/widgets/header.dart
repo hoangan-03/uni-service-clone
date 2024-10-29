@@ -1,10 +1,22 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/truncate_text.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
+import 'package:get_storage/get_storage.dart';
 
 Widget buildHeader(BuildContext context) {
   final appColors = Theme.of(context).extension<AppColors>();
+  final GetStorage localStorage = GetStorage(); 
+
+  final branchJson = localStorage.read('selectedBranch');
+  String branchName = 'Sample name';
+
+  if (branchJson != null) {
+    final Map<String, dynamic> branchData = jsonDecode(branchJson);
+    branchName = branchData['name'] ?? 'Sample'; 
+  }
+
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -25,11 +37,14 @@ Widget buildHeader(BuildContext context) {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Nguyễn Hoàng Ân',
-                  style: AppTextStyle.bold16()
-                      .copyWith(color: appColors?.secondary)),
-              Text(truncateText("Sample", 30),
-                  style: AppTextStyle.regular14()),
+              Text(
+                'Nguyễn Hoàng Ân',
+                style: AppTextStyle.bold16().copyWith(color: appColors?.secondary),
+              ),
+              Text(
+                truncateText(branchName, 30), 
+                style: AppTextStyle.regular14(),
+              ),
             ],
           ),
         ],

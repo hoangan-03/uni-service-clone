@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -54,7 +56,21 @@ class BranchController extends BaseController {
 
   void selectBranch(Branch branch) {
     selectedBranch.value = branch;
-    // _localStorage.saveSelectedBranch(branch); // Save selected branch if needed
+
+    final branchData = {
+      'id': branch.id,
+      'name': branch.name,
+      'description': branch.description,
+      'isActive': branch.isActive,
+    };
+
+    final branchJson = jsonEncode(branchData);
+
+    _localStorage.setString('selectedBranch', branchJson).then((_) {
+      print('Branch saved to local storage: $branchJson');
+    }).catchError((error) {
+      print('Failed to save branch: $error');
+    });
   }
 
   void navigateToHome() {
@@ -94,7 +110,4 @@ class BranchController extends BaseController {
     _localStorage.saveThemeMode(newThemeMode);
     Get.changeThemeMode(newThemeMode);
   }
-
-
-  
 }

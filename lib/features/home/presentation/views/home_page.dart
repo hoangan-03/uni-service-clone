@@ -6,6 +6,8 @@ import 'package:flutter_base_v2/features/qrcode/presentation/views/qrcode.dart';
 import 'package:flutter_base_v2/features/history/presentation/views/history.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/home_page_content.dart'; 
 import 'package:get/get.dart';
+import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -53,6 +55,7 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -79,8 +82,8 @@ class HomePageState extends State<HomePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: appColors?.primary,
+        unselectedItemColor: appColors?.gray,
         showUnselectedLabels: true,
         onTap: (index) {
           if (index == 1) {
