@@ -12,8 +12,6 @@ import 'package:flutter_base_v2/features/home/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/home/domain/usecases/get_menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/features/home/domain/usecases/get_profile_uc.dart';
-import 'package:flutter_base_v2/features/branch/domain/usecases/get_branch_uc.dart';
-import 'package:flutter_base_v2/features/branch/domain/entities/branch.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -22,18 +20,13 @@ import 'package:get/get.dart';
 
 class HomeController extends BaseController<HomeInput> {
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
-
-  GetBranchUseCase get _getBranchUseCase => Get.find<GetBranchUseCase>();
-
   GetMenuUseCase get _getMenuUseCase => Get.find<GetMenuUseCase>();
   BaseState<List<Menu>?> getMenusState = BaseState();
   final pushNotiService = Get.find<PushNotificationService>();
 
   final user = User().obs;
-  final branches = <Branch>[].obs;
-  final menus = <Menu>[].obs;
-  final LocalStorage _localStorage = Get.find();
 
+  final LocalStorage _localStorage = Get.find();
   var currentMenu = ''.obs;
 
   @override
@@ -41,7 +34,7 @@ class HomeController extends BaseController<HomeInput> {
     super.onInit();
     pushNotiService.listenNotification();
     getProfile();
-    getMenus('', '');
+    getMenus('TODAY', '28edd9d2-bdee-40c7-acaa-dc5c62f9560f');
     final notificationAppLaunchDetails =
         await pushNotiService.getNotificationAppLaunchDetails();
 
@@ -54,7 +47,6 @@ class HomeController extends BaseController<HomeInput> {
   void onClose() {
     pushNotiService.cancelNotification();
     _getProfileUseCase.dispose();
-    _getBranchUseCase.dispose();
     _getMenuUseCase.dispose();
     super.onClose();
   }
@@ -95,20 +87,6 @@ class HomeController extends BaseController<HomeInput> {
         input: null);
   }
 
-  Future<void> getBranches() {
-    return _getBranchUseCase.execute(
-        observer: Observer(
-          onSuccess: (List<Branch>? data) {
-            L.info(data);
-            if (data != null) branches.addAll(data);
-          },
-          onError: (AppException e) {
-            handleError(e);
-          },
-        ),
-        input: null);
-  }
-
   Future<void> getMenus(String category, String branchId) {
     return _getMenuUseCase.execute(
       observer: Observer(
@@ -123,12 +101,12 @@ class HomeController extends BaseController<HomeInput> {
           handleError(e);
         },
       ),
-      input: GetMenuParams(branchId: branchId, category: category),
+      input: GetMenuParams(category: category, branchId: branchId),
     );
   }
 
   void selectMenu(String menu) {
-    currentMenu.value = menu; // Update the current menu
+    currentMenu.value = menu;
   }
 
   void logout() {

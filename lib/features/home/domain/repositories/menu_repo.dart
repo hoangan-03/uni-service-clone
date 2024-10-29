@@ -3,5 +3,5 @@ import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 
 
 abstract class MenuRepo extends BaseMappingRepo<Menu, Menu> {
-  Future<List<Menu>?> getMenu(String category, String branchId);
+  Future<List<Menu>?> getMenus(String category, String branchId);
 }

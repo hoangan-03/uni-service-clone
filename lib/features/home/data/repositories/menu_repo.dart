@@ -3,13 +3,13 @@ import 'package:flutter_base_v2/base/data/remote/api/api_service.dart';
 import 'package:flutter_base_v2/features/home/data/models/menu_response.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/domain/repositories/menu_repo.dart';
-import 'package:flutter_base_v2/features/home/domain/entities/item.dart'; 
+import 'package:flutter_base_v2/features/home/domain/entities/item.dart';
 
 class MenuRepoImpl extends MenuRepo {
   final ApiService _apiService = Get.find();
 
   @override
-  Future<List<Menu>?> getMenu(String category, String branchId) async {
+  Future<List<Menu>?> getMenus(String category, String branchId) async {
     final response = await _apiService.getMenu(category, branchId);
     final List<MenuApiModel>? menuModels = response.data;
 

@@ -9,7 +9,7 @@ class GetMenuUseCase extends UseCaseIO<GetMenuParams, List<Menu>?> {
 
   @override
   Future<List<Menu>?> build(GetMenuParams input) {
-    return _menuRepo.getMenu(input.category, input.branchId);
+    return _menuRepo.getMenus(input.category, input.branchId);
   }
 }
 
