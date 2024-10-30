@@ -34,7 +34,7 @@ class HomeController extends BaseController<HomeInput> {
     super.onInit();
     pushNotiService.listenNotification();
     getProfile();
-    getMenus('TODAY', '28edd9d2-bdee-40c7-acaa-dc5c62f9560f');
+    getMenus('TODAY', '6134edff-d5cc-4dbc-be51-4c914bfded16');
     final notificationAppLaunchDetails =
         await pushNotiService.getNotificationAppLaunchDetails();
 
