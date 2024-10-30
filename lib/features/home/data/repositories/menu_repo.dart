@@ -10,7 +10,7 @@ class MenuRepoImpl extends MenuRepo {
 
   @override
   Future<List<Menu>?> getMenus(String category, String branchId) async {
-    final response = await _apiService.getMenu(category, branchId);
+    final response = await _apiService.getMenuByCategory(category, branchId);
     final List<MenuApiModel>? menuModels = response.data;
 
      return (menuModels != null) ? mappingEntity(menuModels) : null;
