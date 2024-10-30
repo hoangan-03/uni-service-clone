@@ -27,7 +27,7 @@ abstract class ApiService {
   Future<BranchResponse> getListBrands();
 
   @GET('/menu')
-  Future<MenuResponse> getMenu(
+  Future<MenuResponse> getMenuByCategory(
     @Query('menu') String category,
     @Query('branchId') String branchid,
   );

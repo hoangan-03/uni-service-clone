@@ -1,26 +1,93 @@
+// import 'package:flutter/material.dart';
+// import 'package:flutter_base_v2/base/domain/base_state.dart';
+// import 'package:flutter_base_v2/features/home/data/types/menu_item.dart';
+// import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
+// import 'package:flutter_base_v2/features/home/presentation/widgets/item_card.dart';
+
+// Widget buildItemList(List<MenuItem> items, BuildContext context, BaseState<List<Menu>?> state) {
+//     return SingleChildScrollView(
+//       scrollDirection: Axis.horizontal,
+//       child: Row(
+//         children: items
+//             .map((item) => Padding(
+//                   padding: const EdgeInsets.only(right: 10),
+//                   child: buildItemCard(item, context),
+//                 ))
+//             .toList(),
+//       ),
+//     );
+//   }
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter_base_v2/features/home/data/types/menu_item.dart';
+import 'package:flutter_base_v2/base/domain/base_state.dart';
+import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/item_card.dart';
 
-Widget buildItemList(List<MenuItem> items, BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: items
-            .map((item) => Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: buildItemCard(item, context),
-                ))
-            .toList(),
-      ),
-    );
-  }
+Widget buildItemList(BuildContext context, String category, BaseState<Map<String, List<Menu>>?> state) {
+  print("state: $state");
+  return SizedBox(
+    child: state.widget(
+      onLoading: const Center(child: CircularProgressIndicator()),
+      onSuccess: (menusMap) {
+        List<Menu> menus = menusMap?[category] ?? [];
+        print("category: $category");
+        print("menus: $menusMap");
+
+        return SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Text(
+                  category,
+                  style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: menus
+                      .map((menu) => Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: buildItemCard(menu.product, context),
+                          ))
+                      .toList(),
+                ),
+              ),
+              const SizedBox(height: 16), 
+            ],
+          ),
+        );
+      },
+      onError: (error) => Center(child: Text('Error: $error')),
+    ),
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
 // import 'package:flutter/material.dart';
 // import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 // import 'package:get/get.dart';
-// import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 
-// Widget buildItemList(BuildContext context, String branchId, String category) {
+
+// import 'package:flutter_base_v2/utils/config/app_text_style.dart';
+// import 'package:get/get.dart';
+
+// Widget buildItemList(
+//     List<MenuItem> items, BuildContext context, BaseState<List<Menu>?> state) {
 //   return Scaffold(
 //     body: Center(
 //       child: Padding(
@@ -35,34 +102,29 @@ Widget buildItemList(List<MenuItem> items, BuildContext context) {
 //             const SizedBox(height: 16.0),
 //             Expanded(
 //               child: Obx(() {
-//                 if (controller.menus.isEmpty) {
-//                   controller.getMenus(branchId, category);
-//                   return const Center(child: CircularProgressIndicator());
-//                 }
 //                 return Expanded(
-//                   child: controller.getMenusState.widget(
+//                   child: state.widget(
 //                     onLoading: const Center(child: CircularProgressIndicator()),
 //                     onSuccess: (menus) {
 //                       return ListView.builder(
-//                         itemCount: menus?.length ?? 0,
+//                         itemCount: menus?.length,
 //                         itemBuilder: (context, index) {
 //                           final menu = menus![index];
-//                           return Obx(() {
-//                             return Column(
-//                               children: menu.items.map((item) {
-//                                 return ListTile(
-//                                   title: Text(item.name),
-//                                   subtitle: item.description.isNotEmpty == true
-//                                       ? Text(
-//                                           item.description,
-//                                           style: AppTextStyle.regular12()
-//                                               .copyWith(color: Colors.green),
-//                                         )
-//                                       : null,
-//                                 );
-//                               }).toList(),
-//                             );
-//                           });
+//                           return Column(
+//                             crossAxisAlignment: CrossAxisAlignment.start,
+//                             children: [
+//                               ListTile(
+//                                 title: Text(menu.product.name),
+//                                 // subtitle: item.id != null && item.id!.isNotEmpty
+//                                 //     ? Text(
+//                                 //         item.id!,
+//                                 //         style: AppTextStyle.regular12()
+//                                 //             .copyWith(color: appColors?.gray),
+//                                 //       )
+//                                 //     : null,
+//                               )
+//                             ],
+//                           );
 //                         },
 //                       );
 //                     },

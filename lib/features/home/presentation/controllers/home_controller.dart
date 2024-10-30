@@ -21,20 +21,28 @@ import 'package:get/get.dart';
 class HomeController extends BaseController<HomeInput> {
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
   GetMenuUseCase get _getMenuUseCase => Get.find<GetMenuUseCase>();
-  BaseState<List<Menu>?> getMenusState = BaseState();
+  BaseState<Map<String, List<Menu>>?> getMenusState = BaseState();
   final pushNotiService = Get.find<PushNotificationService>();
 
   final user = User().obs;
 
   final LocalStorage _localStorage = Get.find();
   var currentMenu = ''.obs;
+  final currentBranchID = '6134edff-d5cc-4dbc-be51-4c914bfded16'.obs;
+  final currentCategory = 'TODAY'.obs;
 
   @override
   void onInit() async {
     super.onInit();
     pushNotiService.listenNotification();
     getProfile();
-    getMenus('TODAY', '6134edff-d5cc-4dbc-be51-4c914bfded16');
+    getMenuByCategory('TODAY', currentBranchID.value);
+    // getMenuByCategory('FOODCOURT', currentBranchID.value);
+    // getMenuByCategory('PREORDER', currentBranchID.value);
+    // getMenuByCategory('DRINK', currentBranchID.value);
+    // getMenuByCategory('SPECIALITY', currentBranchID.value);
+    // getMenuByCategory('NECESSITY', currentBranchID.value);
+
     final notificationAppLaunchDetails =
         await pushNotiService.getNotificationAppLaunchDetails();
 
@@ -87,14 +95,14 @@ class HomeController extends BaseController<HomeInput> {
         input: null);
   }
 
-  Future<void> getMenus(String category, String branchId) {
+  Future<void> getMenuByCategory(String category, String branchId) {
     return _getMenuUseCase.execute(
       observer: Observer(
         onSubscribe: () {
           getMenusState.onLoading();
         },
         onSuccess: (List<Menu>? menus) {
-          getMenusState.onSuccess(data: menus);
+          getMenusState.onSuccess(data: {category: menus ?? []});
         },
         onError: (AppException e) {
           getMenusState.onError(e.message);
@@ -107,6 +115,26 @@ class HomeController extends BaseController<HomeInput> {
 
   void selectMenu(String menu) {
     currentMenu.value = menu;
+  }
+
+  void updateCurrentBranchID(String branchID) {
+    currentBranchID.value = branchID;
+  }
+
+  void updateCurrentCategory(String category) {
+    const validCategories = [
+      'TODAY',
+      'FOODCOURT',
+      'PREORDER',
+      'DRINK',
+      'SPECIALITY',
+      'NECESSITY'
+    ];
+    if (validCategories.contains(category)) {
+      currentCategory.value = category;
+    } else {
+      throw ArgumentError('Invalid category: $category');
+    }
   }
 
   void logout() {

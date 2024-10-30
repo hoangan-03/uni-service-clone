@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/features/home/data/types/menu_item.dart';
 import 'package:flutter_base_v2/features/home/data/repositories/menu_mockdata.dart';
+import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/greetings.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/header.dart';
@@ -13,15 +15,19 @@ class HomePageContent extends StatelessWidget {
   final String currentMenu;
   final String branchId;
   final String greeting = getGreeting();
+  final String selectedCategory;
   final Function(String) onMenuSelected;
+  final BaseState<Map<String, List<Menu>>?> state;
   // final HomeController controller;
 
   HomePageContent({
     super.key,
     required this.branchId,
     required this.currentMenu,
-    required this.onMenuSelected,
-    // required this.controller,
+    required this.onMenuSelected, 
+    required this.state, 
+    required this.selectedCategory,
+
   });
 
   @override
@@ -87,7 +93,7 @@ class HomePageContent extends StatelessWidget {
                 )),
             const SizedBox(height: 24),
             currentMenu == 'Tất cả'
-                ? buildMainPage(context, branchId)
+                ? buildMainPage(context, branchId, selectedCategory, state)
                 : buildMenuPage(menuItems[currentMenu]!, context),
           ],
         ),

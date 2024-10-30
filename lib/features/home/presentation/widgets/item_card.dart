@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_v2/features/home/data/types/menu_item.dart';
+import 'package:flutter_base_v2/features/home/domain/entities/product.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 
-Widget buildItemCard(MenuItem item, BuildContext context) {
+Widget buildItemCard(Product item, BuildContext context) {
     return Container(
       width: 140,
       margin: const EdgeInsets.only(top: 10, bottom: 10),
@@ -15,7 +15,7 @@ Widget buildItemCard(MenuItem item, BuildContext context) {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
               image: DecorationImage(
-                image: NetworkImage(item.imageUrl),
+                image: NetworkImage(item.imageURL),
                 fit: BoxFit.cover,
                 
               ),
@@ -31,7 +31,7 @@ Widget buildItemCard(MenuItem item, BuildContext context) {
               ),
               const SizedBox(height: 4),
               Text(
-                item.price,
+                item.description,
                 style: AppTextStyle.regular14(),
               ),
             ],
