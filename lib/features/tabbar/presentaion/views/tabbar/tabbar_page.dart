@@ -6,7 +6,7 @@ import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
-enum TabType { home, add, list }
+enum TabType { home, service, qr, history, account }
 
 extension TabItem on TabType {
   Widget get icon {
@@ -17,24 +17,27 @@ extension TabItem on TabType {
           size: 20,
           color: colorScheme.primary,
         );
-      case TabType.add:
-        return Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: colorScheme.secondaryContainer,
-            shape: BoxShape.circle,
-          ),
-          child: Center(
-            child: Icon(
-              CupertinoIcons.add,
-              size: 20,
-              color: colorScheme.onPrimaryContainer,
-            ),
-          ),
-        );
-      case TabType.list:
+      case TabType.service:
         return Icon(
-          CupertinoIcons.list_bullet,
+          CupertinoIcons.square_list,
+          size: 20,
+          color: colorScheme.primary,
+        );
+      case TabType.qr:
+        return Icon(
+          CupertinoIcons.qrcode,
+          size: 20,
+          color: colorScheme.primary,
+        );
+      case TabType.history:
+        return Icon(
+          CupertinoIcons.time,
+          size: 20,
+          color: colorScheme.primary,
+        );
+      case TabType.account:
+        return Icon(
+          CupertinoIcons.person,
           size: 20,
           color: colorScheme.primary,
         );
@@ -49,24 +52,27 @@ extension TabItem on TabType {
           size: 20,
           color: Get.context?.theme.disabledColor,
         );
-      case TabType.add:
-        return Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: colorScheme.secondaryContainer,
-            shape: BoxShape.circle,
-          ),
-          child: Center(
-            child: Icon(
-              CupertinoIcons.add,
-              size: 20,
-              color: Get.context?.theme.disabledColor,
-            ),
-          ),
-        );
-      case TabType.list:
+      case TabType.service:
         return Icon(
-          CupertinoIcons.list_bullet,
+          CupertinoIcons.square_list,
+          size: 20,
+          color: Get.context?.theme.disabledColor,
+        );
+      case TabType.qr:
+        return Icon(
+          CupertinoIcons.qrcode,
+          size: 20,
+          color: Get.context?.theme.disabledColor,
+        );
+      case TabType.history:
+        return Icon(
+          CupertinoIcons.time,
+          size: 20,
+          color: Get.context?.theme.disabledColor,
+        );
+      case TabType.account:
+        return Icon(
+          CupertinoIcons.person,
           size: 20,
           color: Get.context?.theme.disabledColor,
         );
@@ -77,10 +83,14 @@ extension TabItem on TabType {
     switch (this) {
       case TabType.home:
         return 'Home';
-      case TabType.add:
-        return 'Add';
-      case TabType.list:
-        return 'List';
+      case TabType.service:
+        return 'Service';
+      case TabType.qr:
+        return 'QR';
+      case TabType.history:
+        return 'History';
+      case TabType.account:
+        return 'Account';
     }
   }
 
@@ -88,10 +98,14 @@ extension TabItem on TabType {
     switch (this) {
       case TabType.home:
         return AppRoute.getPage(AppRoute.home)?.page() ?? Container();
-      case TabType.add:
-        return Container();
-      case TabType.list:
-        return AppRoute.getPage(AppRoute.exampleList)?.page() ?? Container();
+      case TabType.service:
+        return AppRoute.getPage(AppRoute.service)?.page() ?? Container();
+      case TabType.qr:
+        return AppRoute.getPage(AppRoute.qr)?.page() ?? Container();
+      case TabType.history:
+        return AppRoute.getPage(AppRoute.history)?.page() ?? Container();
+      case TabType.account:
+        return AppRoute.getPage(AppRoute.account)?.page() ?? Container();
     }
   }
 
@@ -99,11 +113,9 @@ extension TabItem on TabType {
     return PersistentBottomNavBarItem(
       icon: icon,
       inactiveIcon: inactiveIcon,
-      onPressed: this == TabType.add
-          ? (_) async {
-              L.debug('custom action');
-            }
-          : null,
+      title: title,
+      activeColorPrimary: colorScheme.primary,
+      inactiveColorPrimary: Get.context?.theme.disabledColor,
     );
   }
 }
@@ -142,17 +154,6 @@ class TabbarPage extends GetView {
               ),
             ],
           ),
-          // popAllScreensOnTapOfSelectedTab: true,
-          // popActionScreens: PopActionScreensType.all,
-          // itemAnimationProperties: const ItemAnimationProperties(
-          //   duration: Duration(milliseconds: 200),
-          //   curve: Curves.ease,
-          // ),
-          // screenTransitionAnimation: const ScreenTransitionAnimation(
-          //   animateTabTransition: true,
-          //   curve: Curves.ease,
-          //   duration: Duration(milliseconds: 200),
-          // ),
           navBarStyle: NavBarStyle.style12,
           onItemSelected: (index) {},
         ),

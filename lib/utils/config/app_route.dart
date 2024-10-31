@@ -8,6 +8,7 @@ import 'package:flutter_base_v2/features/example_list/presentation/views/example
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_binding.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/home_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/notifications_page.dart';
+import 'package:flutter_base_v2/features/services/presentation/views/services.dart';
 import 'package:flutter_base_v2/features/tabbar/presentaion/controllers/landing/landing_binding.dart';
 import 'package:flutter_base_v2/features/tabbar/presentaion/controllers/root/root_binding.dart';
 import 'package:flutter_base_v2/features/tabbar/presentaion/controllers/tabbar/tabbar_binding.dart';
@@ -27,15 +28,17 @@ class AppRoute {
   static String landing = '/landing';
   static String login = '/login';
   // static String register = '/register';
-  static String home = '/home';
+
   static String exampleList = '/example_list';
   static String uniLogin = '/uni_login';
   static String notifications = '/notifications';
+    static String home = '/home';
   static String service = '/service';
   static String qr = '/qr';
-  static String branch = '/branches';
-  static String history = '/history';
+    static String history = '/history';
   static String account = '/account';
+  static String branch = '/branches';
+
 
   static List<GetPage> generateGetPages = [
     GetPage(name: root, page: RootPage.new, binding: RootBinding()),
@@ -80,6 +83,7 @@ class AppRoute {
         page: BranchsPage.new,
         binding: BranchBinding(),
         transition: Transition.noTransition),
+            GetPage(name: service, page: ServicesPage.new),
     GetPage(name: qr, page: QRPage.new),
     GetPage(name: history, page: HistoryPage.new),
     GetPage(name: account, page: AccountPage.new),

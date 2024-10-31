@@ -135,41 +135,6 @@ class HomePage extends BaseGetView<HomeController> {
           ],
         );
       }),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Trang chủ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.design_services),
-            label: 'Tiện ích',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.qr_code),
-            label: 'Mã QR',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'Lịch sử',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Tài khoản',
-          ),
-        ],
-        currentIndex: selectedIndex,
-        selectedItemColor: appColors?.primary,
-        unselectedItemColor: appColors?.gray,
-        showUnselectedLabels: true,
-        onTap: (index) {
-          if (index == 1) {
-            Get.to(() => const BranchsPage());
-          } else {
-            selectedIndex = index;
-          }
-        },
-      ),
     );
   }
 }
