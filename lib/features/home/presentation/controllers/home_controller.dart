@@ -46,7 +46,7 @@ class HomeController extends BaseController<HomeInput> {
 
     getMenuToday("TODAY", currentBranchID.value);
     getMenuToday("PREORDER", currentBranchID.value);
-    getMenuToday("PREORDER", currentBranchID.value);
+    getMenuToday("FOODCOURT", currentBranchID.value);
     getMenuToday("DRINK", currentBranchID.value);
     getMenuToday("NECESSITY", currentBranchID.value);
     getMenuToday("SPECIALITY", currentBranchID.value);
@@ -138,103 +138,6 @@ class HomeController extends BaseController<HomeInput> {
         throw ArgumentError('Invalid category: $category');
     }
   }
-
-  // Future<void> getMenuTodayy(String branchId) {
-  //   return _getMenuUseCase.execute(
-  //       observer: Observer(
-  //         onSubscribe: (){
-  //           getMenuTodayState.onLoading();
-  //         },
-  //         onSuccess: (List<Menu>? menus) {
-  //           getMenuTodayState.onSuccess(data: menus);
-  //         },
-  //         onError: (AppException e) {
-  //           getMenuTodayState.onError(e.message);
-  //           handleError(e);
-  //         },
-  //       ),
-  //       input:  GetMenuParams(category: category, branchId: branchId));
-  // }
-  // Future<void> getMenuPreorder(String branchId) {
-  //   return _getMenuUseCase.execute(
-  //       observer: Observer(
-  //         onSubscribe: (){
-  //           getMenuPreorderState.onLoading();
-  //         },
-  //         onSuccess: (List<Menu>? menus) {
-  //           getMenuPreorderState.onSuccess(data: menus);
-  //         },
-  //         onError: (AppException e) {
-  //           getMenuPreorderState.onError(e.message);
-  //           handleError(e);
-  //         },
-  //       ),
-  //       input:  GetParams(branchId: branchId));
-  // }
-  // Future<void> getMenuDrink(String branchId) {
-  //   return _getMenuUseCase.execute(
-  //       observer: Observer(
-  //         onSubscribe: (){
-  //           getMenuDrinkState.onLoading();
-  //         },
-  //         onSuccess: (List<Menu>? menus) {
-  //           getMenuDrinkState.onSuccess(data: menus);
-  //         },
-  //         onError: (AppException e) {
-  //           getMenuDrinkState.onError(e.message);
-  //           handleError(e);
-  //         },
-  //       ),
-  //       input:  GetParams(branchId: branchId));
-  // }
-  // Future<void> getMenuNecessity(String branchId) {
-  //   return _getMenuUseCase.execute(
-  //       observer: Observer(
-  //         onSubscribe: (){
-  //           getMenuNecessityState.onLoading();
-  //         },
-  //         onSuccess: (List<Menu>? menus) {
-  //           getMenuNecessityState.onSuccess(data: menus);
-  //         },
-  //         onError: (AppException e) {
-  //           getMenuNecessityState.onError(e.message);
-  //           handleError(e);
-  //         },
-  //       ),
-  //       input:  GetParams(branchId: branchId));
-  // }
-  // Future<void> getMenuSpeciality(String branchId) {
-  //   return _getMenuUseCase.execute(
-  //       observer: Observer(
-  //         onSubscribe: (){
-  //           getMenuSpecialityState.onLoading();
-  //         },
-  //         onSuccess: (List<Menu>? menus) {
-  //           getMenuSpecialityState.onSuccess(data: menus);
-  //         },
-  //         onError: (AppException e) {
-  //           getMenuSpecialityState.onError(e.message);
-  //           handleError(e);
-  //         },
-  //       ),
-  //       input:  GetParams(branchId: branchId));
-  // }
-  // Future<void> getMenuFoodcourt(String branchId) {
-  //   return _getMenuUseCase.execute(
-  //       observer: Observer(
-  //         onSubscribe: (){
-  //           getMenuFoodcourtState.onLoading();
-  //         },
-  //         onSuccess: (List<Menu>? menus) {
-  //           getMenuFoodcourtState.onSuccess(data: menus);
-  //         },
-  //         onError: (AppException e) {
-  //           getMenuTodayState.onError(e.message);
-  //           handleError(e);
-  //         },
-  //       ),
-  //       input:  GetParams(branchId: branchId));
-  // }
 
   void selectMenu(String menu) {
     currentMenu.value = menu;

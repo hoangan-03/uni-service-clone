@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/utils/config/app_route.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
-import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
@@ -62,7 +61,7 @@ extension TabItem on TabType {
         return Icon(
           CupertinoIcons.qrcode,
           size: 20,
-          color: Get.context?.theme.disabledColor,
+          color: colorScheme.onPrimary,
         );
       case TabType.history:
         return Icon(
@@ -82,15 +81,15 @@ extension TabItem on TabType {
   String get title {
     switch (this) {
       case TabType.home:
-        return 'Home';
+        return 'Trang chủ';
       case TabType.service:
-        return 'Service';
+        return 'Tiện ích';
       case TabType.qr:
         return 'QR';
       case TabType.history:
-        return 'History';
+        return 'Lịch sử';
       case TabType.account:
-        return 'Account';
+        return 'Tài khoản';
     }
   }
 
@@ -113,7 +112,7 @@ extension TabItem on TabType {
     return PersistentBottomNavBarItem(
       icon: icon,
       inactiveIcon: inactiveIcon,
-      title: title,
+      title: title.isEmpty ? null : title,
       activeColorPrimary: colorScheme.primary,
       inactiveColorPrimary: Get.context?.theme.disabledColor,
     );
@@ -143,6 +142,7 @@ class TabbarPage extends GetView {
           screens: _buildScreens(),
           items: _navBarsItems(),
           confineToSafeArea: true,
+          padding: const EdgeInsets.only(top: 10),
           resizeToAvoidBottomInset: true,
           decoration: const NavBarDecoration(
             colorBehindNavBar: Colors.white,
@@ -154,7 +154,7 @@ class TabbarPage extends GetView {
               ),
             ],
           ),
-          navBarStyle: NavBarStyle.style12,
+          navBarStyle: NavBarStyle.style15,
           onItemSelected: (index) {},
         ),
       ],

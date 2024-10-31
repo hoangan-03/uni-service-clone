@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:flutter_base_v2/features/home/domain/entities/menu.dart";
+import "package:flutter_base_v2/features/home/presentation/utils/get_cate_title.dart";
 import "package:flutter_base_v2/features/home/presentation/views/order_slider/order_slider.dart";
 import "package:flutter_base_v2/utils/config/app_text_style.dart";
 import "package:flutter_base_v2/utils/config/app_theme.dart";
@@ -29,7 +30,7 @@ class MenuPage extends StatelessWidget {
                   },
                 ),
                 Text(
-                  title,
+                  getCategoryTitle(title),
                   style: AppTextStyle.bold20(),
                 ),
               ],
@@ -40,8 +41,8 @@ class MenuPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final item = menuItems[index];
                   return Container(
-                    margin: const EdgeInsets.only(bottom: 12.0),
-                    padding: const EdgeInsets.only(bottom: 12.0),
+                    margin: const EdgeInsets.only(bottom: 20.0),
+                    padding: const EdgeInsets.only(bottom: 16.0),
                     decoration: BoxDecoration(
                       border: Border(
                         bottom: BorderSide(color: appColors?.gray ?? Colors.grey, width: 0.5),

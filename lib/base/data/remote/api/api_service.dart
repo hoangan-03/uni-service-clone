@@ -3,7 +3,6 @@ import 'package:flutter_base_v2/features/authentication/data/models/token_respon
 import 'package:flutter_base_v2/features/authentication/data/models/user_response.dart';
 import 'package:flutter_base_v2/features/branch/data/models/branch_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
-import 'package:flutter_base_v2/features/example_list/data/models/history_response.dart';
 import 'package:flutter_base_v2/features/home/data/models/menu_response.dart';
 import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:retrofit/error_logger.dart';
@@ -31,11 +30,6 @@ abstract class ApiService {
     @Query('menu') String menu,
     @Query('branchId') String branchId,
   );
-  @GET("/users/user-history")
-  Future<HistoryResponse> getListHistory(@Query("page") int page,
-      {@Query("limit") int perPage = PagingConstants.itemsPerPage,
-      @Query("order") String order = 'DESC',
-      @Query("field") String field = 'createdAt'});
 
   @GET('/auth/logout')
   Future<void> logout();
