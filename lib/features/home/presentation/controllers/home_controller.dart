@@ -21,27 +21,35 @@ import 'package:get/get.dart';
 class HomeController extends BaseController<HomeInput> {
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
   GetMenuUseCase get _getMenuUseCase => Get.find<GetMenuUseCase>();
-  BaseState<Map<String, List<Menu>>?> getMenusState = BaseState();
+
+  BaseState<List<Menu>?> getMenuPreorderState = BaseState();
+  BaseState<List<Menu>?> getMenuTodayState = BaseState();
+
+  BaseState<List<Menu>?> getMenuFoodcourtState = BaseState();
+  BaseState<List<Menu>?> getMenuDrinkState = BaseState();
+  BaseState<List<Menu>?> getMenuSpecialityState = BaseState();
+  BaseState<List<Menu>?> getMenuNecessityState = BaseState();
   final pushNotiService = Get.find<PushNotificationService>();
 
   final user = User().obs;
 
   final LocalStorage _localStorage = Get.find();
   var currentMenu = ''.obs;
-  final currentBranchID = '6134edff-d5cc-4dbc-be51-4c914bfded16'.obs;
-  final currentCategory = 'TODAY'.obs;
+  final currentBranchID = '5bb72354-7c84-4f24-b889-a05cbda5d45d'.obs;
+  final currentCategory = 'FOODCOURT'.obs;
 
   @override
   void onInit() async {
     super.onInit();
     pushNotiService.listenNotification();
-    getProfile();
-    getMenuByCategory('TODAY', currentBranchID.value);
-    // getMenuByCategory('FOODCOURT', currentBranchID.value);
-    // getMenuByCategory('PREORDER', currentBranchID.value);
-    // getMenuByCategory('DRINK', currentBranchID.value);
-    // getMenuByCategory('SPECIALITY', currentBranchID.value);
-    // getMenuByCategory('NECESSITY', currentBranchID.value);
+    // getProfile();
+
+    getMenuToday("TODAY", currentBranchID.value);
+    getMenuToday("PREORDER", currentBranchID.value);
+    getMenuToday("PREORDER", currentBranchID.value);
+    getMenuToday("DRINK", currentBranchID.value);
+    getMenuToday("NECESSITY", currentBranchID.value);
+    getMenuToday("SPECIALITY", currentBranchID.value);
 
     final notificationAppLaunchDetails =
         await pushNotiService.getNotificationAppLaunchDetails();
@@ -95,23 +103,138 @@ class HomeController extends BaseController<HomeInput> {
         input: null);
   }
 
-  Future<void> getMenuByCategory(String category, String branchId) {
+  Future<void> getMenuToday(String category, String branchId) async {
     return _getMenuUseCase.execute(
-      observer: Observer(
-        onSubscribe: () {
-          getMenusState.onLoading();
-        },
-        onSuccess: (List<Menu>? menus) {
-          getMenusState.onSuccess(data: {category: menus ?? []});
-        },
-        onError: (AppException e) {
-          getMenusState.onError(e.message);
-          handleError(e);
-        },
-      ),
-      input: GetMenuParams(category: category, branchId: branchId),
-    );
+        observer: Observer(
+          onSubscribe: () {
+            _getStateByCategory(category).onLoading();
+          },
+          onSuccess: (List<Menu>? menus) {
+            _getStateByCategory(category).onSuccess(data: menus);
+          },
+          onError: (AppException e) {
+            _getStateByCategory(category).onError(e.message);
+            handleError(e);
+          },
+        ),
+        input: GetMenuParams(category: category, branchId: branchId));
   }
+
+  BaseState<List<Menu>?> _getStateByCategory(String category) {
+    switch (category) {
+      case 'TODAY':
+        return getMenuTodayState;
+      case 'PREORDER':
+        return getMenuPreorderState;
+      case 'FOODCOURT':
+        return getMenuFoodcourtState;
+      case 'DRINK':
+        return getMenuDrinkState;
+      case 'SPECIALITY':
+        return getMenuSpecialityState;
+      case 'NECESSITY':
+        return getMenuNecessityState;
+      default:
+        throw ArgumentError('Invalid category: $category');
+    }
+  }
+
+  // Future<void> getMenuTodayy(String branchId) {
+  //   return _getMenuUseCase.execute(
+  //       observer: Observer(
+  //         onSubscribe: (){
+  //           getMenuTodayState.onLoading();
+  //         },
+  //         onSuccess: (List<Menu>? menus) {
+  //           getMenuTodayState.onSuccess(data: menus);
+  //         },
+  //         onError: (AppException e) {
+  //           getMenuTodayState.onError(e.message);
+  //           handleError(e);
+  //         },
+  //       ),
+  //       input:  GetMenuParams(category: category, branchId: branchId));
+  // }
+  // Future<void> getMenuPreorder(String branchId) {
+  //   return _getMenuUseCase.execute(
+  //       observer: Observer(
+  //         onSubscribe: (){
+  //           getMenuPreorderState.onLoading();
+  //         },
+  //         onSuccess: (List<Menu>? menus) {
+  //           getMenuPreorderState.onSuccess(data: menus);
+  //         },
+  //         onError: (AppException e) {
+  //           getMenuPreorderState.onError(e.message);
+  //           handleError(e);
+  //         },
+  //       ),
+  //       input:  GetParams(branchId: branchId));
+  // }
+  // Future<void> getMenuDrink(String branchId) {
+  //   return _getMenuUseCase.execute(
+  //       observer: Observer(
+  //         onSubscribe: (){
+  //           getMenuDrinkState.onLoading();
+  //         },
+  //         onSuccess: (List<Menu>? menus) {
+  //           getMenuDrinkState.onSuccess(data: menus);
+  //         },
+  //         onError: (AppException e) {
+  //           getMenuDrinkState.onError(e.message);
+  //           handleError(e);
+  //         },
+  //       ),
+  //       input:  GetParams(branchId: branchId));
+  // }
+  // Future<void> getMenuNecessity(String branchId) {
+  //   return _getMenuUseCase.execute(
+  //       observer: Observer(
+  //         onSubscribe: (){
+  //           getMenuNecessityState.onLoading();
+  //         },
+  //         onSuccess: (List<Menu>? menus) {
+  //           getMenuNecessityState.onSuccess(data: menus);
+  //         },
+  //         onError: (AppException e) {
+  //           getMenuNecessityState.onError(e.message);
+  //           handleError(e);
+  //         },
+  //       ),
+  //       input:  GetParams(branchId: branchId));
+  // }
+  // Future<void> getMenuSpeciality(String branchId) {
+  //   return _getMenuUseCase.execute(
+  //       observer: Observer(
+  //         onSubscribe: (){
+  //           getMenuSpecialityState.onLoading();
+  //         },
+  //         onSuccess: (List<Menu>? menus) {
+  //           getMenuSpecialityState.onSuccess(data: menus);
+  //         },
+  //         onError: (AppException e) {
+  //           getMenuSpecialityState.onError(e.message);
+  //           handleError(e);
+  //         },
+  //       ),
+  //       input:  GetParams(branchId: branchId));
+  // }
+  // Future<void> getMenuFoodcourt(String branchId) {
+  //   return _getMenuUseCase.execute(
+  //       observer: Observer(
+  //         onSubscribe: (){
+  //           getMenuFoodcourtState.onLoading();
+  //         },
+  //         onSuccess: (List<Menu>? menus) {
+  //           getMenuFoodcourtState.onSuccess(data: menus);
+  //         },
+  //         onError: (AppException e) {
+  //           getMenuTodayState.onError(e.message);
+  //           handleError(e);
+  //         },
+  //       ),
+  //       input:  GetParams(branchId: branchId));
+  // }
 
   void selectMenu(String menu) {
     currentMenu.value = menu;

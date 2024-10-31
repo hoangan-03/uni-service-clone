@@ -73,7 +73,6 @@
 //   }
 // }
 
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -116,7 +115,12 @@ class HomePage extends BaseGetView<HomeController> {
           index: selectedIndex,
           children: <Widget>[
             HomePageContent(
-              state: controller.getMenusState,
+              menuTodayState: controller.getMenuTodayState,
+              menuPreoderState: controller.getMenuPreorderState,
+              menuDrinkState: controller.getMenuDrinkState,
+              menuFoodcourtState: controller.getMenuFoodcourtState,
+              menuSpecialityState: controller.getMenuSpecialityState,
+              menuNecessityState: controller.getMenuNecessityState,
               branchId: controller.currentBranchID.value,
               selectedCategory: controller.currentCategory.value,
               currentMenu: currentMenu,

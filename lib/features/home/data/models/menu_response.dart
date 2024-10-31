@@ -22,12 +22,24 @@ class MenuApiModel {
   int? sortOrder = 0;
   String? updatedAt = '';
   ProductApiModel? product = ProductApiModel();
-  String? _type;
-  String get type => _type ?? '';
-  set type(String? value) => _type = value;
+  TypeApiModel? _type;
+
+  TypeApiModel get type => _type ?? TypeApiModel();
+  set type(TypeApiModel? value) => _type = value;
+
   BranchApiModel? branch = BranchApiModel();
   List<ItemApiModel>? items = [];
 }
+
+@jsonSerializable
+class TypeApiModel {
+  String? id = '';
+  String? name = '';
+  int? price = 0;
+  String? createdAt = '';
+  String? updatedAt = '';
+}
+
 
 @jsonSerializable
 class ProductApiModel {

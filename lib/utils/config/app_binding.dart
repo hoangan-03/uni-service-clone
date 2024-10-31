@@ -72,7 +72,7 @@ class AppBinding extends Bindings {
     Get.put<ProfileRepo>(ProfileRepoImpl());
     Get.put<HistoryRepo>(HistoryRepoImpl());
     Get.put<BranchRepo>(BranchRepoImpl()); 
-    Get.put<MenuRepo>(MenuRepoImpl());
+    Get.put<MenuTodayRepo>(MenuRepoImpl());
   }
 
   void injectService() {

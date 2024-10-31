@@ -17,7 +17,7 @@ enum AppExceptionType {
   purchaseCancel,
   purchaseError,
   paymentRequired,
-  unknown,
+  unknown, general,
 }
 
 class AppException {

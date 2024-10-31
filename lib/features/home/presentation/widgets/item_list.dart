@@ -18,22 +18,17 @@
 //     );
 //   }
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/item_card.dart';
 
-Widget buildItemList(BuildContext context, String category, BaseState<Map<String, List<Menu>>?> state) {
-  print("state: $state");
+Widget buildItemList(
+    BuildContext context, String category, BaseState<List<Menu>?> state) {
   return SizedBox(
     child: state.widget(
       onLoading: const Center(child: CircularProgressIndicator()),
       onSuccess: (menusMap) {
-        List<Menu> menus = menusMap?[category] ?? [];
-        print("category: $category");
-        print("menus: $menusMap");
-
         return SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
@@ -43,13 +38,16 @@ Widget buildItemList(BuildContext context, String category, BaseState<Map<String
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: Text(
                   category,
-                  style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: menus
+                  children: menusMap!
                       .map((menu) => Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: buildItemCard(menu.product, context),
@@ -57,12 +55,15 @@ Widget buildItemList(BuildContext context, String category, BaseState<Map<String
                       .toList(),
                 ),
               ),
-              const SizedBox(height: 16), 
+              const SizedBox(height: 16),
             ],
           ),
         );
       },
-      onError: (error) => Center(child: Text('Error: $error')),
+      onError: (error) {
+        print('Errorbug: $error');
+        return Center(child: Text('Error: $error'));
+      },
     ),
   );
 }

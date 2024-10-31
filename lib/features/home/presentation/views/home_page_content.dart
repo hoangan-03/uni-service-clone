@@ -16,7 +16,12 @@ class HomePageContent extends StatelessWidget {
   final String greeting = getGreeting();
   final String selectedCategory;
   final Function(String) onMenuSelected;
-  final BaseState<Map<String, List<Menu>>?> state;
+  final BaseState<List<Menu>?> menuTodayState;
+  final BaseState<List<Menu>?> menuPreoderState;
+  final BaseState<List<Menu>?> menuFoodcourtState;
+  final BaseState<List<Menu>?> menuDrinkState;
+  final BaseState<List<Menu>?> menuSpecialityState;
+  final BaseState<List<Menu>?> menuNecessityState;
   // final HomeController controller;
 
   HomePageContent({
@@ -24,7 +29,12 @@ class HomePageContent extends StatelessWidget {
     required this.branchId,
     required this.currentMenu,
     required this.onMenuSelected, 
-    required this.state, 
+    required this.menuTodayState, 
+    required this.menuPreoderState, 
+    required this.menuFoodcourtState, 
+    required this.menuDrinkState, 
+    required this.menuSpecialityState,
+    required this.menuNecessityState,
     required this.selectedCategory,
 
   });
@@ -92,7 +102,7 @@ class HomePageContent extends StatelessWidget {
                 )),
             const SizedBox(height: 24),
             currentMenu == 'Tất cả'
-                ? buildMainPage(context, branchId, selectedCategory, state)
+                ? buildMainPage(context, branchId, selectedCategory, menuTodayState, menuPreoderState, menuFoodcourtState, menuDrinkState, menuSpecialityState, menuNecessityState)
                 : buildMenuPage(menuItems[currentMenu]!, context),
           ],
         ),

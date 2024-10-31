@@ -27,11 +27,10 @@ abstract class ApiService {
   Future<BranchResponse> getListBrands();
 
   @GET('/menu')
-  Future<MenuResponse> getMenuByCategory(
-    @Query('menu') String category,
-    @Query('branchId') String branchid,
+  Future<MenuResponse> getMenuToday(
+    @Query('menu') String menu,
+    @Query('branchId') String branchId,
   );
-
   @GET("/users/user-history")
   Future<HistoryResponse> getListHistory(@Query("page") int page,
       {@Query("limit") int perPage = PagingConstants.itemsPerPage,
