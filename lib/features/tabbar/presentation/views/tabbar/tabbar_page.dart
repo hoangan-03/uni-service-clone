@@ -25,8 +25,8 @@ extension TabItem on TabType {
       case TabType.qr:
         return Icon(
           CupertinoIcons.qrcode,
-          size: 20,
-          color: colorScheme.primary,
+          size: 30,
+          color: colorScheme.onPrimary,
         );
       case TabType.history:
         return Icon(
@@ -60,7 +60,7 @@ extension TabItem on TabType {
       case TabType.qr:
         return Icon(
           CupertinoIcons.qrcode,
-          size: 20,
+          size: 30,
           color: colorScheme.onPrimary,
         );
       case TabType.history:
@@ -85,7 +85,7 @@ extension TabItem on TabType {
       case TabType.service:
         return 'Tiện ích';
       case TabType.qr:
-        return 'QR';
+        return ' ';
       case TabType.history:
         return 'Lịch sử';
       case TabType.account:

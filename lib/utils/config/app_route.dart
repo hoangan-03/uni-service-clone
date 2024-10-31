@@ -7,15 +7,13 @@ import 'package:flutter_base_v2/features/home/presentation/controllers/home_bind
 import 'package:flutter_base_v2/features/home/presentation/views/home_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/notifications_page.dart';
 import 'package:flutter_base_v2/features/services/presentation/views/services.dart';
-import 'package:flutter_base_v2/features/tabbar/presentaion/controllers/landing/landing_binding.dart';
-import 'package:flutter_base_v2/features/tabbar/presentaion/controllers/root/root_binding.dart';
-import 'package:flutter_base_v2/features/tabbar/presentaion/controllers/tabbar/tabbar_binding.dart';
-import 'package:flutter_base_v2/features/tabbar/presentaion/views/landing/landing_page.dart';
-import 'package:flutter_base_v2/features/tabbar/presentaion/views/root/root_page.dart';
-import 'package:flutter_base_v2/features/tabbar/presentaion/views/tabbar/tabbar_page.dart';
+import 'package:flutter_base_v2/features/tabbar/presentation/controllers/landing/landing_binding.dart';
+import 'package:flutter_base_v2/features/tabbar/presentation/controllers/root/root_binding.dart';
+import 'package:flutter_base_v2/features/tabbar/presentation/controllers/tabbar/tabbar_binding.dart';
+import 'package:flutter_base_v2/features/tabbar/presentation/views/landing/landing_page.dart';
+import 'package:flutter_base_v2/features/tabbar/presentation/views/root/root_page.dart';
+import 'package:flutter_base_v2/features/tabbar/presentation/views/tabbar/tabbar_page.dart';
 import 'package:get/get.dart';
-
-// Import the new pages
 import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
 import 'package:flutter_base_v2/features/qrcode/presentation/views/qrcode.dart';
 import 'package:flutter_base_v2/features/history/presentation/views/history.dart';

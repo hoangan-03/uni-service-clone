@@ -57,8 +57,8 @@ Widget buildItemList(
                   child: Row(
                     children: menusMap!
                         .map((menu) => Padding(
-                              padding: const EdgeInsets.only(right: 10),
-                              child: buildItemCard(menu.product, context),
+                              padding: const EdgeInsets.only(right: 20),
+                              child: buildItemCard(menu, context),
                             ))
                         .toList(),
                   ),

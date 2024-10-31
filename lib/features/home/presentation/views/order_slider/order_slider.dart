@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import "package:flutter_base_v2/features/home/data/types/menu_item.dart";
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 
 void showOrderSlider(BuildContext context, Menu item) {
@@ -66,12 +65,12 @@ void showOrderSlider(BuildContext context, Menu item) {
                               const TextStyle(fontSize: 14, color: Colors.grey),
                         ),
                         const SizedBox(height: 4),
-                        // Text(
-                        //   item.price,
-                        //   style:
-                        //       const TextStyle(fontSize: 16, color: Colors.green),
-                        // ),
-                        // const SizedBox(height: 8),
+                        Text(
+                          '${item.type.price}đ',
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.green),
+                        ),
+                        const SizedBox(height: 8),
                         Row(
                           children: [
                             IconButton(
@@ -106,7 +105,7 @@ void showOrderSlider(BuildContext context, Menu item) {
                             ),
                             const SizedBox(width: 16),
                             Text(
-                              'Còn lại : 1,999',
+                              'Còn lại: ${item.orignialQuantity}',
                               style: TextStyle(
                                   fontSize: 14, color: Colors.grey[600]),
                             ),

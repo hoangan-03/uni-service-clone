@@ -4,7 +4,6 @@ import 'package:flutter_base_v2/features/authentication/data/models/user_respons
 import 'package:flutter_base_v2/features/branch/data/models/branch_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
 import 'package:flutter_base_v2/features/home/data/models/menu_response.dart';
-import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import 'package:dart_json_mapper/dart_json_mapper.dart';

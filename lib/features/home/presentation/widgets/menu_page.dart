@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
+import 'package:flutter_base_v2/features/home/presentation/views/order_slider/order_slider.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 
@@ -99,7 +100,9 @@ Widget buildMenuPage(
                     ),
                     child: Icon(Icons.add, color: appColors?.white, size: 18),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    showOrderSlider(context, item!);
+                  },
                 ),
               ],
             ),

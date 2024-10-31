@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/common.dart';
-import 'package:flutter_base_v2/features/tabbar/presentaion/controllers/landing/landing_controller.dart';
+import 'package:flutter_base_v2/features/tabbar/presentation/controllers/landing/landing_controller.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/gen/assets.gen.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
