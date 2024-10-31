@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import "package:flutter_base_v2/features/home/data/types/menu_item.dart";
+import "package:flutter_base_v2/features/home/domain/entities/menu.dart";
 import "package:flutter_base_v2/features/home/presentation/views/order_slider/order_slider.dart";
 import "package:flutter_base_v2/utils/config/app_text_style.dart";
 import "package:flutter_base_v2/utils/config/app_theme.dart";
 
 class MenuPage extends StatelessWidget {
   final String title;
-  final List<MenuItem> menuItems;
+  final List<Menu> menuItems;
 
   const MenuPage({super.key, required this.title, required this.menuItems});
 
@@ -52,7 +52,7 @@ class MenuPage extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.network(
-                            item.imageUrl,
+                            item.product.imageURL,
                             width: 80,
                             height: 80,
                             fit: BoxFit.cover,
@@ -65,21 +65,21 @@ class MenuPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                item.name,
+                                item.product.name,
                                 style: AppTextStyle.bold16()
                                     .copyWith(color: appColors?.secondary),
                               ),
                               Text(
-                                item.description,
+                                item.product.description,
                                 style: AppTextStyle.regular14()
                                     .copyWith(color: appColors?.gray),
                               ),
                               const SizedBox(height: 4),
-                              Text(
-                                item.price,
-                                style: AppTextStyle.regular14()
-                                    .copyWith(color: appColors?.secondary),
-                              ),
+                              // Text(
+                              //   item.product.quantity,
+                              //   style: AppTextStyle.regular14()
+                              //       .copyWith(color: appColors?.secondary),
+                              // ),
                             ],
                           ),
                         ),

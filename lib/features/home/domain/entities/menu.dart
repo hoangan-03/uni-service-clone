@@ -12,6 +12,7 @@ class Menu with PrettyJsonMixin {
   String status = '';
   String menu = '';
   Product product = Product();
-  List<Item> items = [];
+  @JsonProperty(name: 'items')
+  List<Item>? items;
   
 }

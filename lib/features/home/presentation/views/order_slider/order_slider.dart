@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import "package:flutter_base_v2/features/home/data/types/menu_item.dart";
+import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 
-void showOrderSlider(BuildContext context, MenuItem item) {
+void showOrderSlider(BuildContext context, Menu item) {
   showModalBottomSheet(
     context: context,
     backgroundColor: Colors.transparent,
@@ -42,7 +43,7 @@ void showOrderSlider(BuildContext context, MenuItem item) {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(
-                      item.imageUrl,
+                      item.product.imageURL,
                       width: 80,
                       height: 80,
                       fit: BoxFit.cover,
@@ -54,23 +55,23 @@ void showOrderSlider(BuildContext context, MenuItem item) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          item.name,
+                          item.product.name,
                           style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          item.description,
+                          item.product.description,
                           style:
                               const TextStyle(fontSize: 14, color: Colors.grey),
                         ),
                         const SizedBox(height: 4),
-                        Text(
-                          item.price,
-                          style:
-                              const TextStyle(fontSize: 16, color: Colors.green),
-                        ),
-                        const SizedBox(height: 8),
+                        // Text(
+                        //   item.price,
+                        //   style:
+                        //       const TextStyle(fontSize: 16, color: Colors.green),
+                        // ),
+                        // const SizedBox(height: 8),
                         Row(
                           children: [
                             IconButton(

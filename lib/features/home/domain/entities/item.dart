@@ -8,4 +8,5 @@ class Item with PrettyJsonMixin {
   bool isLimit = false;
   int quantity = 0;
   int orignialQuantity = 0;
+  
 }

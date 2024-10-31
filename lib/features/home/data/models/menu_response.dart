@@ -28,7 +28,8 @@ class MenuApiModel {
   set type(TypeApiModel? value) => _type = value;
 
   BranchApiModel? branch = BranchApiModel();
-  List<ItemApiModel>? items = [];
+  @JsonProperty(name: 'items')
+  List<ItemApiModel>? items;
 }
 
 @jsonSerializable
@@ -39,7 +40,6 @@ class TypeApiModel {
   String? createdAt = '';
   String? updatedAt = '';
 }
-
 
 @jsonSerializable
 class ProductApiModel {
