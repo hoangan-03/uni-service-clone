@@ -231,8 +231,11 @@ class OrderPage extends BaseGetView<HomeController> {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {
-                  // TODO: Implement payment logic
+                 onPressed: () {
+                  final idProduct = item.menu == "TODAY"
+                      ? item.items![controller.itemIndex.value].id
+                      : item.id;
+                  controller.addToCart(idProduct, controller.quantity.value);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,

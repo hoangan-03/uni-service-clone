@@ -12,8 +12,12 @@ import 'package:flutter_base_v2/features/home/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/home/domain/usecases/get_menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/features/home/domain/usecases/get_profile_uc.dart';
+import 'package:flutter_base_v2/features/order/data/models/add_payment.dart';
 import 'package:flutter_base_v2/features/order/data/models/add_to_cart_request.dart';
+import 'package:flutter_base_v2/features/order/domain/entities/cart.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/add_cart_uc.dart';
+import 'package:flutter_base_v2/features/order/domain/usecases/add_payment_uc.dart';
+import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_uc.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -23,7 +27,9 @@ import 'package:get/get.dart';
 class HomeController extends BaseController<HomeInput> {
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
   GetMenuUseCase get _getMenuUseCase => Get.find<GetMenuUseCase>();
+  GetCartUseCase get _getCartUseCase => Get.find<GetCartUseCase>();
   final AddCartUseCase _addCartUseCase = Get.find<AddCartUseCase>();
+  final AddPaymentUseCase _addPaymentUseCase = Get.find<AddPaymentUseCase>();
   BaseState<List<Menu>?> getMenuPreorderState = BaseState();
   BaseState<List<Menu>?> getMenuTodayState = BaseState();
 
@@ -34,6 +40,7 @@ class HomeController extends BaseController<HomeInput> {
   final pushNotiService = Get.find<PushNotificationService>();
 
   final user = User().obs;
+  final cart = Cart().obs;
 
   final LocalStorage _localStorage = Get.find();
   var currentMenu = ''.obs;
@@ -79,6 +86,7 @@ class HomeController extends BaseController<HomeInput> {
   void updateQuantity(int newQuantity) {
     quantity.value = newQuantity;
   }
+
   void updateItemIndex(int newIndex) {
     itemIndex.value = newIndex;
   }
@@ -131,6 +139,20 @@ class HomeController extends BaseController<HomeInput> {
         input: GetMenuParams(category: category, branchId: branchId));
   }
 
+  Future<void> getCart() {
+    return _getCartUseCase.execute(
+        observer: Observer(
+          onSuccess: (Cart? data) {
+            L.info(data);
+            if (data != null) cart.value = data;
+          },
+          onError: (AppException e) {
+            handleError(e);
+          },
+        ),
+        input: GetCartParams(category: "NORMAL"));
+  }
+
   Future<void> addToCart(String idProduct, int quantity) async {
     final params = AddToCartRequest(
       idProduct: idProduct,
@@ -141,6 +163,18 @@ class HomeController extends BaseController<HomeInput> {
       print("Product added to cart successfully.");
     } catch (e) {
       print("Failed to add product to cart: $e");
+    }
+  }
+
+  Future<void> addPaymentRequest(String cartId) async {
+    final params = AddPaymentRequest(
+      cartId: cartId,
+    );
+    try {
+      await _addPaymentUseCase.build(params);
+      print("Paid succesfully.");
+    } catch (e) {
+      print("Failed to pay: $e");
     }
   }
 
