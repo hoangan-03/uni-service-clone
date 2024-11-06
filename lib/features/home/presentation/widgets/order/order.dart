@@ -58,77 +58,142 @@ class OrderPage extends BaseGetView<HomeController> {
               ),
             ),
             const SizedBox(height: 16),
-            Obx(() {
-              final currentItem = item.items![controller.itemIndex.value];
-              print("curre: $currentItem");
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            if (item.menu == "TODAY") ...[
+              Obx(() {
+                final currentItem = item.items![controller.itemIndex.value];
+                print("curre: $currentItem");
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      currentItem.name,
+                      style: AppTextStyle.bold18()
+                          .copyWith(color: appColors?.secondary),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      item.product.description,
+                      style: AppTextStyle.regular16()
+                          .copyWith(color: appColors?.gray),
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Số lượng:',
+                          style: AppTextStyle.regular18()
+                              .copyWith(color: appColors?.secondary),
+                        ),
+                        Obx(() => Text(
+                              '${controller.quantity.value}',
+                              style: AppTextStyle.regular18()
+                                  .copyWith(color: appColors?.secondary),
+                            )),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    GestureDetector(
+                      onTap: () {
+                        showOrderSlider(
+                          context,
+                          item,
+                          initialQuantity: controller.quantity.value,
+                          onItemSelected: (newIndex) {
+                            controller.updateItemIndex(newIndex);
+                          },
+                          onQuantityChanged: (newQuantity) {
+                            controller.updateQuantity(newQuantity);
+                          },
+                          onOrderPlaced: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OrderPage(
+                                  item: item,
+                                  quantity: controller.quantity.value,
+                                  itemIndex: controller.itemIndex.value,
+                                ),
+                              ),
+                            );
+                          },
+                          shouldNavigate: false,
+                          selectedItemIndex: controller.itemIndex.value,
+                        );
+                      },
+                      child: Text(
+                        'Chỉnh sửa',
+                        style: AppTextStyle.bold18()
+                            .copyWith(color: appColors?.primary),
+                      ),
+                    ),
+                  ],
+                );
+              }),
+            ] else ...[
+              Text(
+                item.product.name,
+                style:
+                    AppTextStyle.bold18().copyWith(color: appColors?.secondary),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                item.product.description,
+                style:
+                    AppTextStyle.regular16().copyWith(color: appColors?.gray),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    currentItem.name,
-                    style: AppTextStyle.bold18()
+                    'Số lượng:',
+                    style: AppTextStyle.regular18()
                         .copyWith(color: appColors?.secondary),
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    item.product.description,
-                    style: AppTextStyle.regular16()
-                        .copyWith(color: appColors?.gray),
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Số lượng:',
+                  Obx(() => Text(
+                        '${controller.quantity.value}',
                         style: AppTextStyle.regular18()
                             .copyWith(color: appColors?.secondary),
-                      ),
-                      Obx(() => Text(
-                            '${controller.quantity.value}',
-                            style: AppTextStyle.regular18()
-                                .copyWith(color: appColors?.secondary),
-                          )),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  GestureDetector(
-                    onTap: () {
-                      showOrderSlider(
+                      )),
+                ],
+              ),
+              const SizedBox(height: 8),
+              GestureDetector(
+                onTap: () {
+                  showOrderSlider(
+                    context,
+                    item,
+                    initialQuantity: controller.quantity.value,
+                    onItemSelected: (newIndex) {
+                      controller.updateItemIndex(newIndex);
+                    },
+                    onQuantityChanged: (newQuantity) {
+                      controller.updateQuantity(newQuantity);
+                    },
+                    onOrderPlaced: () {
+                      Navigator.push(
                         context,
-                        item,
-                        initialQuantity: controller.quantity.value,
-                        onItemSelected: (newIndex) {
-                          controller.updateItemIndex(newIndex);
-                        },
-                        onQuantityChanged: (newQuantity) {
-                          controller.updateQuantity(newQuantity);
-                        },
-                        onOrderPlaced: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => OrderPage(
-                                item: item,
-                                quantity: controller.quantity.value,
-                                itemIndex: controller.itemIndex.value,
-                              ),
-                            ),
-                          );
-                        },
-                        shouldNavigate: false,
-                        selectedItemIndex: controller.itemIndex.value,
+                        MaterialPageRoute(
+                          builder: (context) => OrderPage(
+                            item: item,
+                            quantity: controller.quantity.value,
+                            itemIndex: controller.itemIndex.value,
+                          ),
+                        ),
                       );
                     },
-                    child: Text(
-                      'Chỉnh sửa',
-                      style: AppTextStyle.bold18()
-                          .copyWith(color: appColors?.primary),
-                    ),
-                  ),
-                ],
-              );
-            }),
+                    shouldNavigate: false,
+                    selectedItemIndex: controller.itemIndex.value,
+                  );
+                },
+                child: Text(
+                  'Chỉnh sửa',
+                  style:
+                      AppTextStyle.bold18().copyWith(color: appColors?.primary),
+                ),
+              ),
+            ],
             const Spacer(),
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
@@ -140,14 +205,25 @@ class OrderPage extends BaseGetView<HomeController> {
                     style: AppTextStyle.bold20()
                         .copyWith(color: appColors?.secondary),
                   ),
-                  Obx(() {
-                    final currentItem = item.items![controller.itemIndex.value];
-                    return Text(
-                      '${((item.type.price != null && item.type.price != 0) ? item.type.price : currentItem.price)! * controller.quantity.value}đ',
-                      style: AppTextStyle.bold20()
-                          .copyWith(color: appColors?.onSuccess),
-                    );
-                  }),
+                  if (item.menu == "TODAY") ...[
+                    Obx(() {
+                      final currentItem =
+                          item.items![controller.itemIndex.value];
+                      return Text(
+                        '${((item.type.price != null && item.type.price != 0) ? item.type.price : currentItem.price)! * controller.quantity.value}đ',
+                        style: AppTextStyle.bold20()
+                            .copyWith(color: appColors?.onSuccess),
+                      );
+                    }),
+                  ] else ...[
+                    Obx(() {
+                      return Text(
+                        '${(item.type.price)! * controller.quantity.value}đ',
+                        style: AppTextStyle.bold20()
+                            .copyWith(color: appColors?.onSuccess),
+                      );
+                    }),
+                  ]
                 ],
               ),
             ),
