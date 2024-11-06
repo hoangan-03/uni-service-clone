@@ -37,6 +37,7 @@ class HomeController extends BaseController<HomeInput> {
   var currentMenu = ''.obs;
   final currentBranchID = '5bb72354-7c84-4f24-b889-a05cbda5d45d'.obs;
   final currentCategory = 'FOODCOURT'.obs;
+  final quantity = 0.obs;
 
   @override
   void onInit() async {
@@ -70,6 +71,10 @@ class HomeController extends BaseController<HomeInput> {
   void showNotifications() {
     pushNotiService.showLocalNotification(
         title: "Demo notifications", body: 'Demo body', payload: 'payload');
+  }
+
+  void updateQuantity(int newQuantity) {
+    quantity.value = newQuantity;
   }
 
   void printFcmToken() async {

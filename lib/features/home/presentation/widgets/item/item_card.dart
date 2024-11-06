@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
-import 'package:flutter_base_v2/features/home/presentation/views/order_slider/order_slider.dart';
+import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
+import 'package:flutter_base_v2/features/home/presentation/widgets/order/order.dart';
+import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_slider.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:get/get.dart';
 
 Widget buildItemCard(Menu item, BuildContext context) {
   final appColors = Theme.of(context).extension<AppColors>();
+  final HomeController controller = Get.find<HomeController>();
   return Container(
     width: 140,
     margin: const EdgeInsets.only(top: 10, bottom: 10),
@@ -33,16 +38,25 @@ Widget buildItemCard(Menu item, BuildContext context) {
             ),
             const SizedBox(height: 4),
             Text(
-              '${item.type.price}đ',
+              '${(item.type.price != null && item.type.price != 0) ? item.type.price : item.items?[0].price}đ',
               style: AppTextStyle.regular12(),
             ),
             const SizedBox(height: 8),
             SizedBox(
-              width: 140,  
+              width: 140,
               child: TextButton(
                 onPressed: () {
-                            showOrderSlider(context, item);
-                          },
+                  showOrderSlider(
+                    context,
+                    item,
+                    initialQuantity: controller.quantity.value,
+                    onQuantityChanged: (newQuantity) {
+                      controller.updateQuantity(newQuantity);
+                    },
+                    onOrderPlaced: () {},
+                    shouldNavigate: true,
+                  );
+                },
                 style: TextButton.styleFrom(
                   backgroundColor: appColors?.background,
                   padding: const EdgeInsets.symmetric(vertical: 8),
@@ -52,7 +66,8 @@ Widget buildItemCard(Menu item, BuildContext context) {
                 ),
                 child: Text(
                   'Chọn món',
-                  style: AppTextStyle.bold14().copyWith(color: appColors?.primary),
+                  style:
+                      AppTextStyle.bold14().copyWith(color: appColors?.primary),
                 ),
               ),
             ),

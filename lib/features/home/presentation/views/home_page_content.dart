@@ -6,7 +6,7 @@ import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/greetings.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/header.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/main_page.dart';
-import 'package:flutter_base_v2/features/home/presentation/widgets/menu_page.dart';
+import 'package:flutter_base_v2/features/home/presentation/widgets/menu/menu_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/top_nav_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -22,7 +22,6 @@ class HomePageContent extends StatelessWidget {
   final BaseState<List<Menu>?> menuDrinkState;
   final BaseState<List<Menu>?> menuSpecialityState;
   final BaseState<List<Menu>?> menuNecessityState;
-  // final HomeController controller;
 
   HomePageContent({
     super.key,
@@ -37,18 +36,11 @@ class HomePageContent extends StatelessWidget {
     required this.menuNecessityState,
     required this.selectedCategory,
 
+
   });
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, List<MenuItem>> menuItems = {
-      'Tất cả': [...todayMenuItems, ...tomorrowMenuItems],
-      'Thực đơn chính': todayMenuItems,
-      'Đồ uống': drinksMenuItems,
-      'Food court': foodCourtMenuItems,
-      'Đặc sản địa phương': localSpecialtiesMenuItems,
-    };
-
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 60.0, horizontal: 16),

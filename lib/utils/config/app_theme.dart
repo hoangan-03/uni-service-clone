@@ -23,6 +23,7 @@ class AppTheme {
         gray: Color.fromRGBO(172, 172, 176, 1),
         white: Colors.white,
         transparent: Colors.transparent,
+        onSuccess: ColorName.greenBase,
       ),
     ],
     colorScheme: const ColorScheme(
@@ -69,12 +70,16 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color gray;
   final Color white;
   final Color transparent;
+  final Color onSuccess;
 
   const AppColors(
       {this.primary = Colors.white,
       this.secondary = Colors.white,
       this.gray = Colors.white,
-      this.background = Colors.white, this.white =  Colors.white, this.transparent = Colors.transparent});
+      this.background = Colors.white,
+       this.white =  Colors.white, 
+       this.transparent = Colors.transparent,
+       this.onSuccess = Colors.white});
 
   @override
   AppColors copyWith({

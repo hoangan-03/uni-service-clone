@@ -1,6 +1,9 @@
 import 'package:dart_json_mapper/dart_json_mapper.dart';
 import 'package:flutter_base_v2/base/data/models/common/base_response.dart';
 import 'package:flutter_base_v2/features/branch/data/models/branch_response.dart';
+import 'package:flutter_base_v2/features/home/data/models/item_response.dart';
+import 'package:flutter_base_v2/features/home/data/models/product_response.dart';
+import 'package:flutter_base_v2/features/home/data/models/type_response.dart';
 
 @jsonSerializable
 class MenuResponse extends BaseResponse {
@@ -32,36 +35,6 @@ class MenuApiModel {
   List<ItemApiModel>? items;
 }
 
-@jsonSerializable
-class TypeApiModel {
-  String? id = '';
-  String? name = '';
-  int? price = 0;
-  String? createdAt = '';
-  String? updatedAt = '';
-}
 
-@jsonSerializable
-class ProductApiModel {
-  String? id = '';
-  String? name = '';
-  String? description = '';
-  String? imageURL = '';
-  bool? isActive = false;
-  bool? isLimit = false;
-  bool? isRemoved = false;
-  String? createdAt = '';
-  String? updatedAt = '';
-}
 
-@jsonSerializable
-class ItemApiModel {
-  String? id = '';
-  String? name = '';
-  int? price = 0;
-  bool? isLimit = false;
-  int? quantity = 0;
-  int? orignialQuantity = 0;
-  String? createdAt = '';
-  String? updatedAt = '';
-}
+

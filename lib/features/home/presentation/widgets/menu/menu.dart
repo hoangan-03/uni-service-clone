@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import "package:flutter_base_v2/features/home/domain/entities/menu.dart";
+import "package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart";
 import "package:flutter_base_v2/features/home/presentation/utils/get_cate_title.dart";
-import "package:flutter_base_v2/features/home/presentation/views/order_slider/order_slider.dart";
+import "package:flutter_base_v2/features/home/presentation/widgets/order/order.dart";
+import "package:flutter_base_v2/features/home/presentation/widgets/order/order_slider.dart";
 import "package:flutter_base_v2/utils/config/app_text_style.dart";
 import "package:flutter_base_v2/utils/config/app_theme.dart";
+import "package:get/get.dart";
 
 class MenuPage extends StatelessWidget {
   final String title;
@@ -14,6 +17,7 @@ class MenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
+     final HomeController controller = Get.find<HomeController>();
     return Scaffold(
       backgroundColor: appColors?.white,
       body: Padding(
@@ -45,7 +49,8 @@ class MenuPage extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 16.0),
                     decoration: BoxDecoration(
                       border: Border(
-                        bottom: BorderSide(color: appColors?.gray ?? Colors.grey, width: 0.5),
+                        bottom: BorderSide(
+                            color: appColors?.gray ?? Colors.grey, width: 0.5),
                       ),
                     ),
                     child: Row(
@@ -96,7 +101,26 @@ class MenuPage extends StatelessWidget {
                                 color: appColors?.white, size: 18),
                           ),
                           onPressed: () {
-                            showOrderSlider(context, item);
+                            showOrderSlider(
+                              context,
+                              item,
+                              initialQuantity: controller.quantity.value,
+                              onQuantityChanged: (newQuantity) {
+                                controller.updateQuantity(newQuantity);
+                              },
+                              onOrderPlaced: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => OrderPage(
+                                      item: item,
+                                      quantity: 1,
+                                    ),
+                                  ),
+                                );
+                              },
+                              shouldNavigate: true,
+                            );
                           },
                         ),
                       ],
