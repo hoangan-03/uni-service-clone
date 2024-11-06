@@ -21,11 +21,11 @@ class OrderPage extends BaseGetView<HomeController> {
 
   void onInit() {
     controller.updateQuantity(quantity);
+    controller.updateItemIndex(itemIndex);
   }
 
   @override
   Widget myBuild(BuildContext context) {
-    final currentItem = item.items![itemIndex];
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
       appBar: AppBar(
@@ -35,6 +35,7 @@ class OrderPage extends BaseGetView<HomeController> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             controller.updateQuantity(0);
+            controller.updateItemIndex(0);
             Navigator.of(context).pop();
           },
         ),
@@ -57,63 +58,77 @@ class OrderPage extends BaseGetView<HomeController> {
               ),
             ),
             const SizedBox(height: 16),
-            Text(
-              currentItem.name,
-              style:
-                  AppTextStyle.bold18().copyWith(color: appColors?.secondary),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              item.product.description,
-              style: AppTextStyle.regular16().copyWith(color: appColors?.gray),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Số lượng:',
-                  style: AppTextStyle.regular18()
-                      .copyWith(color: appColors?.secondary),
-                ),
-                Obx(() => Text(
-                      '${controller.quantity.value}',
-                      style: AppTextStyle.regular18()
-                          .copyWith(color: appColors?.secondary),
-                    )),
-              ],
-            ),
-            const SizedBox(height: 8),
-            GestureDetector(
-              onTap: () {
-                showOrderSlider(
-                  context,
-                  item,
-                  initialQuantity: controller.quantity.value,
-                  onQuantityChanged: (newQuantity) {
-                    controller.updateQuantity(newQuantity);
-                  },
-                  onOrderPlaced: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => OrderPage(
-                          item: item,
-                          quantity: controller.quantity.value,
-                          itemIndex: itemIndex,
-                        ),
+            Obx(() {
+              final currentItem = item.items![controller.itemIndex.value];
+              print("curre: $currentItem");
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    currentItem.name,
+                    style: AppTextStyle.bold18()
+                        .copyWith(color: appColors?.secondary),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    item.product.description,
+                    style: AppTextStyle.regular16()
+                        .copyWith(color: appColors?.gray),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Số lượng:',
+                        style: AppTextStyle.regular18()
+                            .copyWith(color: appColors?.secondary),
                       ),
-                    );
-                  },
-                  shouldNavigate: false,
-                );
-              },
-              child: Text(
-                'Chỉnh sửa',
-                style:
-                    AppTextStyle.bold18().copyWith(color: appColors?.primary),
-              ),
-            ),
+                      Obx(() => Text(
+                            '${controller.quantity.value}',
+                            style: AppTextStyle.regular18()
+                                .copyWith(color: appColors?.secondary),
+                          )),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  GestureDetector(
+                    onTap: () {
+                      showOrderSlider(
+                        context,
+                        item,
+                        initialQuantity: controller.quantity.value,
+                        onItemSelected: (newIndex) {
+                          controller.updateItemIndex(newIndex);
+                        },
+                        onQuantityChanged: (newQuantity) {
+                          controller.updateQuantity(newQuantity);
+                        },
+                        onOrderPlaced: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => OrderPage(
+                                item: item,
+                                quantity: controller.quantity.value,
+                                itemIndex: controller.itemIndex.value,
+                              ),
+                            ),
+                          );
+                        },
+                        shouldNavigate: false,
+                        selectedItemIndex: controller.itemIndex.value,
+                      );
+                    },
+                    child: Text(
+                      'Chỉnh sửa',
+                      style: AppTextStyle.bold18()
+                          .copyWith(color: appColors?.primary),
+                    ),
+                  ),
+                ],
+              );
+            }),
             const Spacer(),
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
@@ -125,11 +140,14 @@ class OrderPage extends BaseGetView<HomeController> {
                     style: AppTextStyle.bold20()
                         .copyWith(color: appColors?.secondary),
                   ),
-                  Obx(() => Text(
-                        '${((item.type.price != null && item.type.price != 0) ? item.type.price : currentItem.price)! * controller.quantity.value}đ',
-                        style: AppTextStyle.bold20()
-                            .copyWith(color: appColors?.onSuccess),
-                      )),
+                  Obx(() {
+                    final currentItem = item.items![controller.itemIndex.value];
+                    return Text(
+                      '${((item.type.price != null && item.type.price != 0) ? item.type.price : currentItem.price)! * controller.quantity.value}đ',
+                      style: AppTextStyle.bold20()
+                          .copyWith(color: appColors?.onSuccess),
+                    );
+                  }),
                 ],
               ),
             ),

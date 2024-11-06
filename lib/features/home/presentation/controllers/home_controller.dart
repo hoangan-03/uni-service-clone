@@ -12,6 +12,8 @@ import 'package:flutter_base_v2/features/home/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/home/domain/usecases/get_menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/features/home/domain/usecases/get_profile_uc.dart';
+import 'package:flutter_base_v2/features/order/data/models/add_to_cart_request.dart';
+import 'package:flutter_base_v2/features/order/domain/usecases/add_cart_uc.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -21,7 +23,7 @@ import 'package:get/get.dart';
 class HomeController extends BaseController<HomeInput> {
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
   GetMenuUseCase get _getMenuUseCase => Get.find<GetMenuUseCase>();
-
+  final AddCartUseCase _addCartUseCase = Get.find<AddCartUseCase>();
   BaseState<List<Menu>?> getMenuPreorderState = BaseState();
   BaseState<List<Menu>?> getMenuTodayState = BaseState();
 
@@ -38,6 +40,7 @@ class HomeController extends BaseController<HomeInput> {
   final currentBranchID = '5bb72354-7c84-4f24-b889-a05cbda5d45d'.obs;
   final currentCategory = 'FOODCOURT'.obs;
   final quantity = 0.obs;
+  final itemIndex = 0.obs;
 
   @override
   void onInit() async {
@@ -75,6 +78,9 @@ class HomeController extends BaseController<HomeInput> {
 
   void updateQuantity(int newQuantity) {
     quantity.value = newQuantity;
+  }
+  void updateItemIndex(int newIndex) {
+    itemIndex.value = newIndex;
   }
 
   void printFcmToken() async {
@@ -123,6 +129,19 @@ class HomeController extends BaseController<HomeInput> {
           },
         ),
         input: GetMenuParams(category: category, branchId: branchId));
+  }
+
+  Future<void> addToCart(String idProduct, int quantity) async {
+    final params = AddToCartRequest(
+      idProduct: idProduct,
+      quantity: quantity,
+    );
+    try {
+      await _addCartUseCase.build(params);
+      print("Product added to cart successfully.");
+    } catch (e) {
+      print("Failed to add product to cart: $e");
+    }
   }
 
   BaseState<List<Menu>?> _getStateByCategory(String category) {

@@ -4,6 +4,9 @@ import 'package:flutter_base_v2/features/authentication/data/models/user_respons
 import 'package:flutter_base_v2/features/branch/data/models/branch_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
 import 'package:flutter_base_v2/features/home/data/models/menu_response.dart';
+import 'package:flutter_base_v2/features/order/data/models/add_payment.dart';
+import 'package:flutter_base_v2/features/order/data/models/add_to_cart_request.dart';
+import 'package:flutter_base_v2/features/order/data/models/cart_response.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import 'package:dart_json_mapper/dart_json_mapper.dart';
@@ -32,4 +35,19 @@ abstract class ApiService {
 
   @GET('/auth/logout')
   Future<void> logout();
+
+  @POST('/carts')
+  Future<void> addToCart(
+    @Body() AddToCartRequest body,
+  );
+  @GET('/carts')
+  Future<CartResponse> getCart(
+    @Query('order') String menu,
+  );
+  
+  @POST('/orders')
+  Future<void> addPayment(
+    @Body() AddPaymentRequest body,
+  );
+
 }

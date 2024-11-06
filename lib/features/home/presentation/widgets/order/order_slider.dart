@@ -9,7 +9,7 @@ void showOrderSlider(
   Menu item, {
   required int initialQuantity,
   required Function(int) onQuantityChanged,
-  
+  Function(int)? onItemSelected,
   required Function() onOrderPlaced,
   required bool shouldNavigate,
   int? selectedItemIndex,
@@ -23,8 +23,10 @@ void showOrderSlider(
         child: OrderSliderContent(
           item: item,
           initialQuantity: initialQuantity,
+          initialIndex: selectedItemIndex ?? 0,
           onQuantityChanged: onQuantityChanged,
-           onOrderPlaced: (int selectedItemIndex) { // Updated to receive the selectedItemIndex
+          onItemSelected: onItemSelected,
+          onOrderPlaced: (int selectedItemIndex) {
             if (shouldNavigate) {
               Navigator.push(
                 context,
@@ -32,7 +34,7 @@ void showOrderSlider(
                   builder: (context) => OrderPage(
                     item: item,
                     quantity: initialQuantity,
-                    itemIndex: selectedItemIndex, // Pass the correct index here
+                    itemIndex: selectedItemIndex,
                   ),
                 ),
               );
@@ -48,18 +50,20 @@ void showOrderSlider(
 class OrderSliderContent extends StatefulWidget {
   final Menu item;
   final int initialQuantity;
+  final int initialIndex;
   final Function(int) onQuantityChanged;
-   final Function(int selectedItemIndex) onOrderPlaced;
+  final Function(int)? onItemSelected;
+  final Function(int selectedItemIndex) onOrderPlaced;
   final bool shouldNavigate;
 
   const OrderSliderContent({
     required this.item,
     required this.initialQuantity,
     required this.onQuantityChanged,
-    
-        required this.onOrderPlaced,
+    required this.onOrderPlaced,
     required this.shouldNavigate,
-
+    required this.onItemSelected,
+    required this.initialIndex,
     super.key,
   });
 
@@ -69,12 +73,13 @@ class OrderSliderContent extends StatefulWidget {
 
 class OrderSliderContentState extends State<OrderSliderContent> {
   late int orderQuantity;
-  int? selectedItemIndex;
+  late int? selectedItemIndex;
 
   @override
   void initState() {
     super.initState();
     orderQuantity = widget.initialQuantity;
+    selectedItemIndex = widget.initialIndex;
   }
 
   @override
@@ -225,7 +230,7 @@ class OrderSliderContentState extends State<OrderSliderContent> {
                             .copyWith(color: appColors?.gray)),
                     trailing: Radio<int>(
                       value: index,
-                      groupValue: selectedItemIndex,
+                      groupValue: selectedItemIndex ?? 0,
                       onChanged: (int? value) {
                         setState(() {
                           selectedItemIndex = value;
@@ -239,6 +244,9 @@ class OrderSliderContentState extends State<OrderSliderContent> {
             ElevatedButton(
               onPressed: () {
                 widget.onQuantityChanged(orderQuantity);
+                if (widget.onItemSelected != null) {
+                  widget.onItemSelected!(selectedItemIndex ?? 0);
+                }
                 Navigator.pop(context);
                 if (widget.shouldNavigate) {
                   widget.onOrderPlaced(selectedItemIndex ?? 0);
