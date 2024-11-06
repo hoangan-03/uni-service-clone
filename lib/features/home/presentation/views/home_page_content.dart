@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
-import 'package:flutter_base_v2/features/home/data/types/menu_item.dart';
-import 'package:flutter_base_v2/features/home/data/repositories/menu_mockdata.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/greetings.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/header.dart';

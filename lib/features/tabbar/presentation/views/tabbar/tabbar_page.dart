@@ -14,13 +14,13 @@ extension TabItem on TabType {
         return Icon(
           CupertinoIcons.home,
           size: 20,
-          color: colorScheme.primary,
+          color: colorScheme.onPrimary,
         );
       case TabType.service:
         return Icon(
           CupertinoIcons.square_list,
           size: 20,
-          color: colorScheme.primary,
+          color: colorScheme.onPrimary,
         );
       case TabType.qr:
         return Icon(
@@ -32,13 +32,13 @@ extension TabItem on TabType {
         return Icon(
           CupertinoIcons.time,
           size: 20,
-          color: colorScheme.primary,
+          color: colorScheme.onPrimary,
         );
       case TabType.account:
         return Icon(
           CupertinoIcons.person,
           size: 20,
-          color: colorScheme.primary,
+          color: colorScheme.onPrimary,
         );
     }
   }
@@ -61,7 +61,7 @@ extension TabItem on TabType {
         return Icon(
           CupertinoIcons.qrcode,
           size: 30,
-          color: colorScheme.onPrimary,
+          color: Get.context?.theme.disabledColor,
         );
       case TabType.history:
         return Icon(
@@ -85,7 +85,7 @@ extension TabItem on TabType {
       case TabType.service:
         return 'Tiện ích';
       case TabType.qr:
-        return ' ';
+        return 'QR Code';
       case TabType.history:
         return 'Lịch sử';
       case TabType.account:
@@ -113,8 +113,12 @@ extension TabItem on TabType {
       icon: icon,
       inactiveIcon: inactiveIcon,
       title: title.isEmpty ? null : title,
-      activeColorPrimary: colorScheme.primary,
-      inactiveColorPrimary: Get.context?.theme.disabledColor,
+      activeColorPrimary:
+          colorScheme.primary,
+      activeColorSecondary:
+          colorScheme.onPrimary, 
+      inactiveColorPrimary: Colors.white, 
+      inactiveColorSecondary: Get.context!.theme.disabledColor,
     );
   }
 }
@@ -154,7 +158,7 @@ class TabbarPage extends GetView {
               ),
             ],
           ),
-          navBarStyle: NavBarStyle.style15,
+          navBarStyle: NavBarStyle.style7,
           onItemSelected: (index) {},
         ),
       ],

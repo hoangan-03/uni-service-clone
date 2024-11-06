@@ -16,7 +16,7 @@ class OrderPage extends BaseGetView<HomeController> {
     super.key,
     required this.item,
     required this.quantity,
-    this.itemIndex = 0,
+    required this.itemIndex,
   });
 
   void onInit() {
@@ -25,6 +25,7 @@ class OrderPage extends BaseGetView<HomeController> {
 
   @override
   Widget myBuild(BuildContext context) {
+    final currentItem = item.items![itemIndex];
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
       appBar: AppBar(
@@ -57,7 +58,7 @@ class OrderPage extends BaseGetView<HomeController> {
             ),
             const SizedBox(height: 16),
             Text(
-              item.product.name,
+              currentItem.name,
               style:
                   AppTextStyle.bold18().copyWith(color: appColors?.secondary),
             ),
@@ -99,6 +100,7 @@ class OrderPage extends BaseGetView<HomeController> {
                         builder: (context) => OrderPage(
                           item: item,
                           quantity: controller.quantity.value,
+                          itemIndex: itemIndex,
                         ),
                       ),
                     );
@@ -124,7 +126,7 @@ class OrderPage extends BaseGetView<HomeController> {
                         .copyWith(color: appColors?.secondary),
                   ),
                   Obx(() => Text(
-                        '${((item.type.price != null && item.type.price != 0) ? item.type.price : item.items![itemIndex].price)! * controller.quantity.value}đ',
+                        '${((item.type.price != null && item.type.price != 0) ? item.type.price : currentItem.price)! * controller.quantity.value}đ',
                         style: AppTextStyle.bold20()
                             .copyWith(color: appColors?.onSuccess),
                       )),

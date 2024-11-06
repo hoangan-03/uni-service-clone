@@ -9,6 +9,7 @@ void showOrderSlider(
   Menu item, {
   required int initialQuantity,
   required Function(int) onQuantityChanged,
+  
   required Function() onOrderPlaced,
   required bool shouldNavigate,
   int? selectedItemIndex,
@@ -23,7 +24,7 @@ void showOrderSlider(
           item: item,
           initialQuantity: initialQuantity,
           onQuantityChanged: onQuantityChanged,
-          onOrderPlaced: () {
+           onOrderPlaced: (int selectedItemIndex) { // Updated to receive the selectedItemIndex
             if (shouldNavigate) {
               Navigator.push(
                 context,
@@ -31,13 +32,12 @@ void showOrderSlider(
                   builder: (context) => OrderPage(
                     item: item,
                     quantity: initialQuantity,
-                    itemIndex: selectedItemIndex ?? 0,
+                    itemIndex: selectedItemIndex, // Pass the correct index here
                   ),
                 ),
               );
             }
           },
-
           shouldNavigate: shouldNavigate,
         ),
       );
@@ -49,15 +49,17 @@ class OrderSliderContent extends StatefulWidget {
   final Menu item;
   final int initialQuantity;
   final Function(int) onQuantityChanged;
-  final Function() onOrderPlaced;
+   final Function(int selectedItemIndex) onOrderPlaced;
   final bool shouldNavigate;
 
   const OrderSliderContent({
     required this.item,
     required this.initialQuantity,
     required this.onQuantityChanged,
-    required this.onOrderPlaced,
+    
+        required this.onOrderPlaced,
     required this.shouldNavigate,
+
     super.key,
   });
 
@@ -73,14 +75,14 @@ class OrderSliderContentState extends State<OrderSliderContent> {
   void initState() {
     super.initState();
     orderQuantity = widget.initialQuantity;
-    selectedItemIndex = 0;
   }
 
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
+    final selectedItem = widget.item.items?[selectedItemIndex ?? 0];
+
     return Container(
-      height: widget.item.menu == "TODAY" ? null : 330,
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -88,6 +90,7 @@ class OrderSliderContentState extends State<OrderSliderContent> {
       ),
       child: SingleChildScrollView(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               width: 40,
@@ -126,7 +129,7 @@ class OrderSliderContentState extends State<OrderSliderContent> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.item.product.name,
+                        selectedItem?.name ?? widget.item.product.name,
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
@@ -138,7 +141,7 @@ class OrderSliderContentState extends State<OrderSliderContent> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        '${(widget.item.type.price != null && widget.item.type.price != 0) ? widget.item.type.price : widget.item.items![0].price}đ',
+                        '${selectedItem?.price ?? (widget.item.type.price != null && widget.item.type.price != 0 ? widget.item.type.price : widget.item.items![0].price)}đ',
                         style:
                             const TextStyle(fontSize: 16, color: Colors.green),
                       ),
@@ -166,8 +169,8 @@ class OrderSliderContentState extends State<OrderSliderContent> {
                           ),
                           Text(
                             '$orderQuantity',
-                            style:  AppTextStyle.regular16()
-                            .copyWith(color: appColors?.secondary),
+                            style: AppTextStyle.regular16()
+                                .copyWith(color: appColors?.secondary),
                           ),
                           IconButton(
                             icon: Container(
@@ -213,7 +216,7 @@ class OrderSliderContentState extends State<OrderSliderContent> {
                   final item = widget.item.items![index];
                   return ListTile(
                     title: Text(
-                      '${item.price} đ',
+                      item.name,
                       style: AppTextStyle.regular16()
                           .copyWith(color: appColors?.secondary),
                     ),
@@ -238,7 +241,7 @@ class OrderSliderContentState extends State<OrderSliderContent> {
                 widget.onQuantityChanged(orderQuantity);
                 Navigator.pop(context);
                 if (widget.shouldNavigate) {
-                  widget.onOrderPlaced();
+                  widget.onOrderPlaced(selectedItemIndex ?? 0);
                 }
               },
               style: ElevatedButton.styleFrom(

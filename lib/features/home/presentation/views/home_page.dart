@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/branch/presentation/pages/branches_page.dart';

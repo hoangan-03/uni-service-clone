@@ -115,6 +115,7 @@ class MenuPage extends StatelessWidget {
                                     builder: (context) => OrderPage(
                                       item: item,
                                       quantity: 1,
+                                      itemIndex: 0,
                                     ),
                                   ),
                                 );
