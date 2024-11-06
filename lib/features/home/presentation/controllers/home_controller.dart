@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -138,21 +139,27 @@ class HomeController extends BaseController<HomeInput> {
         ),
         input: GetMenuParams(category: category, branchId: branchId));
   }
-
-  Future<void> getCart() {
-    return _getCartUseCase.execute(
+Future<String?> getCart() async {
+    final completer = Completer<String?>();
+    await _getCartUseCase.execute(
         observer: Observer(
           onSuccess: (Cart? data) {
             L.info(data);
-            if (data != null) cart.value = data;
+            if (data != null) {
+              cart.value = data;
+              completer.complete(cart.value.id);
+            } else {
+              completer.complete(null);
+            }
           },
           onError: (AppException e) {
             handleError(e);
+            completer.completeError(e);
           },
         ),
-        input: GetCartParams(category: "NORMAL"));
+        input: GetCartParams(order: "NORMAL"));
+    return completer.future;
   }
-
   Future<void> addToCart(String idProduct, int quantity) async {
     final params = AddToCartRequest(
       idProduct: idProduct,
@@ -161,6 +168,12 @@ class HomeController extends BaseController<HomeInput> {
     try {
       await _addCartUseCase.build(params);
       print("Product added to cart successfully.");
+      await getCart();
+      final cartId = cart.value.id;
+      print("Cart ID: ${cart.value}");
+      if (cartId != null) {
+        await addPaymentRequest(cartId);
+      }
     } catch (e) {
       print("Failed to add product to cart: $e");
     }
@@ -172,7 +185,7 @@ class HomeController extends BaseController<HomeInput> {
     );
     try {
       await _addPaymentUseCase.build(params);
-      print("Paid succesfully.");
+      print("Paid successfully.");
     } catch (e) {
       print("Failed to pay: $e");
     }

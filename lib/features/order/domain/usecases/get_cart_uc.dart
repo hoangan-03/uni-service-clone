@@ -9,11 +9,11 @@ class GetCartUseCase extends UseCaseIO<GetCartParams, Cart?> {
 
   @override
   Future<Cart?> build(GetCartParams input) {
-    return _cartRepo.getCart(input.category);
+    return _cartRepo.getCart(input.order);
   }
 }
 class GetCartParams {
-  final String category;
+  final String order;
 
-  GetCartParams({required this.category});
+  GetCartParams({required this.order});
 }
