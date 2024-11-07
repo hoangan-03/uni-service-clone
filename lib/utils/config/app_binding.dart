@@ -10,8 +10,10 @@ import 'package:flutter_base_v2/features/home/data/repositories/profile_repo.dar
 import 'package:flutter_base_v2/features/branch/data/repositories/branch_repo.dart'; // Import BranchRepo
 import 'package:flutter_base_v2/features/home/domain/repositories/menu_repo.dart';
 import 'package:flutter_base_v2/features/order/data/repositories/cart_repo.dart';
+import 'package:flutter_base_v2/features/order/data/repositories/cart_shipping_repo.dart';
 import 'package:flutter_base_v2/features/order/data/repositories/payment_repo.dart';
 import 'package:flutter_base_v2/features/order/domain/repositories/cart_repo.dart';
+import 'package:flutter_base_v2/features/order/domain/repositories/cart_shipping.dart';
 import 'package:flutter_base_v2/features/order/domain/repositories/payment_repo.dart';
 import 'package:flutter_base_v2/utils/config/app_config.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
@@ -77,6 +79,7 @@ class AppBinding extends Bindings {
     Get.put<MenuTodayRepo>(MenuRepoImpl());
     Get.put<CartRepo>(CartRepoImpl());
     Get.put<PaymentRepo>(PaymentRepoImpl());
+    Get.put<CartShippingRepo>(CartShippingRepoImpl());
   }
 
   void injectService() {

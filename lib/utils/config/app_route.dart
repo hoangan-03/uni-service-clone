@@ -6,6 +6,8 @@ import 'package:flutter_base_v2/features/branch/presentation/pages/branches_page
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_binding.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/home_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/notifications_page.dart';
+import 'package:flutter_base_v2/features/order/domain/entities/cart_shipping.dart';
+import 'package:flutter_base_v2/features/order/presentation/views/cart_shipping.dart';
 import 'package:flutter_base_v2/features/services/presentation/views/services.dart';
 import 'package:flutter_base_v2/features/tabbar/presentation/controllers/landing/landing_binding.dart';
 import 'package:flutter_base_v2/features/tabbar/presentation/controllers/root/root_binding.dart';
@@ -28,13 +30,13 @@ class AppRoute {
   static String exampleList = '/example_list';
   static String uniLogin = '/uni_login';
   static String notifications = '/notifications';
-    static String home = '/home';
+  static String home = '/home';
   static String service = '/service';
   static String qr = '/qr';
-    static String history = '/history';
+  static String history = '/history';
   static String account = '/account';
   static String branch = '/branches';
-
+   static String cartShipping = '/cart_shipping'; // Add this line
 
   static List<GetPage> generateGetPages = [
     GetPage(name: root, page: RootPage.new, binding: RootBinding()),
@@ -73,7 +75,12 @@ class AppRoute {
         page: BranchsPage.new,
         binding: BranchBinding(),
         transition: Transition.noTransition),
-            GetPage(name: service, page: ServicesPage.new),
+    GetPage(
+        name: cartShipping,
+        page: CartShippingPage.new,
+        binding: HomeBinding(),
+        transition: Transition.noTransition),
+    GetPage(name: service, page: ServicesPage.new),
     GetPage(name: qr, page: QRPage.new),
     GetPage(name: history, page: HistoryPage.new),
     GetPage(name: account, page: AccountPage.new),

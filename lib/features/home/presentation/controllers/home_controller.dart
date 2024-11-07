@@ -16,8 +16,10 @@ import 'package:flutter_base_v2/features/home/domain/usecases/get_profile_uc.dar
 import 'package:flutter_base_v2/features/order/data/models/add_payment.dart';
 import 'package:flutter_base_v2/features/order/data/models/add_to_cart_request.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/cart.dart';
+import 'package:flutter_base_v2/features/order/domain/entities/cart_shipping.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/add_cart_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/add_payment_uc.dart';
+import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_shipping_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_uc.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
@@ -29,6 +31,10 @@ class HomeController extends BaseController<HomeInput> {
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
   GetMenuUseCase get _getMenuUseCase => Get.find<GetMenuUseCase>();
   GetCartUseCase get _getCartUseCase => Get.find<GetCartUseCase>();
+
+  GetCartShippingUseCase get _getCartShippingUsecase =>
+      Get.find<GetCartShippingUseCase>();
+  BaseState<List<CartShipping>?> getCartShippingState = BaseState();
   final AddCartUseCase _addCartUseCase = Get.find<AddCartUseCase>();
   final AddPaymentUseCase _addPaymentUseCase = Get.find<AddPaymentUseCase>();
   BaseState<List<Menu>?> getMenuPreorderState = BaseState();
@@ -56,6 +62,7 @@ class HomeController extends BaseController<HomeInput> {
     pushNotiService.listenNotification();
     // getProfile();
 
+    getCartShipping();
     getMenuToday("TODAY", currentBranchID.value);
     getMenuToday("PREORDER", currentBranchID.value);
     getMenuToday("FOODCOURT", currentBranchID.value);
@@ -76,6 +83,7 @@ class HomeController extends BaseController<HomeInput> {
     pushNotiService.cancelNotification();
     _getProfileUseCase.dispose();
     _getMenuUseCase.dispose();
+    _getCartShippingUsecase.dispose();
     super.onClose();
   }
 
@@ -139,7 +147,8 @@ class HomeController extends BaseController<HomeInput> {
         ),
         input: GetMenuParams(category: category, branchId: branchId));
   }
-Future<String?> getCart() async {
+
+  Future<String?> getCart() async {
     final completer = Completer<String?>();
     await _getCartUseCase.execute(
         observer: Observer(
@@ -160,6 +169,25 @@ Future<String?> getCart() async {
         input: GetCartParams(order: "NORMAL"));
     return completer.future;
   }
+
+  Future<void> getCartShipping() {
+    return _getCartShippingUsecase.execute(
+      observer: Observer(
+        onSubscribe: () {
+          getCartShippingState.onLoading();
+        },
+        onSuccess: (List<CartShipping>? cartship) {
+          getCartShippingState.onSuccess(data: cartship);
+        },
+        onError: (AppException e) {
+          getCartShippingState.onError(e.message);
+          handleError(e);
+        },
+      ),
+      input: null,
+    );
+  }
+
   Future<void> addToCart(String idProduct, int quantity) async {
     final params = AddToCartRequest(
       idProduct: idProduct,
