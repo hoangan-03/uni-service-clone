@@ -20,6 +20,6 @@ class HomeBinding extends Bindings {
     Get.lazyPut(() => AddCartUseCase(Get.find()));
     Get.lazyPut(() => AddPaymentUseCase(Get.find()));
     Get.lazyPut(() => GetCartShippingUseCase(Get.find()));
-    Get.lazyPut(() => UpdateProfileUseCase(Get.find()));
+    // Get.lazyPut(() => UpdateProfileUseCase(Get.find()));
   }
 }

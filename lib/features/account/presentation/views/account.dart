@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
+import 'package:flutter_base_v2/features/account/presentation/controllers/account_binding.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -71,7 +72,7 @@ class AccountPage extends BaseGetView<AccountController> {
                 _buildMenuItem(
                     FontAwesomeIcons.circleUser, 'Thông tin tài khoản', context,
                     onTap: () {
-                  Get.to(() => const AccountInfoPage());
+                  Get.to(() => const AccountInfoPage(), binding: AccountBinding());
                 }),
                 const SizedBox(height: 10),
                 _buildMenuItem(FontAwesomeIcons.gear, 'Cài đặt', context),

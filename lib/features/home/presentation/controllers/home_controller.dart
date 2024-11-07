@@ -195,10 +195,8 @@ class HomeController extends BaseController<HomeInput> {
     );
     try {
       await _addCartUseCase.build(params);
-      print("Product added to cart successfully.");
       await getCart();
       final cartId = cart.value.id;
-      print("Cart ID: ${cart.value}");
       if (cartId != null) {
         await addPaymentRequest(cartId);
       }
