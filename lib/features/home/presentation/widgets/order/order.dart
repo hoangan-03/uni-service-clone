@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_slider.dart';
+import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -61,7 +63,6 @@ class OrderPage extends BaseGetView<HomeController> {
             if (item.menu == "TODAY") ...[
               Obx(() {
                 final currentItem = item.items![controller.itemIndex.value];
-                print("curre: $currentItem");
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -210,7 +211,7 @@ class OrderPage extends BaseGetView<HomeController> {
                       final currentItem =
                           item.items![controller.itemIndex.value];
                       return Text(
-                        '${((item.type.price != null && item.type.price != 0) ? item.type.price : currentItem.price)! * controller.quantity.value}đ',
+                        '${formatPrice(((item.type.price != null && item.type.price != 0) ? item.type.price : currentItem.price)! * controller.quantity.value)}đ',
                         style: AppTextStyle.bold20()
                             .copyWith(color: appColors?.onSuccess),
                       );
@@ -218,7 +219,7 @@ class OrderPage extends BaseGetView<HomeController> {
                   ] else ...[
                     Obx(() {
                       return Text(
-                        '${(item.type.price)! * controller.quantity.value}đ',
+                        '${formatPrice((item.type.price)! * controller.quantity.value)}đ',
                         style: AppTextStyle.bold20()
                             .copyWith(color: appColors?.onSuccess),
                       );
@@ -231,11 +232,28 @@ class OrderPage extends BaseGetView<HomeController> {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                 onPressed: () {
+                onPressed: () {
+                  final name = item.product.name;
+                  final description = item.product.description;
+                  final quantity = controller.quantity.value;
+                  final unitPrice =
+                      (item.menu == "TODAY")
+                          ? item.items![controller.itemIndex.value].price
+                          : item.type.price!;
+                  final totalPrice = unitPrice * quantity;
+                  final branch = item.branchId;
                   final idProduct = item.menu == "TODAY"
                       ? item.items![controller.itemIndex.value].id
-                      : item.id;
-                  controller.addToCart(idProduct, controller.quantity.value);
+                      : item.product.id;
+
+                  controller.addToCart(idProduct, quantity);
+                  Get.to(() => BillPage(
+                        name: name,
+                        description: description,
+                        quantity: quantity,
+                        totalPrice: totalPrice,
+                        branch: branch,
+                      ));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,

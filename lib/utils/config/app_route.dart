@@ -7,6 +7,7 @@ import 'package:flutter_base_v2/features/home/presentation/controllers/home_bind
 import 'package:flutter_base_v2/features/home/presentation/views/home_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/notifications_page.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/cart_shipping.dart';
+import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/cart_shipping.dart';
 import 'package:flutter_base_v2/features/services/presentation/views/services.dart';
 import 'package:flutter_base_v2/features/tabbar/presentation/controllers/landing/landing_binding.dart';
@@ -36,7 +37,8 @@ class AppRoute {
   static String history = '/history';
   static String account = '/account';
   static String branch = '/branches';
-   static String cartShipping = '/cart_shipping'; // Add this line
+  static String cartShipping = '/cart_shipping';
+  static String bill = '/bill';
 
   static List<GetPage> generateGetPages = [
     GetPage(name: root, page: RootPage.new, binding: RootBinding()),
@@ -78,6 +80,17 @@ class AppRoute {
     GetPage(
         name: cartShipping,
         page: CartShippingPage.new,
+        binding: HomeBinding(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: bill,
+        page: () => BillPage(
+          branch: 'defaultBranch',
+          description: 'defaultDescription',
+          name: 'defaultName',
+          quantity: 1,
+          totalPrice: 0,
+        ),
         binding: HomeBinding(),
         transition: Transition.noTransition),
     GetPage(name: service, page: ServicesPage.new),

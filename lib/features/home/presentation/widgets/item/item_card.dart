@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_slider.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -36,7 +37,7 @@ Widget buildItemCard(Menu item, BuildContext context) {
             ),
             const SizedBox(height: 4),
             Text(
-              '${(item.type.price != null && item.type.price != 0) ? item.type.price : item.items?[0].price}đ',
+              '${(item.type.price != null && item.type.price != 0) ? formatPrice(item.type.price ?? 0) : formatPrice(item.items![0].price!)}đ',
               style: AppTextStyle.regular12(),
             ),
             const SizedBox(height: 8),

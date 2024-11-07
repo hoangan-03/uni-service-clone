@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -145,10 +146,9 @@ class OrderSliderContentState extends State<OrderSliderContent> {
                             const TextStyle(fontSize: 14, color: Colors.grey),
                       ),
                       const SizedBox(height: 4),
-                      Text(
-                        '${selectedItem?.price ?? (widget.item.type.price != null && widget.item.type.price != 0 ? widget.item.type.price : widget.item.items![0].price)}đ',
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.green),
+                                           Text(
+                        '${formatPrice(selectedItem?.price ?? (widget.item.type.price != null && widget.item.type.price != 0 ? widget.item.type.price : widget.item.items![0].price)!)}đ',
+                        style: const TextStyle(fontSize: 16, color: Colors.green),
                       ),
                       const SizedBox(height: 8),
                       Row(
