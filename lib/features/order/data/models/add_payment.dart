@@ -6,7 +6,7 @@ class AddPaymentRequest {
   AddPaymentRequest({
     required this.cartId,
   });
-    Map<String, dynamic> toJson() => <String, dynamic>{
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'cartId': cartId,
       };
 }

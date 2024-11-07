@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
+import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends BaseGetView<AccountController> {
   const AccountPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
       body: Column(
@@ -44,16 +46,22 @@ class AccountPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10),
-              Text(
-                'Nguyễn Văn A',
-                style:
-                    AppTextStyle.bold20().copyWith(color: appColors?.secondary),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                'Sinh viên - Khoa quản trị',
-                style: AppTextStyle.regular16().copyWith(color: Colors.grey),
-              ),
+              Obx(() {
+                final user = controller.user.value;
+                return Column(
+                  children: [
+                    Text(
+                      user.username ?? '',
+                      style: AppTextStyle.bold20().copyWith(color: appColors?.secondary),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '${user.position ?? ''} - Khoa ${user.faculty ?? ''}',
+                      style: AppTextStyle.regular16().copyWith(color: Colors.grey),
+                    ),
+                  ],
+                );
+              }),
             ],
           ),
           const SizedBox(height: 30),
@@ -63,7 +71,7 @@ class AccountPage extends StatelessWidget {
                 _buildMenuItem(
                     FontAwesomeIcons.circleUser, 'Thông tin tài khoản', context,
                     onTap: () {
-                  Get.to(() => AccountInfoPage());
+                  Get.to(() => const AccountInfoPage());
                 }),
                 const SizedBox(height: 10),
                 _buildMenuItem(FontAwesomeIcons.gear, 'Cài đặt', context),

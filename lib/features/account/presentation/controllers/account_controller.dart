@@ -10,6 +10,7 @@ import 'package:flutter_base_v2/features/authentication/data/providers/local/loc
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/features/account/domain/usecases/get_profile_uc.dart';
+import 'package:flutter_base_v2/features/account/domain/usecases/update_profile_uc.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -18,10 +19,10 @@ import 'package:get/get.dart';
 
 class AccountController extends BaseController<HomeInput> {
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
+  UpdateProfileUseCase get _updateProfileUseCase => Get.find<UpdateProfileUseCase>();
   final pushNotiService = Get.find<PushNotificationService>();
 
   final user = User().obs;
-
 
   final LocalStorage _localStorage = Get.find();
 
@@ -43,6 +44,7 @@ class AccountController extends BaseController<HomeInput> {
   void onClose() {
     pushNotiService.cancelNotification();
     _getProfileUseCase.dispose();
+    _updateProfileUseCase.dispose();
     super.onClose();
   }
 
@@ -80,6 +82,20 @@ class AccountController extends BaseController<HomeInput> {
           },
         ),
         input: null);
+  }
+
+  Future<void> updateProfile(User updatedUser) {
+    return _updateProfileUseCase.execute(
+        observer: Observer(
+          onSuccess: (_) {
+            L.info("Profile updated successfully");
+            user.value = updatedUser;
+          },
+          onError: (AppException e) {
+            handleError(e);
+          },
+        ),
+        input: updatedUser);
   }
 
   void logout() {

@@ -40,7 +40,7 @@ class AppRoute {
   static String branch = '/branches';
   static String cartShipping = '/cart_shipping';
   static String bill = '/bill';
-    static String accountInfo= '/info';
+  static String accountInfo = '/info';
 
   static List<GetPage> generateGetPages = [
     GetPage(name: root, page: RootPage.new, binding: RootBinding()),
@@ -84,7 +84,7 @@ class AppRoute {
         page: CartShippingPage.new,
         binding: HomeBinding(),
         transition: Transition.noTransition),
-        GetPage(
+    GetPage(
         name: accountInfo,
         page: AccountInfoPage.new,
         binding: AccountBinding(),
@@ -92,19 +92,23 @@ class AppRoute {
     GetPage(
         name: bill,
         page: () => BillPage(
-          imageUrl: 'defaultImageUrl',
-          branch: 'defaultBranch',
-          description: 'defaultDescription',
-          name: 'defaultName',
-          quantity: 1,
-          totalPrice: 0,
-        ),
+              imageUrl: 'defaultImageUrl',
+              branch: 'defaultBranch',
+              description: 'defaultDescription',
+              name: 'defaultName',
+              quantity: 1,
+              totalPrice: 0,
+            ),
         binding: HomeBinding(),
         transition: Transition.noTransition),
     GetPage(name: service, page: ServicesPage.new),
     GetPage(name: qr, page: QRPage.new),
     GetPage(name: history, page: HistoryPage.new),
-    GetPage(name: account, page: AccountPage.new),
+    GetPage(
+        name: account,
+        page: AccountPage.new,
+        binding: AccountBinding(),
+        transition: Transition.noTransition),
   ];
 
   static GetPage? getPage(String name) {

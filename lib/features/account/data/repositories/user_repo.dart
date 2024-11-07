@@ -13,4 +13,10 @@ class UserRepoImpl extends UserRepo {
     final UserApiModel? model = response.data;
     return (model != null) ? mappingEntity(model) : null;
   }
+
+  @override
+  Future<void> updateProfile(User user) async {
+    final UserApiModel model = mappingModel(user);
+    await _apiService.updateProfile(model);
+  }
 }

@@ -24,6 +24,11 @@ abstract class ApiService {
   @GET('/auth/me')
   Future<UserResponse> getUserProfile();
 
+  @POST('/auth/settings')
+  Future<void> updateProfile(
+    @Body() UserApiModel body,
+  );
+
   @GET('/branches/options?o=true')
   Future<BranchResponse> getListBrands();
 

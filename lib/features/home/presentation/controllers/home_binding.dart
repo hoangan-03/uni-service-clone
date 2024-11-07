@@ -1,3 +1,4 @@
+import 'package:flutter_base_v2/features/account/domain/usecases/update_profile_uc.dart';
 import 'package:flutter_base_v2/features/home/domain/usecases/get_menu.dart';
 import 'package:flutter_base_v2/features/account/domain/usecases/get_profile_uc.dart';
 import 'package:flutter_base_v2/features/branch/domain/usecases/get_branch_uc.dart';
@@ -19,5 +20,6 @@ class HomeBinding extends Bindings {
     Get.lazyPut(() => AddCartUseCase(Get.find()));
     Get.lazyPut(() => AddPaymentUseCase(Get.find()));
     Get.lazyPut(() => GetCartShippingUseCase(Get.find()));
+    Get.lazyPut(() => UpdateProfileUseCase(Get.find()));
   }
 }

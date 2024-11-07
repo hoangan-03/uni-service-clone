@@ -7,10 +7,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_base_v2/utils/config/app_route.dart';
+import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 
 Widget buildHeader(BuildContext context) {
   final appColors = Theme.of(context).extension<AppColors>();
   final GetStorage localStorage = GetStorage(); 
+  final AccountController accountController = Get.find<AccountController>();
 
   final branchJson = localStorage.read('selectedBranch');
   String branchName = 'Sample name';
@@ -40,10 +42,13 @@ Widget buildHeader(BuildContext context) {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Nguyễn Hoàng Ân',
-                style: AppTextStyle.bold16().copyWith(color: appColors?.secondary),
-              ),
+              Obx(() {
+                final user = accountController.user.value;
+                return Text(
+                  user.username ?? '',
+                  style: AppTextStyle.bold16().copyWith(color: appColors?.secondary),
+                );
+              }),
               Text(
                 truncateText(branchName, 30), 
                 style: AppTextStyle.regular14(),

@@ -4,6 +4,7 @@ import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 
 abstract class UserRepo extends BaseMappingRepo<User, UserApiModel> {
   Future<User?> getUserProfile();
+  Future<void> updateProfile(User user);
 }
 
 

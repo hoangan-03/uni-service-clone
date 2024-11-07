@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 
-class AccountInfoPage extends StatelessWidget {
+class AccountInfoPage extends BaseGetView<AccountController>{
   const AccountInfoPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     final AccountController controller = Get.put(AccountController());
 
@@ -18,16 +17,16 @@ class AccountInfoPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Thông tin tài khoản',
-          style: AppTextStyle.bold16().copyWith(color: appColors?.secondary),
+          style: AppTextStyle.bold18().copyWith(color: appColors?.secondary),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, size: 24),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: Container(
-        color: Colors.white, // Set background color of the body to white
+        color: Colors.white,
         padding: const EdgeInsets.all(16.0),
         child: Obx(() {
           final user = controller.user.value;
@@ -35,25 +34,28 @@ class AccountInfoPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildInfoField(context, 'Họ tên', user.username ?? '', appColors),
-                buildInfoField(context, 'CCCD', user.identificationCard ?? '', appColors),
+                buildInfoField(context, 'Họ tên', user.username ?? '', appColors, (value) => user.username = value),
+                buildInfoField(context, 'CCCD', user.identificationCard ?? '', appColors, (value) => user.identificationCard = value),
                 buildInfoField(
                   context,
                   'Ngày sinh',
                   user.birthdate ?? '',
                   appColors,
+                  (value) => user.birthdate = value,
                   icon: Icons.calendar_today,
                 ),
-                buildInfoField(context, 'Trường', user.school ?? '', appColors),
-                buildInfoField(context, 'Khoa', user.faculty ?? '', appColors),
-                buildInfoField(context, 'Chức vụ', user.position ?? '', appColors),
-                buildInfoField(context, 'Loại', user.role ?? '', appColors),
-                buildInfoField(context, 'Email', user.email ?? '', appColors),
-                buildInfoField(context, 'Số điện thoại', user.phone ?? '', appColors),
+                buildInfoField(context, 'Trường', user.school ?? '', appColors, (value) => user.school = value),
+                buildInfoField(context, 'Khoa', user.faculty ?? '', appColors, (value) => user.faculty = value),
+                buildInfoField(context, 'Chức vụ', user.position ?? '', appColors, (value) => user.position = value),
+                buildInfoField(context, 'Loại', user.role ?? '', appColors, (value) => user.role = value),
+                buildInfoField(context, 'Email', user.email ?? '', appColors, (value) => user.email = value),
+                buildInfoField(context, 'Số điện thoại', user.phone ?? '', appColors, (value) => user.phone = value),
                 const SizedBox(height: 24.0),
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.updateProfile(user);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       side: BorderSide(color: appColors?.primary ?? Colors.blue),
@@ -78,7 +80,7 @@ class AccountInfoPage extends StatelessWidget {
   }
 
   Widget buildInfoField(BuildContext context, String label, String value,
-      AppColors? appColors, {IconData? icon}) {
+      AppColors? appColors, Function(String) onChanged, {IconData? icon}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -89,7 +91,7 @@ class AccountInfoPage extends StatelessWidget {
         const SizedBox(height: 4.0),
         TextFormField(
           initialValue: value,
-          readOnly: true,
+          onChanged: onChanged,
           decoration: InputDecoration(
             suffixIcon:
                 icon != null ? Icon(icon, color: appColors?.secondary) : null,
