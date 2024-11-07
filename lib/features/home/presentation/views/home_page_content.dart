@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
-import 'package:flutter_base_v2/features/home/presentation/utils/greetings.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/header.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/main_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/menu/menu_page.dart';
@@ -11,7 +10,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class HomePageContent extends StatelessWidget {
   final String currentMenu;
   final String branchId;
-  final String greeting = getGreeting();
   final String selectedCategory;
   final Function(String) onMenuSelected;
   final BaseState<List<Menu>?> menuTodayState;

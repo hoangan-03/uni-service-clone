@@ -2,12 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/data/remote/api/api_service.dart';
 import 'package:flutter_base_v2/base/data/remote/builder/dio_builder.dart';
+import 'package:flutter_base_v2/features/account/data/repositories/user_repo.dart';
+import 'package:flutter_base_v2/features/account/domain/repositories/user_repo.dart';
 import 'package:flutter_base_v2/features/authentication/data/repositories_impl/auth_repo_impl.dart';
 import 'package:flutter_base_v2/features/authentication/domain/repositories/auth_repo.dart';
 import 'package:flutter_base_v2/features/branch/domain/repositories/branch_repo.dart';
 import 'package:flutter_base_v2/features/home/data/repositories/menu_repo.dart';
-import 'package:flutter_base_v2/features/home/data/repositories/profile_repo.dart';
-import 'package:flutter_base_v2/features/branch/data/repositories/branch_repo.dart'; // Import BranchRepo
+import 'package:flutter_base_v2/features/branch/data/repositories/branch_repo.dart'; 
 import 'package:flutter_base_v2/features/home/domain/repositories/menu_repo.dart';
 import 'package:flutter_base_v2/features/order/data/repositories/cart_repo.dart';
 import 'package:flutter_base_v2/features/order/data/repositories/cart_shipping_repo.dart';
@@ -74,7 +75,7 @@ class AppBinding extends Bindings {
 
   void injectRepository() {
     Get.put<AuthRepo>(AuthRepoImpl());
-    Get.put<ProfileRepo>(ProfileRepoImpl());
+    Get.put<UserRepo>(UserRepoImpl());
     Get.put<BranchRepo>(BranchRepoImpl()); 
     Get.put<MenuTodayRepo>(MenuRepoImpl());
     Get.put<CartRepo>(CartRepoImpl());

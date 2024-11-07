@@ -6,7 +6,6 @@ import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:flutter_base_v2/features/order/presentation/views/cart_shipping.dart';
 import 'package:flutter_base_v2/utils/config/app_route.dart';
 
 Widget buildHeader(BuildContext context) {

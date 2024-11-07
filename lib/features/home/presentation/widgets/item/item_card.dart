@@ -37,7 +37,7 @@ Widget buildItemCard(Menu item, BuildContext context) {
             ),
             const SizedBox(height: 4),
             Text(
-              '${(item.type.price != null && item.type.price != 0) ? formatPrice(item.type.price ?? 0) : formatPrice(item.items![0].price!)}đ',
+              '${(item.type.price != null && item.type.price != 0) ? formatPrice(item.type.price ?? 0) : formatPrice(item.items![0].price)}đ',
               style: AppTextStyle.regular12(),
             ),
             const SizedBox(height: 8),

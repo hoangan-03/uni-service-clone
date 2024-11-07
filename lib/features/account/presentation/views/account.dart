@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
+import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_base_v2/utils/config/app_text_style.dart';
+import 'package:get/get.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
       body: Column(
         children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 60),
           Column(
             children: [
               Stack(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 40,
                     backgroundImage: NetworkImage(
                       'https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360',
@@ -24,12 +29,12 @@ class AccountPage extends StatelessWidget {
                     right: 0,
                     bottom: 0,
                     child: Container(
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.camera_alt,
                         size: 16,
                         color: Colors.grey,
@@ -41,12 +46,13 @@ class AccountPage extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 'Nguyễn Văn A',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    AppTextStyle.bold20().copyWith(color: appColors?.secondary),
               ),
               const SizedBox(height: 4),
               Text(
                 'Sinh viên - Khoa quản trị',
-                style: TextStyle(color: Colors.grey),
+                style: AppTextStyle.regular16().copyWith(color: Colors.grey),
               ),
             ],
           ),
@@ -55,20 +61,23 @@ class AccountPage extends StatelessWidget {
             child: ListView(
               children: [
                 _buildMenuItem(
-                    FontAwesomeIcons.user, 'Thông tin tài khoản', context),
+                    FontAwesomeIcons.circleUser, 'Thông tin tài khoản', context,
+                    onTap: () {
+                  Get.to(() => AccountInfoPage());
+                }),
                 const SizedBox(height: 10),
-                _buildMenuItem(FontAwesomeIcons.cog, 'Cài đặt', context),
+                _buildMenuItem(FontAwesomeIcons.gear, 'Cài đặt', context),
                 const SizedBox(height: 10),
                 _buildMenuItem(
-                    FontAwesomeIcons.comment, 'Đóng góp ý kiến', context),
+                    FontAwesomeIcons.commentDots, 'Đóng góp ý kiến', context),
                 const SizedBox(height: 10),
-                _buildMenuItem(FontAwesomeIcons.envelope, 'Liên hệ', context),
+                _buildMenuItem(FontAwesomeIcons.idBadge, 'Liên hệ', context),
                 const SizedBox(height: 10),
                 _buildMenuItem(
                     FontAwesomeIcons.lock, 'Chính sách bảo mật', context),
                 const SizedBox(height: 10),
-                _buildMenuItem(
-                    FontAwesomeIcons.shieldHalved, 'Điều khoản dịch vụ', context),
+                _buildMenuItem(FontAwesomeIcons.shieldHalved,
+                    'Điều khoản dịch vụ', context),
                 const Divider(),
                 const SizedBox(height: 10),
                 _buildMenuItem(
@@ -83,14 +92,17 @@ class AccountPage extends StatelessWidget {
   }
 
   Widget _buildMenuItem(IconData icon, String title, BuildContext context,
-      {Color color = Colors.black, bool showTrailingIcon = true}) {
+      {Color color = Colors.black,
+      bool showTrailingIcon = true,
+      VoidCallback? onTap}) {
     return ListTile(
       leading: Icon(icon, color: color),
-      title: Text(title, style: TextStyle(color: color)),
+      title:
+          Text(title, style: AppTextStyle.regular16().copyWith(color: color)),
       trailing: showTrailingIcon
-          ? Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey)
+          ? const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey)
           : null,
-      onTap: () {},
+      onTap: onTap,
     );
   }
 }

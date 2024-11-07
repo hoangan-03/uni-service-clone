@@ -1,3 +1,5 @@
+import 'package:flutter_base_v2/features/account/presentation/controllers/account_binding.dart';
+import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/login/login_binding.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/login/login_page.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/login/uni_login_page.dart';
@@ -6,7 +8,6 @@ import 'package:flutter_base_v2/features/branch/presentation/pages/branches_page
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_binding.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/home_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/notifications_page.dart';
-import 'package:flutter_base_v2/features/order/domain/entities/cart_shipping.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/cart_shipping.dart';
 import 'package:flutter_base_v2/features/services/presentation/views/services.dart';
@@ -39,6 +40,7 @@ class AppRoute {
   static String branch = '/branches';
   static String cartShipping = '/cart_shipping';
   static String bill = '/bill';
+    static String accountInfo= '/info';
 
   static List<GetPage> generateGetPages = [
     GetPage(name: root, page: RootPage.new, binding: RootBinding()),
@@ -81,6 +83,11 @@ class AppRoute {
         name: cartShipping,
         page: CartShippingPage.new,
         binding: HomeBinding(),
+        transition: Transition.noTransition),
+        GetPage(
+        name: accountInfo,
+        page: AccountInfoPage.new,
+        binding: AccountBinding(),
         transition: Transition.noTransition),
     GetPage(
         name: bill,

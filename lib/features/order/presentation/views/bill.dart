@@ -3,6 +3,7 @@ import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/home_page.dart';
+import 'package:flutter_base_v2/features/tabbar/presentation/views/tabbar/tabbar_page.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
@@ -164,7 +165,7 @@ class BillPage extends BaseGetView<HomeController> {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                Get.to(() => HomePage());
+                Get.to(() => TabbarPage());
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,

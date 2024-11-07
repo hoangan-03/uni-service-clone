@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_base_v2/features/account/data/models/user_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/token_response.dart';
-import 'package:flutter_base_v2/features/authentication/data/models/user_response.dart';
 import 'package:flutter_base_v2/features/branch/data/models/branch_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
 import 'package:flutter_base_v2/features/home/data/models/menu_response.dart';
@@ -22,7 +22,7 @@ abstract class ApiService {
   Future<TokenResponse> loginWithEmail(@Body() LoginBody body);
 
   @GET('/auth/me')
-  Future<UserResponse> getProfile();
+  Future<UserResponse> getUserProfile();
 
   @GET('/branches/options?o=true')
   Future<BranchResponse> getListBrands();
