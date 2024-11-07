@@ -18,6 +18,7 @@ class UserApiModel {
   String? role = '';
   String? email = '';
   String? phone = '';
+  String? avatar = '';
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,
@@ -30,5 +31,6 @@ class UserApiModel {
         'role': role,
         'email': email,
         'phone': phone,
+        'avatar': avatar,
       };
 }

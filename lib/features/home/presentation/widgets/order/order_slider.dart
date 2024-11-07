@@ -256,9 +256,9 @@ class OrderSliderContentState extends State<OrderSliderContent> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 'Đặt món',
-                style: TextStyle(fontSize: 16, color: Colors.white),
+                style: AppTextStyle.bold16().copyWith(color: appColors?.white),
               ),
             ),
             const SizedBox(height: 10),
@@ -266,9 +266,18 @@ class OrderSliderContentState extends State<OrderSliderContent> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.red,
+                backgroundColor: Colors.white,
+                side: const BorderSide(color: Colors.red),
+                minimumSize: const Size(double.infinity, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: Text(
                 'Cancel',
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: AppTextStyle.bold16().copyWith(color: Colors.red),
               ),
             ),
           ],

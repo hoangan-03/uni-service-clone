@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
+import 'package:flutter_base_v2/features/account/domain/usecases/update_avatar.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
@@ -19,7 +21,10 @@ import 'package:get/get.dart';
 
 class AccountController extends BaseController<HomeInput> {
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
-  UpdateProfileUseCase get _updateProfileUseCase => Get.find<UpdateProfileUseCase>();
+  UpdateProfileUseCase get _updateProfileUseCase =>
+      Get.find<UpdateProfileUseCase>();
+  UpdateAvatarUseCase get _updateAvatarUseCase =>
+      Get.find<UpdateAvatarUseCase>();
   final pushNotiService = Get.find<PushNotificationService>();
 
   final user = User().obs;
@@ -96,6 +101,21 @@ class AccountController extends BaseController<HomeInput> {
           },
         ),
         input: updatedUser);
+  }
+
+  Future<void> updateAvatar(File avatar) {
+    return _updateAvatarUseCase.execute(
+        observer: Observer(
+          onSuccess: (_) {
+            L.info("Avatar updated successfully");
+
+            getProfile();
+          },
+          onError: (AppException e) {
+            handleError(e);
+          },
+        ),
+        input: avatar);
   }
 
   void logout() {

@@ -14,37 +14,127 @@ class AccountPage extends BaseGetView<AccountController> {
   @override
   Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
+
+    void _showAvatarOptions() {
+      showModalBottomSheet(
+        context: context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+        ),
+        builder: (context) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 4.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Thay đổi hình từ',
+                  style: AppTextStyle.bold16().copyWith(color: appColors?.secondary),
+                ),
+                const SizedBox(height: 16),
+                ListTile(
+                  leading: Container(
+                    decoration: BoxDecoration(
+                      color: appColors?.primary.withOpacity(0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Icon(Icons.camera_alt, color: appColors?.primary),
+                  ),
+                  title: Text(
+                    'Chụp hình',
+                    style: AppTextStyle.regular16(),
+                  ),
+                  onTap: () {
+                    // Handle "Chụp hình" action here
+                    Navigator.of(context).pop();
+                  },
+                ),
+                ListTile(
+                  leading: Container(
+                    decoration: BoxDecoration(
+                      color: appColors?.primary.withOpacity(0.1),
+                      shape: BoxShape.circle,
+                    ),
+                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Icon(Icons.photo_library, color: appColors?.primary),
+                  ),
+                  title: Text(
+                    'Thư viện ảnh',
+                    style: AppTextStyle.regular16(),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+
+                ListTile(
+                  title: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.red),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Center(
+                    child: Text(
+                    'Cancel',
+                    style: AppTextStyle.bold16().copyWith(color: Colors.red),
+                    ),
+                  ),
+                  ),
+                  onTap: () {
+                  Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
+
     return Scaffold(
       body: Column(
         children: [
           const SizedBox(height: 60),
           Column(
             children: [
-              Stack(
-                children: [
-                  const CircleAvatar(
-                    radius: 40,
-                    backgroundImage: NetworkImage(
-                      'https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360',
-                    ),
-                  ),
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
+              GestureDetector(
+                onTap: _showAvatarOptions,
+                child: Stack(
+                  children: [
+                    Obx(() {
+                      final user = controller.user.value;
+                      return CircleAvatar(
+                        radius: 40,
+                        backgroundImage: NetworkImage(
+                          user.avatar ??
+                              'https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360',
+                        ),
+                        onBackgroundImageError: (_, __) =>
+                            const Icon(Icons.error, size: 40),
+                      );
+                    }),
+                    Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.camera_alt,
+                          size: 16,
+                          color: Colors.grey,
+                        ),
                       ),
-                      child: const Icon(
-                        Icons.camera_alt,
-                        size: 16,
-                        color: Colors.grey,
-                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(height: 10),
               Obx(() {
@@ -53,7 +143,8 @@ class AccountPage extends BaseGetView<AccountController> {
                   children: [
                     Text(
                       user.username ?? '',
-                      style: AppTextStyle.bold20().copyWith(color: appColors?.secondary),
+                      style:
+                          AppTextStyle.bold20().copyWith(color: appColors?.secondary),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -77,16 +168,13 @@ class AccountPage extends BaseGetView<AccountController> {
                 const SizedBox(height: 10),
                 _buildMenuItem(FontAwesomeIcons.gear, 'Cài đặt', context),
                 const SizedBox(height: 10),
-                _buildMenuItem(
-                    FontAwesomeIcons.commentDots, 'Đóng góp ý kiến', context),
+                _buildMenuItem(FontAwesomeIcons.commentDots, 'Đóng góp ý kiến', context),
                 const SizedBox(height: 10),
                 _buildMenuItem(FontAwesomeIcons.idBadge, 'Liên hệ', context),
                 const SizedBox(height: 10),
-                _buildMenuItem(
-                    FontAwesomeIcons.lock, 'Chính sách bảo mật', context),
+                _buildMenuItem(FontAwesomeIcons.lock, 'Chính sách bảo mật', context),
                 const SizedBox(height: 10),
-                _buildMenuItem(FontAwesomeIcons.shieldHalved,
-                    'Điều khoản dịch vụ', context),
+                _buildMenuItem(FontAwesomeIcons.shieldHalved, 'Điều khoản dịch vụ', context),
                 const Divider(),
                 const SizedBox(height: 10),
                 _buildMenuItem(
@@ -106,8 +194,7 @@ class AccountPage extends BaseGetView<AccountController> {
       VoidCallback? onTap}) {
     return ListTile(
       leading: Icon(icon, color: color),
-      title:
-          Text(title, style: AppTextStyle.regular16().copyWith(color: color)),
+      title: Text(title, style: AppTextStyle.regular16().copyWith(color: color)),
       trailing: showTrailingIcon
           ? const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey)
           : null,

@@ -27,17 +27,20 @@ Widget buildHeader(BuildContext context) {
     children: [
       Row(
         children: [
-          ClipOval(
-            child: Image.network(
-              'https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360',
-              width: 50,
-              height: 50,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Icon(Icons.error, size: 50);
-              },
-            ),
-          ),
+          Obx(() {
+            final user = accountController.user.value;
+            return ClipOval(
+              child: Image.network(
+                user.avatar ?? 'https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360',
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(Icons.error, size: 50);
+                },
+              ),
+            );
+          }),
           const SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

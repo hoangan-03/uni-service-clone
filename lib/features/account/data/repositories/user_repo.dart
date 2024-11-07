@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_base_v2/base/data/remote/api/api_service.dart';
 import 'package:flutter_base_v2/features/account/data/models/user_response.dart';
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
@@ -18,5 +20,10 @@ class UserRepoImpl extends UserRepo {
   Future<void> updateProfile(User user) async {
     final UserApiModel model = mappingModel(user);
     await _apiService.updateProfile(model);
+  }
+
+  @override
+  Future<void> updateAvatar(File avatar) async {
+    await _apiService.updateAvatar(avatar);
   }
 }

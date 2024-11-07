@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_base_v2/features/account/data/models/user_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/token_response.dart';
@@ -28,6 +30,10 @@ abstract class ApiService {
   Future<void> updateProfile(
     @Body() UserApiModel body,
   );
+
+  @POST('/auth/update-avatar')
+  @MultiPart()
+  Future<void> updateAvatar(@Part(name: "avatar") File avatar);
 
   @GET('/branches/options?o=true')
   Future<BranchResponse> getListBrands();
