@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/features/home/presentation/views/home_page.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class BillPage extends BaseGetView<HomeController> {
   final String name;
@@ -11,6 +14,7 @@ class BillPage extends BaseGetView<HomeController> {
   final int quantity;
   final int totalPrice;
   final String branch;
+  final String imageUrl;
 
   const BillPage({
     Key? key,
@@ -19,10 +23,13 @@ class BillPage extends BaseGetView<HomeController> {
     required this.quantity,
     required this.totalPrice,
     required this.branch,
+    required this.imageUrl,
   }) : super(key: key);
 
   @override
   Widget myBuild(BuildContext context) {
+    final String currentTime =
+        DateFormat('HH:mm - dd/MM/yyyy').format(DateTime.now());
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
       appBar: AppBar(
@@ -47,32 +54,32 @@ class BillPage extends BaseGetView<HomeController> {
           children: [
             const SizedBox(height: 16.0),
             Text(
-              'Ngày hết hạn: 23:00 - 18/04/2023',
+              "Ngày hết hạn: ${DateFormat('HH:mm - dd/MM/yyyy').format(DateTime.now().add(const Duration(hours: 8)))}",
               style: AppTextStyle.regular14().copyWith(color: Colors.grey),
             ),
             const SizedBox(height: 8.0),
             ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                backgroundColor: appColors?.primary,
+                backgroundColor: appColors?.onSuccess,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
               ),
               child: Text(
-                'Đã giao hàng',
+                'Chưa giao hàng',
                 style: AppTextStyle.bold14().copyWith(color: Colors.white),
               ),
             ),
             const SizedBox(height: 16.0),
             Image.network(
-              'https://cdn.britannica.com/17/155017-050-9AC96FC8/Example-QR-code.jpg', // Sample QR image URL
+              'https://cdn.britannica.com/17/155017-050-9AC96FC8/Example-QR-code.jpg',
               width: 150,
               height: 150,
             ),
             const SizedBox(height: 8.0),
             Text(
-              '18:32 - 22/03/2023',
+              currentTime,
               style: AppTextStyle.regular12().copyWith(color: Colors.grey),
             ),
             const SizedBox(height: 8.0),
@@ -82,7 +89,7 @@ class BillPage extends BaseGetView<HomeController> {
             ),
             const SizedBox(height: 16.0),
             Text(
-              'Thông tin đơn hàng',
+              'Chi tiết đơn hàng',
               style: AppTextStyle.bold16().copyWith(color: Colors.black),
             ),
             const SizedBox(height: 8.0),
@@ -94,7 +101,7 @@ class BillPage extends BaseGetView<HomeController> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(
-                    'https://cdn.mos.cms.futurecdn.net/FRdq8ZbPetwNDRV9R3hYpP.jpg',
+                    imageUrl,
                     width: 70,
                     height: 70,
                     fit: BoxFit.cover,
@@ -107,12 +114,14 @@ class BillPage extends BaseGetView<HomeController> {
                     children: [
                       Text(
                         name,
-                        style: AppTextStyle.bold14().copyWith(color: Colors.black),
+                        style:
+                            AppTextStyle.bold14().copyWith(color: Colors.black),
                       ),
                       const SizedBox(height: 4.0),
                       Text(
                         description,
-                        style: AppTextStyle.regular12().copyWith(color: Colors.grey),
+                        style: AppTextStyle.regular12()
+                            .copyWith(color: Colors.grey),
                       ),
                     ],
                   ),
@@ -122,12 +131,14 @@ class BillPage extends BaseGetView<HomeController> {
                   children: [
                     Text(
                       'x$quantity',
-                      style: AppTextStyle.regular14().copyWith(color: Colors.black),
+                      style: AppTextStyle.regular14()
+                          .copyWith(color: Colors.black),
                     ),
                     const SizedBox(height: 4.0),
                     Text(
                       '${formatPrice(totalPrice)} đ',
-                      style: AppTextStyle.bold14().copyWith(color: Colors.black),
+                      style:
+                          AppTextStyle.bold14().copyWith(color: Colors.black),
                     ),
                   ],
                 ),
@@ -145,13 +156,16 @@ class BillPage extends BaseGetView<HomeController> {
                 ),
                 Text(
                   '${formatPrice(totalPrice)} đ',
-                  style: AppTextStyle.bold16().copyWith(color: appColors?.primary),
+                  style:
+                      AppTextStyle.bold16().copyWith(color: appColors?.primary),
                 ),
               ],
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => HomePage());
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 side: BorderSide(color: appColors?.primary ?? Colors.blue),
@@ -161,7 +175,8 @@ class BillPage extends BaseGetView<HomeController> {
               ),
               child: Text(
                 'Quay về trang chủ',
-                style: AppTextStyle.bold14().copyWith(color: appColors?.primary),
+                style:
+                    AppTextStyle.bold14().copyWith(color: appColors?.primary),
               ),
             ),
           ],

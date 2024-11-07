@@ -4,6 +4,7 @@ import 'package:flutter_base_v2/features/home/presentation/utils/format_price.da
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:get/get.dart';
 
 void showOrderSlider(
   BuildContext context,
@@ -29,16 +30,11 @@ void showOrderSlider(
           onItemSelected: onItemSelected,
           onOrderPlaced: (int selectedItemIndex) {
             if (shouldNavigate) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => OrderPage(
+              Get.to(() => OrderPage(
                     item: item,
                     quantity: initialQuantity,
                     itemIndex: selectedItemIndex,
-                  ),
-                ),
-              );
+                  ));
             }
           },
           shouldNavigate: shouldNavigate,
@@ -146,9 +142,10 @@ class OrderSliderContentState extends State<OrderSliderContent> {
                             const TextStyle(fontSize: 14, color: Colors.grey),
                       ),
                       const SizedBox(height: 4),
-                                           Text(
+                      Text(
                         '${formatPrice(selectedItem?.price ?? (widget.item.type.price != null && widget.item.type.price != 0 ? widget.item.type.price : widget.item.items![0].price)!)}đ',
-                        style: const TextStyle(fontSize: 16, color: Colors.green),
+                        style:
+                            const TextStyle(fontSize: 16, color: Colors.green),
                       ),
                       const SizedBox(height: 8),
                       Row(

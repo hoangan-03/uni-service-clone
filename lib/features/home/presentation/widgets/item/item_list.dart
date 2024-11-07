@@ -6,6 +6,7 @@ import 'package:flutter_base_v2/features/home/presentation/widgets/menu/menu.dar
 import 'package:flutter_base_v2/features/home/presentation/widgets/item/item_card.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
+import 'package:get/get.dart';
 
 Widget buildItemList(
     BuildContext context, String category, BaseState<List<Menu>?> state ) {
@@ -28,13 +29,10 @@ Widget buildItemList(
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MenuPage(
-                                title: category, menuItems: menusMap ?? []),
-                          ),
-                        );
+                        Get.to(() => MenuPage(
+                          title: category, 
+                          menuItems: menusMap ?? []
+                        ));
                       },
                       child: Row(
                         children: [

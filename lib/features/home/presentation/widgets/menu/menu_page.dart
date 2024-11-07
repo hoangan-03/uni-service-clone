@@ -113,16 +113,11 @@ Widget buildMenuPage(
                         controller.updateQuantity(newQuantity);
                       },
                       onOrderPlaced: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => OrderPage(
-                              item: item,
-                              quantity: 1,
-                              itemIndex: 0,
-                            ),
-                          ),
-                        );
+                        Get.to(() => OrderPage(
+                          item: item,
+                          quantity: 1,
+                          itemIndex: 0,
+                        ));
                       },
                       shouldNavigate: true,
                     );

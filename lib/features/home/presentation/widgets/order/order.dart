@@ -107,16 +107,11 @@ class OrderPage extends BaseGetView<HomeController> {
                             controller.updateQuantity(newQuantity);
                           },
                           onOrderPlaced: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => OrderPage(
-                                  item: item,
-                                  quantity: controller.quantity.value,
-                                  itemIndex: controller.itemIndex.value,
-                                ),
-                              ),
-                            );
+                            Get.to(() => OrderPage(
+                              item: item,
+                              quantity: controller.quantity.value,
+                              itemIndex: controller.itemIndex.value,
+                            ));
                           },
                           shouldNavigate: false,
                           selectedItemIndex: controller.itemIndex.value,
@@ -173,16 +168,11 @@ class OrderPage extends BaseGetView<HomeController> {
                       controller.updateQuantity(newQuantity);
                     },
                     onOrderPlaced: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => OrderPage(
-                            item: item,
-                            quantity: controller.quantity.value,
-                            itemIndex: controller.itemIndex.value,
-                          ),
-                        ),
-                      );
+                        Get.to(() => OrderPage(
+                        item: item,
+                        quantity: controller.quantity.value,
+                        itemIndex: controller.itemIndex.value,
+                        ));
                     },
                     shouldNavigate: false,
                     selectedItemIndex: controller.itemIndex.value,
@@ -245,9 +235,9 @@ class OrderPage extends BaseGetView<HomeController> {
                   final idProduct = item.menu == "TODAY"
                       ? item.items![controller.itemIndex.value].id
                       : item.product.id;
-
                   controller.addToCart(idProduct, quantity);
                   Get.to(() => BillPage(
+                    imageUrl: item.product.imageURL,
                         name: name,
                         description: description,
                         quantity: quantity,

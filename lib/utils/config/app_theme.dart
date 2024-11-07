@@ -23,7 +23,7 @@ class AppTheme {
         gray: Color.fromRGBO(172, 172, 176, 1),
         white: Colors.white,
         transparent: Colors.transparent,
-        onSuccess: ColorName.greenBase,
+        onSuccess: Color.fromRGBO(24, 162, 72, 1),
       ),
     ],
     colorScheme: const ColorScheme(

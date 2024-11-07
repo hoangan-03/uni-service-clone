@@ -85,6 +85,7 @@ class AppRoute {
     GetPage(
         name: bill,
         page: () => BillPage(
+          imageUrl: 'defaultImageUrl',
           branch: 'defaultBranch',
           description: 'defaultDescription',
           name: 'defaultName',
