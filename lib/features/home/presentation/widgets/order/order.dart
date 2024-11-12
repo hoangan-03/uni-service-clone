@@ -138,7 +138,7 @@ class OrderPage extends BaseGetView<HomeController> {
       width: double.infinity,
       height: 50,
       child: ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
           final name = item.product.name;
           final description = item.product.description;
           final quantity = controller.quantity.value;
@@ -150,7 +150,8 @@ class OrderPage extends BaseGetView<HomeController> {
           final idProduct = item.menu == "TODAY"
               ? item.items![controller.itemIndex.value].id
               : item.product.id;
-          controller.addToCart(idProduct, quantity);
+          await controller.addToCart(idProduct, quantity);
+          await controller.getQrCode(idProduct);
           Get.to(() => BillPage(
                 imageUrl: item.product.imageURL,
                 name: name,

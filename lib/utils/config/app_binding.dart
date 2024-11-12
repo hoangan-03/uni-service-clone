@@ -8,14 +8,16 @@ import 'package:flutter_base_v2/features/authentication/data/repositories_impl/a
 import 'package:flutter_base_v2/features/authentication/domain/repositories/auth_repo.dart';
 import 'package:flutter_base_v2/features/branch/domain/repositories/branch_repo.dart';
 import 'package:flutter_base_v2/features/home/data/repositories/menu_repo.dart';
-import 'package:flutter_base_v2/features/branch/data/repositories/branch_repo.dart'; 
+import 'package:flutter_base_v2/features/branch/data/repositories/branch_repo.dart';
 import 'package:flutter_base_v2/features/home/domain/repositories/menu_repo.dart';
 import 'package:flutter_base_v2/features/order/data/repositories/cart_repo.dart';
 import 'package:flutter_base_v2/features/order/data/repositories/cart_shipping_repo.dart';
 import 'package:flutter_base_v2/features/order/data/repositories/payment_repo.dart';
+import 'package:flutter_base_v2/features/order/data/repositories/qr_repo.dart';
 import 'package:flutter_base_v2/features/order/domain/repositories/cart_repo.dart';
 import 'package:flutter_base_v2/features/order/domain/repositories/cart_shipping.dart';
 import 'package:flutter_base_v2/features/order/domain/repositories/payment_repo.dart';
+import 'package:flutter_base_v2/features/order/domain/repositories/qr_repo.dart';
 import 'package:flutter_base_v2/utils/config/app_config.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -76,19 +78,18 @@ class AppBinding extends Bindings {
   void injectRepository() {
     Get.put<AuthRepo>(AuthRepoImpl());
     Get.put<UserRepo>(UserRepoImpl());
-    Get.put<BranchRepo>(BranchRepoImpl()); 
+    Get.put<BranchRepo>(BranchRepoImpl());
     Get.put<MenuTodayRepo>(MenuRepoImpl());
     Get.put<CartRepo>(CartRepoImpl());
     Get.put<PaymentRepo>(PaymentRepoImpl());
     Get.put<CartShippingRepo>(CartShippingRepoImpl());
-    
+    Get.put<QrCodeRepo>(QrCodeRepoImpl());
   }
 
   void injectService() {
     Get.put(LogServiceImpl());
     Get.put<AuthService>(AppAuthService());
-    Get.put<AuthService>(GoogleAuthService(),
-        tag: AuthServiceType.google.name);
+    Get.put<AuthService>(GoogleAuthService(), tag: AuthServiceType.google.name);
     Get.put(PushNotificationService());
   }
 }

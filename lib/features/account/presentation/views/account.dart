@@ -1,4 +1,6 @@
 // account.dart
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_binding.dart';
@@ -54,7 +56,9 @@ class AccountPage extends BaseGetView<AccountController> {
                     final XFile? image =
                         await picker.pickImage(source: ImageSource.camera);
                     if (image != null) {
-                      controller.updateAvatar(await image.readAsBytes());
+                      final formattedFile = File(image.path);
+                      controller.updateAvatar(formattedFile);
+                      
                     }
                     Navigator.of(context).pop();
                   },
@@ -77,7 +81,8 @@ class AccountPage extends BaseGetView<AccountController> {
                     final XFile? image =
                         await picker.pickImage(source: ImageSource.gallery);
                     if (image != null) {
-                      controller.updateAvatar(await image.readAsBytes());
+                      final formattedFile = File(image.path);
+                      controller.updateAvatar(formattedFile);
                     }
                     Navigator.of(context).pop();
                   },

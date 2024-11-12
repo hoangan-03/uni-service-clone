@@ -1,4 +1,6 @@
-
+import 'dart:io';
+import 'package:flutter_base_v2/features/order/data/models/menu_qr_response.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_base_v2/features/account/data/models/user_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/token_response.dart';
@@ -30,17 +32,21 @@ abstract class ApiService {
     @Body() UserApiModel body,
   );
 
-  @POST('/auth/update-avatar')
-  @MultiPart()
-  Future<void> updateAvatar(@Part(name: "avatar") List<int> avatar);
-
-
   // @POST('/auth/update-avatar')
   // @MultiPart()
-  // Future<void> updateAvatar(@Part(name: "avatar") File avatar);
+  // Future<void> updateAvatar(@Part(name: "avatar") List<int> avatar);
+
+  @POST('/auth/update-avatar')
+  @MultiPart()
+  Future<void> updateAvatar(
+      @Part(name: "avatar", contentType: "image/*", fileName: "avatar1.jpeg")
+      File avatar);
 
   @GET('/branches/options?o=true')
   Future<BranchResponse> getListBrands();
+
+  @GET('/menu/qr/{product_id}')
+  Future<MenuQRResponse> getQrCode(@Path('product_id') String productId);
 
   @GET('/menu')
   Future<MenuResponse> getMenuToday(

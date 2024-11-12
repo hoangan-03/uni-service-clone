@@ -6,6 +6,7 @@ import 'package:flutter_base_v2/features/order/domain/usecases/add_cart_uc.dart'
 import 'package:flutter_base_v2/features/order/domain/usecases/add_payment_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_shipping_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_uc.dart';
+import 'package:flutter_base_v2/features/order/domain/usecases/get_qr_code.dart';
 import 'package:get/get.dart';
 
 class HomeBinding extends Bindings {
@@ -19,6 +20,7 @@ class HomeBinding extends Bindings {
     Get.lazyPut(() => AddCartUseCase(Get.find()));
     Get.lazyPut(() => AddPaymentUseCase(Get.find()));
     Get.lazyPut(() => GetCartShippingUseCase(Get.find()));
+    Get.lazyPut(() => GetQrCodeUseCase(Get.find()));
     // Get.lazyPut(() => UpdateProfileUseCase(Get.find()));
   }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class BillPage extends BaseGetView<HomeController> {
   final String name;
@@ -43,12 +44,7 @@ class BillPage extends BaseGetView<HomeController> {
         style: AppTextStyle.bold20().copyWith(color: appColors?.secondary),
       ),
       centerTitle: true,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-      ),
+      automaticallyImplyLeading: false,
     );
   }
 
@@ -111,12 +107,28 @@ class BillPage extends BaseGetView<HomeController> {
     );
   }
 
-  Image _buildQRCodeImage() {
-    return Image.network(
-      'https://cdn.britannica.com/17/155017-050-9AC96FC8/Example-QR-code.jpg',
-      width: 150,
-      height: 150,
-    );
+  Widget _buildQRCodeImage() {
+    return Obx(() {
+      final qrCode = controller.qrmenu.value.id;
+      if (qrCode == null) {
+        return const CircularProgressIndicator();
+      } else {
+        return QrImageView(
+          data: qrCode,
+          version: QrVersions.auto,
+          size: 150.0,
+          gapless: false,
+          errorStateBuilder: (context, error) {
+            return Center(
+              child: Text(
+                'Uh oh! Something went wrong...',
+                textAlign: TextAlign.center,
+              ),
+            );
+          },
+        );
+      }
+    });
   }
 
   Text _buildBillTimestamp(String currentTime) {
@@ -126,11 +138,14 @@ class BillPage extends BaseGetView<HomeController> {
     );
   }
 
-  Text _buildBillId() {
-    return Text(
-      'Mã hoá đơn : MDSHFJKJKSHADJKASLKJSDJKL',
-      style: AppTextStyle.regular14().copyWith(color: Colors.black),
-    );
+  Widget _buildBillId() {
+    return Obx(() {
+      final billId = controller.qrmenu.value.id;
+      return Text(
+        'Mã hoá đơn : $billId',
+        style: AppTextStyle.regular14().copyWith(color: Colors.black),
+      );
+    });
   }
 
   Text _buildOrderDetailsHeader() {

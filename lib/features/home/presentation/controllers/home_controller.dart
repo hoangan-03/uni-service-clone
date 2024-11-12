@@ -15,12 +15,15 @@ import 'package:flutter_base_v2/features/home/presentation/controllers/home_inpu
 import 'package:flutter_base_v2/features/account/domain/usecases/get_profile_uc.dart';
 import 'package:flutter_base_v2/features/order/data/models/add_payment.dart';
 import 'package:flutter_base_v2/features/order/data/models/add_to_cart_request.dart';
+import 'package:flutter_base_v2/features/order/data/models/menu_qr_response.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/cart.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/cart_shipping.dart';
+import 'package:flutter_base_v2/features/order/domain/entities/menu_qr.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/add_cart_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/add_payment_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_shipping_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_uc.dart';
+import 'package:flutter_base_v2/features/order/domain/usecases/get_qr_code.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -31,6 +34,7 @@ class HomeController extends BaseController<HomeInput> {
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
   GetMenuUseCase get _getMenuUseCase => Get.find<GetMenuUseCase>();
   GetCartUseCase get _getCartUseCase => Get.find<GetCartUseCase>();
+  GetQrCodeUseCase get _getQrCodeUseCase => Get.find<GetQrCodeUseCase>();
 
   GetCartShippingUseCase get _getCartShippingUsecase =>
       Get.find<GetCartShippingUseCase>();
@@ -40,6 +44,7 @@ class HomeController extends BaseController<HomeInput> {
   BaseState<List<Menu>?> getMenuPreorderState = BaseState();
   BaseState<List<Menu>?> getMenuTodayState = BaseState();
 
+
   BaseState<List<Menu>?> getMenuFoodcourtState = BaseState();
   BaseState<List<Menu>?> getMenuDrinkState = BaseState();
   BaseState<List<Menu>?> getMenuSpecialityState = BaseState();
@@ -48,6 +53,7 @@ class HomeController extends BaseController<HomeInput> {
 
   final user = User().obs;
   final cart = Cart().obs;
+  final qrmenu = MenuQR().obs;
 
   final LocalStorage _localStorage = Get.find();
   var currentMenu = ''.obs;
@@ -168,6 +174,21 @@ class HomeController extends BaseController<HomeInput> {
         ),
         input: GetCartParams(order: "NORMAL"));
     return completer.future;
+  }
+
+  Future<void> getQrCode(String productId) async {
+    return _getQrCodeUseCase.execute(
+      observer: Observer(
+        onSuccess: (MenuQR? qrMenu) {
+          L.info(qrMenu);
+          if (qrMenu != null) qrmenu.value = qrMenu;
+        },
+        onError: (AppException e) {
+          handleError(e);
+        },
+      ),
+      input: GetQrCodeParams(productId: productId),
+    );
   }
 
   Future<void> getCartShipping() {

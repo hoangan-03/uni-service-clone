@@ -1,6 +1,7 @@
 // account_controller.dart
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_base_v2/base/data/app_error.dart';
@@ -103,7 +104,7 @@ class AccountController extends BaseController<HomeInput> {
         input: updatedUser);
   }
 
-  Future<void> updateAvatar(List<int> avatar) {
+  Future<void> updateAvatar(File avatar) {
     return _updateAvatarUseCase.execute(
         observer: Observer(
           onSuccess: (_) {
