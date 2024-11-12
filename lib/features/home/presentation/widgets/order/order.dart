@@ -21,11 +21,6 @@ class OrderPage extends BaseGetView<HomeController> {
     required this.itemIndex,
   });
 
-  void onInit() {
-    controller.updateQuantity(quantity);
-    controller.updateItemIndex(itemIndex);
-  }
-
   @override
   Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
@@ -63,6 +58,8 @@ class OrderPage extends BaseGetView<HomeController> {
             if (item.menu == "TODAY") ...[
               Obx(() {
                 final currentItem = item.items![controller.itemIndex.value];
+                print("this is currentIndex: ${controller.itemIndex.value}");
+                print("this is currentItem: $item");
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

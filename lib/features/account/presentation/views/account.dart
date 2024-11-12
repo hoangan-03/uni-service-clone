@@ -15,7 +15,7 @@ class AccountPage extends BaseGetView<AccountController> {
   Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
 
-    void _showAvatarOptions() {
+    void showAvatarOptions() {
       showModalBottomSheet(
         context: context,
         shape: RoundedRectangleBorder(
@@ -102,7 +102,7 @@ class AccountPage extends BaseGetView<AccountController> {
           Column(
             children: [
               GestureDetector(
-                onTap: _showAvatarOptions,
+                onTap: showAvatarOptions,
                 child: Stack(
                   children: [
                     Obx(() {

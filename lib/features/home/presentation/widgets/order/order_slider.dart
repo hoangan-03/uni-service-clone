@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
+import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -15,7 +16,19 @@ void showOrderSlider(
   required Function() onOrderPlaced,
   required bool shouldNavigate,
   int? selectedItemIndex,
+  int? orderQuantity,
 }) {
+  void navigateToOrderPage(int newIndex) {
+    // final controller = Get.find<HomeController>();
+    // controller.updateQuantity(initialQuantity);
+    // controller.updateItemIndex(selectedItemIndex ?? 0);
+    Get.to(() => OrderPage(
+          item: item,
+          quantity: initialQuantity,
+          itemIndex: newIndex,
+        ));
+  }
+
   showModalBottomSheet(
     context: context,
     backgroundColor: Colors.transparent,
@@ -24,17 +37,18 @@ void showOrderSlider(
         padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 16.0),
         child: OrderSliderContent(
           item: item,
-          initialQuantity: initialQuantity,
+          initialQuantity: orderQuantity ?? initialQuantity,
           initialIndex: selectedItemIndex ?? 0,
           onQuantityChanged: onQuantityChanged,
-          onItemSelected: onItemSelected,
+          onItemSelected: (newIndex) {
+            if (onItemSelected != null) {
+              onItemSelected(newIndex);
+            }
+            navigateToOrderPage(newIndex);
+          },
           onOrderPlaced: (int selectedItemIndex) {
             if (shouldNavigate) {
-              Get.to(() => OrderPage(
-                    item: item,
-                    quantity: initialQuantity,
-                    itemIndex: selectedItemIndex,
-                  ));
+              navigateToOrderPage(selectedItemIndex);
             }
           },
           shouldNavigate: shouldNavigate,
@@ -82,6 +96,7 @@ class OrderSliderContentState extends State<OrderSliderContent> {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
+    final controller = Get.find<HomeController>();
     final selectedItem = widget.item.items?[selectedItemIndex ?? 0];
 
     return Container(
@@ -241,12 +256,17 @@ class OrderSliderContentState extends State<OrderSliderContent> {
             ElevatedButton(
               onPressed: () {
                 widget.onQuantityChanged(orderQuantity);
+                print("current index: $selectedItemIndex");
                 if (widget.onItemSelected != null) {
                   widget.onItemSelected!(selectedItemIndex ?? 0);
+
+                  controller.updateItemIndex(selectedItemIndex ?? 0);
                 }
                 Navigator.pop(context);
                 if (widget.shouldNavigate) {
+                  print("this time index: $selectedItemIndex");
                   widget.onOrderPlaced(selectedItemIndex ?? 0);
+                  controller.updateItemIndex(selectedItemIndex ?? 0);
                 }
               },
               style: ElevatedButton.styleFrom(

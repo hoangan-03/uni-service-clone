@@ -19,7 +19,7 @@ class HomePageContent extends StatelessWidget {
   final BaseState<List<Menu>?> menuSpecialityState;
   final BaseState<List<Menu>?> menuNecessityState;
 
-  HomePageContent({
+  const HomePageContent({
     super.key,
     required this.branchId,
     required this.currentMenu,

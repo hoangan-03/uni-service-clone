@@ -12,7 +12,7 @@ class UserRepoImpl extends UserRepo {
   @override
   Future<User?> getUserProfile() async {
     final UserResponse response = await _apiService.getUserProfile();
-    final UserApiModel? model = response.data;
+    final UserApiModel model = response.data;
     return (model != null) ? mappingEntity(model) : null;
   }
 

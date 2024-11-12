@@ -12,134 +12,172 @@ class CartShippingPage extends BaseGetView<HomeController> {
   Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.all(0.0),
-          child: Text(
-            'Đơn hàng chưa nhận',
-            textAlign: TextAlign.center,
-            style: AppTextStyle.bold20().copyWith(color: appColors?.secondary),
-          ),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+      appBar: _buildAppBar(appColors, context),
+      body: _buildBody(appColors),
+    );
+  }
+
+  AppBar _buildAppBar(AppColors? appColors, BuildContext context) {
+    return AppBar(
+      title: Padding(
+        padding: const EdgeInsets.all(0.0),
+        child: Text(
+          'Đơn hàng chưa nhận',
+          textAlign: TextAlign.center,
+          style: AppTextStyle.bold20().copyWith(color: appColors?.secondary),
         ),
       ),
-      body: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 8.0),
-              Expanded(
-                child: controller.getCartShippingState.widget(
-                  onLoading: const Center(child: CircularProgressIndicator()),
-                  onSuccess: (cartships) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.location_on,
-                              size: 16.0,
-                              color: Colors.grey,
-                            ),
-                            const SizedBox(width: 4.0),
-                            Text(
-                              cartships?.first.branch?.name ?? '',
-                              style: AppTextStyle.regular14()
-                                  .copyWith(color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8.0),
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: cartships?.length,
-                            itemBuilder: (context, index) {
-                              final cartship = cartships![index];
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: Card(
-                                  elevation: 4.0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: ListTile(
-                                    contentPadding: const EdgeInsets.all(8.0),
-                                    leading: ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.network(
-                                        cartship.orderDetails?[0]
-                                                .productImage ??
-                                            '',
-                                        width: 70,
-                                        height: 70,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    title: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          cartship.orderDetails![0]
-                                                  .productName ??
-                                              "",
-                                          style: AppTextStyle.bold16(),
-                                        ),
-                                        if (cartship
-                                                .orderDetails![0]
-                                                .productDescription!
-                                                .isNotEmpty ==
-                                            true)
-                                          Text(
-                                            cartship.orderDetails?[0]
-                                                    .productDescription ??
-                                                '',
-                                            style: AppTextStyle.regular12()
-                                                .copyWith(
-                                                    color: appColors?.gray),
-                                          ),
-                                      ],
-                                    ),
-                                    trailing: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          'x${cartship.orderDetails?[0].quantity}',
-                                          style: AppTextStyle.regular14(),
-                                        ),
-                                        Text(
-                                          '${formatPrice(cartship.totalPrice ?? 0)} đ',
-                                          style: AppTextStyle.bold16().copyWith(
-                                              color: appColors?.primary),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                  onError: (error) => Center(child: Text('Error: $error')),
-                ),
-              ),
-            ],
-          ),
+      centerTitle: true,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+  }
+
+  Widget _buildBody(AppColors? appColors) {
+    return Container(
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            const SizedBox(height: 8.0),
+            Expanded(
+              child: _buildCartShippingList(appColors),
+            ),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _buildCartShippingList(AppColors? appColors) {
+    return controller.getCartShippingState.widget(
+      onLoading: const Center(child: CircularProgressIndicator()),
+      onSuccess: (cartships) {
+        if (cartships == null || cartships.isEmpty) {
+          return Center(child: Text('No items in the cart'));
+        }
+        return _CartShippingList(cartships: cartships, appColors: appColors);
+      },
+      onError: (error) => Center(child: Text('Error: $error')),
+    );
+  }
+}
+
+class _CartShippingList extends StatelessWidget {
+  final List? cartships;
+  final AppColors? appColors;
+
+  const _CartShippingList({this.cartships, this.appColors});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (cartships != null && cartships!.isNotEmpty) _buildBranchLocation(),
+        const SizedBox(height: 8.0),
+        Expanded(
+          child: ListView.builder(
+            itemCount: cartships?.length,
+            itemBuilder: (context, index) {
+              final cartship = cartships![index];
+              return _CartShippingItem(
+                cartship: cartship,
+                appColors: appColors,
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row _buildBranchLocation() {
+    return Row(
+      children: [
+        const Icon(
+          Icons.location_on,
+          size: 16.0,
+          color: Colors.grey,
+        ),
+        const SizedBox(width: 4.0),
+        Text(
+          cartships?.first.branch?.name ?? '',
+          style: AppTextStyle.regular14().copyWith(color: Colors.grey),
+        ),
+      ],
+    );
+  }
+}
+
+class _CartShippingItem extends StatelessWidget {
+  final dynamic cartship;
+  final AppColors? appColors;
+
+  const _CartShippingItem({this.cartship, this.appColors});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Card(
+        elevation: 4.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: ListTile(
+          contentPadding: const EdgeInsets.all(8.0),
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.network(
+              cartship.orderDetails?[0].productImage ?? '',
+              width: 70,
+              height: 70,
+              fit: BoxFit.cover,
+            ),
+          ),
+          title: _buildProductTitle(),
+          trailing: _buildProductPrice(),
+        ),
+      ),
+    );
+  }
+
+  Column _buildProductTitle() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          cartship.orderDetails![0].productName ?? "",
+          style: AppTextStyle.bold16(),
+        ),
+        if (cartship.orderDetails![0].productDescription!.isNotEmpty == true)
+          Text(
+            cartship.orderDetails?[0].productDescription ?? '',
+            style: AppTextStyle.regular12().copyWith(color: appColors?.gray),
+          ),
+      ],
+    );
+  }
+
+  Column _buildProductPrice() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          'x${cartship.orderDetails?[0].quantity}',
+          style: AppTextStyle.regular14(),
+        ),
+        Text(
+          '${formatPrice(cartship.totalPrice ?? 0)} đ',
+          style: AppTextStyle.bold16().copyWith(color: appColors?.primary),
+        ),
+      ],
     );
   }
 }
