@@ -1,3 +1,4 @@
+// account.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_binding.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AccountPage extends BaseGetView<AccountController> {
   const AccountPage({super.key});
@@ -23,13 +25,15 @@ class AccountPage extends BaseGetView<AccountController> {
         ),
         builder: (context) {
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 4.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 4.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   'Thay đổi hình từ',
-                  style: AppTextStyle.bold16().copyWith(color: appColors?.secondary),
+                  style: AppTextStyle.bold16()
+                      .copyWith(color: appColors?.secondary),
                 ),
                 const SizedBox(height: 16),
                 ListTile(
@@ -45,8 +49,13 @@ class AccountPage extends BaseGetView<AccountController> {
                     'Chụp hình',
                     style: AppTextStyle.regular16(),
                   ),
-                  onTap: () {
-                    // Handle "Chụp hình" action here
+                  onTap: () async {
+                    final ImagePicker picker = ImagePicker();
+                    final XFile? image =
+                        await picker.pickImage(source: ImageSource.camera);
+                    if (image != null) {
+                      controller.updateAvatar(await image.readAsBytes());
+                    }
                     Navigator.of(context).pop();
                   },
                 ),
@@ -56,36 +65,42 @@ class AccountPage extends BaseGetView<AccountController> {
                       color: appColors?.primary.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
-                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Icon(Icons.photo_library, color: appColors?.primary),
                   ),
                   title: Text(
                     'Thư viện ảnh',
                     style: AppTextStyle.regular16(),
                   ),
-                  onTap: () {
+                  onTap: () async {
+                    final ImagePicker picker = ImagePicker();
+                    final XFile? image =
+                        await picker.pickImage(source: ImageSource.gallery);
+                    if (image != null) {
+                      controller.updateAvatar(await image.readAsBytes());
+                    }
                     Navigator.of(context).pop();
                   },
                 ),
-
                 ListTile(
                   title: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.red),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Center(
-                    child: Text(
-                    'Cancel',
-                    style: AppTextStyle.bold16().copyWith(color: Colors.red),
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 12.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.red),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Cancel',
+                        style:
+                            AppTextStyle.bold16().copyWith(color: Colors.red),
+                      ),
                     ),
                   ),
-                  ),
                   onTap: () {
-                  Navigator.of(context).pop();
+                    Navigator.of(context).pop();
                   },
                 ),
               ],
@@ -143,13 +158,14 @@ class AccountPage extends BaseGetView<AccountController> {
                   children: [
                     Text(
                       user.username ?? '',
-                      style:
-                          AppTextStyle.bold20().copyWith(color: appColors?.secondary),
+                      style: AppTextStyle.bold20()
+                          .copyWith(color: appColors?.secondary),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       '${user.position ?? ''} - Khoa ${user.faculty ?? ''}',
-                      style: AppTextStyle.regular16().copyWith(color: Colors.grey),
+                      style:
+                          AppTextStyle.regular16().copyWith(color: Colors.grey),
                     ),
                   ],
                 );
@@ -163,18 +179,22 @@ class AccountPage extends BaseGetView<AccountController> {
                 _buildMenuItem(
                     FontAwesomeIcons.circleUser, 'Thông tin tài khoản', context,
                     onTap: () {
-                  Get.to(() => const AccountInfoPage(), binding: AccountBinding());
+                  Get.to(() => const AccountInfoPage(),
+                      binding: AccountBinding());
                 }),
                 const SizedBox(height: 10),
                 _buildMenuItem(FontAwesomeIcons.gear, 'Cài đặt', context),
                 const SizedBox(height: 10),
-                _buildMenuItem(FontAwesomeIcons.commentDots, 'Đóng góp ý kiến', context),
+                _buildMenuItem(
+                    FontAwesomeIcons.commentDots, 'Đóng góp ý kiến', context),
                 const SizedBox(height: 10),
                 _buildMenuItem(FontAwesomeIcons.idBadge, 'Liên hệ', context),
                 const SizedBox(height: 10),
-                _buildMenuItem(FontAwesomeIcons.lock, 'Chính sách bảo mật', context),
+                _buildMenuItem(
+                    FontAwesomeIcons.lock, 'Chính sách bảo mật', context),
                 const SizedBox(height: 10),
-                _buildMenuItem(FontAwesomeIcons.shieldHalved, 'Điều khoản dịch vụ', context),
+                _buildMenuItem(FontAwesomeIcons.shieldHalved,
+                    'Điều khoản dịch vụ', context),
                 const Divider(),
                 const SizedBox(height: 10),
                 _buildMenuItem(
@@ -194,7 +214,8 @@ class AccountPage extends BaseGetView<AccountController> {
       VoidCallback? onTap}) {
     return ListTile(
       leading: Icon(icon, color: color),
-      title: Text(title, style: AppTextStyle.regular16().copyWith(color: color)),
+      title:
+          Text(title, style: AppTextStyle.regular16().copyWith(color: color)),
       trailing: showTrailingIcon
           ? const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey)
           : null,

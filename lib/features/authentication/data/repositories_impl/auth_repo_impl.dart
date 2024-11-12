@@ -47,9 +47,8 @@ class AuthRepoImpl extends AuthRepo {
     final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
     print('loginWithGoogle idToken $idToken');
     // TODO send to BE
-    final length = idToken!.length;
-    print('sub1 ${idToken.substring(0, 1000)}');
-    print('sub2 ${idToken.substring(995, idToken.length)}');
+    print('sub1 ${idToken?.substring(0, 1000)}');
+    print('sub2 ${idToken?.substring(995, idToken.length)}');
   }
 
   @override

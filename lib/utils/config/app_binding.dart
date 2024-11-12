@@ -81,6 +81,7 @@ class AppBinding extends Bindings {
     Get.put<CartRepo>(CartRepoImpl());
     Get.put<PaymentRepo>(PaymentRepoImpl());
     Get.put<CartShippingRepo>(CartShippingRepoImpl());
+    
   }
 
   void injectService() {

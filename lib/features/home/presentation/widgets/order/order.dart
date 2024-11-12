@@ -32,7 +32,8 @@ class OrderPage extends BaseGetView<HomeController> {
 
   AppBar _buildAppBar(AppColors? appColors, BuildContext context) {
     return AppBar(
-      title: const Text('Đặt món'),
+      title: Text('Đặt món',
+          style: AppTextStyle.bold20().copyWith(color: appColors?.secondary)),
       centerTitle: true,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
@@ -45,7 +46,8 @@ class OrderPage extends BaseGetView<HomeController> {
     );
   }
 
-  Widget _buildBody(BuildContext context, AppColors? appColors, HomeController controller) {
+  Widget _buildBody(
+      BuildContext context, AppColors? appColors, HomeController controller) {
     return Container(
       decoration: BoxDecoration(
         color: appColors?.white,
@@ -79,8 +81,8 @@ class OrderPage extends BaseGetView<HomeController> {
   }
 
   Widget _buildProductDetails(AppColors? appColors) {
-    return Obx(() {
-      if (item.menu == "TODAY") {
+    if (item.menu == "TODAY") {
+      return Obx(() {
         final currentItem = item.items![controller.itemIndex.value];
         return _TodayMenuDetails(
           currentItem: currentItem,
@@ -88,14 +90,14 @@ class OrderPage extends BaseGetView<HomeController> {
           appColors: appColors,
           controller: controller,
         );
-      } else {
-        return _RegularMenuDetails(
-          item: item,
-          appColors: appColors,
-          controller: controller,
-        );
-      }
-    });
+      });
+    } else {
+      return _RegularMenuDetails(
+        item: item,
+        appColors: appColors,
+        controller: controller,
+      );
+    }
   }
 
   Padding _buildTotalAmount(AppColors? appColors) {
@@ -106,25 +108,23 @@ class OrderPage extends BaseGetView<HomeController> {
         children: [
           Text(
             'Tổng cộng:',
-            style: AppTextStyle.bold20()
-                .copyWith(color: appColors?.secondary),
+            style: AppTextStyle.bold20().copyWith(color: appColors?.secondary),
           ),
           if (item.menu == "TODAY") ...[
             Obx(() {
-              final currentItem =
-                  item.items![controller.itemIndex.value];
+              final currentItem = item.items![controller.itemIndex.value];
               return Text(
                 '${formatPrice(((item.type.price != null && item.type.price != 0) ? item.type.price : currentItem.price)! * controller.quantity.value)}đ',
-                style: AppTextStyle.bold20()
-                    .copyWith(color: appColors?.onSuccess),
+                style:
+                    AppTextStyle.bold20().copyWith(color: appColors?.onSuccess),
               );
             }),
           ] else ...[
             Obx(() {
               return Text(
                 '${formatPrice((item.type.price)! * controller.quantity.value)}đ',
-                style: AppTextStyle.bold20()
-                    .copyWith(color: appColors?.onSuccess),
+                style:
+                    AppTextStyle.bold20().copyWith(color: appColors?.onSuccess),
               );
             }),
           ]
@@ -142,10 +142,9 @@ class OrderPage extends BaseGetView<HomeController> {
           final name = item.product.name;
           final description = item.product.description;
           final quantity = controller.quantity.value;
-          final unitPrice =
-              (item.menu == "TODAY")
-                  ? item.items![controller.itemIndex.value].price
-                  : item.type.price!;
+          final unitPrice = (item.menu == "TODAY")
+              ? item.items![controller.itemIndex.value].price
+              : item.type.price!;
           final totalPrice = unitPrice * quantity;
           final branch = item.branchId;
           final idProduct = item.menu == "TODAY"
@@ -162,17 +161,14 @@ class OrderPage extends BaseGetView<HomeController> {
               ));
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue,
+          backgroundColor: appColors?.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        child: const Text(
+        child: Text(
           'Thanh toán',
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.white,
-          ),
+          style: AppTextStyle.bold20().copyWith(color: appColors?.white),
         ),
       ),
     );
@@ -184,7 +180,6 @@ class _TodayMenuDetails extends StatelessWidget {
   final Menu item;
   final AppColors? appColors;
   final HomeController controller;
-  
 
   const _TodayMenuDetails({
     required this.currentItem,
@@ -200,101 +195,12 @@ class _TodayMenuDetails extends StatelessWidget {
       children: [
         Text(
           currentItem.name,
-          style: AppTextStyle.bold18()
-              .copyWith(color: appColors?.secondary),
+          style: AppTextStyle.bold18().copyWith(color: appColors?.secondary),
         ),
         const SizedBox(height: 4),
         Text(
           item.product.description,
-          style: AppTextStyle.regular16()
-              .copyWith(color: appColors?.gray),
-        ),
-        const SizedBox(height: 16),
-        _buildQuantityDetails(appColors, controller),
-        const SizedBox(height: 8),
-        _buildEditButton(appColors, context ,controller),
-      ],
-    );
-  }
-
-  Row _buildQuantityDetails(AppColors? appColors, HomeController controller) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          'Số lượng:',
-          style: AppTextStyle.regular18()
-              .copyWith(color: appColors?.secondary),
-        ),
-        Obx(() => Text(
-              '${controller.quantity.value}',
-              style: AppTextStyle.regular18()
-                  .copyWith(color: appColors?.secondary),
-            )),
-      ],
-    );
-  }
-
-  GestureDetector _buildEditButton(AppColors? appColors, context, HomeController controller) {
-    return GestureDetector(
-      onTap: () {
-        showOrderSlider(
-          context,
-          item,
-          initialQuantity: controller.quantity.value,
-          onItemSelected: (newIndex) {
-            controller.updateItemIndex(newIndex);
-          },
-          onQuantityChanged: (newQuantity) {
-            controller.updateQuantity(newQuantity);
-          },
-          onOrderPlaced: () {
-            Get.to(() => OrderPage(
-              item: item,
-              quantity: controller.quantity.value,
-              itemIndex: controller.itemIndex.value,
-            ));
-          },
-          shouldNavigate: false,
-          selectedItemIndex: controller.itemIndex.value,
-        );
-      },
-      child: Text(
-        'Chỉnh sửa',
-        style: AppTextStyle.bold18()
-            .copyWith(color: appColors?.primary),
-      ),
-    );
-  }
-}
-
-class _RegularMenuDetails extends StatelessWidget {
-  final Menu item;
-  final AppColors? appColors;
-  final HomeController controller;
-
-
-  const _RegularMenuDetails({
-    required this.item,
-    required this.appColors,
-    required this.controller,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          item.product.name,
-          style: AppTextStyle.bold18()
-              .copyWith(color: appColors?.secondary),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          item.product.description,
-          style: AppTextStyle.regular16()
-              .copyWith(color: appColors?.gray),
+          style: AppTextStyle.regular16().copyWith(color: appColors?.gray),
         ),
         const SizedBox(height: 16),
         _buildQuantityDetails(appColors, controller),
@@ -310,8 +216,7 @@ class _RegularMenuDetails extends StatelessWidget {
       children: [
         Text(
           'Số lượng:',
-          style: AppTextStyle.regular18()
-              .copyWith(color: appColors?.secondary),
+          style: AppTextStyle.regular18().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(
               '${controller.quantity.value}',
@@ -322,7 +227,8 @@ class _RegularMenuDetails extends StatelessWidget {
     );
   }
 
-  GestureDetector _buildEditButton(AppColors? appColors, context, HomeController controller) {
+  GestureDetector _buildEditButton(
+      AppColors? appColors, context, HomeController controller) {
     return GestureDetector(
       onTap: () {
         showOrderSlider(
@@ -337,10 +243,10 @@ class _RegularMenuDetails extends StatelessWidget {
           },
           onOrderPlaced: () {
             Get.to(() => OrderPage(
-              item: item,
-              quantity: controller.quantity.value,
-              itemIndex: controller.itemIndex.value,
-            ));
+                  item: item,
+                  quantity: controller.quantity.value,
+                  itemIndex: controller.itemIndex.value,
+                ));
           },
           shouldNavigate: false,
           selectedItemIndex: controller.itemIndex.value,
@@ -348,8 +254,90 @@ class _RegularMenuDetails extends StatelessWidget {
       },
       child: Text(
         'Chỉnh sửa',
-        style: AppTextStyle.bold18()
-            .copyWith(color: appColors?.primary),
+        style: AppTextStyle.bold18().copyWith(color: appColors?.primary),
+      ),
+    );
+  }
+}
+
+class _RegularMenuDetails extends StatelessWidget {
+  final Menu item;
+  final AppColors? appColors;
+  final HomeController controller;
+
+  const _RegularMenuDetails({
+    required this.item,
+    required this.appColors,
+    required this.controller,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          item.product.name,
+          style: AppTextStyle.bold18().copyWith(color: appColors?.secondary),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          item.product.description,
+          style: AppTextStyle.regular16().copyWith(color: appColors?.gray),
+        ),
+        const SizedBox(height: 16),
+        _buildQuantityDetails(appColors, controller),
+        const SizedBox(height: 8),
+        _buildEditButton(appColors, context, controller),
+      ],
+    );
+  }
+
+  Row _buildQuantityDetails(AppColors? appColors, HomeController controller) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          'Số lượng:',
+          style: AppTextStyle.regular18().copyWith(color: appColors?.secondary),
+        ),
+        Obx(() => Text(
+              '${controller.quantity.value}',
+              style: AppTextStyle.regular18()
+                  .copyWith(color: appColors?.secondary),
+            )),
+      ],
+    );
+  }
+
+  GestureDetector _buildEditButton(
+      AppColors? appColors, context, HomeController controller) {
+    return GestureDetector(
+      onTap: () {
+        showOrderSlider(
+          context,
+          item,
+          initialQuantity: controller.quantity.value,
+          onItemSelected: (newIndex) {
+            controller.updateItemIndex(newIndex);
+          },
+          onQuantityChanged: (newQuantity) {
+            controller.updateQuantity(newQuantity);
+          },
+          onOrderPlaced: () {
+            Get.to(() => OrderPage(
+                  item: item,
+                  quantity: controller.quantity.value,
+                  itemIndex: controller.itemIndex.value,
+                ));
+          },
+          shouldNavigate: false,
+          selectedItemIndex: controller.itemIndex.value,
+        );
+      },
+      child: Text(
+        'Chỉnh sửa',
+        style: AppTextStyle.bold18().copyWith(color: appColors?.primary),
       ),
     );
   }

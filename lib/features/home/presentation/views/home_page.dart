@@ -20,6 +20,7 @@ class HomePage extends BaseGetView<HomeController> {
 
     final branchJson = localStorage.read('selectedBranch');
     String branchId = '6134edff-d5cc-4dbc-be51-4c914bfded16';
+    print("branchId: $branchId");
 
     if (branchJson != null) {
       final Map<String, dynamic> branchData = jsonDecode(branchJson);
