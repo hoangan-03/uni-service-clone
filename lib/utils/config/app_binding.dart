@@ -84,6 +84,7 @@ class AppBinding extends Bindings {
     Get.put<PaymentRepo>(PaymentRepoImpl());
     Get.put<CartShippingRepo>(CartShippingRepoImpl());
     Get.put<QrCodeRepo>(QrCodeRepoImpl());
+    
   }
 
   void injectService() {

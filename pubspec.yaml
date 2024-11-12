@@ -70,6 +70,11 @@ dependencies:
   image_picker: ^1.1.2
   qr_flutter: ^4.1.0
   http_parser: ^4.0.2
+  photo_gallery: ^2.2.1
+  scan: ^1.6.0
+  notification_center: ^1.0.2
+  qr_code_scanner: ^1.0.1
+  device_info_plus: ^11.1.1
 
 dev_dependencies:
   flutter_test:

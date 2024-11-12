@@ -15,7 +15,6 @@ import 'package:flutter_base_v2/features/home/presentation/controllers/home_inpu
 import 'package:flutter_base_v2/features/account/domain/usecases/get_profile_uc.dart';
 import 'package:flutter_base_v2/features/order/data/models/add_payment.dart';
 import 'package:flutter_base_v2/features/order/data/models/add_to_cart_request.dart';
-import 'package:flutter_base_v2/features/order/data/models/menu_qr_response.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/cart.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/cart_shipping.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/menu_qr.dart';

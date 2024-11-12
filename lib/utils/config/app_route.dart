@@ -4,12 +4,13 @@ import 'package:flutter_base_v2/features/authentication/presentation/controllers
 import 'package:flutter_base_v2/features/authentication/presentation/views/login/login_page.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/login/uni_login_page.dart';
 import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_binding.dart';
-import 'package:flutter_base_v2/features/branch/presentation/pages/branches_page.dart';
+import 'package:flutter_base_v2/features/branch/presentation/views/branches_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_binding.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/home_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/notifications_page.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/cart_shipping.dart';
+import 'package:flutter_base_v2/features/qrcode/presentation/controllers/qrcode_binding.dart';
 import 'package:flutter_base_v2/features/services/presentation/views/services.dart';
 import 'package:flutter_base_v2/features/tabbar/presentation/controllers/landing/landing_binding.dart';
 import 'package:flutter_base_v2/features/tabbar/presentation/controllers/root/root_binding.dart';
@@ -102,7 +103,11 @@ class AppRoute {
         binding: HomeBinding(),
         transition: Transition.noTransition),
     GetPage(name: service, page: ServicesPage.new),
-    GetPage(name: qr, page: QRPage.new),
+    GetPage(
+        name: qr,
+        page: QRPage.new,
+        binding: QrcodeBinding(),
+        transition: Transition.noTransition),
     GetPage(name: history, page: HistoryPage.new),
     GetPage(
         name: account,
