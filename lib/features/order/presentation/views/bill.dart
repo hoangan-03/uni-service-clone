@@ -211,6 +211,8 @@ class BillPage extends BaseGetView<HomeController> {
   ElevatedButton _buildReturnHomeButton(AppColors? appColors) {
     return ElevatedButton(
       onPressed: () {
+        controller.updateQuantity(0);
+        controller.updateItemIndex(0);
         Get.to(() => TabbarPage());
       },
       style: ElevatedButton.styleFrom(

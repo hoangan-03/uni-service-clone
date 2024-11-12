@@ -19,9 +19,6 @@ void showOrderSlider(
   int? orderQuantity,
 }) {
   void navigateToOrderPage(int newIndex) {
-    // final controller = Get.find<HomeController>();
-    // controller.updateQuantity(initialQuantity);
-    // controller.updateItemIndex(selectedItemIndex ?? 0);
     Get.to(() => OrderPage(
           item: item,
           quantity: initialQuantity,
@@ -95,8 +92,8 @@ class OrderSliderContentState extends State<OrderSliderContent> {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).extension<AppColors>();
-    final controller = Get.find<HomeController>();
+    Theme.of(context).extension<AppColors>();
+    Get.find<HomeController>();
     final selectedItem = widget.item.items?[selectedItemIndex ?? 0];
 
     return Container(
@@ -109,199 +106,294 @@ class OrderSliderContentState extends State<OrderSliderContent> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 40,
-              height: 4,
-              margin: const EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            Text(
-              "Tuỳ chọn",
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                fontSize: 16,
-              ),
-              textAlign: TextAlign.start,
-            ),
+            _SliderHeader(),
             const SizedBox(height: 36),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    widget.item.product.imageURL,
-                    width: 80,
-                    height: 80,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        selectedItem?.name ?? widget.item.product.name,
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        widget.item.product.description,
-                        style:
-                            const TextStyle(fontSize: 14, color: Colors.grey),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        '${formatPrice(selectedItem?.price ?? (widget.item.type.price != null && widget.item.type.price != 0 ? widget.item.type.price : widget.item.items![0].price)!)}đ',
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.green),
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        children: [
-                          IconButton(
-                            icon: Container(
-                              width: 24,
-                              height: 24,
-                              decoration: BoxDecoration(
-                                color: const Color.fromRGBO(66, 63, 255, 1),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: const Icon(Icons.remove,
-                                  color: Colors.white, size: 18),
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                if (orderQuantity > 0) {
-                                  orderQuantity--;
-                                }
-                              });
-                            },
-                          ),
-                          Text(
-                            '$orderQuantity',
-                            style: AppTextStyle.regular16()
-                                .copyWith(color: appColors?.secondary),
-                          ),
-                          IconButton(
-                            icon: Container(
-                              width: 24,
-                              height: 24,
-                              decoration: BoxDecoration(
-                                color: const Color.fromRGBO(66, 63, 255, 1),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: const Icon(Icons.add,
-                                  color: Colors.white, size: 18),
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                if (orderQuantity <
-                                    widget.item.orignialQuantity) {
-                                  orderQuantity++;
-                                }
-                              });
-                            },
-                          ),
-                          const SizedBox(width: 16),
-                          if (widget.item.menu != "TODAY")
-                            Text(
-                              'Còn lại: ${widget.item.orignialQuantity}',
-                              style: TextStyle(
-                                  fontSize: 14, color: Colors.grey[600]),
-                            ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            _OrderItemDetails(
+              item: widget.item,
+              selectedItem: selectedItem,
+              orderQuantity: orderQuantity,
+              onQuantityChanged: (newQuantity) {
+                setState(() {
+                  orderQuantity = newQuantity;
+                });
+              },
             ),
             const SizedBox(height: 16),
             if (widget.item.menu == "TODAY") ...[
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: widget.item.items?.length ?? 0,
-                itemBuilder: (context, index) {
-                  final item = widget.item.items![index];
-                  return ListTile(
-                    title: Text(
-                      item.name,
-                      style: AppTextStyle.regular16()
-                          .copyWith(color: appColors?.secondary),
-                    ),
-                    subtitle: Text('Còn lại: ${item.quantity}',
-                        style: AppTextStyle.regular12()
-                            .copyWith(color: appColors?.gray)),
-                    trailing: Radio<int>(
-                      value: index,
-                      groupValue: selectedItemIndex ?? 0,
-                      onChanged: (int? value) {
-                        setState(() {
-                          selectedItemIndex = value;
-                        });
-                      },
-                    ),
-                  );
+              _TodayMenuOptions(
+                item: widget.item,
+                selectedItemIndex: selectedItemIndex,
+                onItemSelected: (int? value) {
+                  setState(() {
+                    selectedItemIndex = value;
+                  });
                 },
               ),
             ],
-            ElevatedButton(
-              onPressed: () {
-                widget.onQuantityChanged(orderQuantity);
-                print("current index: $selectedItemIndex");
-                if (widget.onItemSelected != null) {
-                  widget.onItemSelected!(selectedItemIndex ?? 0);
-
-                  controller.updateItemIndex(selectedItemIndex ?? 0);
-                }
-                Navigator.pop(context);
-                if (widget.shouldNavigate) {
-                  print("this time index: $selectedItemIndex");
-                  widget.onOrderPlaced(selectedItemIndex ?? 0);
-                  controller.updateItemIndex(selectedItemIndex ?? 0);
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                minimumSize: const Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: Text(
-                'Đặt món',
-                style: AppTextStyle.bold16().copyWith(color: appColors?.white),
-              ),
+            _OrderButton(
+              onQuantityChanged: widget.onQuantityChanged,
+              onItemSelected: widget.onItemSelected,
+              onOrderPlaced: widget.onOrderPlaced,
+              shouldNavigate: widget.shouldNavigate,
+              orderQuantity: orderQuantity,
+              selectedItemIndex: selectedItemIndex,
             ),
             const SizedBox(height: 10),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.red,
-                backgroundColor: Colors.white,
-                side: const BorderSide(color: Colors.red),
-                minimumSize: const Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: Text(
-                'Cancel',
-                style: AppTextStyle.bold16().copyWith(color: Colors.red),
-              ),
-            ),
+            _CancelButton(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _SliderHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 40,
+      height: 4,
+      margin: const EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+  }
+}
+
+class _OrderItemDetails extends StatelessWidget {
+  final Menu item;
+  final dynamic selectedItem;
+  final int orderQuantity;
+  final Function(int) onQuantityChanged;
+
+  const _OrderItemDetails({
+    required this.item,
+    required this.selectedItem,
+    required this.orderQuantity,
+    required this.onQuantityChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.network(
+            item.product.imageURL,
+            width: 80,
+            height: 80,
+            fit: BoxFit.cover,
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                selectedItem?.name ?? item.product.name,
+                style:
+                    AppTextStyle.bold18().copyWith(color: appColors?.primary),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                item.product.description,
+                style:
+                    AppTextStyle.regular16().copyWith(color: appColors?.gray),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                '${formatPrice(selectedItem?.price ?? (item.type.price != null && item.type.price != 0 ? item.type.price : item.items![0].price)!)}đ',
+                style:
+                    AppTextStyle.bold16().copyWith(color: appColors?.onSuccess),
+              ),
+              const SizedBox(height: 8),
+              _QuantitySelector(
+                orderQuantity: orderQuantity,
+                onQuantityChanged: onQuantityChanged,
+                originalQuantity: item.orignialQuantity,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _QuantitySelector extends StatelessWidget {
+  final int orderQuantity;
+  final Function(int) onQuantityChanged;
+  final int originalQuantity;
+
+  const _QuantitySelector({
+    required this.orderQuantity,
+    required this.onQuantityChanged,
+    required this.originalQuantity,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
+    return Row(
+      children: [
+        IconButton(
+          icon: Container(
+            width: 24,
+            height: 24,
+            decoration: BoxDecoration(
+              color: appColors?.primary,
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Icon(Icons.remove, color: appColors?.white, size: 18),
+          ),
+          onPressed: () {
+            onQuantityChanged(orderQuantity > 0 ? orderQuantity - 1 : 0);
+          },
+        ),
+        Text(
+          '$orderQuantity',
+          style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
+        ),
+        IconButton(
+          icon: Container(
+            width: 24,
+            height: 24,
+            decoration: BoxDecoration(
+              color: appColors?.primary,
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Icon(Icons.add, color: appColors?.white, size: 18),
+          ),
+          onPressed: () {
+            onQuantityChanged(orderQuantity < originalQuantity
+                ? orderQuantity + 1
+                : originalQuantity);
+          },
+        ),
+        const SizedBox(width: 16),
+        Text(
+          'Còn lại: $originalQuantity',
+          style: AppTextStyle.regular14().copyWith(color: appColors?.gray),
+        ),
+      ],
+    );
+  }
+}
+
+class _TodayMenuOptions extends StatelessWidget {
+  final Menu item;
+  final int? selectedItemIndex;
+  final Function(int?) onItemSelected;
+
+  const _TodayMenuOptions({
+    required this.item,
+    required this.selectedItemIndex,
+    required this.onItemSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: item.items?.length ?? 0,
+      itemBuilder: (context, index) {
+        final item = this.item.items![index];
+        return ListTile(
+          title: Text(
+            item.name,
+            style:
+                AppTextStyle.regular16().copyWith(color: appColors?.secondary),
+          ),
+          subtitle: Text('Còn lại: ${item.quantity}',
+              style: AppTextStyle.regular12().copyWith(color: appColors?.gray)),
+          trailing: Radio<int>(
+            value: index,
+            groupValue: selectedItemIndex ?? 0,
+            onChanged: onItemSelected,
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _OrderButton extends StatelessWidget {
+  final Function(int) onQuantityChanged;
+  final Function(int)? onItemSelected;
+  final Function(int selectedItemIndex) onOrderPlaced;
+  final bool shouldNavigate;
+  final int orderQuantity;
+  final int? selectedItemIndex;
+
+  const _OrderButton({
+    required this.onQuantityChanged,
+    required this.onItemSelected,
+    required this.onOrderPlaced,
+    required this.shouldNavigate,
+    required this.orderQuantity,
+    required this.selectedItemIndex,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
+    final controller = Get.find<HomeController>();
+    return ElevatedButton(
+      onPressed: () {
+        onQuantityChanged(orderQuantity);
+        if (onItemSelected != null) {
+          onItemSelected!(selectedItemIndex ?? 0);
+          controller.updateItemIndex(selectedItemIndex ?? 0);
+        }
+        Navigator.pop(context);
+        if (shouldNavigate) {
+          onOrderPlaced(selectedItemIndex ?? 0);
+          controller.updateItemIndex(selectedItemIndex ?? 0);
+        }
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: appColors?.primary,
+        minimumSize: const Size(double.infinity, 50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      child: Text(
+        'Đặt món',
+        style: AppTextStyle.bold16().copyWith(color: appColors?.white),
+      ),
+    );
+  }
+}
+
+class _CancelButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
+    return TextButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      style: TextButton.styleFrom(
+        foregroundColor: appColors?.onCancel,
+        backgroundColor: appColors?.white,
+        side: BorderSide(color: appColors!.onCancel),
+        minimumSize: const Size(double.infinity, 50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      child: Text(
+        'Cancel',
+        style: AppTextStyle.bold16().copyWith(color: appColors.onCancel),
       ),
     );
   }
