@@ -5,7 +5,7 @@ import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
-enum TabType { home, service, qr, history, account }
+enum TabType { home, service, history, account }
 
 extension TabItem on TabType {
   Widget get icon {
@@ -20,12 +20,6 @@ extension TabItem on TabType {
         return Icon(
           CupertinoIcons.square_list,
           size: 20,
-          color: colorScheme.onPrimary,
-        );
-      case TabType.qr:
-        return Icon(
-          CupertinoIcons.qrcode,
-          size: 30,
           color: colorScheme.onPrimary,
         );
       case TabType.history:
@@ -57,12 +51,6 @@ extension TabItem on TabType {
           size: 20,
           color: Get.context?.theme.disabledColor,
         );
-      case TabType.qr:
-        return Icon(
-          CupertinoIcons.qrcode,
-          size: 30,
-          color: Get.context?.theme.disabledColor,
-        );
       case TabType.history:
         return Icon(
           CupertinoIcons.time,
@@ -84,8 +72,6 @@ extension TabItem on TabType {
         return 'Trang chủ';
       case TabType.service:
         return 'Tiện ích';
-      case TabType.qr:
-        return 'QR Code';
       case TabType.history:
         return 'Lịch sử';
       case TabType.account:
@@ -99,8 +85,6 @@ extension TabItem on TabType {
         return AppRoute.getPage(AppRoute.home)?.page() ?? Container();
       case TabType.service:
         return AppRoute.getPage(AppRoute.service)?.page() ?? Container();
-      case TabType.qr:
-        return AppRoute.getPage(AppRoute.qr)?.page() ?? Container();
       case TabType.history:
         return AppRoute.getPage(AppRoute.history)?.page() ?? Container();
       case TabType.account:
@@ -113,11 +97,9 @@ extension TabItem on TabType {
       icon: icon,
       inactiveIcon: inactiveIcon,
       title: title.isEmpty ? null : title,
-      activeColorPrimary:
-          colorScheme.primary,
-      activeColorSecondary:
-          colorScheme.onPrimary, 
-      inactiveColorPrimary: Colors.white, 
+      activeColorPrimary: colorScheme.primary,
+      activeColorSecondary: colorScheme.onPrimary,
+      inactiveColorPrimary: Colors.white,
       inactiveColorSecondary: Get.context!.theme.disabledColor,
     );
   }
@@ -160,6 +142,17 @@ class TabbarPage extends GetView {
           ),
           navBarStyle: NavBarStyle.style7,
           onItemSelected: (index) {},
+        ),
+        Positioned(
+          bottom: 40,
+          right: 20,
+          child: FloatingActionButton(
+            onPressed: () {
+              Get.toNamed(AppRoute.qr);
+            },
+            backgroundColor: colorScheme.primary,
+            child: Icon(CupertinoIcons.qrcode, size: 30),
+          ),
         ),
       ],
     );

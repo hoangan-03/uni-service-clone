@@ -5,6 +5,7 @@ import 'package:flutter_base_v2/features/branch/domain/entities/branch.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
+
 class BranchsPage extends BaseGetView<BranchController> {
   const BranchsPage({super.key});
 
@@ -18,42 +19,55 @@ class BranchsPage extends BaseGetView<BranchController> {
           child: Column(
             children: [
               const SizedBox(height: 32.0),
-               Text(
+              Text(
                 'Chọn chi nhánh',
                 style: AppTextStyle.bold20(),
               ),
               const SizedBox(height: 16.0),
               Expanded(
                 child: controller.getBranchsState.widget(
-                  onLoading: const Center(child: CircularProgressIndicator()), 
+                  onLoading: const Center(child: CircularProgressIndicator()),
                   onSuccess: (branches) {
                     return ListView.builder(
                       itemCount: branches?.length,
                       itemBuilder: (context, index) {
                         final branch = branches![index];
-                        return Obx(() => ListTile(
-                              title: Text(branch.name),
-                             subtitle: branch.description?.isNotEmpty == true
-                                  ? Text(
-                                      branch.description ?? '',
-                                      style: AppTextStyle.regular12().copyWith(color: appColors?.gray),
-                                    )
-                                  : null,
-                              trailing: Radio<Branch>(
-                                value: branch,
-                                groupValue: controller.selectedBranch.value,
-                                onChanged: (Branch? value) {
-                                  if (value != null) {
-                                    controller.selectBranch(value);
-                                  }
-                                },
-                                activeColor: appColors?.primary,
+                        return Obx(() => Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(branch.name, style: AppTextStyle.regular16()),
+                                        if (branch.description?.isNotEmpty == true)
+                                          Text(
+                                            branch.description ?? '',
+                                            style: AppTextStyle.regular12().copyWith(color: appColors?.gray),
+                                          ),
+                                      ],
+                                    ),
+                                  ),
+                                  Radio<Branch>(
+                                    value: branch,
+                                    groupValue: controller.selectedBranch.value,
+                                    onChanged: (Branch? value) {
+                                      if (value != null) {
+                                        controller.selectBranch(value);
+                                      }
+                                    },
+                                    activeColor: appColors?.primary,
+                                    visualDensity: VisualDensity.compact,
+                                  ),
+                                ],
                               ),
                             ));
                       },
                     );
                   },
-                  onError: (error) => Center(child: Text('Error: $error')), // Center the error message
+                  onError: (error) => Center(child: Text('Error: $error')),
                 ),
               ),
             ],
@@ -71,9 +85,9 @@ class BranchsPage extends BaseGetView<BranchController> {
                 backgroundColor: appColors?.primary,
                 minimumSize: const Size(double.infinity, 48),
               ),
-              child:  Text(
+              child: Text(
                 'Tiếp tục',
-                style: AppTextStyle.bold18().copyWith(color: appColors?.white), 
+                style: AppTextStyle.bold18().copyWith(color: appColors?.white),
               ),
             )),
       ),

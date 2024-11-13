@@ -305,19 +305,36 @@ class _TodayMenuOptions extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: item.items?.length ?? 0,
       itemBuilder: (context, index) {
-        final item = this.item.items![index];
-        return ListTile(
-          title: Text(
-            item.name,
-            style:
-                AppTextStyle.regular16().copyWith(color: appColors?.secondary),
-          ),
-          subtitle: Text('Còn lại: ${item.quantity}',
-              style: AppTextStyle.regular12().copyWith(color: appColors?.gray)),
-          trailing: Radio<int>(
-            value: index,
-            groupValue: selectedItemIndex ?? 0,
-            onChanged: onItemSelected,
+        final menuItem = item.items![index];
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      menuItem.name,
+                      style: AppTextStyle.regular16()
+                          .copyWith(color: appColors?.secondary),
+                    ),
+                    Text(
+                      'Còn lại: ${menuItem.quantity}',
+                      style: AppTextStyle.regular12()
+                          .copyWith(color: appColors?.gray),
+                    ),
+                  ],
+                ),
+              ),
+              Radio<int>(
+                value: index,
+                groupValue: selectedItemIndex ?? 0,
+                onChanged: onItemSelected,
+                activeColor: appColors?.primary,
+              ),
+            ],
           ),
         );
       },
