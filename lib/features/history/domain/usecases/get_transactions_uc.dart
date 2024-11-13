@@ -3,19 +3,19 @@ import 'package:flutter_base_v2/features/history/domain/entities/transaction.dar
 import 'package:flutter_base_v2/features/history/domain/repositories/transaction_repo.dart';
 
 class GetTransactionsUseCase
-    extends UseCaseIO<TransactionInput, List<Transaction>?> {
+    extends UseCaseIO<GetTransactionsParams, List<Transaction>?> {
   final TransactionRepo _transactionRepo;
 
   GetTransactionsUseCase(this._transactionRepo);
 
   @override
-  Future<List<Transaction>?> build(TransactionInput input) {
+  Future<List<Transaction>?> build(GetTransactionsParams input) {
     return _transactionRepo.getUserHistory(input.page, input.limit, input.order,
         input.field, input.fromDate, input.toDate);
   }
 }
 
-class TransactionInput {
+class GetTransactionsParams {
   final int page;
   final int limit;
   final String order;
@@ -23,6 +23,6 @@ class TransactionInput {
   final String fromDate;
   final String toDate;
 
-  TransactionInput(this.page, this.limit, this.order, this.field, this.fromDate,
-      this.toDate);
+  GetTransactionsParams(this.page, this.limit, this.order, this.field,
+      this.fromDate, this.toDate);
 }

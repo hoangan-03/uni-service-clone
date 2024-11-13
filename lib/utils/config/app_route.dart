@@ -5,6 +5,7 @@ import 'package:flutter_base_v2/features/authentication/presentation/views/login
 import 'package:flutter_base_v2/features/authentication/presentation/views/login/uni_login_page.dart';
 import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_binding.dart';
 import 'package:flutter_base_v2/features/branch/presentation/views/branches_page.dart';
+import 'package:flutter_base_v2/features/history/presentation/controllers/transaction_binding.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_binding.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/home_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/notifications_page.dart';
@@ -108,7 +109,11 @@ class AppRoute {
         page: QRPage.new,
         binding: QrcodeBinding(),
         transition: Transition.noTransition),
-    GetPage(name: history, page: HistoryPage.new),
+    GetPage(
+        name: history,
+        page: HistoryPage.new,
+        binding: TransactionBinding(),
+        transition: Transition.noTransition),
     GetPage(
         name: account,
         page: AccountPage.new,
