@@ -9,8 +9,8 @@ import 'package:get/get.dart';
 AppColors colors =
     Get.context?.theme.extension<AppColors>() ?? const AppColors();
 
-ColorScheme colorScheme =
-    Get.context?.theme.colorScheme ?? const ColorScheme.light();
+// ColorScheme colorScheme =
+//     Get.context?.theme.colorScheme ?? const ColorScheme.light();
 
 class AppTheme {
   static final ThemeData lightTheme = ThemeData.light().copyWith(
@@ -27,17 +27,17 @@ class AppTheme {
         onCancel: Color.fromRGBO(255, 59, 48, 1),
               ),
     ],
-    colorScheme: const ColorScheme(
-      brightness: Brightness.light,
-      primary: Color.fromRGBO(66, 63, 255, 1),
-      onPrimary: Colors.white,
-      secondary: ColorName.grayBase,
-      onSecondary: ColorName.greenBase,
-      error: ColorName.errorBackground,
-      onError: ColorName.error,
-      surface: Colors.white,
-      onSurface: ColorName.grayLow10,
-    ),
+    // colorScheme: const ColorScheme(
+    //   brightness: Brightness.light,
+    //   primary: Color.fromRGBO(66, 63, 255, 1),
+    //   onPrimary: Colors.white,
+    //   secondary: ColorName.grayBase,
+    //   onSecondary: ColorName.greenBase,
+    //   error: ColorName.errorBackground,
+    //   onError: ColorName.error,
+    //   surface: Colors.white,
+    //   onSurface: ColorName.grayLow10,
+    // ),
   );
 
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
