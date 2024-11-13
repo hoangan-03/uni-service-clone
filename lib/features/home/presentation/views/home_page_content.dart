@@ -23,16 +23,14 @@ class HomePageContent extends StatelessWidget {
     super.key,
     required this.branchId,
     required this.currentMenu,
-    required this.onMenuSelected, 
-    required this.menuTodayState, 
-    required this.menuPreoderState, 
-    required this.menuFoodcourtState, 
-    required this.menuDrinkState, 
+    required this.onMenuSelected,
+    required this.menuTodayState,
+    required this.menuPreoderState,
+    required this.menuFoodcourtState,
+    required this.menuDrinkState,
     required this.menuSpecialityState,
     required this.menuNecessityState,
     required this.selectedCategory,
-
-
   });
 
   @override
@@ -74,7 +72,7 @@ class HomePageContent extends StatelessWidget {
                       const SizedBox(width: 10),
                       TopNavButton(
                         icon: FontAwesomeIcons.bowlRice,
-                        label: 'Food court',
+                        label: 'Food Court',
                         currentMenu: currentMenu,
                         onMenuSelected: onMenuSelected,
                       ),
@@ -88,10 +86,27 @@ class HomePageContent extends StatelessWidget {
                     ],
                   ),
                 )),
-            const SizedBox(height: 24),
+            const SizedBox(height: 8),
             currentMenu == 'Tất cả'
-                ? buildMainPage(context, branchId, selectedCategory, menuTodayState, menuPreoderState, menuFoodcourtState, menuDrinkState, menuSpecialityState, menuNecessityState)
-                : buildMenuPage(context,currentMenu,  menuTodayState, menuPreoderState, menuFoodcourtState, menuDrinkState, menuSpecialityState, menuNecessityState),
+                ? buildMainPage(
+                    context,
+                    branchId,
+                    selectedCategory,
+                    menuTodayState,
+                    menuPreoderState,
+                    menuFoodcourtState,
+                    menuDrinkState,
+                    menuSpecialityState,
+                    menuNecessityState)
+                : buildMenuPage(
+                    context,
+                    currentMenu,
+                    menuTodayState,
+                    menuPreoderState,
+                    menuFoodcourtState,
+                    menuDrinkState,
+                    menuSpecialityState,
+                    menuNecessityState),
           ],
         ),
       ),

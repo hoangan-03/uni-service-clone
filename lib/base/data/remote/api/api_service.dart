@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter_base_v2/features/history/data/models/transaction_response.dart';
 import 'package:flutter_base_v2/features/order/data/models/menu_qr_response.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:dio/dio.dart';
@@ -21,6 +22,7 @@ part 'api_service.g.dart';
 abstract class ApiService {
   factory ApiService(Dio dioBuilder) = _ApiService;
 
+  /// USER API
   @POST('/auth/login')
   Future<TokenResponse> loginWithEmail(@Body() LoginBody body);
 
@@ -32,18 +34,18 @@ abstract class ApiService {
     @Body() UserApiModel body,
   );
 
-  // @POST('/auth/update-avatar')
-  // @MultiPart()
-  // Future<void> updateAvatar(@Part(name: "avatar") List<int> avatar);
-
   @POST('/auth/update-avatar')
   @MultiPart()
   Future<void> updateAvatar(
       @Part(name: "avatar", contentType: "image/*", fileName: "avatar1.jpeg")
       File avatar);
 
+  /// BRANCH API
+
   @GET('/branches/options?o=true')
   Future<BranchResponse> getListBrands();
+
+  /// MENU API
 
   @GET('/menu/qr/{product_id}')
   Future<MenuQRResponse> getQrCode(@Path('product_id') String productId);
@@ -56,6 +58,8 @@ abstract class ApiService {
 
   @GET('/auth/logout')
   Future<void> logout();
+
+  /// ORDER API
 
   @POST('/carts')
   Future<void> addToCart(
@@ -72,5 +76,16 @@ abstract class ApiService {
   @POST('/orders')
   Future<void> addPayment(
     @Body() AddPaymentRequest body,
+  );
+
+  /// HISTORY API
+  @GET('/users/user-history')
+  Future<TransactionResponse> getUserHistory(
+    @Query('page') int page,
+    @Query('limit') int limit,
+    @Query('order') String order,
+    @Query('field') String field,
+    @Query('fromDate') String fromDate,
+    @Query('toDate') String toDate,
   );
 }

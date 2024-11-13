@@ -5,7 +5,7 @@ String getCategoryTitle(String category) {
     case 'DRINK':
       return 'Đồ uống';
     case 'FOODCOURT':
-      return 'Food court';
+      return 'Food Court';
     case 'SPECIALITY':
       return 'Đặc sản địa phương';
     case 'NECESSITY':

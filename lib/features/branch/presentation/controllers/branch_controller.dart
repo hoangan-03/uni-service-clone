@@ -36,6 +36,7 @@ class BranchController extends BaseController {
     super.onClose();
   }
 
+
   Future<void> getBranches() {
     return _getBranchUsecase.execute(
       observer: Observer(
@@ -54,25 +55,26 @@ class BranchController extends BaseController {
     );
   }
 
-  void selectBranch(Branch branch) {
+    void selectBranch(Branch branch) {
     selectedBranch.value = branch;
-
+  
     final branchData = {
       'id': branch.id,
       'name': branch.name,
       'description': branch.description,
       'isActive': branch.isActive,
     };
-
+  
     final branchJson = jsonEncode(branchData);
-
-    _localStorage.setString('selectedBranch', branchJson).then((_) {
+  
+    _localStorage.setString('selectedBranch', branchJson).then((_) async {
       print('Branch saved to local storage: $branchJson');
+      final selectedBranchJson = await _localStorage.getString('selectedBranch');
+      print('Selected branch: $selectedBranchJson');
     }).catchError((error) {
       print('Failed to save branch: $error');
     });
   }
-
   void navigateToHome() {
     if (selectedBranch.value != null) {
       N.toHome(input: HomeInput('Vinh Truong', 'vinhthv1@yopmail.com'));
@@ -87,9 +89,9 @@ class BranchController extends BaseController {
     _localStorage.saveUserRefreshToken('refreshToken123123123');
   }
 
-  void clearAllData() {
-    _localStorage.removeAllData();
-  }
+  // void clearAllData() {
+  //   _localStorage.removeAllData();
+  // }
 
   void logout() {
     Get.find<AuthService>().logout();

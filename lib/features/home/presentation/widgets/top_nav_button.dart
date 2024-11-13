@@ -31,15 +31,16 @@ class TopNavButton extends StatelessWidget {
           color: isSelected
               ? appColors?.primary
               : appColors?.transparent,
-          border: Border.all(color: appColors?.gray ?? Colors.grey),
+          border: Border.all(color: appColors?.gray ?? Colors.grey, width: 0.5),
           borderRadius: BorderRadius.circular(16.0),
         ),
         child: Column(
           children: [
-            Icon(icon, size: 24, color: isSelected ? appColors?.white : appColors?.secondary),
+            Icon(icon, size: 18, color: isSelected ? appColors?.white : appColors?.secondary),
+            const SizedBox(height: 4),
             Text(
               label,
-              style: AppTextStyle.regular16().copyWith(
+              style: AppTextStyle.regular12().copyWith(
                 color: isSelected ? appColors?.white : appColors?.secondary,
               ),
             ),

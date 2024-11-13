@@ -19,6 +19,7 @@ class QrcodeController extends BaseController<HomeInput> {
   @override
   void onInit() async {
     super.onInit();
+    await requestPermission();
     pushNotiService.listenNotification();
   
     final notificationAppLaunchDetails =
@@ -37,13 +38,10 @@ class QrcodeController extends BaseController<HomeInput> {
   }
 
   void scannedQRCode(String productId) {
-    
     // try {
     //   _notificationCenter.notify('scannedQRCode', data: qrCodeBase64);
-
     // } catch (e) {
     //   _notificationCenter.notify('scannedQRCodpre', data: qrCodeBase64);
-
     // }
   }
 
@@ -70,8 +68,9 @@ class QrcodeController extends BaseController<HomeInput> {
   }
 
   void closeScanQR() {
-    qrController?.pauseCamera(); // Pause the camera before navigating away
-    qrController?.dispose(); // Dispose of the QRViewController
+    qrController?.pauseCamera(); 
+    qrController?.dispose();
+    Get.delete<QrcodeController>();
     N.toHome(input: HomeInput("", ""));
   }
 }

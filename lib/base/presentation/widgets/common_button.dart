@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/common.dart';
-import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/gen/colors.gen.dart';
 
 Widget primaryOutlinedButton({
@@ -35,7 +34,7 @@ Widget primaryOutlinedButton({
               borderRadius: borderRadius ?? BorderRadius.circular(100),
               side: BorderSide(
                 width: borderWidth,
-                color: borderColor ?? colorScheme.primary,
+                color: borderColor ?? Colors.black,
               ),
             ),
           ),
@@ -55,7 +54,7 @@ Widget primaryOutlinedButton({
                           Text(
                             label,
                             style: AppTextStyle.bold18()
-                                .copyWith(color: colorScheme.primary),
+                                .copyWith(color: Colors.black),
                           ),
                         ],
                       ))
@@ -72,7 +71,7 @@ Widget primaryOutlinedButton({
                       Text(
                         label,
                         style: AppTextStyle.bold18()
-                            .copyWith(color: colorScheme.primary),
+                            .copyWith(color: Colors.black),
                       ),
                     ],
                   )),

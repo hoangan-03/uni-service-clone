@@ -13,17 +13,17 @@ class BranchsPage extends BaseGetView<BranchController> {
   Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
+      backgroundColor: appColors?.white,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const SizedBox(height: 32.0),
+              const SizedBox(height: 36.0),
               Text(
                 'Chọn chi nhánh',
-                style: AppTextStyle.bold20(),
+                style: AppTextStyle.bold16(),
               ),
-              const SizedBox(height: 16.0),
               Expanded(
                 child: controller.getBranchsState.widget(
                   onLoading: const Center(child: CircularProgressIndicator()),
@@ -33,7 +33,7 @@ class BranchsPage extends BaseGetView<BranchController> {
                       itemBuilder: (context, index) {
                         final branch = branches![index];
                         return Obx(() => Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding: const EdgeInsets.symmetric(vertical: 4),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [

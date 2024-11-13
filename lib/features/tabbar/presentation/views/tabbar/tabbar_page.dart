@@ -92,6 +92,7 @@ class TabbarPage extends GetView {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Stack(
       children: [
         PersistentTabView(
@@ -124,8 +125,8 @@ class TabbarPage extends GetView {
             onPressed: () {
               Get.toNamed(AppRoute.qr);
             },
-            backgroundColor: colorScheme.primary,
-            child: Icon(CupertinoIcons.qrcode, size: 30),
+            backgroundColor: appColors!.primary,
+            child: Icon(CupertinoIcons.qrcode, size: 30, color: appColors.white),
           ),
         ),
       ],

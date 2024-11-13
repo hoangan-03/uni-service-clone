@@ -17,6 +17,7 @@ class UniLoginPage extends BaseGetView<LoginController> {
 
   @override
   Widget myBuild(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return GestureDetector(
       onTap: controller.hideKeyboard,
       child: Scaffold(
@@ -64,14 +65,14 @@ class UniLoginPage extends BaseGetView<LoginController> {
                         ? Column(
                             children: [
                               CommonButton(
-                                  fillColor: colorScheme.primary,
+                                  fillColor: appColors!.primary,
                                   onPressed: controller.logoutGoogle,
                                   enabled: !controller.isDisableButton.value,
                                   state: controller.loginState,
                                   child: Text(
                                     'Logout Google',
                                     style: AppTextStyle.regular14(
-                                        color: colorScheme.onPrimary),
+                                        color: appColors.white),
                                   )),
                               const SizedBox(height: 16)
                             ],
@@ -79,14 +80,14 @@ class UniLoginPage extends BaseGetView<LoginController> {
                         : Column(
                             children: [
                               CommonButton(
-                                  fillColor: colorScheme.primary,
+                                  fillColor: appColors!.primary,
                                   onPressed: controller.googleSignIn,
                                   enabled: !controller.isDisableButton.value,
                                   state: controller.loginState,
                                   child: Text(
                                     'Login with Google',
                                     style: AppTextStyle.regular14(
-                                        color: colorScheme.onPrimary),
+                                        color: appColors.white),
                                   )),
                               const SizedBox(height: 16)
                             ],
@@ -96,14 +97,14 @@ class UniLoginPage extends BaseGetView<LoginController> {
                     ),
                     const SizedBox(height: 16),
                     Obx(() => CommonButton(
-                        fillColor: colorScheme.primary,
+                        fillColor: appColors!.primary,
                         onPressed: controller.onTapLogin,
                         enabled: !controller.isDisableButton.value,
                         state: controller.loginState,
                         child: Text(
                           S.login,
                           style: AppTextStyle.regular14(
-                              color: colorScheme.onPrimary),
+                              color: appColors.white),
                         ))),
                   ],
                 ),

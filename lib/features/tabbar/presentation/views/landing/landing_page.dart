@@ -12,6 +12,7 @@ class LandingPage extends BaseGetView<LandingController> {
 
   @override
   Widget myBuild(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -54,7 +55,7 @@ class LandingPage extends BaseGetView<LandingController> {
               borderColor: context.theme.primaryColor,
               child: Text(
                 S.register,
-                style: TextStyle(color: colorScheme.onPrimary),
+                style: TextStyle(color: appColors!.white),
               ),
             ),
             const SizedBox(
@@ -78,7 +79,7 @@ class LandingPage extends BaseGetView<LandingController> {
               borderColor: context.theme.primaryColor,
               child: Text(
                 'Uni Login',
-                style: TextStyle(color: colorScheme.primary),
+                style: TextStyle(color: appColors.primary),
               ),
             ),
             const SizedBox(

@@ -29,7 +29,7 @@ Widget buildMenuPage(
     case "Đồ uống":
       currentList = menuDrinkState;
       break;
-    case "Food court":
+    case "Food Court":
       currentList = menuFoodcourtState;
       break;
     case "Đặc sản địa phương":

@@ -8,6 +8,6 @@ class BranchBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(() => BranchController());
     Get.lazyPut(() => GetBranchUseCase(Get.find()));
-        Get.lazyPut(() => UpdateProfileUseCase(Get.find()));
+    Get.lazyPut(() => UpdateProfileUseCase(Get.find()));
   }
 }

@@ -25,7 +25,7 @@ class AppTheme {
         transparent: Colors.transparent,
         onSuccess: Color.fromRGBO(24, 162, 72, 1),
         onCancel: Color.fromRGBO(255, 59, 48, 1),
-              ),
+      ),
     ],
     // colorScheme: const ColorScheme(
     //   brightness: Brightness.light,
@@ -79,10 +79,10 @@ class AppColors extends ThemeExtension<AppColors> {
       this.secondary = Colors.white,
       this.gray = Colors.white,
       this.background = Colors.white,
-       this.white =  Colors.white, 
-       this.transparent = Colors.transparent,
-       this.onSuccess = Colors.white,
-       this.onCancel = Colors.white});
+      this.white = Colors.white,
+      this.transparent = Colors.transparent,
+      this.onSuccess = Colors.white,
+      this.onCancel = Colors.white});
 
   @override
   AppColors copyWith({

@@ -137,7 +137,7 @@ class AccountPage extends BaseGetView<AccountController> {
             const SizedBox(width: 16),
             Expanded(
               child: Text(title,
-                  style: AppTextStyle.bold14().copyWith(color: color)),
+                  style: AppTextStyle.regular14().copyWith(color: color)),
             ),
             if (showTrailingIcon)
               Icon(Icons.arrow_forward_ios, size: 12, color: appColors?.gray),

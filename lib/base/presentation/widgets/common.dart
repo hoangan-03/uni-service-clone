@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
-import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/extension/form_builder.dart';
 import 'package:flutter_base_v2/utils/gen/colors.gen.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -121,7 +120,7 @@ Widget commonBottomButton({
     child: Text(
       text,
       style: TextStyle(
-        color: colorScheme.onPrimaryContainer,
+        color: Colors.white,
       ),
     ),
   );
@@ -166,7 +165,7 @@ Widget commonBackButton({void Function()? onPressed}) {
     },
     child: Icon(
       CupertinoIcons.back,
-      color: colorScheme.onSurface,
+      color: ColorName.grayBase,
     ),
   );
 }

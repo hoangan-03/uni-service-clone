@@ -17,7 +17,7 @@ class HomePage extends BaseGetView<HomeController> {
   @override
   Widget myBuild(BuildContext context) {
     final GetStorage localStorage = GetStorage();
-
+    final appColors = Theme.of(context).extension<AppColors>();
     final branchJson = localStorage.read('selectedBranch');
     String branchId = '6134edff-d5cc-4dbc-be51-4c914bfded16';
     print("branchId: $branchId");
@@ -30,6 +30,7 @@ class HomePage extends BaseGetView<HomeController> {
     int selectedIndex = 0;
 
     return Scaffold(
+      backgroundColor: appColors?.white,
       body: Obx(() {
         String currentMenu = controller.currentMenu.value.isNotEmpty
             ? controller.currentMenu.value
@@ -53,7 +54,6 @@ class HomePage extends BaseGetView<HomeController> {
               },
             ),
             const BranchsPage(),
-            const QRPage(),
             const HistoryPage(),
             const AccountPage(),
           ],

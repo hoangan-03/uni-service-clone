@@ -52,16 +52,38 @@ Widget buildHeader(BuildContext context) {
                   style: AppTextStyle.bold16().copyWith(color: appColors?.secondary),
                 );
               }),
-              Text(
-                truncateText(branchName, 30), 
-                style: AppTextStyle.regular14(),
+              const SizedBox(height: 4),
+              GestureDetector(
+                onTap: () {
+                  Get.toNamed(AppRoute.branch);
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 1.0),
+                  decoration: BoxDecoration(
+                    color: appColors!.transparent,
+                    borderRadius: BorderRadius.circular(20.0),
+                    border: Border.all(color: appColors!.gray, width: 0.5),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.location_on, color: appColors.secondary, size: 16),
+                      const SizedBox(width: 3),
+                      Text(
+                        truncateText(branchName, 30),
+                        style: AppTextStyle.regular12().copyWith(color: appColors.secondary),
+                      ),
+                      const SizedBox(width: 3),
+                      Icon(Icons.expand_more, color: appColors.secondary, size: 20),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
         ],
       ),
       IconButton(
-        icon: Icon(FontAwesomeIcons.fileInvoice, color: appColors?.secondary),
+        icon: Icon(FontAwesomeIcons.fileInvoice, color: appColors.secondary),
         onPressed: () {
           Get.toNamed(AppRoute.cartShipping);
         },

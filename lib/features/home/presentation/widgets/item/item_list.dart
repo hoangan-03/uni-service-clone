@@ -35,14 +35,16 @@ Widget buildItemList(
                         ));
                       },
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             "Xem menu",
-                            style: AppTextStyle.bold16()
+                            style: AppTextStyle.regular14()
                                 .copyWith(color: appColors?.primary),
                           ),
                           Icon(
                             Icons.chevron_right,
+                            size: 16,
                             color: appColors?.primary,
                           ),
                         ],
