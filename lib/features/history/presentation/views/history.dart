@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
+import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/history/presentation/controllers/transaction_controller.dart';
-import 'package:get/get.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HistoryPage extends BaseGetView<TransactionController> {
   const HistoryPage({super.key});
@@ -11,50 +15,146 @@ class HistoryPage extends BaseGetView<TransactionController> {
   @override
   Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
+    final DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+    final DateFormat timeFormat = DateFormat('HH:mm');
+
     return Scaffold(
       backgroundColor: appColors?.white,
+      appBar: buildAppBar(
+        appColors: appColors,
+        context: context,
+        title: 'Lịch sử giao dịch',
+        hasBackButton: false,
+      ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           child: Column(
             children: [
-              const SizedBox(height: 36.0),
+              _buildTransactionTypeTabs(appColors!),
+              const SizedBox(height: 16.0),
+              _buildDateFilter(context),
+              const SizedBox(height: 16.0),
               Expanded(
                 child: controller.getTransactionsState.widget(
                   onLoading: const Center(child: CircularProgressIndicator()),
                   onSuccess: (transaction) {
-                    return ListView.builder(
-                      itemCount: transaction?.length,
-                      itemBuilder: (context, index) {
-                        final transact = transaction![index];
-                        return Obx(() => Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(transact.type ?? '',
-                                            style: AppTextStyle.regular16()),
-                                        if (transact.userName?.isNotEmpty ==
-                                            true)
-                                          Text(
-                                            transact.userName ?? '',
-                                            style: AppTextStyle.regular12()
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: transaction?.map((transact) {
+                              final isFirstOfDay = transaction
+                                          .indexOf(transact) ==
+                                      0 ||
+                                  transact.createdAt!.day !=
+                                      transaction[
+                                              transaction.indexOf(transact) - 1]
+                                          .createdAt!
+                                          .day;
+
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 7.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    if (isFirstOfDay)
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 8.0, bottom: 4.0),
+                                        child: Center(
+                                          child: Text(
+                                            dateFormat
+                                                .format(transact.createdAt!),
+                                            style: AppTextStyle.regular14()
                                                 .copyWith(
                                                     color: appColors?.gray),
                                           ),
-                                      ],
+                                        ),
+                                      ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8),
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.blue[50],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                      ),
+                                                      child:
+                                                          getIconForTransactionType(
+                                                              transact.type ??
+                                                                  '',
+                                                              appColors),
+                                                    ),
+                                                    const SizedBox(width: 16),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          transact.type == 'BUY'
+                                                              ? 'Mua hàng'
+                                                              : transact.type ??
+                                                                  '',
+                                                          style: AppTextStyle
+                                                              .bold16(),
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 2),
+                                                        Text(
+                                                          timeFormat.format(
+                                                              transact
+                                                                  .createdAt!),
+                                                          style: AppTextStyle
+                                                                  .regular14()
+                                                              .copyWith(
+                                                                  color: appColors
+                                                                      ?.gray),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Text(
+                                            '${transact.type == 'DEPOSIT' ? '+' : '-'}${formatPrice(transact.point ?? 0).toString()} đ',
+                                            style: AppTextStyle.bold16()
+                                                .copyWith(
+                                                    color:
+                                                        appColors?.secondary),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ));
-                      },
+                                  ],
+                                ),
+                              );
+                            }).toList() ??
+                            [],
+                      ),
                     );
                   },
                   onError: (error) => Center(child: Text('Error: $error')),
@@ -65,5 +165,133 @@ class HistoryPage extends BaseGetView<TransactionController> {
         ),
       ),
     );
+  }
+
+  Widget _buildTransactionTypeTabs(AppColors appColors) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _buildTabButton('Tất cả', null, appColors),
+          const SizedBox(width: 10),
+          _buildTabButton('Mua hàng', 'BUY', appColors),
+          const SizedBox(width: 10),
+          _buildTabButton('Nạp tiền', 'DEPOSIT', appColors),
+          const SizedBox(width: 10),
+          _buildTabButton('Gửi/Nhận tiền', 'TRANSFER', appColors),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTabButton(String label, String? type, AppColors appColors) {
+    return Obx(() {
+      final isSelected = controller.selectedTransactionType.value == type;
+      return GestureDetector(
+        onTap: () {
+          controller.updateTransactionType(type);
+          controller.filterTransactions();
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          decoration: BoxDecoration(
+            color: isSelected ? appColors.background : appColors.white,
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Text(
+            label,
+            style: AppTextStyle.bold14().copyWith(
+              color: isSelected ? appColors.primary : appColors.secondary,
+            ),
+          ),
+        ),
+      );
+    });
+  }
+
+  Widget _buildDateFilter(BuildContext context) {
+    final TransactionController controller = Get.find<TransactionController>();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _buildDatePicker(context, 'Từ', controller.fromDate, (date) {
+          controller.updateFromDate(date);
+          controller.filterTransactions();
+        }),
+        const SizedBox(width: 16),
+        _buildDatePicker(context, 'Đến', controller.toDate, (date) {
+          controller.updateToDate(date);
+          controller.filterTransactions();
+        }),
+      ],
+    );
+  }
+
+  Widget _buildDatePicker(BuildContext context, String label,
+      Rx<DateTime?> date, Function(DateTime) onDateSelected,
+      {DateTime? defaultDate}) {
+    final appColors = Theme.of(context).extension<AppColors>();
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(label, style: AppTextStyle.bold14()),
+        const SizedBox(width: 8),
+        GestureDetector(
+          onTap: () async {
+            final selectedDate = await showDatePicker(
+              context: context,
+              initialDate: date.value ?? defaultDate ?? DateTime.now(),
+              firstDate: DateTime(2000),
+              lastDate: DateTime(2100),
+            );
+            if (selectedDate != null) {
+              onDateSelected(selectedDate);
+            }
+          },
+          child: Container(
+            width: 140,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              border: Border.all(color: appColors!.gray),
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: Obx(() {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    date.value != null
+                        ? DateFormat('dd/MM/yyyy').format(date.value!)
+                        : DateFormat('dd/MM/yyyy')
+                            .format(defaultDate ?? DateTime.now()),
+                    style: AppTextStyle.regular14(),
+                  ),
+                  Icon(Icons.expand_more, size: 20, color: appColors.gray),
+                ],
+              );
+            }),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Icon getIconForTransactionType(String transactionType, AppColors? appColors) {
+    switch (transactionType) {
+      case 'BUY':
+        return Icon(FontAwesomeIcons.burger, color: appColors?.primary);
+      case 'SERVICES':
+        return Icon(FontAwesomeIcons.squareParking,
+            color: appColors?.onSuccess);
+      case 'DEPOSIT':
+        return Icon(FontAwesomeIcons.wallet, color: Colors.orange);
+      case 'TRANSFER':
+        return Icon(FontAwesomeIcons.moneyBillWave, color: Colors.blue);
+      case 'VENDING_MACHINE':
+        return Icon(FontAwesomeIcons.store, color: Colors.purple);
+      default:
+        return Icon(FontAwesomeIcons.question, color: Colors.grey);
+    }
   }
 }

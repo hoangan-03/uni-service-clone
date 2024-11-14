@@ -18,6 +18,7 @@ class AccountPage extends BaseGetView<AccountController> {
     final appColors = Theme.of(context).extension<AppColors>();
 
     return Scaffold(
+      backgroundColor: appColors!.white,
       body: Column(
         children: [
           const SizedBox(height: 60),

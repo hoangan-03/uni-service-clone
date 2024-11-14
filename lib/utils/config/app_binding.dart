@@ -8,7 +8,6 @@ import 'package:flutter_base_v2/features/authentication/data/repositories_impl/a
 import 'package:flutter_base_v2/features/authentication/domain/repositories/auth_repo.dart';
 import 'package:flutter_base_v2/features/branch/domain/repositories/branch_repo.dart';
 import 'package:flutter_base_v2/features/history/data/repositories/transaction_repo.dart';
-import 'package:flutter_base_v2/features/history/domain/entities/transaction.dart';
 import 'package:flutter_base_v2/features/history/domain/repositories/transaction_repo.dart';
 import 'package:flutter_base_v2/features/home/data/repositories/menu_repo.dart';
 import 'package:flutter_base_v2/features/branch/data/repositories/branch_repo.dart';

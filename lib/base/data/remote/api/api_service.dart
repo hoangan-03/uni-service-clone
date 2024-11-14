@@ -88,4 +88,14 @@ abstract class ApiService {
     @Query('fromDate') String fromDate,
     @Query('toDate') String toDate,
   );
+    @GET('/users/user-history')
+  Future<TransactionResponse> getUserHistoryByCategory(
+    @Query('page') int page,
+    @Query('limit') int limit,
+    @Query('order') String order,
+    @Query('type') String transactionType,
+    @Query('field') String field,
+    @Query('fromDate') String fromDate,
+    @Query('toDate') String toDate,
+  );
 }

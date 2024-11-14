@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "package:flutter_base_v2/base/presentation/widgets/app_bar.dart";
 import "package:flutter_base_v2/features/home/domain/entities/menu.dart";
 import "package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart";
 import "package:flutter_base_v2/features/home/presentation/utils/get_cate_title.dart";
@@ -17,28 +18,18 @@ class MenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
-     final HomeController controller = Get.find<HomeController>();
+    final HomeController controller = Get.find<HomeController>();
     return Scaffold(
       backgroundColor: appColors?.white,
+      appBar: buildAppBar(
+          appColors: appColors,
+          context: context,
+          title: getCategoryTitle(title)),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 40.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.black),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                Text(
-                  getCategoryTitle(title),
-                  style: AppTextStyle.bold20(),
-                ),
-              ],
-            ),
             Expanded(
               child: ListView.builder(
                 itemCount: menuItems.length,
@@ -110,10 +101,10 @@ class MenuPage extends StatelessWidget {
                               },
                               onOrderPlaced: () {
                                 Get.to(() => OrderPage(
-                                  item: item,
-                                  quantity: 1,
-                                  itemIndex: 0,
-                                ));
+                                      item: item,
+                                      quantity: 1,
+                                      itemIndex: 0,
+                                    ));
                               },
                               shouldNavigate: true,
                             );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
+import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -12,31 +13,10 @@ class CartShippingPage extends BaseGetView<HomeController> {
   Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
-      appBar: _buildAppBar(appColors, context),
+      appBar: buildAppBar(appColors: appColors, context: context, title: 'Đơn hàng chưa nhận'),
       body: _buildBody(appColors),
     );
   }
-
-  AppBar _buildAppBar(AppColors? appColors, BuildContext context) {
-    return AppBar(
-      title: Padding(
-        padding: const EdgeInsets.all(0.0),
-        child: Text(
-          'Đơn hàng chưa nhận',
-          textAlign: TextAlign.center,
-          style: AppTextStyle.bold20().copyWith(color: appColors?.secondary),
-        ),
-      ),
-      centerTitle: true,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-      ),
-    );
-  }
-
   Widget _buildBody(AppColors? appColors) {
     return Container(
       color: Colors.white,

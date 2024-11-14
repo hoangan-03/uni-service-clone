@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
+import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
+import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
+import 'package:flutter_base_v2/utils/config/app_theme.dart';
 
-class ServicesPage extends StatelessWidget {
+class ServicesPage extends BaseGetView<HomeController> {
   const ServicesPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget myBuild(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tiện ích'),
-        centerTitle: true,
-      ),
+      appBar: buildAppBar(
+          appColors: appColors,
+          context: context,
+          title: 'Tiện ích',
+          hasBackButton: false),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: GridView.builder(
-          itemCount: 4, // Number of items in the grid
+          itemCount: 4, 
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Number of columns
+            crossAxisCount: 2, 
             mainAxisSpacing: 12,
             crossAxisSpacing: 12,
-            childAspectRatio: 0.75, // Adjusts the item height relative to width
+            childAspectRatio: 0.75, 
           ),
           itemBuilder: (context, index) {
             return ServiceCard(

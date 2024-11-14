@@ -3,9 +3,12 @@ import 'package:flutter_base_v2/base/data/models/common/base_response.dart';
 
 @jsonSerializable
 class TransactionResponse extends BaseResponse {
-  List<TransactionApiModel>? data; 
+   TransactionData? data;
 }
-
+@jsonSerializable
+class TransactionData {
+  List<TransactionApiModel>? data;
+}
 @jsonSerializable
 class TransactionApiModel {
   String? id;
