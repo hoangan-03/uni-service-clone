@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
+import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 
 class ServicesPage extends BaseGetView<HomeController> {
@@ -18,22 +19,18 @@ class ServicesPage extends BaseGetView<HomeController> {
           hasBackButton: false),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: GridView.builder(
-          itemCount: 4, 
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, 
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: 0.75, 
-          ),
-          itemBuilder: (context, index) {
-            return ServiceCard(
-              imageUrl: index % 2 == 0
-                  ? 'https://f1e425bd6cd9ac6.cmccloud.com.vn/cms-tool/post/images/314/img_card.png?v=11' // Example image URL
-                  : 'https://f1e425bd6cd9ac6.cmccloud.com.vn/cms-tool/post/images/314/img_card.png?v=11', // Example image URL
-              title: index % 2 == 0 ? 'Vé xe rẻ' : 'Btaskee',
-            );
-          },
+        child: Column(
+          children: [
+            ServiceCard(
+              imageUrl: 'https://f1e425bd6cd9ac6.cmccloud.com.vn/cms-tool/post/images/314/img_card.png?v=11',
+              title: 'Vé xe rẻ',
+            ),
+            const SizedBox(height: 12),
+            ServiceCard(
+              imageUrl: 'https://employer.jobsgo.vn/uploads/media/img/201911/pictures_library_19108_20191118143305_8696.png', 
+              title: 'Btaskee',
+            ),
+          ],
         ),
       ),
     );
@@ -54,6 +51,7 @@ class ServiceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -81,18 +79,14 @@ class ServiceCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  child: Text(title,
+                      style: AppTextStyle.bold16()
+                          .copyWith(color: appColors?.secondary)),
                 ),
                 TextButton(
                   onPressed: () {
@@ -105,9 +99,9 @@ class ServiceCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child:  Text(
+                  child: Text(
                     'Đặt vé',
-                    style: TextStyle(color: appColors!.primary),
+                    style: TextStyle(color: appColors.primary),
                   ),
                 ),
               ],
