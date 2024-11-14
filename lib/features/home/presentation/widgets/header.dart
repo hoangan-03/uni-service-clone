@@ -62,7 +62,7 @@ Widget buildHeader(BuildContext context) {
                   decoration: BoxDecoration(
                     color: appColors!.transparent,
                     borderRadius: BorderRadius.circular(20.0),
-                    border: Border.all(color: appColors!.gray, width: 0.5),
+                    border: Border.all(color: appColors.gray, width: 0.5),
                   ),
                   child: Row(
                     children: [

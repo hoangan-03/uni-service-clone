@@ -4,7 +4,6 @@ import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/branch/presentation/views/branches_page.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
-import 'package:flutter_base_v2/features/qrcode/presentation/views/qrcode.dart';
 import 'package:flutter_base_v2/features/history/presentation/views/history.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/home_page_content.dart';
 import 'package:get/get.dart';

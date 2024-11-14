@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
@@ -7,72 +9,149 @@ import 'package:flutter_base_v2/features/history/domain/usecases/get_transaction
 import 'package:flutter_base_v2/features/history/domain/usecases/get_transactions_uc.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class TransactionController extends BaseController {
-  GetTransactionsUseCase get _getTransactionsUsecase => Get.find<GetTransactionsUseCase>();
-  GetTransactionsByCateUseCase get _getTransactionsByCateUsecase => Get.find<GetTransactionsByCateUseCase>();
+  GetTransactionsUseCase get _getTransactionsUsecase =>
+      Get.find<GetTransactionsUseCase>();
+  GetTransactionsByCateUseCase get _getTransactionsByCateUsecase =>
+      Get.find<GetTransactionsByCateUseCase>();
   BaseState<List<Transaction>?> getTransactionsState = BaseState();
+
+  final PagingController<int, Transaction> pagingController =
+      PagingController(firstPageKey: 1);
+  final int pageSize = 20;
 
   final fromDate = Rx<DateTime?>(DateTime(2024, 10, 15));
   final toDate = Rx<DateTime?>(DateTime.now());
-  final selectedTransactionType = Rx<String?>(null); 
+  final selectedTransactionType = Rx<String?>(null);
 
   @override
   void onInit() async {
     super.onInit();
-    filterTransactions(); 
+    pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+    filterTransactions();
   }
 
   @override
   void onClose() {
     _getTransactionsUsecase.dispose();
+    pagingController.dispose();
     super.onClose();
   }
 
-  Future<void> getTransactionsByCate(int page, int limit, String order, String transactionType, String field, String fromDate, String toDate) {
-    return _getTransactionsByCateUsecase.execute(
+  Future<List<Transaction>> getTransactionsByCate(
+      int page,
+      int limit,
+      String order,
+      String transactionType,
+      String field,
+      String fromDate,
+      String toDate) {
+    final completer = Completer<List<Transaction>>();
+
+    _getTransactionsByCateUsecase.execute(
       observer: Observer(
         onSubscribe: () {
           getTransactionsState.onLoading();
         },
         onSuccess: (List<Transaction>? transactions) {
           getTransactionsState.onSuccess(data: transactions);
+          completer.complete(transactions ?? []);
         },
         onError: (AppException e) {
           getTransactionsState.onError(e.message);
           handleError(e);
+          completer.completeError(e);
         },
       ),
-      input: GetTransactionsByCateParams(page, limit, order, transactionType, field, fromDate, toDate),
+      input: GetTransactionsByCateParams(
+          page, limit, order, transactionType, field, fromDate, toDate),
     );
+
+    return completer.future;
   }
 
-  Future<void> getTransactions(int page, int limit, String order, String field, String fromDate, String toDate) {
-    return _getTransactionsUsecase.execute(
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      final fromDateString = DateFormat('dd/MM/yyyy').format(fromDate.value!);
+      final toDateString = DateFormat('dd/MM/yyyy').format(toDate.value!);
+
+      List<Transaction> transactions;
+      if (selectedTransactionType.value == null) {
+        transactions = await getTransactions(
+          pageKey,
+          pageSize,
+          'DESC',
+          'createdAt',
+          fromDateString,
+          toDateString,
+        );
+      } else {
+        transactions = await getTransactionsByCate(
+          pageKey,
+          pageSize,
+          'DESC',
+          selectedTransactionType.value!,
+          'createdAt',
+          fromDateString,
+          toDateString,
+        );
+      }
+
+      final isLastPage = transactions.length < pageSize;
+      if (isLastPage) {
+        pagingController.appendLastPage(transactions);
+      } else {
+        final nextPageKey = pageKey + 1;
+        pagingController.appendPage(transactions, nextPageKey);
+      }
+    } catch (error) {
+      pagingController.error = error;
+    }
+  }
+
+  Future<List<Transaction>> getTransactions(
+    int page,
+    int limit,
+    String order,
+    String field,
+    String fromDate,
+    String toDate,
+  ) async {
+    final completer = Completer<List<Transaction>>();
+
+    _getTransactionsUsecase.execute(
       observer: Observer(
         onSubscribe: () {
           getTransactionsState.onLoading();
         },
         onSuccess: (List<Transaction>? transactions) {
           getTransactionsState.onSuccess(data: transactions);
+          completer.complete(transactions ?? []);
         },
         onError: (AppException e) {
           getTransactionsState.onError(e.message);
           handleError(e);
+          completer.completeError(e);
         },
       ),
       input: GetTransactionsParams(page, limit, order, field, fromDate, toDate),
     );
+
+    return completer.future;
   }
 
   void updateFromDate(DateTime date) {
     fromDate.value = date;
-    filterTransactions(); 
+    filterTransactions();
   }
 
   void updateToDate(DateTime date) {
     toDate.value = date;
-    filterTransactions(); 
+    filterTransactions();
   }
 
   void updateTransactionType(String? type) {
@@ -80,15 +159,8 @@ class TransactionController extends BaseController {
   }
 
   void filterTransactions() {
-    if (fromDate.value != null && toDate.value != null) {
-      final fromDateString = DateFormat('dd/MM/yyyy').format(fromDate.value!);
-      final toDateString = DateFormat('dd/MM/yyyy').format(toDate.value!);
-
-      if (selectedTransactionType.value == null) {
-        getTransactions(1, 50, 'DESC', 'createdAt', fromDateString, toDateString);
-      } else {
-        getTransactionsByCate(1, 20, 'DESC', selectedTransactionType.value!, 'createdAt', fromDateString, toDateString);
-      }
-    }
+  if (fromDate.value != null && toDate.value != null) {
+    pagingController.refresh();
   }
+}
 }
