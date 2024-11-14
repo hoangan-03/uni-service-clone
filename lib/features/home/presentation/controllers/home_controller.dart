@@ -43,7 +43,6 @@ class HomeController extends BaseController<HomeInput> {
   BaseState<List<Menu>?> getMenuPreorderState = BaseState();
   BaseState<List<Menu>?> getMenuTodayState = BaseState();
 
-
   BaseState<List<Menu>?> getMenuFoodcourtState = BaseState();
   BaseState<List<Menu>?> getMenuDrinkState = BaseState();
   BaseState<List<Menu>?> getMenuSpecialityState = BaseState();
@@ -74,6 +73,7 @@ class HomeController extends BaseController<HomeInput> {
     getMenuToday("DRINK", currentBranchID.value);
     getMenuToday("NECESSITY", currentBranchID.value);
     getMenuToday("SPECIALITY", currentBranchID.value);
+    getCartShipping();
 
     final notificationAppLaunchDetails =
         await pushNotiService.getNotificationAppLaunchDetails();
@@ -216,8 +216,10 @@ class HomeController extends BaseController<HomeInput> {
     try {
       await _addCartUseCase.build(params);
       await getCart();
+      await getCartShipping();
       final cartId = cart.value.id;
       if (cartId != null) {
+        await getCartShipping();
         await addPaymentRequest(cartId);
       }
     } catch (e) {

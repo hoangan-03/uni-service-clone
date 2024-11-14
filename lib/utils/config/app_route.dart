@@ -100,6 +100,7 @@ class AppRoute {
               name: 'defaultName',
               quantity: 1,
               totalPrice: 0,
+              branchName: 'defaultBranchName',
             ),
         binding: HomeBinding(),
         transition: Transition.noTransition),

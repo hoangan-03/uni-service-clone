@@ -13,10 +13,12 @@ class CartShippingPage extends BaseGetView<HomeController> {
   Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
-      appBar: buildAppBar(appColors: appColors, context: context, title: 'Đơn hàng chưa nhận'),
+      appBar: buildAppBar(
+          appColors: appColors, context: context, title: 'Đơn hàng chưa nhận'),
       body: _buildBody(appColors),
     );
   }
+
   Widget _buildBody(AppColors? appColors) {
     return Container(
       color: Colors.white,
@@ -103,9 +105,11 @@ class _CartShippingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Card(
+        color: appColors?.white,
         elevation: 4.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),

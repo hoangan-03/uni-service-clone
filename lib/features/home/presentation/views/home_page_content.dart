@@ -18,6 +18,7 @@ class HomePageContent extends StatelessWidget {
   final BaseState<List<Menu>?> menuDrinkState;
   final BaseState<List<Menu>?> menuSpecialityState;
   final BaseState<List<Menu>?> menuNecessityState;
+  final Function() getCartShipping;
 
   const HomePageContent({
     super.key,
@@ -31,6 +32,7 @@ class HomePageContent extends StatelessWidget {
     required this.menuSpecialityState,
     required this.menuNecessityState,
     required this.selectedCategory,
+    required this.getCartShipping,
   });
 
   @override
@@ -41,7 +43,7 @@ class HomePageContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildHeader(context),
+            buildHeader(context, getCartShipping),
             const SizedBox(height: 16),
             Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),

@@ -17,6 +17,7 @@ class BillPage extends BaseGetView<HomeController> {
   final int totalPrice;
   final String branch;
   final String imageUrl;
+  final String branchName;
 
   const BillPage({
     super.key,
@@ -26,6 +27,7 @@ class BillPage extends BaseGetView<HomeController> {
     required this.totalPrice,
     required this.branch,
     required this.imageUrl,
+    required this.branchName,
   });
 
   @override
@@ -45,42 +47,58 @@ class BillPage extends BaseGetView<HomeController> {
     final String currentTime =
         DateFormat('HH:mm - dd/MM/yyyy').format(DateTime.now());
     return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: 16.0),
-          _buildExpirationDate(),
-          const SizedBox(height: 8.0),
-          _buildOrderStatusButton(appColors),
-          const SizedBox(height: 16.0),
-          _buildQRCodeImage(),
-          const SizedBox(height: 8.0),
-          _buildBillTimestamp(currentTime),
-          const SizedBox(height: 8.0),
-          _buildBillId(),
-          const SizedBox(height: 16.0),
-          _buildOrderDetailsHeader(),
-          const SizedBox(height: 8.0),
-          Divider(color: Colors.grey[300]),
-          const SizedBox(height: 8.0),
-          _buildOrderItemDetails(),
-          const SizedBox(height: 16.0),
-          Divider(color: Colors.grey[300]),
-          const SizedBox(height: 8.0),
-          _buildTotalPrice(appColors),
-          const SizedBox(height: 16.0),
-          _buildReturnHomeButton(appColors),
-        ],
-      ),
-    );
+        color: Colors.white,
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 16.0),
+            Center(
+              child: Row(
+                mainAxisSize: MainAxisSize
+                    .min,
+                children: [
+                  Icon(Icons.location_on,
+                      color: appColors!.secondary, size: 16),
+                  const SizedBox(width: 3.0),
+                  Text(
+                    branchName,
+                    style: AppTextStyle.bold14()
+                        .copyWith(color: appColors.secondary),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8.0),
+            _buildExpirationDate(appColors),
+            const SizedBox(height: 8.0),
+            _buildOrderStatusButton(appColors),
+            const SizedBox(height: 16.0),
+            _buildQRCodeImage(),
+            const SizedBox(height: 8.0),
+            _buildBillTimestamp(currentTime),
+            const SizedBox(height: 8.0),
+            _buildBillId(),
+            const SizedBox(height: 16.0),
+            _buildOrderDetailsHeader(),
+            const SizedBox(height: 8.0),
+            Divider(color: Colors.grey[300]),
+            const SizedBox(height: 8.0),
+            _buildOrderItemDetails(),
+            const SizedBox(height: 16.0),
+            Divider(color: Colors.grey[300]),
+            const SizedBox(height: 8.0),
+            _buildTotalPrice(appColors),
+            const SizedBox(height: 16.0),
+            _buildReturnHomeButton(appColors),
+          ],
+        ));
   }
 
-  Text _buildExpirationDate() {
+  Text _buildExpirationDate(AppColors? appColors) {
     return Text(
       "Ngày hết hạn: ${DateFormat('HH:mm - dd/MM/yyyy').format(DateTime.now().add(const Duration(hours: 8)))}",
-      style: AppTextStyle.regular14().copyWith(color: Colors.grey),
+      style: AppTextStyle.regular14().copyWith(color: appColors!.secondary),
     );
   }
 

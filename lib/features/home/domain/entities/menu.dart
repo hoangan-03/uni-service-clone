@@ -1,4 +1,5 @@
 import 'package:flutter_base_v2/base/data/models/pretty_json_mixin.dart';
+import 'package:flutter_base_v2/features/branch/domain/entities/branch.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/item.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/product.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu_type.dart';
@@ -16,5 +17,5 @@ class Menu with PrettyJsonMixin {
   Product product = Product();
   @JsonProperty(name: 'items')
   List<Item>? items;
-  
+  Branch? branch = Branch(id: '', name: '');
 }

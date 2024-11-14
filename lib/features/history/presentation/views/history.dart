@@ -84,9 +84,9 @@ class HistoryPage extends BaseGetView<TransactionController> {
                                             Container(
                                               padding: const EdgeInsets.all(8),
                                               decoration: BoxDecoration(
-                                                color: Colors.blue[50],
+                                                color: appColors.background,
                                                 borderRadius:
-                                                    BorderRadius.circular(8),
+                                                    BorderRadius.circular(12),
                                               ),
                                               child: getIconForTransactionType(
                                                   transact.type ?? '',

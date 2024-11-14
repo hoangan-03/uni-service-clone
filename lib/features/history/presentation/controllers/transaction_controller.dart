@@ -38,7 +38,6 @@ class TransactionController extends BaseController {
   @override
   void onClose() {
     _getTransactionsUsecase.dispose();
-    pagingController.dispose();
     super.onClose();
   }
 

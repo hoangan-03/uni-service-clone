@@ -39,6 +39,9 @@ class HomePage extends BaseGetView<HomeController> {
           index: selectedIndex,
           children: <Widget>[
             HomePageContent(
+              getCartShipping: (){
+                controller.getCartShipping();
+              },
               menuTodayState: controller.getMenuTodayState,
               menuPreoderState: controller.getMenuPreorderState,
               menuDrinkState: controller.getMenuDrinkState,

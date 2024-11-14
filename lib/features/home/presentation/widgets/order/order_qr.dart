@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
-import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
-import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_slider.dart';
+import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_slide_qr.dart';
+import 'package:flutter_base_v2/features/order/domain/entities/menu_qr.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 
-class OrderPage extends BaseGetView<HomeController> {
-  final Menu item;
+class OrderQRPage extends BaseGetView<HomeController> {
+  final MenuQR item;
   final int quantity;
   final int itemIndex;
 
-  const OrderPage({
+  const OrderQRPage({
     super.key,
     required this.item,
     required this.quantity,
@@ -72,7 +72,7 @@ class OrderPage extends BaseGetView<HomeController> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Image.network(
-        item.product.imageURL,
+        item.product!.imageURL,
         width: double.infinity,
         height: 200,
         fit: BoxFit.cover,
@@ -83,7 +83,7 @@ class OrderPage extends BaseGetView<HomeController> {
   Widget _buildProductDetails(AppColors? appColors) {
     if (item.menu == "TODAY") {
       return Obx(() {
-        final currentItem = item.items![controller.itemIndex.value];
+        final currentItem = item.product;
         return _TodayMenuDetails(
           currentItem: currentItem,
           item: item,
@@ -110,24 +110,13 @@ class OrderPage extends BaseGetView<HomeController> {
             'Tổng cộng:',
             style: AppTextStyle.bold20().copyWith(color: appColors?.secondary),
           ),
-          if (item.menu == "TODAY") ...[
-            Obx(() {
-              final currentItem = item.items![controller.itemIndex.value];
-              return Text(
-                '${formatPrice(((item.type.price != null && item.type.price != 0) ? item.type.price : currentItem.price)! * controller.quantity.value)}đ',
-                style:
-                    AppTextStyle.bold20().copyWith(color: appColors?.onSuccess),
-              );
-            }),
-          ] else ...[
-            Obx(() {
-              return Text(
-                '${formatPrice((item.type.price)! * controller.quantity.value)}đ',
-                style:
-                    AppTextStyle.bold20().copyWith(color: appColors?.onSuccess),
-              );
-            }),
-          ]
+          Obx(() {
+            return Text(
+              '${formatPrice((item.type.price)! * controller.quantity.value)}đ',
+              style:
+                  AppTextStyle.bold20().copyWith(color: appColors?.onSuccess),
+            );
+          }),
         ],
       ),
     );
@@ -139,28 +128,23 @@ class OrderPage extends BaseGetView<HomeController> {
       height: 50,
       child: ElevatedButton(
         onPressed: () async {
-          final name = item.product.name;
-          final description = item.product.description;
+          final name = item.product!.name;
+          final description = item.product!.description;
           final quantity = controller.quantity.value;
-          final unitPrice = (item.menu == "TODAY")
-              ? item.items![controller.itemIndex.value].price
-              : item.type.price!;
+          final unitPrice = item.type.price!;
           final totalPrice = unitPrice * quantity;
           final branch = item.branchId;
-          final branchName = item.branch?.name ?? "";
-          final idProduct = item.menu == "TODAY"
-              ? item.items![controller.itemIndex.value].id
-              : item.product.id;
+          final idProduct = item.product!.id;
           await controller.addToCart(idProduct, quantity);
           await controller.getQrCode(idProduct);
           Get.to(() => BillPage(
-                imageUrl: item.product.imageURL,
+                imageUrl: item.product!.imageURL,
                 name: name,
                 description: description,
                 quantity: quantity,
                 totalPrice: totalPrice,
-                branch: branch,
-                branchName: branchName,
+                branch: branch ?? '',
+                branchName: "Chi nhánh",
               ));
         },
         style: ElevatedButton.styleFrom(
@@ -180,7 +164,7 @@ class OrderPage extends BaseGetView<HomeController> {
 
 class _TodayMenuDetails extends StatelessWidget {
   final dynamic currentItem;
-  final Menu item;
+  final MenuQR item;
   final AppColors? appColors;
   final HomeController controller;
 
@@ -202,7 +186,7 @@ class _TodayMenuDetails extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          item.product.description,
+          item.product!.description,
           style: AppTextStyle.regular16().copyWith(color: appColors?.gray),
         ),
         const SizedBox(height: 16),
@@ -234,7 +218,7 @@ class _TodayMenuDetails extends StatelessWidget {
       AppColors? appColors, context, HomeController controller) {
     return GestureDetector(
       onTap: () {
-        showOrderSlider(
+        showOrderQRSlider(
           context,
           item,
           initialQuantity: controller.quantity.value,
@@ -245,7 +229,7 @@ class _TodayMenuDetails extends StatelessWidget {
             controller.updateQuantity(newQuantity);
           },
           onOrderPlaced: () {
-            Get.to(() => OrderPage(
+            Get.to(() => OrderQRPage(
                   item: item,
                   quantity: controller.quantity.value,
                   itemIndex: controller.itemIndex.value,
@@ -264,7 +248,7 @@ class _TodayMenuDetails extends StatelessWidget {
 }
 
 class _RegularMenuDetails extends StatelessWidget {
-  final Menu item;
+  final MenuQR item;
   final AppColors? appColors;
   final HomeController controller;
 
@@ -280,12 +264,12 @@ class _RegularMenuDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          item.product.name,
+          item.product!.name,
           style: AppTextStyle.bold18().copyWith(color: appColors?.secondary),
         ),
         const SizedBox(height: 4),
         Text(
-          item.product.description,
+          item.product!.description,
           style: AppTextStyle.regular16().copyWith(color: appColors?.gray),
         ),
         const SizedBox(height: 16),
@@ -317,7 +301,7 @@ class _RegularMenuDetails extends StatelessWidget {
       AppColors? appColors, context, HomeController controller) {
     return GestureDetector(
       onTap: () {
-        showOrderSlider(
+        showOrderQRSlider(
           context,
           item,
           initialQuantity: controller.quantity.value,
@@ -328,7 +312,7 @@ class _RegularMenuDetails extends StatelessWidget {
             controller.updateQuantity(newQuantity);
           },
           onOrderPlaced: () {
-            Get.to(() => OrderPage(
+            Get.to(() => OrderQRPage(
                   item: item,
                   quantity: controller.quantity.value,
                   itemIndex: controller.itemIndex.value,
