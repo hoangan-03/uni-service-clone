@@ -81,23 +81,11 @@ class OrderQRPage extends BaseGetView<HomeController> {
   }
 
   Widget _buildProductDetails(AppColors? appColors) {
-    if (item.menu == "TODAY") {
-      return Obx(() {
-        final currentItem = item.product;
-        return _TodayMenuDetails(
-          currentItem: currentItem,
-          item: item,
-          appColors: appColors,
-          controller: controller,
-        );
-      });
-    } else {
-      return _RegularMenuDetails(
-        item: item,
-        appColors: appColors,
-        controller: controller,
-      );
-    }
+    return _RegularMenuDetails(
+      item: item,
+      appColors: appColors,
+      controller: controller,
+    );
   }
 
   Padding _buildTotalAmount(AppColors? appColors) {
@@ -134,8 +122,8 @@ class OrderQRPage extends BaseGetView<HomeController> {
           final unitPrice = item.type.price!;
           final totalPrice = unitPrice * quantity;
           final branch = item.branchId;
-          final idProduct = item.product!.id;
-          await controller.addToCart(idProduct, quantity);
+          final idProduct = item.id;
+          await controller.addToCart(idProduct!, quantity);
           await controller.getQrCode(idProduct);
           Get.to(() => BillPage(
                 imageUrl: item.product!.imageURL,
@@ -144,7 +132,7 @@ class OrderQRPage extends BaseGetView<HomeController> {
                 quantity: quantity,
                 totalPrice: totalPrice,
                 branch: branch ?? '',
-                branchName: "Chi nhánh",
+                branchName: item.branch!.name,
               ));
         },
         style: ElevatedButton.styleFrom(
@@ -157,91 +145,6 @@ class OrderQRPage extends BaseGetView<HomeController> {
           'Thanh toán',
           style: AppTextStyle.bold16().copyWith(color: appColors?.white),
         ),
-      ),
-    );
-  }
-}
-
-class _TodayMenuDetails extends StatelessWidget {
-  final dynamic currentItem;
-  final MenuQR item;
-  final AppColors? appColors;
-  final HomeController controller;
-
-  const _TodayMenuDetails({
-    required this.currentItem,
-    required this.item,
-    required this.appColors,
-    required this.controller,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          currentItem.name,
-          style: AppTextStyle.bold18().copyWith(color: appColors?.secondary),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          item.product!.description,
-          style: AppTextStyle.regular16().copyWith(color: appColors?.gray),
-        ),
-        const SizedBox(height: 16),
-        _buildQuantityDetails(appColors, controller),
-        const SizedBox(height: 8),
-        _buildEditButton(appColors, context, controller),
-      ],
-    );
-  }
-
-  Row _buildQuantityDetails(AppColors? appColors, HomeController controller) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          'Số lượng:',
-          style: AppTextStyle.regular18().copyWith(color: appColors?.secondary),
-        ),
-        Obx(() => Text(
-              '${controller.quantity.value}',
-              style: AppTextStyle.regular18()
-                  .copyWith(color: appColors?.secondary),
-            )),
-      ],
-    );
-  }
-
-  GestureDetector _buildEditButton(
-      AppColors? appColors, context, HomeController controller) {
-    return GestureDetector(
-      onTap: () {
-        showOrderQRSlider(
-          context,
-          item,
-          initialQuantity: controller.quantity.value,
-          onItemSelected: (newIndex) {
-            controller.updateItemIndex(newIndex);
-          },
-          onQuantityChanged: (newQuantity) {
-            controller.updateQuantity(newQuantity);
-          },
-          onOrderPlaced: () {
-            Get.to(() => OrderQRPage(
-                  item: item,
-                  quantity: controller.quantity.value,
-                  itemIndex: controller.itemIndex.value,
-                ));
-          },
-          shouldNavigate: false,
-          selectedItemIndex: controller.itemIndex.value,
-        );
-      },
-      child: Text(
-        'Chỉnh sửa',
-        style: AppTextStyle.bold18().copyWith(color: appColors?.primary),
       ),
     );
   }

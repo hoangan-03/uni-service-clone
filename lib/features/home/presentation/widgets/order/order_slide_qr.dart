@@ -217,7 +217,7 @@ class _OrderItemDetails extends StatelessWidget {
               _QuantitySelector(
                 orderQuantity: orderQuantity,
                 onQuantityChanged: onQuantityChanged,
-                originalQuantity: item.orignialQuantity ?? 0,
+                originalQuantity: item.orignialQuantity ?? 100,
               ),
             ],
           ),
@@ -322,7 +322,7 @@ class _TodayMenuOptions extends StatelessWidget {
                           .copyWith(color: appColors?.secondary),
                     ),
                     Text(
-                      'Còn lại: ${item.orignialQuantity}',
+                      'Còn lại: ${item.quantity}',
                       style: AppTextStyle.regular12()
                           .copyWith(color: appColors?.gray),
                     ),

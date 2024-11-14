@@ -1,4 +1,5 @@
 import 'package:flutter_base_v2/base/data/models/pretty_json_mixin.dart';
+import 'package:flutter_base_v2/features/branch/domain/entities/branch.dart';
 import 'package:flutter_base_v2/features/home/data/models/type_response.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/product.dart';
 
@@ -21,4 +22,6 @@ class MenuQR with PrettyJsonMixin {
 
   TypeApiModel get type => _type ?? TypeApiModel();
   set type(TypeApiModel? value) => _type = value;
+
+  Branch? branch = Branch(id: '', name: '');
 }

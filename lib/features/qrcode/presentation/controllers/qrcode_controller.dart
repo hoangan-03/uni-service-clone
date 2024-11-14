@@ -87,6 +87,7 @@ class QrcodeController extends BaseController<HomeInput> {
       if (qrCode != null) {
         controller.pauseCamera();
         scannedQRCode(qrCode);
+        closeScanQR();
       }
     });
   }

@@ -52,6 +52,7 @@ class ServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -75,7 +76,7 @@ class ServiceCard extends StatelessWidget {
             child: Image.network(
               imageUrl,
               width: double.infinity,
-              height: 150, // Set the desired height for the image
+              height: 150,
               fit: BoxFit.cover,
             ),
           ),
@@ -98,15 +99,15 @@ class ServiceCard extends StatelessWidget {
                     // Define button action
                   },
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue.shade100,
+                    backgroundColor: appColors!.background,
                     minimumSize: const Size(80, 36),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text(
+                  child:  Text(
                     'Đặt vé',
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(color: appColors!.primary),
                   ),
                 ),
               ],
