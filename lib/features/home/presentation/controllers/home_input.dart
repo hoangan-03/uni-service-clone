@@ -1,6 +1,5 @@
 class HomeInput {
-  String userName;
-  String email;
+  String branchName;
 
-  HomeInput(this.userName, this.email);
+  HomeInput(this.branchName);
 }

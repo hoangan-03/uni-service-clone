@@ -5,6 +5,8 @@ import 'package:flutter_base_v2/features/authentication/presentation/views/login
 import 'package:flutter_base_v2/features/authentication/presentation/views/login/uni_login_page.dart';
 import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_binding.dart';
 import 'package:flutter_base_v2/features/branch/presentation/views/branches_page.dart';
+import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_binding.dart';
+import 'package:flutter_base_v2/features/deposit/presentation/views/deposit.dart';
 import 'package:flutter_base_v2/features/history/presentation/controllers/transaction_binding.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_binding.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/home_page.dart';
@@ -43,6 +45,8 @@ class AppRoute {
   static String cartShipping = '/cart_shipping';
   static String bill = '/bill';
   static String accountInfo = '/info';
+  static String deposit = '/deposit';
+
 
   static List<GetPage> generateGetPages = [
     GetPage(name: root, page: RootPage.new, binding: RootBinding()),
@@ -114,6 +118,11 @@ class AppRoute {
         name: history,
         page: HistoryPage.new,
         binding: TransactionBinding(),
+        transition: Transition.noTransition),
+        GetPage(
+        name: deposit,
+        page: DepositPage.new,
+        binding: DepositBinding(),
         transition: Transition.noTransition),
     GetPage(
         name: account,

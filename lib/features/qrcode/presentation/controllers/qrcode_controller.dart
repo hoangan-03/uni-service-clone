@@ -106,6 +106,6 @@ class QrcodeController extends BaseController<HomeInput> {
     qrController?.pauseCamera();
     qrController?.dispose();
     Get.delete<QrcodeController>();
-    N.toHome(input: HomeInput("", ""));
+    N.toHome(input: HomeInput(''));
   }
 }

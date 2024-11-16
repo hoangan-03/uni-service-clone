@@ -4,6 +4,9 @@ import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_binding.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
+import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -19,39 +22,147 @@ class AccountPage extends BaseGetView<AccountController> {
 
     return Scaffold(
       backgroundColor: appColors!.white,
-      body: Column(
-        children: [
-          const SizedBox(height: 60),
-          _buildProfileSection(appColors),
-          const SizedBox(height: 30),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: Column(
+            children: [
+              const SizedBox(height: 60),
+              _buildProfileSection(appColors),
+              const SizedBox(height: 30),
+              _buildQRSection(appColors),
+              const SizedBox(height: 30),
+              Column(
                 children: [
                   _buildMenuItem(FontAwesomeIcons.circleUser,
                       'Thông tin tài khoản', context, onTap: () {
                     Get.to(() => const AccountInfoPage(),
                         binding: AccountBinding());
                   }),
-                  Divider(color: appColors.gray),
+                  Divider(color: appColors.lightGray),
                   _buildMenuItem(FontAwesomeIcons.gear, 'Cài đặt', context),
-                  Divider(color: appColors.gray),
+                  Divider(color: appColors.lightGray),
                   _buildMenuItem(
                       FontAwesomeIcons.commentDots, 'Đóng góp ý kiến', context),
-                  Divider(color: appColors.gray),
+                  Divider(color: appColors.lightGray),
                   _buildMenuItem(FontAwesomeIcons.idBadge, 'Liên hệ', context),
-                  Divider(color: appColors.gray),
+                  Divider(color: appColors.lightGray),
                   _buildMenuItem(
                       FontAwesomeIcons.lock, 'Chính sách bảo mật', context),
-                  Divider(color: appColors.gray),
+                  Divider(color: appColors.lightGray),
                   _buildMenuItem(FontAwesomeIcons.shieldHalved,
                       'Điều khoản dịch vụ', context),
-                  Divider(color: appColors.gray),
+                  Divider(color: appColors.lightGray),
                   _buildMenuItem(
                       FontAwesomeIcons.rightFromBracket, 'Đăng xuất', context,
                       color: appColors.onCancel, showTrailingIcon: false),
                 ],
               ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQRSection(AppColors? appColors) {
+    return Container(
+      padding: const EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        children: [
+          Image.network(
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/QR_Code_Example.svg/1200px-QR_Code_Example.svg.png',
+            width: 220,
+            height: 220,
+          ),
+          const SizedBox(height: 20),
+          Container(
+            padding: const EdgeInsets.all(12.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Số dư hiện tại',
+                  style: AppTextStyle.regular14()
+                      .copyWith(color: appColors?.secondary),
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Obx(() {
+                      final user = controller.user.value;
+                      return Text(
+                        controller.isBalanceVisible.value
+                            ? '${formatPrice(user.point ?? 0)} đ'
+                            : '********',
+                        style: AppTextStyle.bold14(),
+                      );
+                    }),
+                    const SizedBox(width: 3),
+                    Obx(() => GestureDetector(
+                          onTap: () {
+                            controller.isBalanceVisible.toggle();
+                          },
+                          child: Icon(
+                            controller.isBalanceVisible.value
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: appColors?.gray,
+                            size: 20,
+                          ),
+                        )),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                SizedBox(
+                  width: 270,
+                  child: OutlinedButton.icon(
+                    onPressed: () {
+                      N.toDeposit(
+                          input:
+                              DepositInput(controller.user.value.point ?? 0));
+                    },
+                    icon: Icon(Icons.account_balance_wallet,
+                        color: appColors?.primary),
+                    label: Text(
+                      'Nạp tiền',
+                      style: TextStyle(color: appColors?.primary),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: appColors!.primary),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 270,
+                  child: OutlinedButton.icon(
+                    onPressed: () {},
+                    icon: Icon(Icons.send, color: appColors.primary),
+                    label: Text(
+                      'Chuyển tiền',
+                      style: TextStyle(color: appColors.primary),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: appColors.primary),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -60,61 +171,66 @@ class AccountPage extends BaseGetView<AccountController> {
   }
 
   Widget _buildProfileSection(AppColors? appColors) {
-    return Column(
+    return Stack(
       children: [
-        GestureDetector(
-          onTap: showAvatarOptions,
-          child: Stack(
-            children: [
-              Obx(() {
-                final user = controller.user.value;
-                return CircleAvatar(
-                  radius: 40,
-                  backgroundImage: NetworkImage(
-                    user.avatar ??
-                        'https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360',
+        Column(
+          children: [
+            GestureDetector(
+              onTap: showAvatarOptions,
+              child: Stack(
+                children: [
+                  Obx(() {
+                    final user = controller.user.value;
+                    return CircleAvatar(
+                      radius: 40,
+                      backgroundImage: NetworkImage(
+                        user.avatar ??
+                            'https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360',
+                      ),
+                      onBackgroundImageError: (_, __) =>
+                          const Icon(Icons.error, size: 40),
+                    );
+                  }),
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.camera_alt,
+                        size: 16,
+                        color: appColors!.gray,
+                      ),
+                    ),
                   ),
-                  onBackgroundImageError: (_, __) =>
-                      const Icon(Icons.error, size: 40),
-                );
-              }),
-              Positioned(
-                right: 0,
-                bottom: 0,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.camera_alt,
-                    size: 16,
-                    color: Colors.grey,
-                  ),
-                ),
+                ],
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 10),
+            Obx(() {
+              final user = controller.user.value;
+              return Column(
+                children: [
+                  Text(
+                    user.username ?? '',
+                    style: AppTextStyle.bold16()
+                        .copyWith(color: appColors?.secondary),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${user.position ?? ''} - Khoa ${user.faculty ?? ''}',
+                    style: AppTextStyle.regular14()
+                        .copyWith(color: appColors?.gray),
+                  ),
+                ],
+              );
+            }),
+          ],
         ),
-        const SizedBox(height: 10),
-        Obx(() {
-          final user = controller.user.value;
-          return Column(
-            children: [
-              Text(
-                user.username ?? '',
-                style:
-                    AppTextStyle.bold20().copyWith(color: appColors?.secondary),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                '${user.position ?? ''} - Khoa ${user.faculty ?? ''}',
-                style: AppTextStyle.regular16().copyWith(color: Colors.grey),
-              ),
-            ],
-          );
-        }),
       ],
     );
   }
@@ -131,14 +247,14 @@ class AccountPage extends BaseGetView<AccountController> {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 13),
         child: Row(
           children: [
             Icon(icon, color: color, size: 20),
             const SizedBox(width: 16),
             Expanded(
               child: Text(title,
-                  style: AppTextStyle.regular14().copyWith(color: color)),
+                  style: AppTextStyle.regular12().copyWith(color: color)),
             ),
             if (showTrailingIcon)
               Icon(Icons.arrow_forward_ios, size: 12, color: appColors?.gray),

@@ -21,6 +21,7 @@ class AppTheme {
         secondary: Colors.black,
         background: Color.fromRGBO(66, 63, 255, 0.08),
         gray: Color.fromRGBO(172, 172, 176, 1),
+        lightGray: Color.fromRGBO(242, 242, 247, 1),
         white: Colors.white,
         transparent: Colors.transparent,
         onSuccess: Color.fromRGBO(24, 162, 72, 1),
@@ -69,6 +70,7 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color secondary;
   final Color background;
   final Color gray;
+  final Color lightGray;
   final Color white;
   final Color transparent;
   final Color onSuccess;
@@ -78,6 +80,7 @@ class AppColors extends ThemeExtension<AppColors> {
       {this.primary = Colors.white,
       this.secondary = Colors.white,
       this.gray = Colors.white,
+      this.lightGray = Colors.white,
       this.background = Colors.white,
       this.white = Colors.white,
       this.transparent = Colors.transparent,

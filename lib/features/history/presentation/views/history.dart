@@ -231,7 +231,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
             }
           },
           child: Container(
-            width: 140,
+            width: 120,
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               border: Border.all(color: appColors!.gray),

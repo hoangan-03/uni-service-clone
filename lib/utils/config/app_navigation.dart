@@ -1,9 +1,9 @@
+import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/utils/config/app_route.dart';
 import 'package:flutter_base_v2/utils/extension/route_type.dart';
 
 class N {
-
   static void toNotifications({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.notifications);
   }
@@ -12,10 +12,9 @@ class N {
     type.navigate(name: AppRoute.uniLogin);
   }
 
-
   static void toBranchPage({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.branch);
-  } 
+  }
 
   static void toLandingPage({RouteType type = RouteType.offAll}) {
     type.navigate(name: AppRoute.landing);
@@ -28,6 +27,11 @@ class N {
   // static void toRegister({RouteType type = RouteType.to}) {
   //   type.navigate(name: AppRoute.register);
   // }
+
+  static void toDeposit(
+      {required DepositInput input, RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.deposit, arguments: input);
+  }
 
   static void toHome({
     required HomeInput input,

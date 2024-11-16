@@ -14,4 +14,5 @@ class User with PrettyJsonMixin{
   String? email = '';
   String? phone='';
   String? avatar='';
+  int? point=0;
 }

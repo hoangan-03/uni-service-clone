@@ -32,7 +32,7 @@ class RootController extends BaseController {
     final selectedBranchJson = await _localStorage.getString('selectedBranch');
     print('Selected branchh: $selectedBranchJson');
     if (selectedBranchJson != null) {
-      N.toHome(input: HomeInput('Vinh Truong', 'vinhthv1@yopmail.com'));
+      N.toHome(input: HomeInput(selectedBranchJson));
     } else {
       N.toBranchPage();
     }

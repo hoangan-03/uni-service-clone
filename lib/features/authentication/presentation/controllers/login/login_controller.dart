@@ -121,7 +121,7 @@ class LoginController extends BaseController {
           onSuccess: (_) {
             loginState.onSuccess();
             N.toHome(
-              input: HomeInput(_email.trim(), _password.trim()),
+              input: HomeInput(""),
             );
           },
           onError: (AppException e) {

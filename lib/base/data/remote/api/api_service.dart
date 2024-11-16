@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
+import 'package:flutter_base_v2/features/deposit/data/models/deposit_request.dart';
+import 'package:flutter_base_v2/features/deposit/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/history/data/models/transaction_response.dart';
 import 'package:flutter_base_v2/features/order/data/models/menu_qr_response.dart';
 import 'package:http_parser/http_parser.dart';
@@ -88,7 +91,7 @@ abstract class ApiService {
     @Query('fromDate') String fromDate,
     @Query('toDate') String toDate,
   );
-    @GET('/users/user-history')
+  @GET('/users/user-history')
   Future<TransactionResponse> getUserHistoryByCategory(
     @Query('page') int page,
     @Query('limit') int limit,
@@ -98,4 +101,19 @@ abstract class ApiService {
     @Query('fromDate') String fromDate,
     @Query('toDate') String toDate,
   );
+
+  /// DEPOSIT API
+  @POST('/users/deposit')
+  Future<void> depositRequest(
+    @Body() DepositRequest body,
+  );
+
+  /// TRANSFER API
+  @POST('/transfer')
+  Future<void> transferRequest(
+    @Body() TransferRequest body,
+  );
+
+  @GET('/users/user-phone')
+  Future<UserResponse> getUserbyPhone(@Path('phone') String phone);
 }

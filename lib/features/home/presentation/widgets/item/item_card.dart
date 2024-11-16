@@ -66,7 +66,7 @@ Widget buildItemCard(Menu item, BuildContext context) {
                 child: Text(
                   'Chọn món',
                   style:
-                      AppTextStyle.bold14().copyWith(color: appColors?.primary),
+                      AppTextStyle.bold12().copyWith(color: appColors?.primary),
                 ),
               ),
             ),

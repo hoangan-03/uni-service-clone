@@ -9,16 +9,11 @@ Widget buildMainPage(BuildContext context, String branchId, String selectedCateg
       children: [
         const SizedBox(height: 10),
         buildItemList(context,"TODAY", menuTodayState),
-        const SizedBox(height: 16),
         // buildItemList(context,"PREORDER", menuPreoderState),
-        // const SizedBox(height: 16),
         buildItemList(context,"DRINK", menuDrinkState),
-        const SizedBox(height: 16),
         buildItemList(context,"FOODCOURT", menuFoodcourtState),
-        const SizedBox(height: 16),
         buildItemList(context,"SPECIALITY", menuSpecialityState),
-        const SizedBox(height: 16),
-        buildItemList(context,"NECESSITY", menuNecessityState),
+        // buildItemList(context,"NECESSITY", menuNecessityState),
       ],
     );
   }

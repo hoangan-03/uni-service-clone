@@ -17,6 +17,7 @@ enum AppExceptionType {
   purchaseCancel,
   purchaseError,
   paymentRequired,
+  updateInfoRequired,
   unknown, general,
 }
 
@@ -85,6 +86,9 @@ class AppException {
               break;
             case HttpStatus.paymentRequired: // 402
               type = AppExceptionType.paymentRequired;
+              break;
+            case HttpStatus.lengthRequired: // 411
+              type = AppExceptionType.updateInfoRequired;
               break;
             default:
               type = AppExceptionType.server;

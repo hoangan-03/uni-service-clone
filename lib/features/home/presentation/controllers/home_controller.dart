@@ -35,6 +35,9 @@ class HomeController extends BaseController<HomeInput> {
   GetCartUseCase get _getCartUseCase => Get.find<GetCartUseCase>();
   GetQrCodeUseCase get _getQrCodeUseCase => Get.find<GetQrCodeUseCase>();
 
+  @override
+  final HomeInput input;
+  HomeController(this.input);
   GetCartShippingUseCase get _getCartShippingUsecase =>
       Get.find<GetCartShippingUseCase>();
   BaseState<List<CartShipping>?> getCartShippingState = BaseState();
