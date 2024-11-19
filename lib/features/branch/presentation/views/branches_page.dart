@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
+import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_controller.dart';
 import 'package:flutter_base_v2/features/branch/domain/entities/branch.dart';
 import 'package:get/get.dart';
@@ -14,16 +15,18 @@ class BranchsPage extends BaseGetView<BranchController> {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
       backgroundColor: appColors?.white,
+      appBar: buildAppBar(
+        context: context,
+        title: "Chọn chi nhánh",
+        appColors: appColors,
+        hasBackButton: true,
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
               const SizedBox(height: 36.0),
-              Text(
-                'Chọn chi nhánh',
-                style: AppTextStyle.bold16(),
-              ),
               Expanded(
                 child: controller.getBranchsState.widget(
                   onLoading: const Center(child: CircularProgressIndicator()),
@@ -35,17 +38,23 @@ class BranchsPage extends BaseGetView<BranchController> {
                         return Obx(() => Padding(
                               padding: const EdgeInsets.symmetric(vertical: 4),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text(branch.name, style: AppTextStyle.regular16()),
-                                        if (branch.description?.isNotEmpty == true)
+                                        Text(branch.name,
+                                            style: AppTextStyle.regular16()),
+                                        if (branch.description?.isNotEmpty ==
+                                            true)
                                           Text(
                                             branch.description ?? '',
-                                            style: AppTextStyle.regular12().copyWith(color: appColors?.gray),
+                                            style: AppTextStyle.regular12()
+                                                .copyWith(
+                                                    color: appColors?.gray),
                                           ),
                                       ],
                                     ),

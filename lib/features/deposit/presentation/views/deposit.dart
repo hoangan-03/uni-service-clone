@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
+import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_controller.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:get/get.dart';
 
 class DepositPage extends BaseGetView<DepositController> {
-  const DepositPage({super.key});
+  DepositPage({super.key});
+  final AccountController accountController = Get.find<AccountController>();
 
   @override
   Widget myBuild(BuildContext context) {
@@ -53,19 +57,16 @@ class DepositPage extends BaseGetView<DepositController> {
                   children: [
                     Expanded(
                       child: TextField(
-                        controller: controller.amountController,
-                        keyboardType: TextInputType.number,
-                        style: AppTextStyle.bold18().copyWith(
-                          color: appColors?.secondary,
-                        ),
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: '0',
-                        ),
-                        onChanged: (value) {
-                          controller.updateAmount(value);
-                        },
-                      ),
+                          controller: controller.amountController,
+                          keyboardType: TextInputType.number,
+                          style: AppTextStyle.bold18().copyWith(
+                            color: appColors?.secondary,
+                          ),
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: '0',
+                          ),
+                          onChanged: controller.onAmountChanged),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -88,7 +89,7 @@ class DepositPage extends BaseGetView<DepositController> {
               ),
               const SizedBox(width: 8),
               Text(
-                '99.999 đ',
+                formatPrice(accountController.user.value.point ?? 0),
                 style: AppTextStyle.bold14().copyWith(
                   color: appColors?.secondary,
                 ),
@@ -123,7 +124,7 @@ class DepositPage extends BaseGetView<DepositController> {
       width: 80,
       child: OutlinedButton(
         onPressed: () {
-          controller.addAmount(amount);
+          controller.setAmount(amount);
         },
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
@@ -149,7 +150,10 @@ class DepositPage extends BaseGetView<DepositController> {
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            final amount = int.tryParse(controller.currentAmount.value.replaceAll('.', '')) ?? 0;
+            controller.depositRequest(amount);
+          },
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 6),
             backgroundColor: appColors?.primary,

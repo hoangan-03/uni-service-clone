@@ -75,6 +75,7 @@ dependencies:
   notification_center: ^1.0.2
   qr_code_scanner: ^1.0.1
   device_info_plus: ^11.1.1
+  webview_flutter: ^4.10.0
 
 dev_dependencies:
   flutter_test:

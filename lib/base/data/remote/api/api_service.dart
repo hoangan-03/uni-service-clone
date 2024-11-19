@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/deposit/data/models/deposit_request.dart';
+import 'package:flutter_base_v2/features/deposit/data/models/deposit_response.dart';
 import 'package:flutter_base_v2/features/deposit/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/history/data/models/transaction_response.dart';
 import 'package:flutter_base_v2/features/order/data/models/menu_qr_response.dart';
@@ -104,7 +104,7 @@ abstract class ApiService {
 
   /// DEPOSIT API
   @POST('/users/deposit')
-  Future<void> depositRequest(
+  Future<DepositResponse> depositRequest(
     @Body() DepositRequest body,
   );
 

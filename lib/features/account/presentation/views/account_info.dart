@@ -4,6 +4,8 @@ import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
+import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
+import 'package:intl/intl.dart';
 
 class AccountInfoPage extends BaseGetView<AccountController> {
   const AccountInfoPage({super.key});
@@ -14,18 +16,11 @@ class AccountInfoPage extends BaseGetView<AccountController> {
     final AccountController controller = Get.put(AccountController());
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Thông tin tài khoản',
-          style: AppTextStyle.bold18().copyWith(color: appColors?.secondary),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, size: 24),
-          onPressed: () {
-            Get.back();
-          },
-        ),
+      appBar: buildAppBar(
+        context: context,
+        title: "Thông tin tài khoản",
+        appColors: appColors,
+        hasBackButton: true,
       ),
       body: Container(
         color: Colors.white,
@@ -40,13 +35,15 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                     appColors, (value) => user.username = value),
                 buildInfoField(context, 'CCCD', user.identificationCard ?? '',
                     appColors, (value) => user.identificationCard = value),
-                buildInfoField(
+                buildDatePickerField(
                   context,
                   'Ngày sinh',
                   user.birthdate ?? '',
                   appColors,
-                  (value) => user.birthdate = value,
-                  icon: Icons.calendar_today,
+                  (value) {
+                    user.birthdate = value;
+                    controller.user.refresh(); // Refresh the user observable
+                  },
                 ),
                 buildInfoField(context, 'Trường', user.school ?? '', appColors,
                     (value) => user.school = value),
@@ -116,6 +113,63 @@ class AccountInfoPage extends BaseGetView<AccountController> {
             ),
           ),
           style: AppTextStyle.regular14().copyWith(color: Colors.black),
+        ),
+        const SizedBox(height: 16.0),
+      ],
+    );
+  }
+
+  Widget buildDatePickerField(BuildContext context, String label, String value,
+      AppColors? appColors, Function(String) onChanged) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: AppTextStyle.regular14().copyWith(color: Colors.grey),
+        ),
+        const SizedBox(height: 4.0),
+        GestureDetector(
+          onTap: () async {
+            DateTime? pickedDate;
+            try {
+              pickedDate = value.isNotEmpty
+                  ? DateFormat('dd/MM/yyyy').parse(value)
+                  : DateTime.now();
+            } catch (e) {
+              pickedDate = DateTime.now();
+            }
+
+            final selectedDate = await showDatePicker(
+              context: context,
+              initialDate: pickedDate,
+              firstDate: DateTime(1900),
+              lastDate: DateTime(2100),
+            );
+
+            if (selectedDate != null) {
+              onChanged(DateFormat('dd/MM/yyyy').format(selectedDate));
+            }
+          },
+          child: Container(
+            padding:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(8.0),
+              border: Border.all(color: Colors.transparent),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  value.isNotEmpty ? value : 'Chọn ngày',
+                  style: AppTextStyle.regular14().copyWith(color: Colors.black),
+                ),
+                Icon(Icons.calendar_today, color: appColors?.secondary),
+              ],
+            ),
+          ),
         ),
         const SizedBox(height: 16.0),
       ],

@@ -4,9 +4,7 @@ import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_binding.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
-import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
-import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -127,9 +125,7 @@ class AccountPage extends BaseGetView<AccountController> {
                   width: 270,
                   child: OutlinedButton.icon(
                     onPressed: () {
-                      N.toDeposit(
-                          input:
-                              DepositInput(controller.user.value.point ?? 0));
+                     controller.navigateToDeposit();
                     },
                     icon: Icon(Icons.account_balance_wallet,
                         color: appColors?.primary),
@@ -218,13 +214,13 @@ class AccountPage extends BaseGetView<AccountController> {
                   Text(
                     user.username ?? '',
                     style: AppTextStyle.bold16()
-                        .copyWith(color: appColors?.secondary),
+                        .copyWith(color: appColors.secondary),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     '${user.position ?? ''} - Khoa ${user.faculty ?? ''}',
                     style: AppTextStyle.regular14()
-                        .copyWith(color: appColors?.gray),
+                        .copyWith(color: appColors.gray),
                   ),
                 ],
               );
@@ -247,14 +243,14 @@ class AccountPage extends BaseGetView<AccountController> {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 13),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 11),
         child: Row(
           children: [
             Icon(icon, color: color, size: 20),
             const SizedBox(width: 16),
             Expanded(
               child: Text(title,
-                  style: AppTextStyle.regular12().copyWith(color: color)),
+                  style: AppTextStyle.regular13().copyWith(color: color)),
             ),
             if (showTrailingIcon)
               Icon(Icons.arrow_forward_ios, size: 12, color: appColors?.gray),

@@ -10,14 +10,12 @@ import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_base_v2/utils/service/push_notification_service.dart';
 import 'package:get/get.dart';
-import 'package:notification_center/notification_center.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:scan/scan.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class QrcodeController extends BaseController<HomeInput> {
   final pushNotiService = Get.find<PushNotificationService>();
-  final NotificationCenter _notificationCenter = NotificationCenter();
   final scanerController = ScanController();
   QRViewController? qrController;
   final isAllowCameraPermission = false.obs;

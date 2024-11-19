@@ -1,4 +1,3 @@
-// account_controller.dart
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -11,6 +10,7 @@ import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/account/domain/usecases/update_avatar.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
+import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/features/account/domain/usecases/get_profile_uc.dart';
 import 'package:flutter_base_v2/features/account/domain/usecases/update_profile_uc.dart';
@@ -45,6 +45,11 @@ class AccountController extends BaseController<HomeInput> {
     if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
       N.toNotifications();
     }
+  }
+
+  void navigateToDeposit() {
+    final depositInput = DepositInput(user.value.point ?? 0);
+    Get.toNamed('/deposit', arguments: depositInput);
   }
 
   @override

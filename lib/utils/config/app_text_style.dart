@@ -8,6 +8,10 @@ class AppTextStyle {
     return _styleWith(FontWeight.w400, 12, color: color);
   }
 
+    static TextStyle regular13({Color color = ColorName.grayBase}) {
+    return _styleWith(FontWeight.w400, 13, color: color);
+  }
+
   static TextStyle regular14({Color color = ColorName.grayBase}) {
     return _styleWith(FontWeight.w400, 14, color: color);
   }
