@@ -9,7 +9,6 @@ import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/deposit/data/models/deposit_request.dart';
-import 'package:flutter_base_v2/features/deposit/data/models/deposit_response.dart';
 import 'package:flutter_base_v2/features/deposit/domain/entities/deposit.dart';
 import 'package:flutter_base_v2/features/deposit/domain/usecases/deposit_uc.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';
