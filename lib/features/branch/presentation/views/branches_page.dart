@@ -23,10 +23,10 @@ class BranchsPage extends BaseGetView<BranchController> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              const SizedBox(height: 36.0),
+              const SizedBox(height: 8.0),
               Expanded(
                 child: controller.getBranchsState.widget(
                   onLoading: const Center(child: CircularProgressIndicator()),

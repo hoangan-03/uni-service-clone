@@ -10,32 +10,34 @@ import 'package:flutter_base_v2/features/account/presentation/controllers/accoun
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/deposit/data/models/deposit_request.dart';
+import 'package:flutter_base_v2/features/deposit/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/deposit/domain/entities/deposit.dart';
 import 'package:flutter_base_v2/features/deposit/domain/usecases/deposit_uc.dart';
-import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/views/webview_page.dart';
-import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
+import 'package:flutter_base_v2/features/transfer/domain/entities/transfer.dart';
+import 'package:flutter_base_v2/features/transfer/domain/usecases/transfer_uc.dart';
+import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_input.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
-import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_base_v2/utils/service/push_notification_service.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
-class DepositController extends BaseController<DepositInput> {
+class TransferController extends BaseController<TransferInput> {
   DepositRequestUseCase get _depositRequestUseCase =>
       Get.find<DepositRequestUseCase>();
+  TransferRequestUseCase get _transferRequestUseCase =>
+      Get.find<TransferRequestUseCase>();
+
   final pushNotiService = Get.find<PushNotificationService>();
+
   final AccountController controller = Get.put(AccountController());
 
   final user = User().obs;
-  var isBalanceVisible = false.obs;
 
-  final amountController = TextEditingController();
-  var currentAmount = ''.obs;
   var depositResponse = Deposit().obs;
+  var transferResponse = Transfer().obs;
 
   final LocalStorage _localStorage = Get.find();
 
@@ -77,52 +79,13 @@ class DepositController extends BaseController<DepositInput> {
     _localStorage.saveUserRefreshToken('refreshToken123123123');
   }
 
-  void setAmount(String amount) {
-    currentAmount.value = NumberFormat("#,###", "vi_VN")
-        .format(int.tryParse(amount.replaceAll('.', '')) ?? 0);
-    amountController.text = currentAmount.value;
-  }
-
-  void updateAmount(String value) {
-    currentAmount.value = value;
-  }
-
-  void clearAmount() {
-    amountController.clear();
-    currentAmount.value = '';
-  }
-
-  void onAmountChanged(String value) {
-    String cleanedValue = value.replaceAll(RegExp(r'\D'), '');
-    String formattedValue = formatPrice(int.tryParse(cleanedValue) ?? 0);
-    amountController.value = TextEditingValue(
-      text: formattedValue,
-      selection: TextSelection.collapsed(offset: formattedValue.length),
-    );
-    updateAmount(formattedValue);
-  }
-
-  Future<void> depositRequest(int price) async {
-    if (controller.user.value.school == null ||
-        controller.user.value.faculty == null ||
-        controller.user.value.identificationCard == null ||
-        controller.user.value.position == null) {
-      buildSnackBar("Vui lòng cập nhật đầy đủ thông tin cá nhân trước khi nạp tiền",false);
-      await Future.delayed(Duration(seconds: 3));
-      N.toAccountInfo();
-      return;
-    }
-
-    final params = DepositRequest(
-      price: price,
-    );
-    return _depositRequestUseCase.execute(
+  Future<void> transferRequest(String recipientId, String amount) async {
+    final params = TransferRequest(recipientId: recipientId, amount: amount);
+    return _transferRequestUseCase.execute(
       observer: Observer(
-        onSuccess: (Deposit? data) {
+        onSuccess: (Transfer? data) {
           L.info(data);
-          if (data != null) depositResponse.value = data;
-          Get.to(() => WebViewPage(
-              url: data?.paymentURL ?? 'https://www.facebook.com/'));
+          if (data != null) transferResponse.value = data;
         },
         onError: (AppException e) {
           handleError(e);
@@ -131,6 +94,38 @@ class DepositController extends BaseController<DepositInput> {
       input: params,
     );
   }
+
+  // Future<void> depositRequest(int price) async {
+  //   if (controller.user.value.school == null ||
+  //       controller.user.value.faculty == null ||
+  //       controller.user.value.identificationCard == null ||
+  //       controller.user.value.position == null) {
+  //     buildSnackBar(
+  //         "Vui lòng cập nhật đầy đủ thông tin cá nhân trước khi nạp tiền",
+  //         false);
+  //     await Future.delayed(Duration(seconds: 3));
+  //     N.toAccountInfo();
+  //     return;
+  //   }
+
+  //   final params = DepositRequest(
+  //     price: price,
+  //   );
+  //   return _depositRequestUseCase.execute(
+  //     observer: Observer(
+  //       onSuccess: (Deposit? data) {
+  //         L.info(data);
+  //         if (data != null) depositResponse.value = data;
+  //         Get.to(() => WebViewPage(
+  //             url: data?.paymentURL ?? 'https://www.facebook.com/'));
+  //       },
+  //       onError: (AppException e) {
+  //         handleError(e);
+  //       },
+  //     ),
+  //     input: params,
+  //   );
+  // }
 
   void logout() {
     Get.find<AuthService>().logout();

@@ -198,19 +198,19 @@ class _OrderItemDetails extends StatelessWidget {
               Text(
                 selectedItem?.name ?? item.product.name,
                 style:
-                    AppTextStyle.bold16().copyWith(color: appColors?.primary),
+                    AppTextStyle.bold15().copyWith(color: appColors?.primary),
               ),
               const SizedBox(height: 4),
               Text(
                 item.product.description,
                 style:
-                    AppTextStyle.regular14().copyWith(color: appColors?.gray),
+                    AppTextStyle.regular13().copyWith(color: appColors?.gray),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 18),
               Text(
                 '${formatPrice(selectedItem?.price ?? (item.type.price != null && item.type.price != 0 ? item.type.price : item.items![0].price)!)}đ',
                 style:
-                    AppTextStyle.bold14().copyWith(color: appColors?.onSuccess),
+                    AppTextStyle.medium14().copyWith(color: appColors?.onSuccess),
               ),
               const SizedBox(height: 8),
               _QuantitySelector(
@@ -225,7 +225,6 @@ class _OrderItemDetails extends StatelessWidget {
     );
   }
 }
-
 class _QuantitySelector extends StatelessWidget {
   final int orderQuantity;
   final Function(int) onQuantityChanged;
@@ -247,13 +246,15 @@ class _QuantitySelector extends StatelessWidget {
             width: 20,
             height: 20,
             decoration: BoxDecoration(
-              color: appColors?.primary,
+              color: orderQuantity == 0 ? appColors?.gray : appColors?.primary,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Icon(Icons.remove, color: appColors?.white, size: 18),
           ),
           onPressed: () {
-            onQuantityChanged(orderQuantity > 0 ? orderQuantity - 1 : 0);
+            if (orderQuantity > 0) {
+              onQuantityChanged(orderQuantity - 1);
+            }
           },
         ),
         Text(
@@ -265,15 +266,15 @@ class _QuantitySelector extends StatelessWidget {
             width: 20,
             height: 20,
             decoration: BoxDecoration(
-              color: appColors?.primary,
+              color: orderQuantity == originalQuantity ? appColors?.gray : appColors?.primary,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Icon(Icons.add, color: appColors?.white, size: 18),
           ),
           onPressed: () {
-            onQuantityChanged(orderQuantity < originalQuantity
-                ? orderQuantity + 1
-                : originalQuantity);
+            if (orderQuantity < originalQuantity) {
+              onQuantityChanged(orderQuantity + 1);
+            }
           },
         ),
         const SizedBox(width: 16),

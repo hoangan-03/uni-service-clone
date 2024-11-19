@@ -34,7 +34,7 @@ class OrderPage extends BaseGetView<HomeController> {
   AppBar _buildAppBar(AppColors? appColors, BuildContext context) {
     return AppBar(
       title: Text('Đặt món',
-          style: AppTextStyle.bold20().copyWith(color: appColors?.secondary)),
+          style: AppTextStyle.bold16().copyWith(color: appColors?.secondary)),
       centerTitle: true,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
@@ -62,7 +62,6 @@ class OrderPage extends BaseGetView<HomeController> {
           _buildProductDetails(appColors),
           const Spacer(),
           _buildTotalAmount(appColors),
-          const SizedBox(height: 16),
           _buildCheckoutButton(appColors),
         ],
       ),
@@ -108,8 +107,8 @@ class OrderPage extends BaseGetView<HomeController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Tổng cộng:',
-            style: AppTextStyle.bold20().copyWith(color: appColors?.secondary),
+            'Tổng cộng',
+            style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
           ),
           if (item.menu == "TODAY") ...[
             Obx(() {
@@ -117,7 +116,7 @@ class OrderPage extends BaseGetView<HomeController> {
               return Text(
                 '${formatPrice(((item.type.price != null && item.type.price != 0) ? item.type.price : currentItem.price)! * controller.quantity.value)}đ',
                 style:
-                    AppTextStyle.bold20().copyWith(color: appColors?.onSuccess),
+                    AppTextStyle.medium16().copyWith(color: appColors?.secondary),
               );
             }),
           ] else ...[
@@ -125,7 +124,7 @@ class OrderPage extends BaseGetView<HomeController> {
               return Text(
                 '${formatPrice((item.type.price)! * controller.quantity.value)}đ',
                 style:
-                    AppTextStyle.bold20().copyWith(color: appColors?.onSuccess),
+                    AppTextStyle.medium18().copyWith(color: appColors?.onSuccess),
               );
             }),
           ]
@@ -137,7 +136,7 @@ class OrderPage extends BaseGetView<HomeController> {
   SizedBox _buildCheckoutButton(AppColors? appColors) {
     return SizedBox(
       width: double.infinity,
-      height: 50,
+      height: 40,
       child: ElevatedButton(
         onPressed: () async {
           final name = item.product.name;
@@ -170,10 +169,11 @@ class OrderPage extends BaseGetView<HomeController> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
+          minimumSize: Size(double.infinity, 16)
         ),
         child: Text(
           'Thanh toán',
-          style: AppTextStyle.bold16().copyWith(color: appColors?.white),
+          style: AppTextStyle.medium14().copyWith(color: appColors?.white),
         ),
       ),
     );
@@ -220,8 +220,8 @@ class _TodayMenuDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Số lượng:',
-          style: AppTextStyle.regular18().copyWith(color: appColors?.secondary),
+          'Số lượng',
+          style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(
               '${controller.quantity.value}',
@@ -259,7 +259,7 @@ class _TodayMenuDetails extends StatelessWidget {
       },
       child: Text(
         'Chỉnh sửa',
-        style: AppTextStyle.bold18().copyWith(color: appColors?.primary),
+        style: AppTextStyle.medium14().copyWith(color: appColors?.primary),
       ),
     );
   }
@@ -303,8 +303,8 @@ class _RegularMenuDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Số lượng:',
-          style: AppTextStyle.regular18().copyWith(color: appColors?.secondary),
+          'Số lượng',
+          style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(
               '${controller.quantity.value}',
@@ -342,7 +342,7 @@ class _RegularMenuDetails extends StatelessWidget {
       },
       child: Text(
         'Chỉnh sửa',
-        style: AppTextStyle.bold18().copyWith(color: appColors?.primary),
+        style: AppTextStyle.regular14().copyWith(color: appColors?.primary),
       ),
     );
   }
