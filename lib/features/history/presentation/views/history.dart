@@ -30,7 +30,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
           child: Column(
             children: [
               _buildTransactionTypeTabs(appColors!),
@@ -101,7 +101,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
                                                   transact.type == 'BUY'
                                                       ? 'Mua hàng'
                                                       : transact.type ?? '',
-                                                  style: AppTextStyle.bold16(),
+                                                  style: AppTextStyle.bold14(),
                                                 ),
                                                 const SizedBox(height: 2),
                                                 Text(
@@ -122,7 +122,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
                                   ),
                                   Text(
                                     '${transact.type == 'DEPOSIT' ? '+' : '-'}${formatPrice(transact.point ?? 0).toString()} đ',
-                                    style: AppTextStyle.bold16()
+                                    style: AppTextStyle.bold14()
                                         .copyWith(color: appColors.secondary),
                                   ),
                                 ],
@@ -182,7 +182,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
           ),
           child: Text(
             label,
-            style: AppTextStyle.bold14().copyWith(
+            style: AppTextStyle.bold12().copyWith(
               color: isSelected ? appColors.primary : appColors.secondary,
             ),
           ),
@@ -231,8 +231,8 @@ class HistoryPage extends BaseGetView<TransactionController> {
             }
           },
           child: Container(
-            width: 120,
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            width: 125,
+            padding: const EdgeInsets.only(left: 8, right: 4, top: 4, bottom: 4),
             decoration: BoxDecoration(
               border: Border.all(color: appColors!.gray),
               borderRadius: BorderRadius.circular(24),
@@ -246,7 +246,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
                         ? DateFormat('dd/MM/yyyy').format(date.value!)
                         : DateFormat('dd/MM/yyyy')
                             .format(defaultDate ?? DateTime.now()),
-                    style: AppTextStyle.regular14(),
+                    style: AppTextStyle.regular12(),
                   ),
                   Icon(Icons.expand_more, size: 20, color: appColors.gray),
                 ],
@@ -261,18 +261,18 @@ class HistoryPage extends BaseGetView<TransactionController> {
   Icon getIconForTransactionType(String transactionType, AppColors? appColors) {
     switch (transactionType) {
       case 'BUY':
-        return Icon(FontAwesomeIcons.burger, color: appColors?.primary);
+        return Icon(FontAwesomeIcons.burger, color: appColors?.primary, size: 24);
       case 'SERVICES':
         return Icon(FontAwesomeIcons.squareParking,
-            color: appColors?.onSuccess);
+            color: appColors?.onSuccess, size: 24);
       case 'DEPOSIT':
-        return Icon(FontAwesomeIcons.wallet, color: Colors.orange);
+        return Icon(FontAwesomeIcons.wallet, color: Colors.orange, size: 24);
       case 'TRANSFER':
-        return Icon(FontAwesomeIcons.moneyBillWave, color: Colors.blue);
+        return Icon(FontAwesomeIcons.moneyBillWave, color: Colors.blue, size: 24);
       case 'VENDING_MACHINE':
-        return Icon(FontAwesomeIcons.store, color: Colors.purple);
+        return Icon(FontAwesomeIcons.store, color: Colors.purple, size: 24);
       default:
-        return Icon(FontAwesomeIcons.question, color: Colors.grey);
+        return Icon(FontAwesomeIcons.question, color: Colors.grey, size: 24);
     }
   }
 }

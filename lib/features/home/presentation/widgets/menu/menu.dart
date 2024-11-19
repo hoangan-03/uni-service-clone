@@ -26,7 +26,7 @@ class MenuPage extends StatelessWidget {
           context: context,
           title: getCategoryTitle(title)),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -63,13 +63,13 @@ class MenuPage extends StatelessWidget {
                             children: [
                               Text(
                                 item.product.name,
-                                style: AppTextStyle.bold16()
+                                style: AppTextStyle.bold15()
                                     .copyWith(color: appColors?.secondary),
                               ),
                               Text(
                                 item.product.description,
-                                style: AppTextStyle.regular14()
-                                    .copyWith(color: appColors?.gray),
+                                style: AppTextStyle.medium14()
+                                    .copyWith(color: appColors?.secondary),
                               ),
                               const SizedBox(height: 4),
                               // Text(

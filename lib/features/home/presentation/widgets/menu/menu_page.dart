@@ -83,13 +83,13 @@ Widget buildMenuPage(
                     children: [
                       Text(
                         item?.product.name ?? '',
-                        style: AppTextStyle.bold16()
+                        style: AppTextStyle.bold15()
                             .copyWith(color: appColors?.secondary),
                       ),
                       Text(
                         item?.product.description ?? '',
-                        style: AppTextStyle.regular14()
-                            .copyWith(color: appColors?.gray),
+                        style: AppTextStyle.medium14()
+                            .copyWith(color: appColors?.secondary),
                       ),
                     ],
                   ),

@@ -37,40 +37,49 @@ class BranchsPage extends BaseGetView<BranchController> {
                         final branch = branches![index];
                         return Obx(() => Padding(
                               padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(branch.name,
-                                            style: AppTextStyle.regular16()),
-                                        if (branch.description?.isNotEmpty ==
-                                            true)
-                                          Text(
-                                            branch.description ?? '',
-                                            style: AppTextStyle.regular12()
-                                                .copyWith(
-                                                    color: appColors?.gray),
-                                          ),
-                                      ],
-                                    ),
+                              child: GestureDetector(
+                                onTap: () {
+                                  controller.selectBranch(branch);
+                                },
+                                child: Container(
+                                  color: Colors.transparent, // Ensure the entire row is clickable
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(branch.name,
+                                                style: AppTextStyle.regular16()),
+                                            if (branch.description?.isNotEmpty ==
+                                                true)
+                                              Text(
+                                                branch.description ?? '',
+                                                style: AppTextStyle.regular12()
+                                                    .copyWith(
+                                                        color: appColors?.gray),
+                                              ),
+                                          ],
+                                        ),
+                                      ),
+                                      Radio<Branch>(
+                                        value: branch,
+                                        groupValue:
+                                            controller.selectedBranch.value,
+                                        onChanged: (Branch? value) {
+                                          if (value != null) {
+                                            controller.selectBranch(value);
+                                          }
+                                        },
+                                        activeColor: appColors?.primary,
+                                        visualDensity: VisualDensity.compact,
+                                      ),
+                                    ],
                                   ),
-                                  Radio<Branch>(
-                                    value: branch,
-                                    groupValue: controller.selectedBranch.value,
-                                    onChanged: (Branch? value) {
-                                      if (value != null) {
-                                        controller.selectBranch(value);
-                                      }
-                                    },
-                                    activeColor: appColors?.primary,
-                                    visualDensity: VisualDensity.compact,
-                                  ),
-                                ],
+                                ),
                               ),
                             ));
                       },

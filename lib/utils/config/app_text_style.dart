@@ -8,12 +8,16 @@ class AppTextStyle {
     return _styleWith(FontWeight.w400, 12, color: color);
   }
 
-    static TextStyle regular13({Color color = ColorName.grayBase}) {
+  static TextStyle regular13({Color color = ColorName.grayBase}) {
     return _styleWith(FontWeight.w400, 13, color: color);
   }
 
   static TextStyle regular14({Color color = ColorName.grayBase}) {
     return _styleWith(FontWeight.w400, 14, color: color);
+  }
+
+  static TextStyle regular15({Color color = ColorName.grayBase}) {
+    return _styleWith(FontWeight.w400, 15, color: color);
   }
 
   static TextStyle regular16({Color color = ColorName.grayBase}) {
@@ -24,7 +28,7 @@ class AppTextStyle {
     return _styleWith(FontWeight.w400, 18, color: color);
   }
 
-    static TextStyle regular20({Color color = ColorName.grayBase}) {
+  static TextStyle regular20({Color color = ColorName.grayBase}) {
     return _styleWith(FontWeight.w400, 20, color: color);
   }
 
@@ -60,8 +64,16 @@ class AppTextStyle {
     return _styleWith(FontWeight.w700, 14, color: color);
   }
 
+  static TextStyle bold15({Color color = ColorName.grayBase}) {
+    return _styleWith(FontWeight.w700, 15, color: color);
+  }
+
   static TextStyle bold16({Color color = ColorName.grayBase}) {
     return _styleWith(FontWeight.w700, 16, color: color);
+  }
+
+  static TextStyle bold17({Color color = ColorName.grayBase}) {
+    return _styleWith(FontWeight.w700, 17, color: color);
   }
 
   static TextStyle bold18({Color color = ColorName.grayBase}) {

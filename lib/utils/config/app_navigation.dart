@@ -39,4 +39,8 @@ class N {
   }) {
     type.navigate(name: AppRoute.tabbar, arguments: 0);
   }
+
+  static void toAccountInfo({RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.accountInfo);
+  }
 }

@@ -107,7 +107,7 @@ class OrderSliderContentState extends State<OrderSliderContent> {
           mainAxisSize: MainAxisSize.min,
           children: [
             _SliderHeader(),
-            const SizedBox(height: 36),
+            const SizedBox(height: 4),
             _OrderItemDetails(
               item: widget.item,
               selectedItem: selectedItem,
@@ -138,7 +138,7 @@ class OrderSliderContentState extends State<OrderSliderContent> {
               orderQuantity: orderQuantity,
               selectedItemIndex: selectedItemIndex,
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 2),
             _CancelButton(),
           ],
         ),
@@ -198,19 +198,19 @@ class _OrderItemDetails extends StatelessWidget {
               Text(
                 selectedItem?.name ?? item.product.name,
                 style:
-                    AppTextStyle.bold18().copyWith(color: appColors?.primary),
+                    AppTextStyle.bold16().copyWith(color: appColors?.primary),
               ),
               const SizedBox(height: 4),
               Text(
                 item.product.description,
                 style:
-                    AppTextStyle.regular16().copyWith(color: appColors?.gray),
+                    AppTextStyle.regular14().copyWith(color: appColors?.gray),
               ),
               const SizedBox(height: 4),
               Text(
                 '${formatPrice(selectedItem?.price ?? (item.type.price != null && item.type.price != 0 ? item.type.price : item.items![0].price)!)}đ',
                 style:
-                    AppTextStyle.bold16().copyWith(color: appColors?.onSuccess),
+                    AppTextStyle.bold14().copyWith(color: appColors?.onSuccess),
               ),
               const SizedBox(height: 8),
               _QuantitySelector(
@@ -244,11 +244,11 @@ class _QuantitySelector extends StatelessWidget {
       children: [
         IconButton(
           icon: Container(
-            width: 24,
-            height: 24,
+            width: 20,
+            height: 20,
             decoration: BoxDecoration(
               color: appColors?.primary,
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(4),
             ),
             child: Icon(Icons.remove, color: appColors?.white, size: 18),
           ),
@@ -258,15 +258,15 @@ class _QuantitySelector extends StatelessWidget {
         ),
         Text(
           '$orderQuantity',
-          style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
+          style: AppTextStyle.regular14().copyWith(color: appColors?.secondary),
         ),
         IconButton(
           icon: Container(
-            width: 24,
-            height: 24,
+            width: 20,
+            height: 20,
             decoration: BoxDecoration(
               color: appColors?.primary,
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(4),
             ),
             child: Icon(Icons.add, color: appColors?.white, size: 18),
           ),
@@ -279,7 +279,7 @@ class _QuantitySelector extends StatelessWidget {
         const SizedBox(width: 16),
         Text(
           'Còn lại: $originalQuantity',
-          style: AppTextStyle.regular14().copyWith(color: appColors?.gray),
+          style: AppTextStyle.regular12().copyWith(color: appColors?.gray),
         ),
       ],
     );
@@ -317,7 +317,7 @@ class _TodayMenuOptions extends StatelessWidget {
                   children: [
                     Text(
                       menuItem.name,
-                      style: AppTextStyle.regular16()
+                      style: AppTextStyle.regular15()
                           .copyWith(color: appColors?.secondary),
                     ),
                     Text(
@@ -378,14 +378,15 @@ class _OrderButton extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: appColors?.primary,
-        minimumSize: const Size(double.infinity, 50),
+        minimumSize: const Size(double.infinity, 20),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
       child: Text(
         'Đặt món',
-        style: AppTextStyle.bold16().copyWith(color: appColors?.white),
+        style: AppTextStyle.bold14().copyWith(color: appColors?.white),
       ),
     );
   }
@@ -403,14 +404,15 @@ class _CancelButton extends StatelessWidget {
         foregroundColor: appColors?.onCancel,
         backgroundColor: appColors?.white,
         side: BorderSide(color: appColors!.onCancel),
-        minimumSize: const Size(double.infinity, 50),
+        minimumSize: const Size(double.infinity, 20),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
       child: Text(
         'Cancel',
-        style: AppTextStyle.bold16().copyWith(color: appColors.onCancel),
+        style: AppTextStyle.bold14().copyWith(color: appColors.onCancel),
       ),
     );
   }

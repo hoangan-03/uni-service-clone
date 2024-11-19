@@ -6,6 +6,7 @@ import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
+import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/deposit/data/models/deposit_request.dart';
@@ -25,9 +26,12 @@ class DepositController extends BaseController<DepositInput> {
   DepositRequestUseCase get _depositRequestUseCase =>
       Get.find<DepositRequestUseCase>();
   final pushNotiService = Get.find<PushNotificationService>();
+      final AccountController controller = Get.put(AccountController());
 
   final user = User().obs;
   var isBalanceVisible = false.obs;
+
+
 
   final amountController = TextEditingController();
   var currentAmount = ''.obs;
@@ -98,7 +102,22 @@ class DepositController extends BaseController<DepositInput> {
     updateAmount(formattedValue);
   }
 
-  Future<void> depositRequest(int price) {
+  Future<void> depositRequest(int price) async {
+    if (controller.user.value.school == null ||
+        controller.user.value.faculty == null ||
+        controller.user.value.identificationCard == null ||
+        controller.user.value.position == null) {
+      Get.snackbar(
+        'Thiếu thông tin',
+        'Hoàn thành các trường sau để tiếp tục: Trường, Khoa, CCCD, Chức vụ',
+        snackPosition: SnackPosition.BOTTOM,
+        duration: Duration(seconds: 3),
+      );
+      await Future.delayed(Duration(seconds: 3));
+      N.toAccountInfo();
+      return;
+    }
+
     final params = DepositRequest(
       price: price,
     );
@@ -107,7 +126,7 @@ class DepositController extends BaseController<DepositInput> {
         onSuccess: (Deposit? data) {
           L.info(data);
           if (data != null) depositResponse.value = data;
-           Get.to(() => WebViewPage(url: data?.paymentURL ?? 'https://www.facebook.com/'));
+          Get.to(() => WebViewPage(url: data?.paymentURL ?? 'https://www.facebook.com/'));
         },
         onError: (AppException e) {
           handleError(e);
