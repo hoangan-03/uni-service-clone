@@ -15,7 +15,9 @@ import 'package:flutter_base_v2/features/deposit/domain/usecases/deposit_uc.dart
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/views/webview_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
+import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_base_v2/utils/service/push_notification_service.dart';
@@ -26,12 +28,10 @@ class DepositController extends BaseController<DepositInput> {
   DepositRequestUseCase get _depositRequestUseCase =>
       Get.find<DepositRequestUseCase>();
   final pushNotiService = Get.find<PushNotificationService>();
-      final AccountController controller = Get.put(AccountController());
+  final AccountController controller = Get.put(AccountController());
 
   final user = User().obs;
   var isBalanceVisible = false.obs;
-
-
 
   final amountController = TextEditingController();
   var currentAmount = ''.obs;
@@ -107,12 +107,7 @@ class DepositController extends BaseController<DepositInput> {
         controller.user.value.faculty == null ||
         controller.user.value.identificationCard == null ||
         controller.user.value.position == null) {
-      Get.snackbar(
-        'Thiếu thông tin',
-        'Hoàn thành các trường sau để tiếp tục: Trường, Khoa, CCCD, Chức vụ',
-        snackPosition: SnackPosition.BOTTOM,
-        duration: Duration(seconds: 3),
-      );
+      buildSnackBar("Vui lòng cập nhật đầy đủ thông tin cá nhân trước khi nạp tiền",false);
       await Future.delayed(Duration(seconds: 3));
       N.toAccountInfo();
       return;
@@ -126,7 +121,8 @@ class DepositController extends BaseController<DepositInput> {
         onSuccess: (Deposit? data) {
           L.info(data);
           if (data != null) depositResponse.value = data;
-          Get.to(() => WebViewPage(url: data?.paymentURL ?? 'https://www.facebook.com/'));
+          Get.to(() => WebViewPage(
+              url: data?.paymentURL ?? 'https://www.facebook.com/'));
         },
         onError: (AppException e) {
           handleError(e);

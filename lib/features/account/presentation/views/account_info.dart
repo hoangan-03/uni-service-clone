@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
@@ -42,7 +43,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                   appColors,
                   (value) {
                     user.birthdate = value;
-                    controller.user.refresh(); // Refresh the user observable
+                    controller.user.refresh();
                   },
                 ),
                 buildInfoField(context, 'Trường', user.school ?? '', appColors,
@@ -63,6 +64,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                     onPressed: () {
                       controller.updateProfile(user);
                       Get.back();
+                      buildSnackBar("Cập nhật thông tin thành công", true);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
