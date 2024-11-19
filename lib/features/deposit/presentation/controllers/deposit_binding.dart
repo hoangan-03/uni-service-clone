@@ -7,6 +7,5 @@ class DepositBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(DepositController.new);
     Get.lazyPut(() => DepositRequestUseCase(Get.find()));
-
   }
 }

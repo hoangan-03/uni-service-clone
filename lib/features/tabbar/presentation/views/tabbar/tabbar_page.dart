@@ -93,13 +93,14 @@ class TabbarPage extends GetView {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
+    final initialIndex = Get.arguments as int? ?? 0;
     return Stack(
       children: [
         PersistentTabView(
           context,
           backgroundColor:
               Get.context?.theme.appBarTheme.backgroundColor ?? Colors.white,
-          controller: PersistentTabController(initialIndex: 0),
+          controller: PersistentTabController(initialIndex: initialIndex),
           screens: _buildScreens(),
           items: _navBarsItems(),
           confineToSafeArea: true,

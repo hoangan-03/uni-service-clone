@@ -24,19 +24,19 @@ class N {
     type.navigate(name: AppRoute.login);
   }
 
-  // static void toRegister({RouteType type = RouteType.to}) {
-  //   type.navigate(name: AppRoute.register);
-  // }
-
   static void toDeposit(
       {required DepositInput input, RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.deposit, arguments: input);
+  }
+
+  static void toAccount({RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.tabbar, arguments: 4);
   }
 
   static void toHome({
     required HomeInput input,
     RouteType type = RouteType.offAll,
   }) {
-    type.navigate(name: AppRoute.tabbar, arguments: input);
+    type.navigate(name: AppRoute.tabbar, arguments: 0);
   }
 }

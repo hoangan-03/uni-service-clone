@@ -12,6 +12,7 @@ import 'package:flutter_base_v2/features/deposit/data/models/deposit_request.dar
 import 'package:flutter_base_v2/features/deposit/domain/entities/deposit.dart';
 import 'package:flutter_base_v2/features/deposit/domain/usecases/deposit_uc.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';
+import 'package:flutter_base_v2/features/deposit/presentation/views/webview_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
@@ -106,6 +107,7 @@ class DepositController extends BaseController<DepositInput> {
         onSuccess: (Deposit? data) {
           L.info(data);
           if (data != null) depositResponse.value = data;
+           Get.to(() => WebViewPage(url: data?.paymentURL ?? 'https://www.facebook.com/'));
         },
         onError: (AppException e) {
           handleError(e);

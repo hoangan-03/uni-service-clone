@@ -110,6 +110,8 @@ class AccountController extends BaseController<HomeInput> {
         input: updatedUser);
   }
 
+
+
   Future<void> updateAvatar(File avatar) {
     return _updateAvatarUseCase.execute(
         observer: Observer(
@@ -122,6 +124,10 @@ class AccountController extends BaseController<HomeInput> {
           },
         ),
         input: avatar);
+  }
+
+  void reloadUserInfo() {
+    getProfile();
   }
 
   void logout() {
