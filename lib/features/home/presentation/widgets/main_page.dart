@@ -7,7 +7,7 @@ Widget buildMainPage(BuildContext context, String branchId, String selectedCateg
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 10),
+        const SizedBox(height: 32),
         buildItemList(context,"TODAY", menuTodayState),
         // buildItemList(context,"PREORDER", menuPreoderState),
         buildItemList(context,"DRINK", menuDrinkState),

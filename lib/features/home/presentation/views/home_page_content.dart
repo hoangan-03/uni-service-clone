@@ -45,50 +45,47 @@ class HomePageContent extends StatelessWidget {
           children: [
             buildHeader(context, getCartShipping),
             const SizedBox(height: 16),
-            Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      TopNavButton(
-                        icon: FontAwesomeIcons.bellConcierge,
-                        label: 'Tất cả',
-                        currentMenu: currentMenu,
-                        onMenuSelected: onMenuSelected,
-                      ),
-                      const SizedBox(width: 10),
-                      TopNavButton(
-                        icon: FontAwesomeIcons.utensils,
-                        label: 'Thực đơn chính',
-                        currentMenu: currentMenu,
-                        onMenuSelected: onMenuSelected,
-                      ),
-                      const SizedBox(width: 10),
-                      TopNavButton(
-                        icon: FontAwesomeIcons.martiniGlass,
-                        label: 'Đồ uống',
-                        currentMenu: currentMenu,
-                        onMenuSelected: onMenuSelected,
-                      ),
-                      const SizedBox(width: 10),
-                      TopNavButton(
-                        icon: FontAwesomeIcons.bowlRice,
-                        label: 'Food Court',
-                        currentMenu: currentMenu,
-                        onMenuSelected: onMenuSelected,
-                      ),
-                      const SizedBox(width: 10),
-                      TopNavButton(
-                        icon: FontAwesomeIcons.wheatAwn,
-                        label: 'Đặc sản địa phương',
-                        currentMenu: currentMenu,
-                        onMenuSelected: onMenuSelected,
-                      ),
-                    ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  TopNavButton(
+                    icon: FontAwesomeIcons.bellConcierge,
+                    label: 'Tất cả',
+                    currentMenu: currentMenu,
+                    onMenuSelected: onMenuSelected,
                   ),
-                )),
-            const SizedBox(height: 8),
+                  const SizedBox(width: 10),
+                  TopNavButton(
+                    icon: FontAwesomeIcons.utensils,
+                    label: 'Thực đơn chính',
+                    currentMenu: currentMenu,
+                    onMenuSelected: onMenuSelected,
+                  ),
+                  const SizedBox(width: 10),
+                  TopNavButton(
+                    icon: FontAwesomeIcons.martiniGlass,
+                    label: 'Đồ uống',
+                    currentMenu: currentMenu,
+                    onMenuSelected: onMenuSelected,
+                  ),
+                  const SizedBox(width: 10),
+                  TopNavButton(
+                    icon: FontAwesomeIcons.bowlRice,
+                    label: 'Food Court',
+                    currentMenu: currentMenu,
+                    onMenuSelected: onMenuSelected,
+                  ),
+                  const SizedBox(width: 10),
+                  TopNavButton(
+                    icon: FontAwesomeIcons.wheatAwn,
+                    label: 'Đặc sản địa phương',
+                    currentMenu: currentMenu,
+                    onMenuSelected: onMenuSelected,
+                  ),
+                ],
+              ),
+            ),
             currentMenu == 'Tất cả'
                 ? buildMainPage(
                     context,

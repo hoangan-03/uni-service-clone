@@ -17,4 +17,6 @@ class DepositRepoImpl extends DepositRepo {
     final DepositApiModel model = response.data;
     return mappingEntity(model);
   }
+
+  
 }

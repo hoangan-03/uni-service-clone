@@ -17,6 +17,7 @@ import 'package:flutter_base_v2/features/deposit/presentation/views/webview_page
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
+import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_base_v2/utils/service/push_notification_service.dart';

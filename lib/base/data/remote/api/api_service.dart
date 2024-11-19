@@ -4,6 +4,7 @@ import 'package:flutter_base_v2/features/deposit/data/models/deposit_response.da
 import 'package:flutter_base_v2/features/deposit/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/history/data/models/transaction_response.dart';
 import 'package:flutter_base_v2/features/order/data/models/menu_qr_response.dart';
+import 'package:flutter_base_v2/features/transfer/data/models/transfer_response.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_base_v2/features/account/data/models/user_response.dart';
@@ -110,7 +111,7 @@ abstract class ApiService {
 
   /// TRANSFER API
   @POST('/transfer')
-  Future<void> transferRequest(
+  Future<TransferResponse> transferRequest(
     @Body() TransferRequest body,
   );
 

@@ -52,11 +52,9 @@ class BillPage extends BaseGetView<HomeController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 16.0),
             Center(
               child: Row(
-                mainAxisSize: MainAxisSize
-                    .min,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.location_on,
                       color: appColors!.secondary, size: 16),
@@ -71,9 +69,9 @@ class BillPage extends BaseGetView<HomeController> {
             ),
             const SizedBox(height: 8.0),
             _buildExpirationDate(appColors),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 4.0),
             _buildOrderStatusButton(appColors),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 4.0),
             _buildQRCodeImage(),
             const SizedBox(height: 8.0),
             _buildBillTimestamp(currentTime),
@@ -81,15 +79,15 @@ class BillPage extends BaseGetView<HomeController> {
             _buildBillId(),
             const SizedBox(height: 16.0),
             _buildOrderDetailsHeader(),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 4.0),
             Divider(color: Colors.grey[300]),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 6.0),
             _buildOrderItemDetails(),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 6.0),
             Divider(color: Colors.grey[300]),
-            const SizedBox(height: 8.0),
+            const SizedBox(height: 6.0),
             _buildTotalPrice(appColors),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 12.0),
             _buildReturnHomeButton(appColors),
           ],
         ));
@@ -98,22 +96,23 @@ class BillPage extends BaseGetView<HomeController> {
   Text _buildExpirationDate(AppColors? appColors) {
     return Text(
       "Ngày hết hạn: ${DateFormat('HH:mm - dd/MM/yyyy').format(DateTime.now().add(const Duration(hours: 8)))}",
-      style: AppTextStyle.regular14().copyWith(color: appColors!.secondary),
+      style: AppTextStyle.bold12().copyWith(color: appColors!.secondary),
     );
   }
 
-  ElevatedButton _buildOrderStatusButton(AppColors? appColors) {
+   ElevatedButton _buildOrderStatusButton(AppColors? appColors) {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
         backgroundColor: appColors?.onSuccess,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(16.0),
         ),
+        minimumSize: const Size(80, 30), 
       ),
       child: Text(
         'Chưa giao hàng',
-        style: AppTextStyle.bold14().copyWith(color: Colors.white),
+        style: AppTextStyle.bold12().copyWith(color: Colors.white),
       ),
     );
   }
@@ -247,6 +246,8 @@ class BillPage extends BaseGetView<HomeController> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
+        minimumSize: const Size (double.infinity, 40)
+
       ),
       child: Text(
         'Quay về trang chủ',

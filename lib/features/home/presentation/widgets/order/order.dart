@@ -3,6 +3,7 @@ import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_slider.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -162,6 +163,7 @@ class OrderPage extends BaseGetView<HomeController> {
                 branch: branch,
                 branchName: branchName,
               ));
+          buildSnackBar("Mua hàng thành công", true);
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: appColors?.primary,
