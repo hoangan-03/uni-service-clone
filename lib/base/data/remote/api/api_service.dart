@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'package:flutter_base_v2/features/deposit/data/models/deposit_request.dart';
 import 'package:flutter_base_v2/features/deposit/data/models/deposit_response.dart';
-import 'package:flutter_base_v2/features/deposit/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/history/data/models/transaction_response.dart';
 import 'package:flutter_base_v2/features/order/data/models/menu_qr_response.dart';
+import 'package:flutter_base_v2/features/transfer/data/models/transfer_detail_reponse.dart';
+import 'package:flutter_base_v2/features/transfer/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/transfer/data/models/transfer_response.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:dio/dio.dart';
@@ -113,6 +114,11 @@ abstract class ApiService {
   @POST('/transfer')
   Future<TransferResponse> transferRequest(
     @Body() TransferRequest body,
+  );
+
+  @GET('/transfer')
+  Future<TransferDetailResponse> getTransferDetail(
+    @Query('txn') String txn,
   );
 
   @GET('/users/user-phone')

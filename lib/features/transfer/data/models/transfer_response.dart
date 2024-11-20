@@ -8,9 +8,7 @@ class TransferResponse extends BaseResponse {
 
 @jsonSerializable
 class TransferApiModel {
-  String? id = '';
-  String? username = '';
-  String? phone  = '';
-  String? avatar = '';
-  String? email = '';
+  String? txn = '';
+  int? fee = 0;
+  int? amount = 0;
 }

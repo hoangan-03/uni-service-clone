@@ -2,12 +2,14 @@ import 'dart:async';
 import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
-import 'package:flutter_base_v2/features/deposit/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_qr.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/menu_qr.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/get_qr_code.dart';
+import 'package:flutter_base_v2/features/transfer/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/transfer/domain/entities/transfer.dart';
+import 'package:flutter_base_v2/features/transfer/domain/entities/transfer_detail.dart';
+import 'package:flutter_base_v2/features/transfer/domain/usecases/transfer_detail_uc.dart';
 import 'package:flutter_base_v2/features/transfer/domain/usecases/transfer_uc.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/views/transfer_bill.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
@@ -24,9 +26,13 @@ class QrcodeController extends BaseController<HomeInput> {
   QRViewController? qrController;
   final isAllowCameraPermission = false.obs;
   final qrmenu = MenuQR().obs;
+
+  var amount = "30000".obs;
   GetQrCodeUseCase get _getQrCodeUseCase => Get.find<GetQrCodeUseCase>();
-  TransferRequestUseCase get _getQrCodeUserUseCase =>
+  TransferRequestUseCase get _transferRequestUseCase =>
       Get.find<TransferRequestUseCase>();
+  TransferDetailUseCase get _transferDetailUseCase =>
+      Get.find<TransferDetailUseCase>();
 
   @override
   void onInit() async {
@@ -66,26 +72,30 @@ class QrcodeController extends BaseController<HomeInput> {
 
   void scannedUserQRCode(String recipientId, String amount) async {
     try {
-      final item = await getQrCodeUser(recipientId, amount);
-      if (item != null) {
-        Get.to(() => TransferBillPage(
-              recipientName:  item.username ?? "",
-              phone: item.phone ?? "",
-              amount: amount,
-            ));
+      final transferResponse = await transferRequest(recipientId, amount);
+      if (transferResponse != null) {
+        final transferDetail =
+            await getTransferDetail(transferResponse.txn?? "");
+        if (transferDetail != null) {
+          Get.to(() => TransferBillPage(
+                recipientName: transferDetail.recipient.username ?? "",
+                phone: transferDetail.recipient.phone ?? "",
+                amount: amount,
+              ));
+        }
       }
     } catch (e) {
-      print("Failed to get item: $e");
+      print("Failed to get transfer detail: $e");
     }
   }
 
-  Future<Transfer?> getQrCodeUser(String recipientId, String amount) async {
+  Future<Transfer?> transferRequest(String recipientId, String amount) async {
     final completer = Completer<Transfer?>();
-    _getQrCodeUserUseCase.execute(
+    _transferRequestUseCase.execute(
       observer: Observer(
-        onSuccess: (Transfer? qrMenu) {
-          L.info(qrMenu);
-          completer.complete(qrMenu);
+        onSuccess: (Transfer? transferResponse) {
+          L.info(transferResponse);
+          completer.complete(transferResponse);
         },
         onError: (AppException e) {
           handleError(e);
@@ -93,6 +103,24 @@ class QrcodeController extends BaseController<HomeInput> {
         },
       ),
       input: TransferRequest(recipientId: recipientId, amount: amount),
+    );
+    return completer.future;
+  }
+
+  Future<TransferDetail?> getTransferDetail(String txn) async {
+    final completer = Completer<TransferDetail?>();
+    _transferDetailUseCase.execute(
+      observer: Observer(
+        onSuccess: (TransferDetail? transferDetail) {
+          L.info(transferDetail);
+          completer.complete(transferDetail);
+        },
+        onError: (AppException e) {
+          handleError(e);
+          completer.completeError(e);
+        },
+      ),
+      input: TransferDetailParams(txn: txn),
     );
     return completer.future;
   }
@@ -115,7 +143,7 @@ class QrcodeController extends BaseController<HomeInput> {
     return completer.future;
   }
 
-  Future onQRViewCreated(QRViewController controller, String amount) async {
+  Future onQRViewCreated(QRViewController controller) async {
     qrController = controller;
     await controller.resumeCamera();
     controller.scannedDataStream.listen((scanData) {
@@ -124,7 +152,7 @@ class QrcodeController extends BaseController<HomeInput> {
         controller.pauseCamera();
         if (qrCode.startsWith("usr:")) {
           var recipientId = qrCode.substring(4);
-          scannedUserQRCode(recipientId, amount);
+          scannedUserQRCode(recipientId, amount.value);
         } else {
           scannedQRCode(qrCode);
         }

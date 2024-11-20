@@ -216,6 +216,7 @@ class AccountPage extends BaseGetView<AccountController> {
                           controller.updateAvatar(formattedFile);
                         }
                         Navigator.of(context).pop();
+                        
                       },
                     ),
                     _buildOptionItem(

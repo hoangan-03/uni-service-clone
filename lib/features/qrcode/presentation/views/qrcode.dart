@@ -31,7 +31,7 @@ class QRPage extends BaseGetView<QrcodeController> {
           Obx(() => (controller.isAllowCameraPermission.value)
               ? QRView(
                   key: qrKey,
-                  onQRViewCreated: controller.onQRViewCreated as QRViewCreatedCallback,
+                  onQRViewCreated: controller.onQRViewCreated,
                   overlay: QrScannerOverlayShape(
                     overlayColor: appColors!.transparent,
                     borderColor: appColors.transparent,

@@ -9,10 +9,11 @@ import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
-import 'package:flutter_base_v2/features/deposit/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/deposit/domain/entities/deposit.dart';
 import 'package:flutter_base_v2/features/deposit/domain/usecases/deposit_uc.dart';
+import 'package:flutter_base_v2/features/transfer/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/transfer/domain/entities/transfer.dart';
+import 'package:flutter_base_v2/features/transfer/domain/usecases/transfer_detail_uc.dart';
 import 'package:flutter_base_v2/features/transfer/domain/usecases/transfer_uc.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_input.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
@@ -26,6 +27,8 @@ class TransferController extends BaseController<TransferInput> {
       Get.find<DepositRequestUseCase>();
   TransferRequestUseCase get _transferRequestUseCase =>
       Get.find<TransferRequestUseCase>();
+  TransferDetailUseCase get _transferDetailUseCase =>
+      Get.find<TransferDetailUseCase>();
 
   final pushNotiService = Get.find<PushNotificationService>();
 
@@ -91,39 +94,7 @@ class TransferController extends BaseController<TransferInput> {
       input: params,
     );
   }
-
-  // Future<void> depositRequest(int price) async {
-  //   if (controller.user.value.school == null ||
-  //       controller.user.value.faculty == null ||
-  //       controller.user.value.identificationCard == null ||
-  //       controller.user.value.position == null) {
-  //     buildSnackBar(
-  //         "Vui lòng cập nhật đầy đủ thông tin cá nhân trước khi nạp tiền",
-  //         false);
-  //     await Future.delayed(Duration(seconds: 3));
-  //     N.toAccountInfo();
-  //     return;
-  //   }
-
-  //   final params = DepositRequest(
-  //     price: price,
-  //   );
-  //   return _depositRequestUseCase.execute(
-  //     observer: Observer(
-  //       onSuccess: (Deposit? data) {
-  //         L.info(data);
-  //         if (data != null) depositResponse.value = data;
-  //         Get.to(() => WebViewPage(
-  //             url: data?.paymentURL ?? 'https://www.facebook.com/'));
-  //       },
-  //       onError: (AppException e) {
-  //         handleError(e);
-  //       },
-  //     ),
-  //     input: params,
-  //   );
-  // }
-
+  
   void logout() {
     Get.find<AuthService>().logout();
   }
