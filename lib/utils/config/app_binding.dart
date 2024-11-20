@@ -22,6 +22,8 @@ import 'package:flutter_base_v2/features/order/domain/repositories/cart_repo.dar
 import 'package:flutter_base_v2/features/order/domain/repositories/cart_shipping.dart';
 import 'package:flutter_base_v2/features/order/domain/repositories/payment_repo.dart';
 import 'package:flutter_base_v2/features/order/domain/repositories/qr_repo.dart';
+import 'package:flutter_base_v2/features/transfer/data/repositories/transfer_repo.dart';
+import 'package:flutter_base_v2/features/transfer/domain/repositories/transfer_repo.dart';
 import 'package:flutter_base_v2/utils/config/app_config.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -90,6 +92,7 @@ class AppBinding extends Bindings {
     Get.put<QrCodeRepo>(QrCodeRepoImpl());
     Get.put<TransactionRepo>(TransactionRepoImpl());
     Get.put<DepositRepo>(DepositRepoImpl());
+    Get.put<TransferRepo>(TransferRepoImpl());
     
   }
 

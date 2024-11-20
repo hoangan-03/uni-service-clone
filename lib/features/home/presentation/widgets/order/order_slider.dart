@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/cancel_button.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -139,7 +140,7 @@ class OrderSliderContentState extends State<OrderSliderContent> {
               selectedItemIndex: selectedItemIndex,
             ),
             const SizedBox(height: 2),
-            _CancelButton(),
+            CancelButton(),
           ],
         ),
       ),
@@ -388,32 +389,6 @@ class _OrderButton extends StatelessWidget {
       child: Text(
         'Đặt món',
         style: AppTextStyle.bold14().copyWith(color: appColors?.white),
-      ),
-    );
-  }
-}
-
-class _CancelButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final appColors = Theme.of(context).extension<AppColors>();
-    return TextButton(
-      onPressed: () {
-        Navigator.pop(context);
-      },
-      style: TextButton.styleFrom(
-        foregroundColor: appColors?.onCancel,
-        backgroundColor: appColors?.white,
-        side: BorderSide(color: appColors!.onCancel),
-        minimumSize: const Size(double.infinity, 20),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-      child: Text(
-        'Cancel',
-        style: AppTextStyle.bold14().copyWith(color: appColors.onCancel),
       ),
     );
   }

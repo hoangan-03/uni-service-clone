@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/product.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/cancel_button.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_qr.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/menu_qr.dart';
@@ -140,7 +141,7 @@ class OrderSliderContentState extends State<OrderSliderContent> {
               selectedItemIndex: selectedItemIndex,
             ),
             const SizedBox(height: 10),
-            _CancelButton(),
+            CancelButton(),
           ],
         ),
       ),
@@ -209,7 +210,7 @@ class _OrderItemDetails extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                '${formatPrice( item.type.price!)}đ',
+                '${formatPrice(item.type.price!)}đ',
                 style:
                     AppTextStyle.bold16().copyWith(color: appColors?.onSuccess),
               ),
@@ -387,31 +388,6 @@ class _OrderButton extends StatelessWidget {
       child: Text(
         'Đặt món',
         style: AppTextStyle.bold16().copyWith(color: appColors?.white),
-      ),
-    );
-  }
-}
-
-class _CancelButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final appColors = Theme.of(context).extension<AppColors>();
-    return TextButton(
-      onPressed: () {
-        Navigator.pop(context);
-      },
-      style: TextButton.styleFrom(
-        foregroundColor: appColors?.onCancel,
-        backgroundColor: appColors?.white,
-        side: BorderSide(color: appColors!.onCancel),
-        minimumSize: const Size(double.infinity, 50),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-      child: Text(
-        'Cancel',
-        style: AppTextStyle.bold16().copyWith(color: appColors.onCancel),
       ),
     );
   }

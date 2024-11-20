@@ -4,7 +4,9 @@ import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_binding.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/cancel_button.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -26,9 +28,9 @@ class AccountPage extends BaseGetView<AccountController> {
           child: Column(
             children: [
               const SizedBox(height: 60),
-              _buildProfileSection(appColors),
+              _buildProfileSection(context),
               const SizedBox(height: 30),
-              _buildQRSection(appColors),
+              _buildQRSection(context),
               const SizedBox(height: 30),
               Column(
                 children: [
@@ -63,7 +65,8 @@ class AccountPage extends BaseGetView<AccountController> {
     );
   }
 
-  Widget _buildQRSection(AppColors? appColors) {
+  Widget _buildQRSection(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Container(
       padding: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
@@ -125,7 +128,7 @@ class AccountPage extends BaseGetView<AccountController> {
                   width: 270,
                   child: OutlinedButton.icon(
                     onPressed: () {
-                     controller.navigateToDeposit();
+                      controller.navigateToDeposit();
                     },
                     icon: Icon(Icons.account_balance_wallet,
                         color: appColors?.primary),
@@ -144,7 +147,30 @@ class AccountPage extends BaseGetView<AccountController> {
                 SizedBox(
                   width: 270,
                   child: OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      showOptions(
+                        'Phương thức chuyển tiền',
+                        [
+                          _buildOptionItem(
+                            appColors,
+                            Icons.qr_code,
+                            'Quét mã QR',
+                            () {
+                              Get.back();
+                              N.toQrScanner();
+                            },
+                          ),
+                          _buildOptionItem(
+                            appColors,
+                            Icons.phone_enabled,
+                            'Nhập số điện thoại',
+                            () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
                     icon: Icon(Icons.send, color: appColors.primary),
                     label: Text(
                       'Chuyển tiền',
@@ -166,13 +192,50 @@ class AccountPage extends BaseGetView<AccountController> {
     );
   }
 
-  Widget _buildProfileSection(AppColors? appColors) {
+  Widget _buildProfileSection(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Stack(
       children: [
         Column(
           children: [
             GestureDetector(
-              onTap: showAvatarOptions,
+              onTap: () {
+                showOptions(
+                  'Thay đổi hình từ',
+                  [
+                    _buildOptionItem(
+                      appColors,
+                      Icons.camera_alt,
+                      'Chụp hình',
+                      () async {
+                        final ImagePicker picker = ImagePicker();
+                        final XFile? image =
+                            await picker.pickImage(source: ImageSource.camera);
+                        if (image != null) {
+                          final formattedFile = File(image.path);
+                          controller.updateAvatar(formattedFile);
+                        }
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    _buildOptionItem(
+                      appColors,
+                      Icons.photo_library,
+                      'Thư viện ảnh',
+                      () async {
+                        final ImagePicker picker = ImagePicker();
+                        final XFile? image =
+                            await picker.pickImage(source: ImageSource.gallery);
+                        if (image != null) {
+                          final formattedFile = File(image.path);
+                          controller.updateAvatar(formattedFile);
+                        }
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
               child: Stack(
                 children: [
                   Obx(() {
@@ -260,97 +323,66 @@ class AccountPage extends BaseGetView<AccountController> {
     );
   }
 
-  void showAvatarOptions() {
+  void showOptions(String title, List<Widget> options) {
     final appColors = Theme.of(Get.context!).extension<AppColors>();
     showModalBottomSheet(
       context: Get.context!,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
+      backgroundColor: appColors?.transparent,
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 4.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Thay đổi hình từ',
-                style:
-                    AppTextStyle.bold16().copyWith(color: appColors?.secondary),
-              ),
-              const SizedBox(height: 16),
-              ListTile(
-                leading: Container(
-                  decoration: BoxDecoration(
-                    color: appColors?.primary.withOpacity(0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Icon(Icons.camera_alt, color: appColors?.primary),
-                ),
-                title: Text(
-                  'Chụp hình',
-                  style: AppTextStyle.regular16(),
-                ),
-                onTap: () async {
-                  final ImagePicker picker = ImagePicker();
-                  final XFile? image =
-                      await picker.pickImage(source: ImageSource.camera);
-                  if (image != null) {
-                    final formattedFile = File(image.path);
-                    controller.updateAvatar(formattedFile);
-                  }
-                  Navigator.of(context).pop();
-                },
-              ),
-              ListTile(
-                leading: Container(
-                  decoration: BoxDecoration(
-                    color: appColors?.primary.withOpacity(0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Icon(Icons.photo_library, color: appColors?.primary),
-                ),
-                title: Text(
-                  'Thư viện ảnh',
-                  style: AppTextStyle.regular16(),
-                ),
-                onTap: () async {
-                  final ImagePicker picker = ImagePicker();
-                  final XFile? image =
-                      await picker.pickImage(source: ImageSource.gallery);
-                  if (image != null) {
-                    final formattedFile = File(image.path);
-                    controller.updateAvatar(formattedFile);
-                  }
-                  Navigator.of(context).pop();
-                },
-              ),
-              ListTile(
-                title: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.red),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Center(
+          padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 10.0),
+          child: Container(
+            padding:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+            decoration: BoxDecoration(
+              color: appColors?.white,
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0, top: 8),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
                     child: Text(
-                      'Cancel',
-                      style: AppTextStyle.bold16().copyWith(color: Colors.red),
+                      title,
+                      style: AppTextStyle.bold16()
+                          .copyWith(color: appColors?.secondary),
                     ),
                   ),
                 ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
+                const SizedBox(height: 16),
+                ...options,
+                const SizedBox(height: 16),
+                CancelButton(),
+              ],
+            ),
           ),
         );
       },
+    );
+  }
+
+  Widget _buildOptionItem(
+      AppColors? appColors, IconData icon, String title, VoidCallback onTap) {
+    return ListTile(
+      leading: Container(
+        decoration: BoxDecoration(
+          color: appColors?.lightGray.withOpacity(0.8),
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        padding: const EdgeInsets.all(8.0),
+        child: Icon(icon, color: appColors?.primary),
+      ),
+      title: Text(
+        title,
+        style: AppTextStyle.bold14(),
+      ),
+      onTap: onTap,
     );
   }
 }

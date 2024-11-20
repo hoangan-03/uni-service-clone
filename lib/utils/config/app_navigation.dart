@@ -40,6 +40,10 @@ class N {
     type.navigate(name: AppRoute.tabbar, arguments: 0);
   }
 
+  static void toQrScanner({RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.qr);
+  }
+
   static void toAccountInfo({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.accountInfo);
   }
