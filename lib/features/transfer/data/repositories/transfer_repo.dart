@@ -9,7 +9,7 @@ class TransferRepoImpl extends TransferRepo {
   final ApiService _apiService = Get.find();
 
   @override
-  Future<Transfer> transferRequest(String recipientId, String amount) async {
+  Future<Transfer> transferRequest(String recipientId, int amount) async {
     final request = TransferRequest(
       recipientId: recipientId,
       amount: amount,

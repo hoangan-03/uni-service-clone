@@ -9,7 +9,7 @@ class TransferDetailResponse extends BaseResponse {
 @jsonSerializable
 class TransferDetailApiModel {
   String? id = '';
-  String? amount = '';
+  int? amount = 0;
   String? status = '';
   RecipientSender recipient = RecipientSender();
   RecipientSender sender = RecipientSender();

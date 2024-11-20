@@ -116,9 +116,9 @@ abstract class ApiService {
     @Body() TransferRequest body,
   );
 
-  @GET('/transfer')
+  @GET('/transfer/{txn}')
   Future<TransferDetailResponse> getTransferDetail(
-    @Query('txn') String txn,
+    @Path('txn') String txn,
   );
 
   @GET('/users/user-phone')

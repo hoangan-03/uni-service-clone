@@ -23,7 +23,7 @@ class BranchsPage extends BaseGetView<BranchController> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.only(left: 20, right: 6),
           child: Column(
             children: [
               const SizedBox(height: 8.0),
@@ -42,7 +42,7 @@ class BranchsPage extends BaseGetView<BranchController> {
                                   controller.selectBranch(branch);
                                 },
                                 child: Container(
-                                  color: Colors.transparent, // Ensure the entire row is clickable
+                                  color: Colors.transparent, 
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,

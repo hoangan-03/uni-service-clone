@@ -1,6 +1,6 @@
 class TransferRequest {
   String recipientId = "";
-  String amount = "";
+  int amount = 0;
   TransferRequest({
     required this.recipientId,
     required this.amount,

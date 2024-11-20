@@ -4,7 +4,7 @@ import 'package:flutter_base_v2/features/transfer/data/models/transfer_detail_re
 @jsonSerializable
 class TransferDetail with PrettyJsonMixin {
   String? id = '';
-  String? amount = '';
+  int? amount = 0;
   String? status = '';
   RecipientSender recipient = RecipientSender();
   RecipientSender sender = RecipientSender();

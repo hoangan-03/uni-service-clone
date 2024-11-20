@@ -11,16 +11,21 @@ import 'package:flutter_base_v2/features/authentication/data/providers/local/loc
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/deposit/domain/entities/deposit.dart';
 import 'package:flutter_base_v2/features/deposit/domain/usecases/deposit_uc.dart';
+import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/transfer/data/models/transfer_request.dart';
+import 'package:flutter_base_v2/features/transfer/data/models/transfer_response.dart';
 import 'package:flutter_base_v2/features/transfer/domain/entities/transfer.dart';
+import 'package:flutter_base_v2/features/transfer/domain/entities/transfer_detail.dart';
 import 'package:flutter_base_v2/features/transfer/domain/usecases/transfer_detail_uc.dart';
 import 'package:flutter_base_v2/features/transfer/domain/usecases/transfer_uc.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_input.dart';
+import 'package:flutter_base_v2/features/transfer/presentation/views/transfer_bill.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_base_v2/utils/service/push_notification_service.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class TransferController extends BaseController<TransferInput> {
   DepositRequestUseCase get _depositRequestUseCase =>
@@ -31,10 +36,12 @@ class TransferController extends BaseController<TransferInput> {
       Get.find<TransferDetailUseCase>();
 
   final pushNotiService = Get.find<PushNotificationService>();
-
+  final amountController = TextEditingController();
   final AccountController controller = Get.put(AccountController());
 
   final user = User().obs;
+
+  var currentAmount = ''.obs;
 
   var depositResponse = Deposit().obs;
   var transferResponse = Transfer().obs;
@@ -79,22 +86,88 @@ class TransferController extends BaseController<TransferInput> {
     _localStorage.saveUserRefreshToken('refreshToken123123123');
   }
 
-  Future<void> transferRequest(String recipientId, String amount) async {
-    final params = TransferRequest(recipientId: recipientId, amount: amount);
-    return _transferRequestUseCase.execute(
+  void setAmount(String amount) {
+    currentAmount.value = NumberFormat("#,###", "vi_VN")
+        .format(int.tryParse(amount.replaceAll('.', '')) ?? 0);
+    amountController.text = currentAmount.value;
+  }
+
+  void updateAmount(String value) {
+    currentAmount.value = value;
+  }
+
+  void clearAmount() {
+    amountController.clear();
+    currentAmount.value = '';
+  }
+
+  void onAmountChanged(String value) {
+    String cleanedValue = value.replaceAll(RegExp(r'\D'), '');
+    String formattedValue = formatPrice(int.tryParse(cleanedValue) ?? 0);
+    amountController.value = TextEditingValue(
+      text: formattedValue,
+      selection: TextSelection.collapsed(offset: formattedValue.length),
+    );
+    updateAmount(formattedValue);
+  }
+
+  Future<Transfer?> transferRequest(String recipientId, int amount) async {
+    final completer = Completer<Transfer?>();
+    _transferRequestUseCase.execute(
       observer: Observer(
-        onSuccess: (Transfer? data) {
-          L.info(data);
-          if (data != null) transferResponse.value = data;
+        onSuccess: (Transfer? transferResponse) {
+          L.info(transferResponse);
+          completer.complete(transferResponse);
         },
         onError: (AppException e) {
           handleError(e);
+          completer.completeError(e);
         },
       ),
-      input: params,
+      input: TransferRequest(recipientId: recipientId, amount: amount),
     );
+    return completer.future;
   }
-  
+
+  Future<TransferDetail?> getTransferDetail(String txn) async {
+    final completer = Completer<TransferDetail?>();
+    _transferDetailUseCase.execute(
+      observer: Observer(
+        onSuccess: (TransferDetail? transferDetail) {
+          L.info(transferDetail);
+          completer.complete(transferDetail);
+        },
+        onError: (AppException e) {
+          handleError(e);
+          completer.completeError(e);
+        },
+      ),
+      input: TransferDetailParams(txn: txn),
+    );
+    return completer.future;
+  }
+
+  void scannedUserQRCode(String recipientId, int amount) async {
+    try {
+      final transferResponse = await transferRequest(recipientId, amount);
+      print("scannedUserQrcode");
+      if (transferResponse != null) {
+        final transferDetail =
+            await getTransferDetail(transferResponse.txn ?? "");
+        print("transferDetail");
+        if (transferDetail != null) {
+          Get.to(() => TransferBillPage(
+                recipientName: transferDetail.recipient.username ?? "",
+                phone: transferDetail.recipient.phone ?? "",
+                amount: amount,
+              ));
+        }
+      }
+    } catch (e) {
+      print("Failed to get transfer detail: $e");
+    }
+  }
+
   void logout() {
     Get.find<AuthService>().logout();
   }

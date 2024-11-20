@@ -21,6 +21,9 @@ import 'package:flutter_base_v2/features/tabbar/presentation/controllers/tabbar/
 import 'package:flutter_base_v2/features/tabbar/presentation/views/landing/landing_page.dart';
 import 'package:flutter_base_v2/features/tabbar/presentation/views/root/root_page.dart';
 import 'package:flutter_base_v2/features/tabbar/presentation/views/tabbar/tabbar_page.dart';
+import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_binding.dart';
+import 'package:flutter_base_v2/features/transfer/presentation/views/transfer.dart';
+import 'package:flutter_base_v2/features/transfer/presentation/views/transfer_bill.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
 import 'package:flutter_base_v2/features/qrcode/presentation/views/qrcode.dart';
@@ -44,9 +47,10 @@ class AppRoute {
   static String branch = '/branches';
   static String cartShipping = '/cart_shipping';
   static String bill = '/bill';
+  static String transferbill = '/transferbill';
   static String accountInfo = '/info';
   static String deposit = '/deposit';
-
+  static String transfer = '/transfer';
 
   static List<GetPage> generateGetPages = [
     GetPage(name: root, page: RootPage.new, binding: RootBinding()),
@@ -96,6 +100,15 @@ class AppRoute {
         binding: AccountBinding(),
         transition: Transition.noTransition),
     GetPage(
+        name: transferbill,
+        page: () => TransferBillPage(
+              recipientName: 'defaultRecipientName',
+              phone: 'defaultPhone',
+              amount: 0,
+            ),
+        binding: TransferBinding(),
+        transition: Transition.noTransition),
+    GetPage(
         name: bill,
         page: () => BillPage(
               imageUrl: 'defaultImageUrl',
@@ -119,10 +132,15 @@ class AppRoute {
         page: HistoryPage.new,
         binding: TransactionBinding(),
         transition: Transition.noTransition),
-        GetPage(
+    GetPage(
         name: deposit,
         page: DepositPage.new,
         binding: DepositBinding(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: transfer,
+        page: () => TransferPage(recipientId: 'defaultRecipientId'),
+        binding: TransferBinding(),
         transition: Transition.noTransition),
     GetPage(
         name: account,

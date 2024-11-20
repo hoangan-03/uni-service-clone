@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
-import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_controller.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
 
-class DepositPage extends BaseGetView<DepositController> {
-  DepositPage({super.key});
+class TransferPage extends BaseGetView<TransferController> {
+  final String recipientId;
+  TransferPage({required this.recipientId, super.key});
   final AccountController accountController = Get.find<AccountController>();
 
   @override
@@ -19,9 +20,9 @@ class DepositPage extends BaseGetView<DepositController> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: "Nạp tiền",
+        title: "Chuyển tiền",
         appColors: appColors,
-        hasBackButton: true,
+        hasBackButton: false,
       ),
       backgroundColor: appColors!.white,
       body: Column(
@@ -151,8 +152,10 @@ class DepositPage extends BaseGetView<DepositController> {
         width: double.infinity,
         child: ElevatedButton(
           onPressed: () {
-            final amount = int.tryParse(controller.currentAmount.value.replaceAll('.', '')) ?? 0;
-            controller.depositRequest(amount);
+            final amount = int.tryParse(
+                    controller.currentAmount.value.replaceAll('.', '')) ??
+                0;
+            controller.scannedUserQRCode(recipientId, amount);
           },
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 6),
