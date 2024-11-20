@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,6 +26,7 @@ class BranchController extends BaseController {
   void onInit() async {
     super.onInit();
     getBranches();
+    // await loadSelectedBranch();
   }
 
   @override
@@ -52,6 +51,19 @@ class BranchController extends BaseController {
       ),
       input: null,
     );
+  }
+
+  Future<void> loadSelectedBranch() async {
+    final branchJson = await _localStorage.getString('selectedBranch');
+    if (branchJson != null) {
+      final branchData = jsonDecode(branchJson);
+      selectedBranch.value = Branch(
+        id: branchData['id'],
+        name: branchData['name'],
+        description: branchData['description'],
+        isActive: branchData['isActive'],
+      );
+    }
   }
 
   void selectBranch(Branch branch) {
@@ -89,10 +101,6 @@ class BranchController extends BaseController {
   void setRefreshToken() {
     _localStorage.saveUserRefreshToken('refreshToken123123123');
   }
-
-  // void clearAllData() {
-  //   _localStorage.removeAllData();
-  // }
 
   void logout() {
     Get.find<AuthService>().logout();

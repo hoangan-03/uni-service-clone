@@ -8,6 +8,7 @@ import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
+import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_controller.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/home/domain/usecases/get_menu.dart';
@@ -28,24 +29,23 @@ import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_base_v2/utils/service/push_notification_service.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class HomeController extends BaseController<HomeInput> {
-  GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
-  GetMenuUseCase get _getMenuUseCase => Get.find<GetMenuUseCase>();
-  GetCartUseCase get _getCartUseCase => Get.find<GetCartUseCase>();
-  GetQrCodeUseCase get _getQrCodeUseCase => Get.find<GetQrCodeUseCase>();
-
   @override
   final HomeInput input;
   HomeController(this.input);
   GetCartShippingUseCase get _getCartShippingUsecase =>
       Get.find<GetCartShippingUseCase>();
+  GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
+  GetMenuUseCase get _getMenuUseCase => Get.find<GetMenuUseCase>();
+  GetCartUseCase get _getCartUseCase => Get.find<GetCartUseCase>();
+  GetQrCodeUseCase get _getQrCodeUseCase => Get.find<GetQrCodeUseCase>();
   BaseState<List<CartShipping>?> getCartShippingState = BaseState();
   final AddCartUseCase _addCartUseCase = Get.find<AddCartUseCase>();
   final AddPaymentUseCase _addPaymentUseCase = Get.find<AddPaymentUseCase>();
   BaseState<List<Menu>?> getMenuPreorderState = BaseState();
   BaseState<List<Menu>?> getMenuTodayState = BaseState();
-
   BaseState<List<Menu>?> getMenuFoodcourtState = BaseState();
   BaseState<List<Menu>?> getMenuDrinkState = BaseState();
   BaseState<List<Menu>?> getMenuSpecialityState = BaseState();
@@ -55,8 +55,8 @@ class HomeController extends BaseController<HomeInput> {
   final user = User().obs;
   final cart = Cart().obs;
   final qrmenu = MenuQR().obs;
+  final BranchController branchController = Get.find<BranchController>();
 
-  final LocalStorage _localStorage = Get.find();
   var currentMenu = ''.obs;
   final currentBranchID = '5bb72354-7c84-4f24-b889-a05cbda5d45d'.obs;
   final currentCategory = 'FOODCOURT'.obs;
@@ -67,8 +67,14 @@ class HomeController extends BaseController<HomeInput> {
   void onInit() async {
     super.onInit();
     pushNotiService.listenNotification();
+    final GetStorage localStorage = GetStorage();
+    final branchJson = localStorage.read('selectedBranch');
+    if (branchJson != null) {
+      final Map<String, dynamic> branchData = jsonDecode(branchJson);
+      currentBranchID.value =
+          branchData['id'] ?? '5bb72354-7c84-4f24-b889-a05cbda5d45d';
+    }
     // getProfile();
-
     getCartShipping();
     getMenuToday("TODAY", currentBranchID.value);
     getMenuToday("PREORDER", currentBranchID.value);
@@ -111,14 +117,6 @@ class HomeController extends BaseController<HomeInput> {
   void printFcmToken() async {
     final fcmToken = await pushNotiService.fcmToken;
     L.debug(fcmToken);
-  }
-
-  void setAccessToken() {
-    _localStorage.saveAccessToken('accessToken123123123');
-  }
-
-  void setRefreshToken() {
-    _localStorage.saveUserRefreshToken('refreshToken123123123');
   }
 
   // void clearAllData() {
@@ -301,7 +299,6 @@ class HomeController extends BaseController<HomeInput> {
 
   void switchTheme() {
     final newThemeMode = Get.isDarkMode ? ThemeMode.light : ThemeMode.dark;
-    _localStorage.saveThemeMode(newThemeMode);
     Get.changeThemeMode(newThemeMode);
   }
 }

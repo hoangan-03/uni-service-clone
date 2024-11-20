@@ -12,6 +12,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class AccountPage extends BaseGetView<AccountController> {
   const AccountPage({super.key});
@@ -74,11 +75,7 @@ class AccountPage extends BaseGetView<AccountController> {
       ),
       child: Column(
         children: [
-          Image.network(
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/QR_Code_Example.svg/1200px-QR_Code_Example.svg.png',
-            width: 220,
-            height: 220,
-          ),
+          _buildQRCodeImage(),
           const SizedBox(height: 20),
           Container(
             padding: const EdgeInsets.all(12.0),
@@ -165,7 +162,7 @@ class AccountPage extends BaseGetView<AccountController> {
                             Icons.phone_enabled,
                             'Nhập số điện thoại',
                             () {
-                              Navigator.of(context).pop();
+                              Get.back();
                             },
                           ),
                         ],
@@ -192,6 +189,26 @@ class AccountPage extends BaseGetView<AccountController> {
     );
   }
 
+  Widget _buildQRCodeImage() {
+    return Obx(() {
+      final qrCode = "usr:${controller.user.value.id}";
+      return QrImageView(
+        data: qrCode,
+        version: QrVersions.auto,
+        size: 200.0,
+        gapless: false,
+        errorStateBuilder: (context, error) {
+          return Center(
+            child: Text(
+              'Có lỗi xảy ra...',
+              textAlign: TextAlign.center,
+            ),
+          );
+        },
+      );
+    });
+  }
+
   Widget _buildProfileSection(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     return Stack(
@@ -216,7 +233,6 @@ class AccountPage extends BaseGetView<AccountController> {
                           controller.updateAvatar(formattedFile);
                         }
                         Navigator.of(context).pop();
-                        
                       },
                     ),
                     _buildOptionItem(

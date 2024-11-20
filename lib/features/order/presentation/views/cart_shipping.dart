@@ -41,7 +41,7 @@ class CartShippingPage extends BaseGetView<HomeController> {
       onLoading: const Center(child: CircularProgressIndicator()),
       onSuccess: (cartships) {
         if (cartships == null || cartships.isEmpty) {
-          return Center(child: Text('No items in the cart'));
+          return Center(child: Text('Giỏ hàng trống'));
         }
         return _CartShippingList(cartships: cartships, appColors: appColors);
       },

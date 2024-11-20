@@ -98,9 +98,8 @@ class HistoryPage extends BaseGetView<TransactionController> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  transact.type == 'BUY'
-                                                      ? 'Mua hàng'
-                                                      : transact.type ?? '',
+                                                  getTitleForTransactionType(
+                                                      transact.type ?? ''),
                                                   style: AppTextStyle.bold14(),
                                                 ),
                                                 const SizedBox(height: 2),
@@ -121,7 +120,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
                                     ),
                                   ),
                                   Text(
-                                    '${transact.type == 'DEPOSIT' ? '+' : '-'}${formatPrice(transact.point ?? 0).toString()} đ',
+                                    '${transact.type == "TRANSFER" ? "" : transact.type == 'DEPOSIT' ? '+' : '-'}${formatPrice(transact.point ?? 0).toString()} đ',
                                     style: AppTextStyle.bold14()
                                         .copyWith(color: appColors.secondary),
                                   ),
@@ -137,7 +136,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
                     newPageProgressIndicatorBuilder: (_) =>
                         const Center(child: CircularProgressIndicator()),
                     noItemsFoundIndicatorBuilder: (context) =>
-                        Center(child: Text('No transactions found')),
+                        Center(child: Text('Không có giao dịch nào')),
                   ),
                 ),
               ),
@@ -232,7 +231,8 @@ class HistoryPage extends BaseGetView<TransactionController> {
           },
           child: Container(
             width: 125,
-            padding: const EdgeInsets.only(left: 8, right: 4, top: 4, bottom: 4),
+            padding:
+                const EdgeInsets.only(left: 8, right: 4, top: 4, bottom: 4),
             decoration: BoxDecoration(
               border: Border.all(color: appColors!.gray),
               borderRadius: BorderRadius.circular(24),
@@ -261,18 +261,33 @@ class HistoryPage extends BaseGetView<TransactionController> {
   Icon getIconForTransactionType(String transactionType, AppColors? appColors) {
     switch (transactionType) {
       case 'BUY':
-        return Icon(FontAwesomeIcons.burger, color: appColors?.primary, size: 24);
+        return Icon(FontAwesomeIcons.burger,
+            color: appColors?.primary, size: 24);
       case 'SERVICES':
         return Icon(FontAwesomeIcons.squareParking,
             color: appColors?.onSuccess, size: 24);
       case 'DEPOSIT':
         return Icon(FontAwesomeIcons.wallet, color: Colors.orange, size: 24);
       case 'TRANSFER':
-        return Icon(FontAwesomeIcons.moneyBillWave, color: Colors.blue, size: 24);
+        return Icon(FontAwesomeIcons.moneyBillWave,
+            color: Colors.blue, size: 24);
       case 'VENDING_MACHINE':
         return Icon(FontAwesomeIcons.store, color: Colors.purple, size: 24);
       default:
         return Icon(FontAwesomeIcons.question, color: Colors.grey, size: 24);
+    }
+  }
+
+  String getTitleForTransactionType(String transactionType) {
+    switch (transactionType) {
+      case 'BUY':
+        return 'Mua hàng';
+      case 'DEPOSIT':
+        return 'Nạp tiền';
+      case 'TRANSFER':
+        return 'Chuyển tiền';
+      default:
+        return transactionType;
     }
   }
 }

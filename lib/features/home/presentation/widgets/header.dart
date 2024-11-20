@@ -73,7 +73,7 @@ Widget buildHeader(BuildContext context, Function getCartShipping) {
                           color: appColors.secondary, size: 16),
                       const SizedBox(width: 3),
                       Text(
-                        truncateText(branchName, 30),
+                        truncateText(branchName, 25),
                         style: AppTextStyle.regular12()
                             .copyWith(color: appColors.secondary),
                       ),
