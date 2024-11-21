@@ -16,36 +16,26 @@ extension TabItem on TabType {
       case TabType.home:
         return SvgPicture.asset(
           AppSvgUrl.icHome,
-          width: 20,
-          height: 20,
           color: color,
         );
       case TabType.service:
         return SvgPicture.asset(
           AppSvgUrl.icServices,
-          width: 20,
-          height: 20,
           color: color,
         );
       case TabType.qr:
         return SvgPicture.asset(
           AppSvgUrl.icQR,
-          width: 20,
-          height: 20,
           color: Colors.transparent,
         );
       case TabType.history:
         return SvgPicture.asset(
           AppSvgUrl.icHistory,
-          width: 20,
-          height: 20,
           color: color,
         );
       case TabType.account:
         return SvgPicture.asset(
           AppSvgUrl.icAccount,
-          width: 20,
-          height: 20,
           color: color,
         );
     }
@@ -86,6 +76,8 @@ extension TabItem on TabType {
       icon: icon(CupertinoColors.activeBlue),
       inactiveIcon: icon(CupertinoColors.systemGrey),
       title: title.isEmpty ? null : title,
+      iconSize: 26,
+      contentPadding: 10,
       activeColorPrimary: CupertinoColors.activeBlue,
       inactiveColorPrimary: CupertinoColors.systemGrey,
       activeColorSecondary: CupertinoColors.activeBlue,
