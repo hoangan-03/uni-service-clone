@@ -60,7 +60,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                         (value) => user.email = value),
                     buildInfoField(context, 'Số điện thoại', user.phone ?? '',
                         appColors, (value) => user.phone = value),
-                    const SizedBox(height: 80.0), // Add some space at the bottom
+                    const SizedBox(height: 80.0), 
                   ],
                 ),
               );

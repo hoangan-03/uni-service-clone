@@ -11,14 +11,14 @@ Widget buildItemCard(Menu item, BuildContext context) {
   final appColors = Theme.of(context).extension<AppColors>();
   final HomeController controller = Get.find<HomeController>();
   return Container(
-    width: 140,
+    width: 130,
     margin: const EdgeInsets.only(top: 10, bottom: 10),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: 140,
-          height: 140,
+          width: 130,
+          height: 130,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             image: DecorationImage(
@@ -33,9 +33,9 @@ Widget buildItemCard(Menu item, BuildContext context) {
           children: [
             Text(
               item.product.name,
-              style: AppTextStyle.bold16(),
+              style: AppTextStyle.bold14(),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 2),
             Text(
               '${(item.type.price != null && item.type.price != 0) ? formatPrice(item.type.price ?? 0) : formatPrice(item.items![0].price)}đ',
               style: AppTextStyle.regular12(),
@@ -43,6 +43,7 @@ Widget buildItemCard(Menu item, BuildContext context) {
             const SizedBox(height: 8),
             SizedBox(
               width: 140,
+              height: 35,
               child: TextButton(
                 onPressed: () {
                   showOrderSlider(
@@ -58,7 +59,7 @@ Widget buildItemCard(Menu item, BuildContext context) {
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: appColors?.background,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 6),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -66,7 +67,7 @@ Widget buildItemCard(Menu item, BuildContext context) {
                 child: Text(
                   'Chọn món',
                   style:
-                      AppTextStyle.bold12().copyWith(color: appColors?.primary),
+                      AppTextStyle.bold11().copyWith(color: appColors?.primary),
                 ),
               ),
             ),

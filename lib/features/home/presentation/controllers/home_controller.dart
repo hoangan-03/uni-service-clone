@@ -71,7 +71,6 @@ class HomeController extends BaseController<HomeInput> {
       currentBranchID.value =
           branchData['id'] ?? '5bb72354-7c84-4f24-b889-a05cbda5d45d';
     }
-    // getProfile();
     getCartShipping();
     getMenuToday("TODAY", currentBranchID.value);
     getMenuToday("PREORDER", currentBranchID.value);

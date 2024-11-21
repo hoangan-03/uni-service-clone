@@ -30,7 +30,7 @@ class AccountPage extends BaseGetView<AccountController> {
             children: [
               const SizedBox(height: 60),
               _buildProfileSection(context),
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
               _buildQRSection(context),
               const SizedBox(height: 30),
               Column(
@@ -69,18 +69,26 @@ class AccountPage extends BaseGetView<AccountController> {
   Widget _buildQRSection(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     return Container(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
+        image: DecorationImage(
+          image: AssetImage('assets/images/backgroundQR.png'),
+          fit: BoxFit.cover,
+          colorFilter: ColorFilter.mode(
+            appColors!.lightGray.withOpacity(0.15),
+            BlendMode.dstATop,
+          ),
+        ),
       ),
       child: Column(
         children: [
           _buildQRCodeImage(),
-          const SizedBox(height: 20),
           Container(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.symmetric(vertical: 12.0),
+               margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: appColors.white,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(

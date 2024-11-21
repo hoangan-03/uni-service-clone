@@ -1,43 +1,56 @@
+// ignore_for_file: deprecated_member_use
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/utils/config/app_route.dart';
+import 'package:flutter_base_v2/utils/config/app_svg_url.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 enum TabType { home, service, qr, history, account }
 
 extension TabItem on TabType {
-  Widget get icon {
+  Widget icon(Color color) {
     switch (this) {
       case TabType.home:
-        return Icon(
-          CupertinoIcons.home,
-          size: 20,
+        return SvgPicture.asset(
+          AppSvgUrl.icHome,
+          width: 20,
+          height: 20,
+          color: color,
         );
       case TabType.service:
-        return Icon(
-          CupertinoIcons.square_list,
-          size: 20,
+        return SvgPicture.asset(
+          AppSvgUrl.icServices,
+          width: 20,
+          height: 20,
+          color: color,
         );
       case TabType.qr:
-        return Icon(
-          CupertinoIcons.qrcode,
-          size: 20,
-          color: Colors.transparent, 
+        return SvgPicture.asset(
+          AppSvgUrl.icQR,
+          width: 20,
+          height: 20,
+          color: Colors.transparent,
         );
       case TabType.history:
-        return Icon(
-          CupertinoIcons.time,
-          size: 20,
+        return SvgPicture.asset(
+          AppSvgUrl.icHistory,
+          width: 20,
+          height: 20,
+          color: color,
         );
       case TabType.account:
-        return Icon(
-          CupertinoIcons.person,
-          size: 20,
+        return SvgPicture.asset(
+          AppSvgUrl.icAccount,
+          width: 20,
+          height: 20,
+          color: color,
         );
     }
   }
+
   String get title {
     switch (this) {
       case TabType.home:
@@ -45,7 +58,7 @@ extension TabItem on TabType {
       case TabType.service:
         return 'Tiện ích';
       case TabType.qr:
-        return ''; 
+        return '';
       case TabType.history:
         return 'Lịch sử';
       case TabType.account:
@@ -70,11 +83,12 @@ extension TabItem on TabType {
 
   PersistentBottomNavBarItem get item {
     return PersistentBottomNavBarItem(
-      icon: icon,
-      inactiveIcon: icon,
+      icon: icon(CupertinoColors.activeBlue),
+      inactiveIcon: icon(CupertinoColors.systemGrey),
       title: title.isEmpty ? null : title,
       activeColorPrimary: CupertinoColors.activeBlue,
       inactiveColorPrimary: CupertinoColors.systemGrey,
+      activeColorSecondary: CupertinoColors.activeBlue,
     );
   }
 }
@@ -123,12 +137,16 @@ class TabbarPage extends GetView {
           bottom: 20,
           left: MediaQuery.of(context).size.width / 2 - 30,
           child: FloatingActionButton(
-            onPressed: () {
-              Get.toNamed(AppRoute.qr);
-            },
-            backgroundColor: appColors!.primary,
-            child: Icon(CupertinoIcons.qrcode, size: 30, color: appColors.white),
-          ),
+              onPressed: () {
+                Get.toNamed(AppRoute.qr);
+              },
+              backgroundColor: appColors!.primary,
+              child: SvgPicture.asset(
+                AppSvgUrl.icQR,
+                width: 30,
+                height: 30,
+                color: appColors.white,
+              )),
         ),
       ],
     );

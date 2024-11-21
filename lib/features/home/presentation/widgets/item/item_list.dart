@@ -21,7 +21,7 @@ Widget buildItemList(
             children: [
               Text(
                 getCategoryTitle(category),
-                style: AppTextStyle.bold18(),
+                style: AppTextStyle.bold15(),
               ),
               GestureDetector(
                 child: Row(
@@ -65,7 +65,7 @@ Widget buildItemList(
                   children: [
                     Text(
                       getCategoryTitle(category),
-                      style: AppTextStyle.bold18(),
+                      style: AppTextStyle.medium16(),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -95,7 +95,7 @@ Widget buildItemList(
                   child: Row(
                     children: menusMap!
                         .map((menu) => Padding(
-                              padding: const EdgeInsets.only(right: 20),
+                              padding: const EdgeInsets.only(right: 10),
                               child: buildItemCard(menu, context),
                             ))
                         .toList(),

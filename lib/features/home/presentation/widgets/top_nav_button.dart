@@ -26,22 +26,23 @@ class TopNavButton extends StatelessWidget {
         onMenuSelected(label);
       },
       child: Container(
-        padding: const EdgeInsets.all(8.0),
+        constraints: BoxConstraints(minWidth: 65),
+        padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
         decoration: BoxDecoration(
           color: isSelected
-              ? appColors?.primary
+              ? appColors?.background
               : appColors?.transparent,
-          border: Border.all(color: appColors?.gray ?? Colors.grey, width: 0.5),
+          border: Border.all(color: appColors?.lightGray ?? Colors.grey, width: 0.5),
           borderRadius: BorderRadius.circular(16.0),
         ),
         child: Column(
           children: [
-            Icon(icon, size: 18, color: isSelected ? appColors?.white : appColors?.secondary),
+            Icon(icon, size: 18, color: isSelected ? appColors?.primary : appColors?.secondary),
             const SizedBox(height: 4),
             Text(
               label,
-              style: AppTextStyle.regular12().copyWith(
-                color: isSelected ? appColors?.white : appColors?.secondary,
+              style: AppTextStyle.medium12().copyWith(
+                color: isSelected ? appColors?.primary : appColors?.secondary,
               ),
             ),
           ],
