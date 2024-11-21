@@ -78,12 +78,12 @@ Widget buildItemList(
                           Text(
                             "Xem menu",
                             style: AppTextStyle.regular14()
-                                .copyWith(color: appColors?.primary),
+                                .copyWith(color: appColors.primary),
                           ),
                           Icon(
                             Icons.chevron_right,
                             size: 16,
-                            color: appColors?.primary,
+                            color: appColors.primary,
                           ),
                         ],
                       ),

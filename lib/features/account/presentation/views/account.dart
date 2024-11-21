@@ -98,7 +98,7 @@ class AccountPage extends BaseGetView<AccountController> {
                 Text(
                   'Số dư hiện tại',
                   style: AppTextStyle.regular14()
-                      .copyWith(color: appColors?.secondary),
+                      .copyWith(color: appColors.secondary),
                 ),
                 const SizedBox(height: 6),
                 Row(
@@ -122,7 +122,7 @@ class AccountPage extends BaseGetView<AccountController> {
                             controller.isBalanceVisible.value
                                 ? Icons.visibility
                                 : Icons.visibility_off,
-                            color: appColors?.gray,
+                            color: appColors.gray,
                             size: 20,
                           ),
                         )),
@@ -136,13 +136,13 @@ class AccountPage extends BaseGetView<AccountController> {
                       controller.navigateToDeposit();
                     },
                     icon: Icon(Icons.account_balance_wallet,
-                        color: appColors?.primary),
+                        color: appColors.primary),
                     label: Text(
                       'Nạp tiền',
-                      style: TextStyle(color: appColors?.primary),
+                      style: TextStyle(color: appColors.primary),
                     ),
                     style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: appColors!.primary),
+                      side: BorderSide(color: appColors.primary),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
