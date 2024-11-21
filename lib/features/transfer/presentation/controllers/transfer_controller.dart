@@ -13,7 +13,6 @@ import 'package:flutter_base_v2/features/deposit/domain/entities/deposit.dart';
 import 'package:flutter_base_v2/features/deposit/domain/usecases/deposit_uc.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/transfer/data/models/transfer_request.dart';
-import 'package:flutter_base_v2/features/transfer/data/models/transfer_response.dart';
 import 'package:flutter_base_v2/features/transfer/domain/entities/transfer.dart';
 import 'package:flutter_base_v2/features/transfer/domain/entities/transfer_detail.dart';
 import 'package:flutter_base_v2/features/transfer/domain/usecases/transfer_detail_uc.dart';

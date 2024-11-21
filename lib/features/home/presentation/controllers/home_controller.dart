@@ -3,11 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_base_v2/base/data/app_error.dart';
-import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
-import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_controller.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
@@ -35,8 +33,7 @@ class HomeController extends BaseController<HomeInput> {
   @override
   final HomeInput input;
   HomeController(this.input);
-  GetCartShippingUseCase get _getCartShippingUsecase =>
-      Get.find<GetCartShippingUseCase>();
+  GetCartShippingUseCase get _getCartShippingUsecase => Get.find<GetCartShippingUseCase>();
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
   GetMenuUseCase get _getMenuUseCase => Get.find<GetMenuUseCase>();
   GetCartUseCase get _getCartUseCase => Get.find<GetCartUseCase>();

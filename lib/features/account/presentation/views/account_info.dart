@@ -23,69 +23,76 @@ class AccountInfoPage extends BaseGetView<AccountController> {
         appColors: appColors,
         hasBackButton: true,
       ),
-      body: Container(
-        color: Colors.white,
-        padding: const EdgeInsets.all(16.0),
-        child: Obx(() {
-          final user = controller.user.value;
-          return SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                buildInfoField(context, 'Họ tên', user.username ?? '',
-                    appColors, (value) => user.username = value),
-                buildInfoField(context, 'CCCD', user.identificationCard ?? '',
-                    appColors, (value) => user.identificationCard = value),
-                buildDatePickerField(
-                  context,
-                  'Ngày sinh',
-                  user.birthdate ?? '',
-                  appColors,
-                  (value) {
-                    user.birthdate = value;
-                    controller.user.refresh();
-                  },
-                ),
-                buildInfoField(context, 'Trường', user.school ?? '', appColors,
-                    (value) => user.school = value),
-                buildInfoField(context, 'Khoa', user.faculty ?? '', appColors,
-                    (value) => user.faculty = value),
-                buildInfoField(context, 'Chức vụ', user.position ?? '',
-                    appColors, (value) => user.position = value),
-                buildInfoField(context, 'Loại', user.role ?? '', appColors,
-                    (value) => user.role = value),
-                buildInfoField(context, 'Email', user.email ?? '', appColors,
-                    (value) => user.email = value),
-                buildInfoField(context, 'Số điện thoại', user.phone ?? '',
-                    appColors, (value) => user.phone = value),
-                const SizedBox(height: 24.0),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      controller.updateProfile(user);
-                      Get.back();
-                      buildSnackBar("Cập nhật thông tin thành công", true);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      side:
-                          BorderSide(color: appColors?.primary ?? Colors.blue),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
+      body: Stack(
+        children: [
+          Container(
+            color: Colors.white,
+            padding: const EdgeInsets.all(16.0),
+            child: Obx(() {
+              final user = controller.user.value;
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildInfoField(context, 'Họ tên', user.username ?? '',
+                        appColors, (value) => user.username = value),
+                    buildInfoField(context, 'CCCD', user.identificationCard ?? '',
+                        appColors, (value) => user.identificationCard = value),
+                    buildDatePickerField(
+                      context,
+                      'Ngày sinh',
+                      user.birthdate ?? '',
+                      appColors,
+                      (value) {
+                        user.birthdate = value;
+                        controller.user.refresh();
+                      },
                     ),
-                    child: Text(
-                      'Cập nhật thông tin',
-                      style: AppTextStyle.bold14().copyWith(
-                        color: appColors?.primary,
-                      ),
-                    ),
-                  ),
+                    buildInfoField(context, 'Trường', user.school ?? '', appColors,
+                        (value) => user.school = value),
+                    buildInfoField(context, 'Khoa', user.faculty ?? '', appColors,
+                        (value) => user.faculty = value),
+                    buildInfoField(context, 'Chức vụ', user.position ?? '',
+                        appColors, (value) => user.position = value),
+                    buildInfoField(context, 'Loại', user.role ?? '', appColors,
+                        (value) => user.role = value),
+                    buildInfoField(context, 'Email', user.email ?? '', appColors,
+                        (value) => user.email = value),
+                    buildInfoField(context, 'Số điện thoại', user.phone ?? '',
+                        appColors, (value) => user.phone = value),
+                    const SizedBox(height: 80.0), // Add some space at the bottom
+                  ],
                 ),
-              ],
+              );
+            }),
+          ),
+          Positioned(
+            bottom: 16,
+            left: 16,
+            right: 16,
+            child: ElevatedButton(
+              onPressed: () {
+                final user = controller.user.value;
+                controller.updateProfile(user);
+                Get.back();
+                buildSnackBar("Cập nhật thông tin thành công", true);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                side: BorderSide(color: appColors?.primary ?? Colors.blue),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+              child: Text(
+                'Cập nhật thông tin',
+                style: AppTextStyle.bold14().copyWith(
+                  color: appColors?.primary,
+                ),
+              ),
             ),
-          );
-        }),
+          ),
+        ],
       ),
     );
   }

@@ -9,11 +9,51 @@ import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
 
 Widget buildItemList(
-    BuildContext context, String category, BaseState<List<Menu>?> state ) {
+    BuildContext context, String category, BaseState<List<Menu>?> state) {
   final appColors = Theme.of(context).extension<AppColors>();
   return SizedBox(
     child: state.widget(
-      onLoading: const Center(child: CircularProgressIndicator()),
+      onLoading: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                getCategoryTitle(category),
+                style: AppTextStyle.bold18(),
+              ),
+              GestureDetector(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Xem menu",
+                      style: AppTextStyle.regular14()
+                          .copyWith(color: appColors?.primary),
+                    ),
+                    Icon(
+                      Icons.chevron_right,
+                      size: 16,
+                      color: appColors?.primary,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Container(
+            width: double.infinity,
+            height: 200,
+            decoration: BoxDecoration(
+              color: appColors!.lightGray,
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
       onSuccess: (menusMap) {
         return SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -30,9 +70,7 @@ Widget buildItemList(
                     GestureDetector(
                       onTap: () {
                         Get.to(() => MenuPage(
-                          title: category, 
-                          menuItems: menusMap ?? []
-                        ));
+                            title: category, menuItems: menusMap ?? []));
                       },
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,7 +106,7 @@ Widget buildItemList(
             ));
       },
       onError: (error) {
-        debugPrint('Errorbug: $error');
+        debugPrint('Error: $error');
         return Center(child: Text('Error: $error'));
       },
     ),
