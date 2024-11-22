@@ -2,10 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/data/remote/api/api_service.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/token_model.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/token_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
+import 'package:flutter_base_v2/features/authentication/data/request_body/getOTP_body.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
-import 'package:flutter_base_v2/features/authentication/data/request_body/register_body.dart';
+import 'package:flutter_base_v2/features/authentication/data/request_body/update_info.dart';
+import 'package:flutter_base_v2/features/authentication/data/request_body/verifyOTP_body.dart';
 import 'package:flutter_base_v2/features/authentication/domain/repositories/auth_repo.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -27,8 +30,18 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<void> registerWithEmail(RegisterBody request) {
-    // TODO: implement registerWithEmail
+  Future<void> updateInfo(UpdateInfoBody request) {
+// todo
+    throw UnimplementedError();
+  }
+    @override
+  Future<void> getOTP(GetOTPBody request) {
+// todo
+    throw UnimplementedError();
+  }
+    @override
+  Future<TokenModel> verifyOTP(VerifyOTPBody request) {
+// todo
     throw UnimplementedError();
   }
 

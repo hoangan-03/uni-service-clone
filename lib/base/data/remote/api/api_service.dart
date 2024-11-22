@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'package:flutter_base_v2/features/authentication/data/request_body/getOTP_body.dart';
+import 'package:flutter_base_v2/features/authentication/data/request_body/update_info.dart';
+import 'package:flutter_base_v2/features/authentication/data/request_body/verifyOTP_body.dart';
 import 'package:flutter_base_v2/features/deposit/data/models/deposit_request.dart';
 import 'package:flutter_base_v2/features/deposit/data/models/deposit_response.dart';
 import 'package:flutter_base_v2/features/history/data/models/transaction_response.dart';
@@ -26,6 +29,22 @@ part 'api_service.g.dart';
 @RestApi(parser: Parser.DartJsonMapper)
 abstract class ApiService {
   factory ApiService(Dio dioBuilder) = _ApiService;
+
+  /// REGISTER
+  @POST('/auth/guest-register')
+  Future<void> getOTP(
+    @Body() GetOTPBody body,
+  );
+
+  @POST('/auth/verify-otp')
+  Future<void> verifyOTP(
+    @Body() VerifyOTPBody body,
+  );
+
+  @POST('/auth/update-info')
+  Future<void> updateInfo(
+    @Body() UpdateInfoBody body,
+  );
 
   /// USER API
   @POST('/auth/login')
