@@ -2,7 +2,6 @@
 import 'package:flutter_base_v2/features/authentication/data/models/token_model.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/getOTP_body.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
-import 'package:flutter_base_v2/features/authentication/data/request_body/register_body.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/update_info.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/verifyOTP_body.dart';
 
