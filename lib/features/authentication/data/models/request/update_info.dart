@@ -1,13 +1,13 @@
 class UpdateInfoBody {
-  final String birthdate;
-  final String name;
-  final String passwordl;
+  String birthdate;
+  String name;
+  String password;
 
-  UpdateInfoBody(this.birthdate, this.name, this.passwordl);
+  UpdateInfoBody(this.birthdate, this.name, this.password);
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'birthdate': birthdate,
         'name': name,
-        'password': passwordl,
+        'password': password,
       };
 }

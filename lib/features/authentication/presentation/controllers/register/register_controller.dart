@@ -20,6 +20,7 @@ class RegisterController extends BaseController {
   var tokenResponse = TokenModel().obs;
   var registerRequest = GetOTPBody('john12052003@gmail.com').obs;
   var otp = ''.obs;
+  var userInitInfo = UpdateInfoBody('', '', '').obs;
   var canResendOtp = false.obs;
   var otpResendTimer = 30.obs;
 
@@ -135,5 +136,19 @@ class RegisterController extends BaseController {
 
   void onChangeEmail() {
     N.toRegister();
+  }
+
+  Future<void> initProfile(UpdateInfoBody initedUser) {
+    return _updateInfoUseCase.execute(
+        observer: Observer(
+          onSuccess: (_) {
+            L.info("Profile inited successfully");
+            userInitInfo.value = initedUser;
+          },
+          onError: (AppException e) {
+            handleError(e);
+          },
+        ),
+        input: initedUser);
   }
 }

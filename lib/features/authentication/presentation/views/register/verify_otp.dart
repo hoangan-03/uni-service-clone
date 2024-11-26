@@ -18,19 +18,19 @@ class VerifyOtpPage extends BaseGetView<RegisterController> {
     return GestureDetector(
       onTap: controller.hideKeyboard,
       child: Scaffold(
-        appBar: buildAppBar(
-          context: context,
-          title: "Verify OTP",
-          appColors: appColors,
-          hasBackButton: true,
-        ),
+        // appBar: buildAppBar(
+        //   context: context,
+        //   title: "Verify OTP",
+        //   appColors: appColors,
+        //   hasBackButton: true,
+        // ),
         backgroundColor: appColors?.white,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 48),
+              const SizedBox(height: 96),
               Image.asset(
                 'assets/images/email.png',
                 height: 80,
