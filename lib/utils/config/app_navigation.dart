@@ -23,6 +23,9 @@ class N {
   static void toLogin({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.login);
   }
+    static void toRegister({RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.register);
+  }
 
   static void toDeposit(
       {required DepositInput input, RouteType type = RouteType.to}) {

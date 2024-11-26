@@ -12,8 +12,7 @@ class LandingController extends BaseController {
   }
 
   void toRegister() {
-    // N.toRegister();
-     buildSnackBar("Coming soon", false);
+    N.toRegister();
   }
 
   void toUniLogin() {
