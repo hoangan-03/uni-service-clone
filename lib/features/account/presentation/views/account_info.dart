@@ -35,9 +35,9 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     buildInfoField(context, 'Họ tên', user.username ?? '',
-                        appColors, (value) => user.username = value),
+                        appColors, (value) => user.username = value, hintText: 'Nhập họ tên'),
                     buildInfoField(context, 'CCCD', user.identificationCard ?? '',
-                        appColors, (value) => user.identificationCard = value),
+                        appColors, (value) => user.identificationCard = value, hintText: 'Nhập CCCD'),
                     buildDatePickerField(
                       context,
                       'Ngày sinh',
@@ -47,19 +47,20 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                         user.birthdate = value;
                         controller.user.refresh();
                       },
+                      hintText: 'Chọn ngày sinh',
                     ),
                     buildInfoField(context, 'Trường', user.school ?? '', appColors,
-                        (value) => user.school = value),
+                        (value) => user.school = value, hintText: 'Nhập trường'),
                     buildInfoField(context, 'Khoa', user.faculty ?? '', appColors,
-                        (value) => user.faculty = value),
+                        (value) => user.faculty = value, hintText: 'Nhập khoa'),
                     buildInfoField(context, 'Chức vụ', user.position ?? '',
-                        appColors, (value) => user.position = value),
+                        appColors, (value) => user.position = value, hintText: 'Nhập chức vụ'),
                     buildInfoField(context, 'Loại', user.role ?? '', appColors,
-                        (value) => user.role = value),
+                        (value) => user.role = value, hintText: 'Nhập loại'),
                     buildInfoField(context, 'Email', user.email ?? '', appColors,
-                        (value) => user.email = value),
+                        (value) => user.email = value, hintText: 'Nhập email'),
                     buildInfoField(context, 'Số điện thoại', user.phone ?? '',
-                        appColors, (value) => user.phone = value),
+                        appColors, (value) => user.phone = value, hintText: 'Nhập số điện thoại'),
                     const SizedBox(height: 80.0), 
                   ],
                 ),
@@ -99,7 +100,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
 
   Widget buildInfoField(BuildContext context, String label, String value,
       AppColors? appColors, Function(String) onChanged,
-      {IconData? icon}) {
+      {IconData? icon, required String hintText}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -112,6 +113,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
           initialValue: value,
           onChanged: onChanged,
           decoration: InputDecoration(
+            hintText: hintText,
             suffixIcon:
                 icon != null ? Icon(icon, color: appColors?.secondary) : null,
             filled: true,
@@ -129,7 +131,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
   }
 
   Widget buildDatePickerField(BuildContext context, String label, String value,
-      AppColors? appColors, Function(String) onChanged) {
+      AppColors? appColors, Function(String) onChanged, {required String hintText}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -172,7 +174,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  value.isNotEmpty ? value : 'Chọn ngày',
+                  value.isNotEmpty ? value : hintText,
                   style: AppTextStyle.regular14().copyWith(color: Colors.black),
                 ),
                 Icon(Icons.calendar_today, color: appColors?.secondary),

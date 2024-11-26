@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
+import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
@@ -25,64 +26,58 @@ class InitInfoPage extends BaseGetView<RegisterController> {
           hasBackButton: true,
         ),
         backgroundColor: appColors?.white,
-        body: Stack(
-          children: [
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(16.0),
-              child: Obx(() {
-                final user = controller.userInitInfo.value;
-                return SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      buildInfoField(context, 'Mật khẩu', user.password,
-                          appColors, (value) => user.password = value),
-                           buildInfoField(context, 'Tên hiển thị', user.name,
-                          appColors, (value) => user.name = value),
-                      buildDatePickerField(
-                        context,
-                        'Ngày sinh',
-                        user.birthdate,
-                        appColors,
-                        (value) {
-                          user.birthdate = value;
-                          controller.userInitInfo.refresh();
-                        },
-                      ),
-                      const SizedBox(height: 80.0),
-                    ],
+        body: Container(
+          color: Colors.white,
+          padding: const EdgeInsets.all(16.0),
+          child: Obx(() {
+            final user = controller.userInitInfo.value;
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  buildInfoField(context, 'Mật khẩu', user.password,
+                      appColors, (value) => user.password = value,  hintText: 'Nhập mật khẩu'),
+                  buildInfoField(context, 'Tên hiển thị', user.name,
+                      appColors, (value) => user.name = value, hintText: 'Nhập tên hiển thị'),
+                  buildDatePickerField(
+                    context,
+                    'Ngày sinh',
+                    user.birthdate,
+                    appColors,
+                    (value) {
+                      user.birthdate = value;
+                      controller.userInitInfo.refresh();
+                    },
                   ),
-                );
-              }),
-            ),
-            Positioned(
-              bottom: 16,
-              left: 16,
-              right: 16,
-              child: ElevatedButton(
-                onPressed: () {
-                  final user = controller.userInitInfo.value;
-                  controller.initProfile(user);
-                  Get.back();
-                  buildSnackBar("Cập nhật thông tin thành công", true);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  side: BorderSide(color: appColors?.primary ?? Colors.blue),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-                child: Text(
-                  'Cập nhật thông tin',
-                  style: AppTextStyle.bold14().copyWith(
-                    color: appColors?.primary,
-                  ),
-                ),
+                  const SizedBox(height: 80.0),
+                ],
+              ),
+            );
+          }),
+        ),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ElevatedButton(
+            onPressed: () {
+              final user = controller.userInitInfo.value;
+              controller.initProfile(user);
+              buildSnackBar("Đăng kí thành công", true);
+              N.toBranchPage();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              side: BorderSide(color: appColors!.primary),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-          ],
+            child: Text(
+              'Tiếp tục',
+              style: AppTextStyle.bold14().copyWith(
+                color: appColors.primary,
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -90,7 +85,7 @@ class InitInfoPage extends BaseGetView<RegisterController> {
 
   Widget buildInfoField(BuildContext context, String label, String value,
       AppColors? appColors, Function(String) onChanged,
-      {IconData? icon}) {
+      {IconData? icon, required String hintText}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -103,6 +98,7 @@ class InitInfoPage extends BaseGetView<RegisterController> {
           initialValue: value,
           onChanged: onChanged,
           decoration: InputDecoration(
+            hintText: hintText,
             suffixIcon:
                 icon != null ? Icon(icon, color: appColors?.secondary) : null,
             filled: true,

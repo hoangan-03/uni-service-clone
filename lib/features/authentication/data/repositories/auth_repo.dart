@@ -30,8 +30,8 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<void> updateInfo(UpdateInfoBody request) {
-    throw UnimplementedError();
+  Future<void> updateInfo(UpdateInfoBody request) async {
+    await _apiService.updateInfo(request);
   }
 
   @override
