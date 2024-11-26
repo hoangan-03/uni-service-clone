@@ -33,10 +33,18 @@ class RegisterController extends BaseController {
   Timer? _resendOtpTimer;
 
   @override
+  void onInit() {
+    otp.value = ' ' * otpFocusNodes.length;
+    super.onInit();
+  }
+
+  @override
   void onClose() {
     _updateInfoUseCase.dispose();
     _resendOtpTimer?.cancel();
-    otpFocusNodes.forEach((node) => node.dispose());
+    for (var node in otpFocusNodes) {
+      node.dispose();
+    }
     super.onClose();
   }
 
@@ -66,12 +74,11 @@ class RegisterController extends BaseController {
       observer: Observer(
         onSuccess: (TokenModel data) {
           tokenResponse.value = data;
-          L.info('OTP verified successfully');
-          L.info(data);
+          buildSnackBar('Xác minh OTP thành công', true);
           N.toInitInfo();
         },
         onError: (AppException e) {
-          handleError(e);
+          buildSnackBar('Mã xác minh không đúng, vui lòng thử lại', false);
         },
       ),
       input: params,
@@ -83,7 +90,6 @@ class RegisterController extends BaseController {
     return _getOtpUsecase.execute(
         observer: Observer(
           onSuccess: (_) {
-            L.info('OTP sent successfully');
             buildSnackBar('Đã gửi OTP', true);
             N.toVerifyOtp(input: EmailInput(email));
             startOtpResendTimer();
@@ -97,12 +103,14 @@ class RegisterController extends BaseController {
 
   void onOtpInput(int index, String value) {
     if (value.isNotEmpty) {
-      otp.value = otp.value.substring(0, index) + value + otp.value.substring(index + 1);
+      otp.value = otp.value.substring(0, index) +
+          value +
+          otp.value.substring(index + 1);
       if (index < otpFocusNodes.length - 1) {
         otpFocusNodes[index + 1].requestFocus();
       } else {
         otpFocusNodes[index].unfocus();
-        verifyOtp(registerRequest.value.email ?? '123456', otp.value);
+        verifyOtp(registerRequest.value.email ?? '', otp.value);
       }
     }
   }
@@ -126,6 +134,6 @@ class RegisterController extends BaseController {
   }
 
   void onChangeEmail() {
-    Get.back();
+    N.toRegister();
   }
 }

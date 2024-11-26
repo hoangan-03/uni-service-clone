@@ -7,7 +7,6 @@ import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:get/get.dart';
-
 class VerifyOtpPage extends BaseGetView<RegisterController> {
   const VerifyOtpPage({super.key});
 
@@ -86,6 +85,7 @@ class VerifyOtpPage extends BaseGetView<RegisterController> {
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       maxLength: 1,
+                      style: AppTextStyle.bold16().copyWith(color: appColors.primary),
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         counterText: '',
@@ -102,7 +102,8 @@ class VerifyOtpPage extends BaseGetView<RegisterController> {
                     onPressed: controller.canResendOtp.value
                         ? controller.onResendOtp
                         : null,
-                    child: Text(controller.canResendOtp.value
+                    child: Text(
+                      controller.canResendOtp.value
                           ? 'Gửi lại OTP'
                           : 'Gửi lại OTP (${controller.otpResendTimer}s)',
                       style: AppTextStyle.regular16().copyWith(
