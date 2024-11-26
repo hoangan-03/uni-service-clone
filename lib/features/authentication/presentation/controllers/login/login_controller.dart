@@ -4,7 +4,7 @@ import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/base/domain/dispose_bag.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
-import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/request/login_body.dart';
 import 'package:flutter_base_v2/features/authentication/domain/usecases/login/login_uc.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';

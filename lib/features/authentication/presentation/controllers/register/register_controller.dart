@@ -1,10 +1,10 @@
 import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
-import 'package:flutter_base_v2/features/authentication/data/models/token_model.dart';
-import 'package:flutter_base_v2/features/authentication/data/request_body/getOTP_body.dart';
-import 'package:flutter_base_v2/features/authentication/data/request_body/update_info.dart';
-import 'package:flutter_base_v2/features/authentication/data/request_body/verifyOTP_body.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/response/token_model.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/request/getOTP_body.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/request/update_info.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/request/verifyOTP_body.dart';
 import 'package:flutter_base_v2/features/authentication/domain/usecases/register/get_otp_uc.dart';
 import 'package:flutter_base_v2/features/authentication/domain/usecases/register/update_info_uc.dart';
 import 'package:flutter_base_v2/features/authentication/domain/usecases/register/verify_otp_uc.dart';

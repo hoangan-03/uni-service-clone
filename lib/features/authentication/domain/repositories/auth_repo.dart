@@ -1,9 +1,9 @@
 
-import 'package:flutter_base_v2/features/authentication/data/models/token_model.dart';
-import 'package:flutter_base_v2/features/authentication/data/request_body/getOTP_body.dart';
-import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
-import 'package:flutter_base_v2/features/authentication/data/request_body/update_info.dart';
-import 'package:flutter_base_v2/features/authentication/data/request_body/verifyOTP_body.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/response/token_model.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/request/getOTP_body.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/request/login_body.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/request/update_info.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/request/verifyOTP_body.dart';
 
 abstract class AuthRepo {
 
