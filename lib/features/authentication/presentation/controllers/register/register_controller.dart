@@ -1,6 +1,5 @@
 import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
-import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/token_model.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/getOTP_body.dart';
@@ -16,7 +15,7 @@ import 'package:get/get.dart';
 class RegisterController extends BaseController {
 
   var tokenResponse = TokenModel().obs;
-  var registerRequest = GetOTPBody('').obs;
+  var registerRequest = GetOTPBody('john12052003@gmail.com').obs;
 
   final isHidePassword = true.obs;
 
@@ -24,10 +23,6 @@ class RegisterController extends BaseController {
   GetOtpUsecase get _getOtpUsecase => Get.find<GetOtpUsecase>();
   VerifyOtpUsecase get _verifyOtpUsecase => Get.find<VerifyOtpUsecase>();
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   @override
   void onClose() {
@@ -72,8 +67,8 @@ class RegisterController extends BaseController {
     );
   }
 
-  Future<void> getOTP() {
-    final params = registerRequest.value;
+  Future<void> getOTP(String email) {
+    final params = GetOTPBody(email);
     return _getOtpUsecase.execute(
         observer: Observer(
           onSuccess: (_) {

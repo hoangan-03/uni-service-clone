@@ -3,7 +3,7 @@ import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/data/remote/api/api_service.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/token_model.dart';
-import 'package:flutter_base_v2/features/authentication/data/models/token_response.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/response/token_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/getOTP_body.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
@@ -31,18 +31,23 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<void> updateInfo(UpdateInfoBody request) {
-// todo
     throw UnimplementedError();
   }
-    @override
-  Future<void> getOTP(GetOTPBody request) {
-// todo
-    throw UnimplementedError();
+
+  @override
+  Future<void> getOTP(GetOTPBody request) async {
+    await _apiService.getOTP(request);
   }
-    @override
-  Future<TokenModel> verifyOTP(VerifyOTPBody request) {
-// todo
-    throw UnimplementedError();
+
+  @override
+  Future<TokenModel> verifyOTP(VerifyOTPBody request) async {
+    TokenResponse response = await _apiService.verifyOTP(request);
+    if (response.data?.accessToken == null) {
+      throw AppException(
+          AppExceptionType.unauthorized, 'Invalid access token!');
+    }
+    _localStorage.saveUserTokenData(response.data);
+    return response.data!;
   }
 
   @override
@@ -76,8 +81,8 @@ class AuthRepoImpl extends AuthRepo {
         // TODO: Set the `clientId` and `redirectUri` arguments to the values you entered in the Apple Developer portal during the setup
         clientId: 'com.service.flutterBaseV2.stg',
         redirectUri: Uri.parse(
-                    'https://utopian-western-brace.glitch.me/callbacks/sign_in_with_apple',
-                  ),
+          'https://utopian-western-brace.glitch.me/callbacks/sign_in_with_apple',
+        ),
       ),
     );
     final OAuthCredential oAuthCredential = OAuthProvider('apple.com')

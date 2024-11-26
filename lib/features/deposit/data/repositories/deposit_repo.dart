@@ -1,7 +1,7 @@
 import 'package:flutter_base_v2/base/data/base_repo.dart';
 import 'package:flutter_base_v2/base/data/remote/api/api_service.dart';
-import 'package:flutter_base_v2/features/deposit/data/models/deposit_request.dart';
-import 'package:flutter_base_v2/features/deposit/data/models/deposit_response.dart';
+import 'package:flutter_base_v2/features/deposit/data/models/request/deposit_request.dart';
+import 'package:flutter_base_v2/features/deposit/data/models/response/deposit_response.dart';
 import 'package:flutter_base_v2/features/deposit/domain/entities/deposit.dart';
 import 'package:flutter_base_v2/features/deposit/domain/repositories/deposit_repo.dart';
 

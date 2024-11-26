@@ -1,5 +1,5 @@
 import 'package:flutter_base_v2/base/data/base_repo.dart';
-import 'package:flutter_base_v2/features/history/data/models/transaction_response.dart';
+import 'package:flutter_base_v2/features/history/data/models/response/transaction_response.dart';
 import 'package:flutter_base_v2/features/history/domain/entities/transaction.dart';
 
 

@@ -1,16 +1,17 @@
 import 'package:dart_json_mapper/dart_json_mapper.dart';
 import 'package:flutter_base_v2/base/data/models/common/base_response.dart';
-import 'package:flutter_base_v2/features/branch/data/models/branch_response.dart';
-import 'package:flutter_base_v2/features/home/data/models/product_response.dart';
-import 'package:flutter_base_v2/features/home/data/models/type_response.dart';
+import 'package:flutter_base_v2/features/branch/data/models/response/branch_response.dart';
+import 'package:flutter_base_v2/features/home/data/models/response/item_response.dart';
+import 'package:flutter_base_v2/features/home/data/models/response/product_response.dart';
+import 'package:flutter_base_v2/features/home/data/models/response/type_response.dart';
 
 @jsonSerializable
-class MenuQRResponse extends BaseResponse {
-  MenuQRApiModel data = MenuQRApiModel();
+class MenuResponse extends BaseResponse {
+  List<MenuApiModel>? data = [];
 }
 
 @jsonSerializable
-class MenuQRApiModel {
+class MenuApiModel {
   String? id = '';
   String? branchId = '';
   int? quantity = 0;
@@ -30,4 +31,10 @@ class MenuQRApiModel {
   set type(TypeApiModel? value) => _type = value;
 
   BranchApiModel? branch = BranchApiModel();
+  @JsonProperty(name: 'items')
+  List<ItemApiModel>? items;
 }
+
+
+
+

@@ -2,24 +2,24 @@ import 'dart:io';
 import 'package:flutter_base_v2/features/authentication/data/request_body/getOTP_body.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/update_info.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/verifyOTP_body.dart';
-import 'package:flutter_base_v2/features/deposit/data/models/deposit_request.dart';
-import 'package:flutter_base_v2/features/deposit/data/models/deposit_response.dart';
-import 'package:flutter_base_v2/features/history/data/models/transaction_response.dart';
-import 'package:flutter_base_v2/features/order/data/models/menu_qr_response.dart';
+import 'package:flutter_base_v2/features/deposit/data/models/request/deposit_request.dart';
+import 'package:flutter_base_v2/features/deposit/data/models/response/deposit_response.dart';
+import 'package:flutter_base_v2/features/history/data/models/response/transaction_response.dart';
+import 'package:flutter_base_v2/features/order/data/models/response/menu_qr_response.dart';
 import 'package:flutter_base_v2/features/transfer/data/models/transfer_detail_reponse.dart';
 import 'package:flutter_base_v2/features/transfer/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/transfer/data/models/transfer_response.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_base_v2/features/account/data/models/user_response.dart';
-import 'package:flutter_base_v2/features/authentication/data/models/token_response.dart';
-import 'package:flutter_base_v2/features/branch/data/models/branch_response.dart';
+import 'package:flutter_base_v2/features/account/data/models/response/user_response.dart';
+import 'package:flutter_base_v2/features/authentication/data/models/response/token_response.dart';
+import 'package:flutter_base_v2/features/branch/data/models/response/branch_response.dart';
 import 'package:flutter_base_v2/features/authentication/data/request_body/login_body.dart';
-import 'package:flutter_base_v2/features/home/data/models/menu_response.dart';
-import 'package:flutter_base_v2/features/order/data/models/add_payment.dart';
-import 'package:flutter_base_v2/features/order/data/models/add_to_cart_request.dart';
-import 'package:flutter_base_v2/features/order/data/models/cart_response.dart';
-import 'package:flutter_base_v2/features/order/data/models/cart_shipping_response.dart';
+import 'package:flutter_base_v2/features/home/data/models/response/menu_response.dart';
+import 'package:flutter_base_v2/features/order/data/models/request/add_payment_request.dart';
+import 'package:flutter_base_v2/features/order/data/models/request/add_to_cart_request.dart';
+import 'package:flutter_base_v2/features/order/data/models/response/cart_response.dart';
+import 'package:flutter_base_v2/features/order/data/models/response/cart_shipping_response.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import 'package:dart_json_mapper/dart_json_mapper.dart';
@@ -37,7 +37,7 @@ abstract class ApiService {
   );
 
   @POST('/auth/verify-otp')
-  Future<void> verifyOTP(
+  Future<TokenResponse> verifyOTP(
     @Body() VerifyOTPBody body,
   );
 

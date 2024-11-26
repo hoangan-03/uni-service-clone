@@ -1,5 +1,5 @@
 import 'package:flutter_base_v2/base/domain/base_usecase.dart';
-import 'package:flutter_base_v2/features/order/data/models/add_to_cart_request.dart';
+import 'package:flutter_base_v2/features/order/data/models/request/add_to_cart_request.dart';
 import 'package:flutter_base_v2/features/order/domain/repositories/cart_repo.dart';
 
 class AddCartUseCase extends UseCaseIO<AddToCartRequest, void> {
