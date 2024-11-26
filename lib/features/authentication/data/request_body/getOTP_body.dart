@@ -1,5 +1,5 @@
 class GetOTPBody {
-  late final String email;
+  String? email;
   GetOTPBody(this.email);
 
   Map<String, dynamic> toJson() => <String, dynamic>{

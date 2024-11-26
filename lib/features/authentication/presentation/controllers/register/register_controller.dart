@@ -9,21 +9,17 @@ import 'package:flutter_base_v2/features/authentication/data/request_body/verify
 import 'package:flutter_base_v2/features/authentication/domain/usecases/register/get_otp_uc.dart';
 import 'package:flutter_base_v2/features/authentication/domain/usecases/register/update_info_uc.dart';
 import 'package:flutter_base_v2/features/authentication/domain/usecases/register/verify_otp_uc.dart';
-import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends BaseController {
-  final registerState = BaseState();
 
   var tokenResponse = TokenModel().obs;
-  var registerRequest = GetOTPBody("").obs;
+  var registerRequest = GetOTPBody('').obs;
 
   final isHidePassword = true.obs;
-  final isDisableButton = true.obs;
-  final ignoringPointer = false.obs;
-  final isLoggedInGoogle = false.obs;
+
   UpdateInfoUsecase get _updateInfoUseCase => Get.find<UpdateInfoUsecase>();
   GetOtpUsecase get _getOtpUsecase => Get.find<GetOtpUsecase>();
   VerifyOtpUsecase get _verifyOtpUsecase => Get.find<VerifyOtpUsecase>();
@@ -77,10 +73,11 @@ class RegisterController extends BaseController {
   }
 
   Future<void> getOTP() {
-    final params = GetOTPBody(registerRequest.value.email);
+    final params = registerRequest.value;
     return _getOtpUsecase.execute(
         observer: Observer(
           onSuccess: (_) {
+             L.info('OTP sent successfully');
             buildSnackBar('Đã gửi OTP', true);
           },
           onError: (AppException e) {
