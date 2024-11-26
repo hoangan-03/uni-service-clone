@@ -3,8 +3,10 @@ import 'package:flutter_base_v2/features/account/presentation/views/account_info
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/login/login_binding.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_binding.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/login/login_page.dart';
-import 'package:flutter_base_v2/features/authentication/presentation/views/login/register.dart';
+import 'package:flutter_base_v2/features/authentication/presentation/views/register/init_info.dart';
+import 'package:flutter_base_v2/features/authentication/presentation/views/register/register.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/login/uni_login_page.dart';
+import 'package:flutter_base_v2/features/authentication/presentation/views/register/verify_otp.dart';
 import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_binding.dart';
 import 'package:flutter_base_v2/features/branch/presentation/views/branches_page.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_binding.dart';
@@ -37,6 +39,8 @@ class AppRoute {
   static String landing = '/landing';
   static String login = '/login';
   static String register = '/register';
+  static String verifyOTP = '/verify_otp';
+  static String initInfo = '/init_info';
 
   static String exampleList = '/example_list';
   static String uniLogin = '/uni_login';
@@ -72,6 +76,18 @@ class AppRoute {
     GetPage(
       name: register,
       page: RegisterPage.new,
+      binding: RegisterBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: initInfo,
+      page: InitInfoPage.new,
+      binding: RegisterBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: verifyOTP,
+      page: VerifyOtpPage.new,
       binding: RegisterBinding(),
       transition: Transition.noTransition,
     ),

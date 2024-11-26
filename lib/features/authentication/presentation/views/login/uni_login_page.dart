@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/common.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/login/login_controller.dart';
-import 'package:flutter_base_v2/features/authentication/presentation/views/login/widgets/widgets.dart';
+import 'package:flutter_base_v2/features/authentication/presentation/views/widgets/widgets.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';

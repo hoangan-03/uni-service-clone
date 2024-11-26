@@ -1,3 +1,4 @@
+import 'package:flutter_base_v2/features/authentication/data/args/email_input.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/utils/config/app_route.dart';
@@ -23,8 +24,20 @@ class N {
   static void toLogin({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.login);
   }
-    static void toRegister({RouteType type = RouteType.to}) {
+
+  static void toRegister({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.register);
+  }
+
+  static void toVerifyOtp({
+    required EmailInput input,
+    RouteType type = RouteType.to,
+  }) {
+    type.navigate(name: AppRoute.verifyOTP, arguments: input);
+  }
+
+  static void toInitInfo({RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.initInfo);
   }
 
   static void toDeposit(
