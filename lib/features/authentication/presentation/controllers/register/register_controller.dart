@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
@@ -23,6 +24,7 @@ class RegisterController extends BaseController {
   var otpResendTimer = 30.obs;
 
   final isHidePassword = true.obs;
+  final List<FocusNode> otpFocusNodes = List.generate(6, (_) => FocusNode());
 
   UpdateInfoUsecase get _updateInfoUseCase => Get.find<UpdateInfoUsecase>();
   GetOtpUsecase get _getOtpUsecase => Get.find<GetOtpUsecase>();
@@ -34,6 +36,7 @@ class RegisterController extends BaseController {
   void onClose() {
     _updateInfoUseCase.dispose();
     _resendOtpTimer?.cancel();
+    otpFocusNodes.forEach((node) => node.dispose());
     super.onClose();
   }
 
@@ -65,6 +68,7 @@ class RegisterController extends BaseController {
           tokenResponse.value = data;
           L.info('OTP verified successfully');
           L.info(data);
+          N.toInitInfo();
         },
         onError: (AppException e) {
           handleError(e);
@@ -94,6 +98,12 @@ class RegisterController extends BaseController {
   void onOtpInput(int index, String value) {
     if (value.isNotEmpty) {
       otp.value = otp.value.substring(0, index) + value + otp.value.substring(index + 1);
+      if (index < otpFocusNodes.length - 1) {
+        otpFocusNodes[index + 1].requestFocus();
+      } else {
+        otpFocusNodes[index].unfocus();
+        verifyOtp(registerRequest.value.email ?? '123456', otp.value);
+      }
     }
   }
 

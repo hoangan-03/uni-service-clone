@@ -56,7 +56,10 @@ class AccountPage extends BaseGetView<AccountController> {
                   Divider(color: appColors.lightGray),
                   _buildMenuItem(
                       FontAwesomeIcons.rightFromBracket, 'Đăng xuất', context,
-                      color: appColors.onCancel, showTrailingIcon: false),
+                      color: appColors.onCancel,
+                      showTrailingIcon: false, onTap: () {
+                    controller.logout();
+                  }),
                 ],
               ),
             ],
@@ -86,7 +89,7 @@ class AccountPage extends BaseGetView<AccountController> {
           _buildQRCodeImage(),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 12.0),
-               margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+            margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
             decoration: BoxDecoration(
               color: appColors.white,
               borderRadius: BorderRadius.circular(10),

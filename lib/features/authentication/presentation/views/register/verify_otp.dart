@@ -82,6 +82,7 @@ class VerifyOtpPage extends BaseGetView<RegisterController> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: TextField(
+                      focusNode: controller.otpFocusNodes[index],
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       maxLength: 1,
