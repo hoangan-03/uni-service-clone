@@ -11,7 +11,7 @@ import 'package:flutter_base_v2/features/authentication/data/providers/local/loc
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/deposit/domain/entities/deposit.dart';
 import 'package:flutter_base_v2/features/deposit/domain/usecases/deposit_uc.dart';
-import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/utils/helper/format_price.dart';
 import 'package:flutter_base_v2/features/transfer/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/transfer/domain/entities/transfer.dart';
 import 'package:flutter_base_v2/features/transfer/domain/entities/transfer_detail.dart';

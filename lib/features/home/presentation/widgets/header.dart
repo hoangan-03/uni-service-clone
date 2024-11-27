@@ -2,13 +2,12 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_base_v2/features/home/presentation/utils/truncate_text.dart';
+import 'package:flutter_base_v2/utils/helper/truncate_text.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_svg_url.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_base_v2/utils/config/app_route.dart';

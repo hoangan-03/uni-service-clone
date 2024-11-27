@@ -5,8 +5,8 @@ import 'package:flutter_base_v2/features/authentication/data/models/request/upda
 import 'package:flutter_base_v2/features/authentication/data/models/request/verifyOTP_body.dart';
 import 'package:flutter_base_v2/features/deposit/data/models/request/deposit_request.dart';
 import 'package:flutter_base_v2/features/deposit/data/models/response/deposit_response.dart';
-import 'package:flutter_base_v2/features/history/data/models/response/transaction_response.dart';
-import 'package:flutter_base_v2/features/order/data/models/response/menu_qr_response.dart';
+import 'package:flutter_base_v2/features/transactions/data/models/response/transaction_response.dart';
+import 'package:flutter_base_v2/features/qrcode/data/models/response/menu_qr_response.dart';
 import 'package:flutter_base_v2/features/transfer/data/models/transfer_detail_reponse.dart';
 import 'package:flutter_base_v2/features/transfer/data/models/transfer_request.dart';
 import 'package:flutter_base_v2/features/transfer/data/models/transfer_response.dart';

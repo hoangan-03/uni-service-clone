@@ -16,12 +16,12 @@ import 'package:flutter_base_v2/features/order/data/models/request/add_payment_r
 import 'package:flutter_base_v2/features/order/data/models/request/add_to_cart_request.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/cart.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/cart_shipping.dart';
-import 'package:flutter_base_v2/features/order/domain/entities/menu_qr.dart';
+import 'package:flutter_base_v2/features/qrcode/domain/entities/menu_qr.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/add_cart_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/add_payment_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_shipping_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_uc.dart';
-import 'package:flutter_base_v2/features/order/domain/usecases/get_qr_code.dart';
+import 'package:flutter_base_v2/features/qrcode/domain/usecases/get_qr_code.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';

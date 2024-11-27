@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
-import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
+import 'package:flutter_base_v2/utils/helper/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:webview_flutter/webview_flutter.dart';

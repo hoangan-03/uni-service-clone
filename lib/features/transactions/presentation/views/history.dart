@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
-import 'package:flutter_base_v2/features/history/presentation/controllers/transaction_controller.dart';
-import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/features/transactions/presentation/controllers/transaction_controller.dart';
+import 'package:flutter_base_v2/utils/helper/format_price.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:flutter_base_v2/features/history/domain/entities/transaction.dart';
+import 'package:flutter_base_v2/features/transactions/domain/entities/transaction.dart';
 
 class HistoryPage extends BaseGetView<TransactionController> {
   const HistoryPage({super.key});

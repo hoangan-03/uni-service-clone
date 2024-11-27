@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
-import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/utils/helper/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_slide_qr.dart';
-import 'package:flutter_base_v2/features/order/domain/entities/menu_qr.dart';
+import 'package:flutter_base_v2/features/qrcode/domain/entities/menu_qr.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';

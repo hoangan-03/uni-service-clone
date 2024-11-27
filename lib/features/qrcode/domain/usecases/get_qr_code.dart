@@ -1,6 +1,6 @@
 import 'package:flutter_base_v2/base/domain/base_usecase.dart';
-import 'package:flutter_base_v2/features/order/domain/entities/menu_qr.dart';
-import 'package:flutter_base_v2/features/order/domain/repositories/qr_repo.dart';
+import 'package:flutter_base_v2/features/qrcode/domain/entities/menu_qr.dart';
+import 'package:flutter_base_v2/features/qrcode/domain/repositories/qr_repo.dart';
 
 class GetQrCodeUseCase extends UseCaseIO<GetQrCodeParams, MenuQR?> {
   final QrCodeRepo _qrCodeRepo;

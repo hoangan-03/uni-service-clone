@@ -4,10 +4,9 @@ import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
-import 'package:flutter_base_v2/features/history/domain/entities/transaction.dart';
-import 'package:flutter_base_v2/features/history/domain/usecases/get_transactions_cate_uc.dart';
-import 'package:flutter_base_v2/features/history/domain/usecases/get_transactions_uc.dart';
-import 'package:flutter_base_v2/utils/service/log_service.dart';
+import 'package:flutter_base_v2/features/transactions/domain/entities/transaction.dart';
+import 'package:flutter_base_v2/features/transactions/domain/usecases/get_transactions_cate_uc.dart';
+import 'package:flutter_base_v2/features/transactions/domain/usecases/get_transactions_uc.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -34,9 +33,7 @@ class TransactionController extends BaseController {
   @override
   void onInit() async {
     super.onInit();
-    L.info('Adding page request listener');
     pagingController.addPageRequestListener((pageKey) {
-      logger.i('Page request listener triggered for page $pageKey');
       _fetchPage(pageKey);
     });
   }
@@ -67,12 +64,12 @@ class TransactionController extends BaseController {
         },
         onSuccess: (List<Transaction>? transactions) {
           getTransactionsState.onSuccess(data: transactions);
-          isLoading.value = false; // Set loading to false once data is loaded
+          isLoading.value = false; 
           completer.complete(transactions ?? []);
         },
         onError: (AppException e) {
           getTransactionsState.onError(e.message);
-          isLoading.value = false; // Set loading to false in case of an error
+          isLoading.value = false; 
           handleError(e);
           completer.completeError(e);
         },

@@ -1,6 +1,6 @@
 import 'package:flutter_base_v2/base/data/base_repo.dart';
-import 'package:flutter_base_v2/features/history/data/models/response/transaction.dart';
-import 'package:flutter_base_v2/features/history/domain/entities/transaction.dart';
+import 'package:flutter_base_v2/features/transactions/data/models/response/transaction.dart';
+import 'package:flutter_base_v2/features/transactions/domain/entities/transaction.dart';
 
 
 abstract class TransactionRepo extends BaseMappingRepo<Transaction, TransactionApiModel> {

@@ -1,6 +1,6 @@
 import 'package:flutter_base_v2/base/domain/base_usecase.dart';
-import 'package:flutter_base_v2/features/history/domain/entities/transaction.dart';
-import 'package:flutter_base_v2/features/history/domain/repositories/transaction_repo.dart';
+import 'package:flutter_base_v2/features/transactions/domain/entities/transaction.dart';
+import 'package:flutter_base_v2/features/transactions/domain/repositories/transaction_repo.dart';
 
 class GetTransactionsUseCase
     extends UseCaseIO<GetTransactionsParams, List<Transaction>?> {

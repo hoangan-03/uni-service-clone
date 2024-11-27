@@ -12,7 +12,7 @@ import 'package:flutter_base_v2/features/authentication/data/models/request/veri
 import 'package:flutter_base_v2/features/authentication/domain/usecases/register/get_otp_uc.dart';
 import 'package:flutter_base_v2/features/authentication/domain/usecases/register/update_info_uc.dart';
 import 'package:flutter_base_v2/features/authentication/domain/usecases/register/verify_otp_uc.dart';
-import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
+import 'package:flutter_base_v2/utils/helper/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:get/get.dart';

@@ -10,7 +10,7 @@ import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_
 import 'package:flutter_base_v2/features/branch/presentation/views/branches_page.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_binding.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/views/deposit.dart';
-import 'package:flutter_base_v2/features/history/presentation/controllers/transaction_binding.dart';
+import 'package:flutter_base_v2/features/transactions/presentation/controllers/transaction_binding.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_binding.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/home_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/notifications_page.dart';
@@ -30,7 +30,7 @@ import 'package:flutter_base_v2/features/transfer/presentation/views/transfer_bi
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
 import 'package:flutter_base_v2/features/qrcode/presentation/views/qrcode.dart';
-import 'package:flutter_base_v2/features/history/presentation/views/history.dart';
+import 'package:flutter_base_v2/features/transactions/presentation/views/history.dart';
 
 class AppRoute {
   static String root = '/';

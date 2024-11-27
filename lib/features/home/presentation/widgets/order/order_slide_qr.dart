@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/product.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
-import 'package:flutter_base_v2/features/home/presentation/utils/cancel_button.dart';
-import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/utils/helper/cancel_button.dart';
+import 'package:flutter_base_v2/utils/helper/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_qr.dart';
-import 'package:flutter_base_v2/features/order/domain/entities/menu_qr.dart';
+import 'package:flutter_base_v2/features/qrcode/domain/entities/menu_qr.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';

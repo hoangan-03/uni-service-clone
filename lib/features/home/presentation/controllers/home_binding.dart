@@ -7,7 +7,7 @@ import 'package:flutter_base_v2/features/order/domain/usecases/add_cart_uc.dart'
 import 'package:flutter_base_v2/features/order/domain/usecases/add_payment_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_shipping_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_uc.dart';
-import 'package:flutter_base_v2/features/order/domain/usecases/get_qr_code.dart';
+import 'package:flutter_base_v2/features/qrcode/domain/usecases/get_qr_code.dart';
 import 'package:flutter_base_v2/features/transfer/domain/usecases/transfer_uc.dart';
 import 'package:get/get.dart';
 
