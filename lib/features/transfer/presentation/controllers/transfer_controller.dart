@@ -115,7 +115,6 @@ class TransferController extends BaseController<TransferInput> {
     _transferRequestUseCase.execute(
       observer: Observer(
         onSuccess: (Transfer? transferResponse) {
-          L.info(transferResponse);
           completer.complete(transferResponse);
         },
         onError: (AppException e) {
@@ -133,7 +132,6 @@ class TransferController extends BaseController<TransferInput> {
     _transferDetailUseCase.execute(
       observer: Observer(
         onSuccess: (TransferDetail? transferDetail) {
-          L.info(transferDetail);
           completer.complete(transferDetail);
         },
         onError: (AppException e) {

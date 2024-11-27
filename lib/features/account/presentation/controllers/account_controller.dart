@@ -87,7 +87,6 @@ class AccountController extends BaseController<HomeInput> {
     return _getProfileUseCase.execute(
         observer: Observer(
           onSuccess: (User? data) {
-            L.info(data);
             if (data != null) user.value = data;
           },
           onError: (AppException e) {

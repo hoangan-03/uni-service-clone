@@ -1,6 +1,6 @@
 import 'package:dart_json_mapper/dart_json_mapper.dart';
 import 'package:flutter_base_v2/base/data/models/common/base_response.dart';
-import 'package:flutter_base_v2/features/branch/data/models/response/branch_response.dart';
+import 'package:flutter_base_v2/features/branch/data/models/response/branch.dart';
 import 'package:flutter_base_v2/features/home/data/models/response/item_response.dart';
 import 'package:flutter_base_v2/features/home/data/models/response/product_response.dart';
 import 'package:flutter_base_v2/features/home/data/models/response/type_response.dart';

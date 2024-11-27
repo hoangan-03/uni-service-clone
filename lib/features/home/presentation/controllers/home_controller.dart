@@ -123,7 +123,6 @@ class HomeController extends BaseController<HomeInput> {
     return _getProfileUseCase.execute(
         observer: Observer(
           onSuccess: (User? data) {
-            L.info(data);
             if (data != null) user.value = data;
           },
           onError: (AppException e) {
@@ -155,7 +154,6 @@ class HomeController extends BaseController<HomeInput> {
     await _getCartUseCase.execute(
         observer: Observer(
           onSuccess: (Cart? data) {
-            L.info(data);
             if (data != null) {
               cart.value = data;
               completer.complete(cart.value.id);
@@ -176,7 +174,6 @@ class HomeController extends BaseController<HomeInput> {
     return _getQrCodeUseCase.execute(
       observer: Observer(
         onSuccess: (MenuQR? qrMenu) {
-          L.info(qrMenu);
           if (qrMenu != null) qrmenu.value = qrMenu;
         },
         onError: (AppException e) {

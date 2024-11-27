@@ -69,7 +69,6 @@ class QrcodeController extends BaseController<HomeInput> {
     _getQrCodeUseCase.execute(
       observer: Observer(
         onSuccess: (MenuQR? qrMenu) {
-          L.info(qrMenu);
           completer.complete(qrMenu);
         },
         onError: (AppException e) {

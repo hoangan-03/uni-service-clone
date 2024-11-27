@@ -118,7 +118,6 @@ class DepositController extends BaseController<DepositInput> {
     return _depositRequestUseCase.execute(
       observer: Observer(
         onSuccess: (Deposit? data) {
-          L.info(data);
           if (data != null) depositResponse.value = data;
           Get.to(() => WebViewPage(
               url: data?.paymentURL ?? 'https://www.facebook.com/'));
