@@ -4,6 +4,7 @@ import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class DepositPage extends BaseGetView<DepositController> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: "Nạp tiền",
+        title: S.deposit,
         appColors: appColors,
         hasBackButton: true,
       ),
@@ -62,9 +63,9 @@ class DepositPage extends BaseGetView<DepositController> {
                           style: AppTextStyle.bold18().copyWith(
                             color: appColors?.secondary,
                           ),
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: '0',
+                            hintText: S.zero,
                           ),
                           onChanged: controller.onAmountChanged),
                     ),
@@ -82,7 +83,7 @@ class DepositPage extends BaseGetView<DepositController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Số tiền hiện tại',
+                S.current_money,
                 style: AppTextStyle.bold14().copyWith(
                   color: appColors?.secondary,
                 ),
@@ -108,12 +109,12 @@ class DepositPage extends BaseGetView<DepositController> {
         spacing: 10,
         runSpacing: 10,
         children: [
-          _buildPresetAmountButton(appColors, '50.000'),
-          _buildPresetAmountButton(appColors, '100.000'),
-          _buildPresetAmountButton(appColors, '200.000'),
-          _buildPresetAmountButton(appColors, '500.000'),
-          _buildPresetAmountButton(appColors, '1.000.000'),
-          _buildPresetAmountButton(appColors, '2.000.000'),
+          _buildPresetAmountButton(appColors, S.fifty_thousand),
+          _buildPresetAmountButton(appColors, S.one_hundred_thousand),
+          _buildPresetAmountButton(appColors, S.two_hundred_thousand),
+          _buildPresetAmountButton(appColors, S.five_hundred_thousand),
+          _buildPresetAmountButton(appColors, S.one_million),
+          _buildPresetAmountButton(appColors, S.two_million),
         ],
       ),
     );
@@ -162,7 +163,7 @@ class DepositPage extends BaseGetView<DepositController> {
             ),
           ),
           child: Text(
-            'Tiếp tục',
+            S.continue_text,
             style: AppTextStyle.bold12().copyWith(color: appColors?.white),
           ),
         ),

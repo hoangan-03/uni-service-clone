@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/utils/config/app_route.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_svg_url.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_svg/svg.dart';
@@ -44,15 +45,15 @@ extension TabItem on TabType {
   String get title {
     switch (this) {
       case TabType.home:
-        return 'Trang chủ';
+        return S.home;
       case TabType.service:
-        return 'Tiện ích';
+        return S.services;
       case TabType.qr:
-        return '';
+        return S.empty;
       case TabType.history:
-        return 'Lịch sử';
+        return S.history;
       case TabType.account:
-        return 'Tài khoản';
+        return S.account;
     }
   }
 
@@ -112,11 +113,11 @@ class TabbarPage extends GetView {
           confineToSafeArea: true,
           padding: const EdgeInsets.only(top: 10),
           resizeToAvoidBottomInset: true,
-          decoration: const NavBarDecoration(
-            colorBehindNavBar: Colors.white,
+          decoration: NavBarDecoration(
+            colorBehindNavBar: appColors!.white,
             boxShadow: [
               BoxShadow(
-                color: Color.fromARGB(80, 187, 176, 222),
+                color: appColors.gray.withOpacity(0.8),
                 blurRadius: 2,
                 offset: Offset(0, 0),
               ),

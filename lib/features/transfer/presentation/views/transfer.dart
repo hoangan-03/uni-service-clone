@@ -5,6 +5,7 @@ import 'package:flutter_base_v2/features/account/presentation/controllers/accoun
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_controller.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,7 @@ class TransferPage extends BaseGetView<TransferController> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: "Chuyển tiền",
+        title: S.deposit,
         appColors: appColors,
         hasBackButton: false,
       ),
@@ -64,9 +65,9 @@ class TransferPage extends BaseGetView<TransferController> {
                           style: AppTextStyle.bold18().copyWith(
                             color: appColors?.secondary,
                           ),
-                          decoration: const InputDecoration(
+                          decoration:  InputDecoration(
                             border: InputBorder.none,
-                            hintText: '0',
+                            hintText: S.zero,
                           ),
                           onChanged: controller.onAmountChanged),
                     ),
@@ -84,7 +85,7 @@ class TransferPage extends BaseGetView<TransferController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Số tiền hiện tại',
+               S.current_money,
                 style: AppTextStyle.bold14().copyWith(
                   color: appColors?.secondary,
                 ),

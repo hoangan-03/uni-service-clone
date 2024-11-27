@@ -4,6 +4,7 @@ import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_controller.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:intl/intl.dart';
@@ -27,7 +28,7 @@ class TransferBillPage extends BaseGetView<TransferController> {
       appBar: buildAppBar(
         appColors: appColors,
         context: context,
-        title: 'Chi tiết chuyển tiền',
+        title: S.transfer_detail,
         hasBackButton: false,
       ),
       body: _buildBody(context, appColors),
@@ -66,9 +67,9 @@ class TransferBillPage extends BaseGetView<TransferController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildDetailRow('Người nhận', recipientName),
-        _buildDetailRow('Số điện thoại', phone),
-        _buildDetailRow('Số tiền', '${NumberFormat('#,##0').format(amount)} đ'),
+        _buildDetailRow(S.recipient, recipientName),
+        _buildDetailRow(S.phone, phone),
+        _buildDetailRow(S.amount, '${NumberFormat('#,##0').format(amount)} đ'),
         _buildStatusRow(appColors),
       ],
     );
@@ -100,7 +101,7 @@ class TransferBillPage extends BaseGetView<TransferController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Trạng thái: ',
+            S.status,
             style: AppTextStyle.regular15(),
           ),
           Container(
@@ -110,7 +111,7 @@ class TransferBillPage extends BaseGetView<TransferController> {
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: Text(
-              'Thành công',
+              S.success,
               style: AppTextStyle.medium12().copyWith(color: appColors.white),
             ),
           ),
@@ -133,7 +134,7 @@ class TransferBillPage extends BaseGetView<TransferController> {
         minimumSize: const Size(double.infinity, 40),
       ),
       child: Text(
-        'Quay về trang chủ',
+        S.back_to_home,
         style: AppTextStyle.bold14().copyWith(color: appColors?.primary),
       ),
     );

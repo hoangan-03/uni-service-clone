@@ -6,6 +6,7 @@ import 'package:flutter_base_v2/features/branch/presentation/views/branches_page
 import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
 import 'package:flutter_base_v2/features/history/presentation/views/history.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/home_page_content.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get_storage/get_storage.dart';
@@ -18,12 +19,12 @@ class HomePage extends BaseGetView<HomeController> {
     final GetStorage localStorage = GetStorage();
     final appColors = Theme.of(context).extension<AppColors>();
     final branchJson = localStorage.read('selectedBranch');
-    String branchId = '6134edff-d5cc-4dbc-be51-4c914bfded16';
+    String branchId = S.default_branch;
     print("branchId: $branchId");
 
     if (branchJson != null) {
       final Map<String, dynamic> branchData = jsonDecode(branchJson);
-      branchId = branchData['id'] ?? 'Sample';
+      branchId = branchData['id'] ?? S.default_branch;
     }
     Theme.of(context).extension<AppColors>();
     int selectedIndex = 0;
@@ -33,7 +34,7 @@ class HomePage extends BaseGetView<HomeController> {
       body: Obx(() {
         String currentMenu = controller.currentMenu.value.isNotEmpty
             ? controller.currentMenu.value
-            : 'Tất cả';
+            : S.all;
 
         return IndexedStack(
           index: selectedIndex,

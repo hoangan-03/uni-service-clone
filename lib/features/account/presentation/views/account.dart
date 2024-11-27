@@ -7,6 +7,7 @@ import 'package:flutter_base_v2/features/account/presentation/views/account_info
 import 'package:flutter_base_v2/features/home/presentation/utils/cancel_button.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart'; // Import app_strings.dart
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -36,26 +37,26 @@ class AccountPage extends BaseGetView<AccountController> {
               Column(
                 children: [
                   _buildMenuItem(FontAwesomeIcons.circleUser,
-                      'Thông tin tài khoản', context, onTap: () {
+                      S.account_info, context, onTap: () {
                     Get.to(() => const AccountInfoPage(),
                         binding: AccountBinding());
                   }),
                   Divider(color: appColors.lightGray),
-                  _buildMenuItem(FontAwesomeIcons.gear, 'Cài đặt', context),
+                  _buildMenuItem(FontAwesomeIcons.gear, S.settings, context),
                   Divider(color: appColors.lightGray),
                   _buildMenuItem(
-                      FontAwesomeIcons.commentDots, 'Đóng góp ý kiến', context),
+                      FontAwesomeIcons.commentDots, S.contribute_opinion, context),
                   Divider(color: appColors.lightGray),
-                  _buildMenuItem(FontAwesomeIcons.idBadge, 'Liên hệ', context),
+                  _buildMenuItem(FontAwesomeIcons.idBadge, S.contact_office, context),
                   Divider(color: appColors.lightGray),
                   _buildMenuItem(
-                      FontAwesomeIcons.lock, 'Chính sách bảo mật', context),
+                      FontAwesomeIcons.lock, S.privacy_policy, context),
                   Divider(color: appColors.lightGray),
                   _buildMenuItem(FontAwesomeIcons.shieldHalved,
-                      'Điều khoản dịch vụ', context),
+                      S.terms_of_use, context),
                   Divider(color: appColors.lightGray),
                   _buildMenuItem(
-                      FontAwesomeIcons.rightFromBracket, 'Đăng xuất', context,
+                      FontAwesomeIcons.rightFromBracket, S.logout, context,
                       color: appColors.onCancel,
                       showTrailingIcon: false, onTap: () {
                     controller.logout();
@@ -99,7 +100,7 @@ class AccountPage extends BaseGetView<AccountController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Số dư hiện tại',
+                  S.current_money,
                   style: AppTextStyle.regular14()
                       .copyWith(color: appColors.secondary),
                 ),
@@ -141,7 +142,7 @@ class AccountPage extends BaseGetView<AccountController> {
                     icon: Icon(Icons.account_balance_wallet,
                         color: appColors.primary),
                     label: Text(
-                      'Nạp tiền',
+                      S.deposit,
                       style: TextStyle(color: appColors.primary),
                     ),
                     style: OutlinedButton.styleFrom(
@@ -157,12 +158,12 @@ class AccountPage extends BaseGetView<AccountController> {
                   child: OutlinedButton.icon(
                     onPressed: () {
                       showOptions(
-                        'Phương thức chuyển tiền',
+                        S.option,
                         [
                           _buildOptionItem(
                             appColors,
                             Icons.qr_code,
-                            'Quét mã QR',
+                            S.scan_qr,
                             () {
                               Get.back();
                               N.toQrScanner();
@@ -171,7 +172,7 @@ class AccountPage extends BaseGetView<AccountController> {
                           _buildOptionItem(
                             appColors,
                             Icons.phone_enabled,
-                            'Nhập số điện thoại',
+                            S.enter_phone_number,
                             () {
                               Get.back();
                             },
@@ -181,7 +182,7 @@ class AccountPage extends BaseGetView<AccountController> {
                     },
                     icon: Icon(Icons.send, color: appColors.primary),
                     label: Text(
-                      'Chuyển tiền',
+                      S.transfer_money,
                       style: TextStyle(color: appColors.primary),
                     ),
                     style: OutlinedButton.styleFrom(
@@ -210,10 +211,10 @@ class AccountPage extends BaseGetView<AccountController> {
         gapless: false,
         errorStateBuilder: (context, error) {
           return Center(
-            child: Text(
-              'Có lỗi xảy ra...',
-              textAlign: TextAlign.center,
-            ),
+            // child: Text(
+            //   'Có lỗi xảy ra...',
+            //   textAlign: TextAlign.center,
+            // ),
           );
         },
       );
@@ -229,12 +230,12 @@ class AccountPage extends BaseGetView<AccountController> {
             GestureDetector(
               onTap: () {
                 showOptions(
-                  'Thay đổi hình từ',
+                  S.change_image_from,
                   [
                     _buildOptionItem(
                       appColors,
                       Icons.camera_alt,
-                      'Chụp hình',
+                      S.camera,
                       () async {
                         final ImagePicker picker = ImagePicker();
                         final XFile? image =
@@ -249,7 +250,7 @@ class AccountPage extends BaseGetView<AccountController> {
                     _buildOptionItem(
                       appColors,
                       Icons.photo_library,
-                      'Thư viện ảnh',
+                      S.gallery,
                       () async {
                         final ImagePicker picker = ImagePicker();
                         final XFile? image =

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/authentication/data/args/email_input.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_controller.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class VerifyOtpPage extends BaseGetView<RegisterController> {
               ),
               const SizedBox(height: 24),
               Text(
-                'Mã xác minh đã được gửi đến email',
+                S.otp_has_been_sent,
                 style: AppTextStyle.regular12()
                     .copyWith(color: appColors?.secondary),
                 textAlign: TextAlign.center,
@@ -52,12 +53,12 @@ class VerifyOtpPage extends BaseGetView<RegisterController> {
               const SizedBox(height: 16),
               RichText(
                 text: TextSpan(
-                  text: 'Sai email? ',
+                  text: S.wrong_email,
                   style: AppTextStyle.regular12()
                       .copyWith(color: appColors?.secondary),
                   children: [
                     TextSpan(
-                      text: 'Thay đổi',
+                      text: S.change_email,
                       style: AppTextStyle.regular12()
                           .copyWith(color: appColors?.primary),
                       recognizer: TapGestureRecognizer()
@@ -103,8 +104,8 @@ class VerifyOtpPage extends BaseGetView<RegisterController> {
                         : null,
                     child: Text(
                       controller.canResendOtp.value
-                          ? 'Gửi lại OTP'
-                          : 'Gửi lại OTP (${controller.otpResendTimer}s)',
+                          ? S.resend_otp
+                          : '${S.resend_otp} (${controller.otpResendTimer}s)',
                       style: AppTextStyle.regular16().copyWith(
                         color: controller.canResendOtp.value
                             ? appColors?.primary

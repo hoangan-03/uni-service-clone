@@ -4,6 +4,7 @@ import 'package:flutter_base_v2/features/authentication/data/args/token_input.da
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
@@ -23,7 +24,7 @@ class InitInfoPage extends BaseGetView<RegisterController> {
       child: Scaffold(
         appBar: buildAppBar(
           context: context,
-          title: "Đăng ký thông tin",
+          title: S.register_info,
           appColors: appColors,
           hasBackButton: true,
         ),
@@ -37,15 +38,15 @@ class InitInfoPage extends BaseGetView<RegisterController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  buildInfoField(context, 'Mật khẩu', user.password, appColors,
+                  buildInfoField(context, S.password, user.password, appColors,
                       (value) => user.password = value,
-                      hintText: 'Nhập mật khẩu'),
-                  buildInfoField(context, 'Tên hiển thị', user.name, appColors,
+                      hintText: S.enter_password),
+                  buildInfoField(context, S.expired_date, user.name, appColors,
                       (value) => user.name = value,
-                      hintText: 'Nhập tên hiển thị'),
+                      hintText: S.enter_display_name),
                   buildDatePickerField(
                     context,
-                    'Ngày sinh',
+                   S.birthday,
                     user.birthdate,
                     appColors,
                     (value) {
@@ -65,7 +66,7 @@ class InitInfoPage extends BaseGetView<RegisterController> {
             onPressed: () {
               final user = controller.userInitInfo.value;
               controller.initProfile(user);
-              buildSnackBar("Đăng kí thành công", true);
+              buildSnackBar(S.success_register, true);
               N.toBranchPage();
             },
             style: ElevatedButton.styleFrom(
@@ -76,7 +77,7 @@ class InitInfoPage extends BaseGetView<RegisterController> {
               ),
             ),
             child: Text(
-              'Tiếp tục',
+              S.continue_text,
               style: AppTextStyle.bold14().copyWith(
                 color: appColors.primary,
               ),
@@ -163,7 +164,7 @@ class InitInfoPage extends BaseGetView<RegisterController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  value.isNotEmpty ? value : 'Chọn ngày',
+                  value.isNotEmpty ? value : S.enter_birthday,
                   style: AppTextStyle.regular14().copyWith(color: Colors.black),
                 ),
                 Icon(Icons.calendar_today, color: appColors?.secondary),

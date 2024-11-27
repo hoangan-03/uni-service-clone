@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/common.dart';
 import 'package:flutter_base_v2/features/tabbar/presentation/controllers/landing/landing_controller.dart';
+import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/gen/assets.gen.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
@@ -51,15 +52,17 @@ class LandingPage extends BaseGetView<LandingController> {
             ),
             CommonButton(
               onPressed: controller.toRegister,
-              fillColor: context.theme.primaryColor,
-              borderColor: context.theme.primaryColor,
+              fillColor: appColors!.primary,
+              borderColor: appColors.primary,
               child: Text(
                 S.register,
-                style: TextStyle(color: appColors!.white),
+                style: AppTextStyle
+                    .bold16()
+                    .copyWith(color: appColors.white),
               ),
             ),
             const SizedBox(
-              height: 18,
+              height: 8,
             ),
             // CommonButton(
             //   onPressed: controller.toLogin,
@@ -75,19 +78,24 @@ class LandingPage extends BaseGetView<LandingController> {
             // ),
             CommonButton(
               onPressed: controller.toUniLogin,
-              fillColor: Colors.transparent,
-              borderColor: context.theme.primaryColor,
+              fillColor: appColors.transparent,
+              borderColor: appColors.primary,
               child: Text(
-                'Uni Login',
-                style: TextStyle(color: appColors.primary),
+               S.login,
+                style: AppTextStyle
+                    .bold16()
+                    .copyWith(color: appColors.primary),
               ),
             ),
             const SizedBox(
               height: 24,
             ),
-            Text(
-              controller.appVersion,
-            ),
+             Text(
+                controller.appVersion,
+                style: AppTextStyle
+                    .regular14()
+                    .copyWith(color: appColors.secondary),
+              ),
           ],
         ),
       ),

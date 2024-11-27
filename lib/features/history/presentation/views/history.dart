@@ -3,6 +3,7 @@ import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/history/presentation/controllers/transaction_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
@@ -25,7 +26,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
       appBar: buildAppBar(
         appColors: appColors,
         context: context,
-        title: 'Lịch sử giao dịch',
+        title: S.transaction_history,
         hasBackButton: false,
       ),
       body: Center(
@@ -136,7 +137,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
                     newPageProgressIndicatorBuilder: (_) =>
                         const Center(child: CircularProgressIndicator()),
                     noItemsFoundIndicatorBuilder: (context) =>
-                        Center(child: Text('Không có giao dịch nào')),
+                        Center(child: Text(S.no_transactions_found)),
                   ),
                 ),
               ),
@@ -153,13 +154,13 @@ class HistoryPage extends BaseGetView<TransactionController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildTabButton('Tất cả', null, appColors),
+          _buildTabButton(S.all, null, appColors),
           const SizedBox(width: 10),
-          _buildTabButton('Mua hàng', 'BUY', appColors),
+          _buildTabButton(S.buy, 'BUY', appColors),
           const SizedBox(width: 10),
-          _buildTabButton('Nạp tiền', 'DEPOSIT', appColors),
+          _buildTabButton(S.deposit_money, 'DEPOSIT', appColors),
           const SizedBox(width: 10),
-          _buildTabButton('Gửi/Nhận tiền', 'TRANSFER', appColors),
+          _buildTabButton(S.transfer_money, 'TRANSFER', appColors),
         ],
       ),
     );
@@ -195,12 +196,12 @@ class HistoryPage extends BaseGetView<TransactionController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildDatePicker(context, 'Từ', controller.fromDate, (date) {
+        _buildDatePicker(context, S.from, controller.fromDate, (date) {
           controller.updateFromDate(date);
           // controller.pagingController.refresh();
         }),
         const SizedBox(width: 16),
-        _buildDatePicker(context, 'Đến', controller.toDate, (date) {
+        _buildDatePicker(context, S.to, controller.toDate, (date) {
           controller.updateToDate(date);
           // controller.pagingController.refresh();
         }),
@@ -281,11 +282,11 @@ class HistoryPage extends BaseGetView<TransactionController> {
   String getTitleForTransactionType(String transactionType) {
     switch (transactionType) {
       case 'BUY':
-        return 'Mua hàng';
+        return S.buy;
       case 'DEPOSIT':
-        return 'Nạp tiền';
+        return S.deposit_money;
       case 'TRANSFER':
-        return 'Chuyển tiền';
+        return S.transfer_money;
       default:
         return transactionType;
     }

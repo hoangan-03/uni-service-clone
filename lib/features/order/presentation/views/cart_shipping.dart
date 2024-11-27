@@ -3,6 +3,7 @@ import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 
@@ -14,7 +15,7 @@ class CartShippingPage extends BaseGetView<HomeController> {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
       appBar: buildAppBar(
-          appColors: appColors, context: context, title: 'Đơn hàng chưa nhận'),
+          appColors: appColors, context: context, title: S.not_received_order),
       body: _buildBody(appColors),
     );
   }
@@ -41,7 +42,7 @@ class CartShippingPage extends BaseGetView<HomeController> {
       onLoading: const Center(child: CircularProgressIndicator()),
       onSuccess: (cartships) {
         if (cartships == null || cartships.isEmpty) {
-          return Center(child: Text('Giỏ hàng trống'));
+          return Center(child: Text(S.empty_cart));
         }
         return _CartShippingList(cartships: cartships, appColors: appColors);
       },

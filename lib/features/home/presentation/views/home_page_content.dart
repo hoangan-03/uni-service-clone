@@ -5,6 +5,7 @@ import 'package:flutter_base_v2/features/home/presentation/widgets/header.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/main_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/menu/menu_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/top_nav_button.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePageContent extends StatelessWidget {
@@ -51,42 +52,42 @@ class HomePageContent extends StatelessWidget {
                 children: [
                   TopNavButton(
                     icon: FontAwesomeIcons.bellConcierge,
-                    label: 'Tất cả',
+                    label: S.all,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
                     icon: FontAwesomeIcons.utensils,
-                    label: 'Thực đơn chính',
+                    label: S.current_menu,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
                     icon: FontAwesomeIcons.martiniGlass,
-                    label: 'Đồ uống',
+                    label: S.drink,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
                     icon: FontAwesomeIcons.bowlRice,
-                    label: 'Food Court',
+                    label: S.foodcourt,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
                     icon: FontAwesomeIcons.wheatAwn,
-                    label: 'Đặc sản địa phương',
+                    label: S.local_food,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                 ],
               ),
             ),
-            currentMenu == 'Tất cả'
+            currentMenu == S.all
                 ? buildMainPage(
                     context,
                     branchId,

@@ -6,6 +6,7 @@ import 'package:flutter_base_v2/features/home/presentation/utils/format_price.da
 import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_slider.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -33,7 +34,7 @@ class OrderPage extends BaseGetView<HomeController> {
 
   AppBar _buildAppBar(AppColors? appColors, BuildContext context) {
     return AppBar(
-      title: Text('Đặt món',
+      title: Text(S.order,
           style: AppTextStyle.bold16().copyWith(color: appColors?.secondary)),
       centerTitle: true,
       leading: IconButton(
@@ -107,7 +108,7 @@ class OrderPage extends BaseGetView<HomeController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Tổng cộng',
+            S.total_price,
             style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
           ),
           if (item.menu == "TODAY") ...[
@@ -162,7 +163,7 @@ class OrderPage extends BaseGetView<HomeController> {
                 branch: branch,
                 branchName: branchName,
               ));
-          buildSnackBar("Mua hàng thành công", true);
+          buildSnackBar(S.order_success, true);
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: appColors?.primary,
@@ -220,7 +221,7 @@ class _TodayMenuDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Số lượng',
+          S.quantity,
           style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(
@@ -258,7 +259,7 @@ class _TodayMenuDetails extends StatelessWidget {
         );
       },
       child: Text(
-        'Chỉnh sửa',
+        S.edit_order,
         style: AppTextStyle.medium14().copyWith(color: appColors?.primary),
       ),
     );
@@ -303,7 +304,7 @@ class _RegularMenuDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Số lượng',
+         S.quantity,
           style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(
@@ -341,7 +342,7 @@ class _RegularMenuDetails extends StatelessWidget {
         );
       },
       child: Text(
-        'Chỉnh sửa',
+        S.edit_order,
         style: AppTextStyle.regular14().copyWith(color: appColors?.primary),
       ),
     );

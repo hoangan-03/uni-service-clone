@@ -59,7 +59,7 @@ extension FormFieldTypeExtension on FormFieldType {
       case FormFieldType.email:
         validators = [
           FormBuilderValidators.required(
-              errorText: S.please_enter_email),
+              errorText: S.enter_email),
           FormBuilderValidators.email(
               errorText: S.invalid_email),
           FormBuilderValidators.maxLength(128,
@@ -69,9 +69,9 @@ extension FormFieldTypeExtension on FormFieldType {
       case FormFieldType.password:
         validators = [
           FormBuilderValidators.required(
-              errorText: S.please_enter_password),
+              errorText: S.enter_password),
           FormBuilderValidators.minLength(8,
-              errorText: S.invalid_password),
+              errorText: S.included_uppercase_lowercase_number_special_character),
         ];
         break;
       default:

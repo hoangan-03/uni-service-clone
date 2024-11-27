@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -56,7 +57,7 @@ class QRPage extends BaseGetView<QrcodeController> {
                       ),
                     ),
                     Image.asset(
-                      'assets/images/scan.png',
+                      S.scan,
                       width: heightScanLine,
                       height: heightScanLine,
                       fit: BoxFit.cover,
@@ -88,7 +89,7 @@ class QRPage extends BaseGetView<QrcodeController> {
                         icon: Icon(Icons.close, color: appColors?.white),
                       ),
                       Text(
-                        'Quét mã QR',
+                        S.scan_qr,
                         textAlign: TextAlign.center,
                         style: AppTextStyle.bold18()
                             .copyWith(color: appColors?.white),

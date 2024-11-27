@@ -2,34 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/common.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/login/login_controller.dart';
+import 'package:flutter_base_v2/features/authentication/presentation/views/widgets/widgets.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/utils/config/app_text_style.dart';
+import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/extension/form_builder.dart';
+import 'package:flutter_base_v2/utils/gen/assets.gen.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
+// import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginPage extends BaseGetView<LoginController> {
   const LoginPage({super.key});
 
   @override
   Widget myBuild(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return GestureDetector(
       onTap: controller.hideKeyboard,
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: BaseAppBar(
-          title: 'Login',
-        ),
         body: Obx(() => IgnorePointer(
               ignoring: controller.ignoringPointer.value,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4, left: 16, right: 16),
-                    child: FormBuilder(
+              child: SafeArea(
+                  child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 24),
+                    const AppLogo(),
+                    const SizedBox(height: 16),
+                    FormBuilder(
                       key: controller.formKey,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 20),
                           CommonTextField(
                             type: FormFieldType.email,
                             formKey: controller.formKey,
@@ -38,41 +43,72 @@ class LoginPage extends BaseGetView<LoginController> {
                               controller.updateLoginButtonState();
                             },
                           ),
-                          CommonTextField(
-                            type: FormFieldType.password,
-                            formKey: controller.formKey,
-                            controller:
-                                controller.passwordTextEditingController,
-                            textInputAction: TextInputAction.done,
-                            obscureText: controller.isHidePassword.value,
-                            suffixIcon: Text(
-                              'S.current.forgot_password',
-                              style: context.textTheme.labelMedium
-                                  ?.copyWith(color: context.theme.primaryColor),
-                            ),
-                            onChanged: (_) {
-                              controller.updateLoginButtonState();
-                            },
-                            onSubmitted: (_) {
-                              controller.onTapLogin();
-                            },
-                          ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 24),
+                          Obx(() => CommonTextField(
+                              type: FormFieldType.password,
+                              obscureText: controller.isHidePassword.value,
+                              formKey: controller.formKey,
+                              controller:
+                                  controller.passwordTextEditingController,
+                              suffixIcon: controller.isHidePassword.value
+                                  ? Assets.icons.icEyeOff.svg()
+                                  : Assets.icons.icEyeOn.svg(),
+                              onPressedSuffixIcon: controller.onTapEye,
+                              onChanged: (_) {
+                                controller.updateLoginButtonState();
+                              })),
                         ],
                       ),
                     ),
-                  ),
-                  const Spacer(),
-                  Obx(() => CommonBottomButton(
-                        text: 'Login',
+                    const Spacer(),
+                    // Obx(() => controller.isLoggedInGoogle.value
+                    //     ? Column(
+                    //         children: [
+                    //           CommonButton(
+                    //               fillColor: appColors!.primary,
+                    //               onPressed: controller.logoutGoogle,
+                    //               enabled: !controller.isDisableButton.value,
+                    //               state: controller.loginState,
+                    //               child: Text(
+                    //                 'Logout Google',
+                    //                 style: AppTextStyle.regular14(
+                    //                     color: appColors.white),
+                    //               )),
+                    //           const SizedBox(height: 16)
+                    //         ],
+                    //       )
+                    //     : Column(
+                    //         children: [
+                    //           CommonButton(
+                    //               fillColor: appColors!.primary,
+                    //               onPressed: controller.googleSignIn,
+                    //               enabled: !controller.isDisableButton.value,
+                    //               state: controller.loginState,
+                    //               child: Text(
+                    //                 'Login with Google',
+                    //                 style: AppTextStyle.regular14(
+                    //                     color: appColors.white),
+                    //               )),
+                    //           const SizedBox(height: 16)
+                    //         ],
+                    //       )),
+                    // SignInWithAppleButton(
+                    //   onPressed: controller.appleSignIn,
+                    // ),
+                    // const SizedBox(height: 16),
+                    Obx(() => CommonButton(
+                        fillColor: appColors!.primary,
                         onPressed: controller.onTapLogin,
-                        pressedOpacity:
-                            controller.isDisableButton.value ? 1 : 0.4,
-                        isDisable: controller.isDisableButton.value,
+                        enabled: !controller.isDisableButton.value,
                         state: controller.loginState,
-                      ))
-                ],
-              ),
+                        child: Text(
+                          S.login,
+                          style: AppTextStyle.regular14(
+                              color: appColors.white),
+                        ))),
+                  ],
+                ),
+              )),
             )),
       ),
     );

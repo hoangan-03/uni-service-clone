@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_controller.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
@@ -17,7 +18,7 @@ class RegisterPage extends BaseGetView<RegisterController> {
       child: Scaffold(
         appBar: buildAppBar(
           context: context,
-          title: "Đăng ký",
+          title: S.register,
           appColors: appColors,
           hasBackButton: true,
         ),
@@ -30,7 +31,7 @@ class RegisterPage extends BaseGetView<RegisterController> {
               children: [
                 buildInfoField(
                   context,
-                  'Email hoặc số điện thoại',
+                  S.email_or_phone,
                   appColors ?? AppColors(),
                   (value) => controller.registerRequest.value.email = value,
                 ),
@@ -44,7 +45,7 @@ class RegisterPage extends BaseGetView<RegisterController> {
           child: ElevatedButton(
             onPressed: () {
               controller.getOTP(controller.registerRequest.value.email ??
-                  'john12052003@gmail.com');
+                  S.myEmail);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: appColors?.primary ?? Colors.blue,
@@ -53,7 +54,7 @@ class RegisterPage extends BaseGetView<RegisterController> {
               ),
             ),
             child: Text(
-              'Gửi OTP',
+              S.send_otp,
               style: AppTextStyle.bold12().copyWith(
                 color: appColors?.white,
               ),
@@ -76,10 +77,10 @@ class RegisterPage extends BaseGetView<RegisterController> {
         ),
         const SizedBox(height: 4.0),
         TextFormField(
-          initialValue: "john12052003@gmail.com",
+          initialValue: S.myEmail,
           onChanged: onChanged,
           decoration: InputDecoration(
-            hintText: 'Nhập email hoặc số điện thoại',
+            hintText: S.enter_email_or_phone,
             suffixIcon:
                 icon != null ? Icon(icon, color: appColors.secondary) : null,
             filled: true,

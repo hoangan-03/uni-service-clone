@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -46,7 +47,7 @@ class WebViewPageState extends State<WebViewPage> {
             if (request.url.startsWith('https://stg.uniservice.vn')) {
               accountController.reloadUserInfo();
               N.toAccount();
-              buildSnackBar("Nạp tiền thành công", true);
+              buildSnackBar(S.deposit_success, true);
               return NavigationDecision.prevent;
             } else {
               return NavigationDecision.navigate;
@@ -64,7 +65,7 @@ class WebViewPageState extends State<WebViewPage> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: "Nạp tiền",
+        title: S.deposit,
         appColors: appColors,
         hasBackButton: true,
       ),

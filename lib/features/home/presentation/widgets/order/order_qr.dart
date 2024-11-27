@@ -5,6 +5,7 @@ import 'package:flutter_base_v2/features/home/presentation/utils/format_price.da
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_slide_qr.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/menu_qr.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -32,7 +33,7 @@ class OrderQRPage extends BaseGetView<HomeController> {
 
   AppBar _buildAppBar(AppColors? appColors, BuildContext context) {
     return AppBar(
-      title: Text('Đặt món',
+      title: Text(S.order,
           style: AppTextStyle.bold20().copyWith(color: appColors?.secondary)),
       centerTitle: true,
       leading: IconButton(
@@ -95,7 +96,7 @@ class OrderQRPage extends BaseGetView<HomeController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Tổng cộng:',
+            S.total_price,
             style: AppTextStyle.bold20().copyWith(color: appColors?.secondary),
           ),
           Obx(() {
@@ -142,7 +143,7 @@ class OrderQRPage extends BaseGetView<HomeController> {
           ),
         ),
         child: Text(
-          'Thanh toán',
+          S.make_payment,
           style: AppTextStyle.bold16().copyWith(color: appColors?.white),
         ),
       ),
@@ -188,7 +189,7 @@ class _RegularMenuDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Số lượng:',
+          S.quantity,
           style: AppTextStyle.regular18().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(
@@ -226,7 +227,7 @@ class _RegularMenuDetails extends StatelessWidget {
         );
       },
       child: Text(
-        'Chỉnh sửa',
+        S.edit_order,
         style: AppTextStyle.bold18().copyWith(color: appColors?.primary),
       ),
     );

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/truncate_text.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,11 +16,11 @@ Widget buildHeader(BuildContext context, Function getCartShipping) {
   final AccountController accountController = Get.find<AccountController>();
 
   final branchJson = localStorage.read('selectedBranch');
-  String branchName = 'Sample name';
+  String branchName = S.defaultBranchName;
 
   if (branchJson != null) {
     final Map<String, dynamic> branchData = jsonDecode(branchJson);
-    branchName = branchData['name'] ?? 'Sample';
+    branchName = branchData['name'] ?? S.defaultBranchName;
   }
 
   return Row(
@@ -31,8 +32,7 @@ Widget buildHeader(BuildContext context, Function getCartShipping) {
             final user = accountController.user.value;
             return ClipOval(
               child: Image.network(
-                user.avatar ??
-                    'https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360',
+                user.avatar ?? S.defaultAvatar,
                 width: 50,
                 height: 50,
                 fit: BoxFit.cover,
@@ -49,7 +49,7 @@ Widget buildHeader(BuildContext context, Function getCartShipping) {
               Obx(() {
                 final user = accountController.user.value;
                 return Text(
-                  user.username ?? '',
+                  user.username ?? S.empty,
                   style: AppTextStyle.bold16()
                       .copyWith(color: appColors?.secondary),
                 );

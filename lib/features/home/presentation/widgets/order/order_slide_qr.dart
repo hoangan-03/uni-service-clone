@@ -5,6 +5,7 @@ import 'package:flutter_base_v2/features/home/presentation/utils/cancel_button.d
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_qr.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/menu_qr.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -386,7 +387,7 @@ class _OrderButton extends StatelessWidget {
         ),
       ),
       child: Text(
-        'Đặt món',
+        S.order,
         style: AppTextStyle.bold16().copyWith(color: appColors?.white),
       ),
     );

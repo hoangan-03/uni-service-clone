@@ -4,6 +4,7 @@ import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/tabbar/presentation/views/tabbar/tabbar_page.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class BillPage extends BaseGetView<HomeController> {
       appBar: buildAppBar(
           appColors: appColors,
           context: context,
-          title: 'Hóa đơn',
+          title: S.bill,
           hasBackButton: false),
       body: _buildBody(context, appColors),
     );
@@ -95,7 +96,7 @@ class BillPage extends BaseGetView<HomeController> {
 
   Text _buildExpirationDate(AppColors? appColors) {
     return Text(
-      "Ngày hết hạn: ${DateFormat('HH:mm - dd/MM/yyyy').format(DateTime.now().add(const Duration(hours: 8)))}",
+      "${S.expired_date}${DateFormat('HH:mm - dd/MM/yyyy').format(DateTime.now().add(const Duration(hours: 8)))}",
       style: AppTextStyle.bold12().copyWith(color: appColors!.secondary),
     );
   }
@@ -111,7 +112,7 @@ class BillPage extends BaseGetView<HomeController> {
         minimumSize: const Size(80, 30), 
       ),
       child: Text(
-        'Chưa giao hàng',
+       S.not_delivered,
         style: AppTextStyle.bold12().copyWith(color: Colors.white),
       ),
     );
@@ -130,10 +131,10 @@ class BillPage extends BaseGetView<HomeController> {
           gapless: false,
           errorStateBuilder: (context, error) {
             return Center(
-              child: Text(
-                'Uh oh! Something went wrong...',
-                textAlign: TextAlign.center,
-              ),
+              // child: Text(
+              //   'Uh oh! Something went wrong...',
+              //   textAlign: TextAlign.center,
+              // ),
             );
           },
         );
@@ -152,7 +153,7 @@ class BillPage extends BaseGetView<HomeController> {
     return Obx(() {
       final billId = controller.qrmenu.value.id;
       return Text(
-        'Mã hoá đơn : $billId',
+        '${S.bill_id}$billId',
         style: AppTextStyle.regular14().copyWith(color: Colors.black),
       );
     });
@@ -160,7 +161,7 @@ class BillPage extends BaseGetView<HomeController> {
 
   Text _buildOrderDetailsHeader() {
     return Text(
-      'Chi tiết đơn hàng',
+      S.order_detail,
       style: AppTextStyle.bold16().copyWith(color: Colors.black),
     );
   }
@@ -222,7 +223,7 @@ class BillPage extends BaseGetView<HomeController> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Tổng cộng',
+          S.total_price,
           style: AppTextStyle.bold16().copyWith(color: Colors.black),
         ),
         Text(
@@ -250,7 +251,7 @@ class BillPage extends BaseGetView<HomeController> {
 
       ),
       child: Text(
-        'Quay về trang chủ',
+       S.back_to_home,
         style: AppTextStyle.bold14().copyWith(color: appColors?.primary),
       ),
     );

@@ -2,10 +2,9 @@ import 'package:flutter_base_v2/features/account/presentation/controllers/accoun
 import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/login/login_binding.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_binding.dart';
-import 'package:flutter_base_v2/features/authentication/presentation/views/login/login_page.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/register/init_info.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/register/register.dart';
-import 'package:flutter_base_v2/features/authentication/presentation/views/login/uni_login_page.dart';
+import 'package:flutter_base_v2/features/authentication/presentation/views/login/login_page.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/register/verify_otp.dart';
 import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_binding.dart';
 import 'package:flutter_base_v2/features/branch/presentation/views/branches_page.dart';
@@ -105,7 +104,7 @@ class AppRoute {
     ),
     GetPage(
       name: uniLogin,
-      page: UniLoginPage.new,
+      page: LoginPage.new,
       binding: LoginBinding(),
       transition: Transition.noTransition,
     ),

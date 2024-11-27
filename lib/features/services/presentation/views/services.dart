@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 
@@ -15,20 +16,20 @@ class ServicesPage extends BaseGetView<HomeController> {
       appBar: buildAppBar(
           appColors: appColors,
           context: context,
-          title: 'Tiện ích',
+          title: S.services,
           hasBackButton: false),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
             ServiceCard(
-              imageUrl: 'https://f1e425bd6cd9ac6.cmccloud.com.vn/cms-tool/post/images/314/img_card.png?v=11',
-              title: 'Vé xe rẻ',
+              imageUrl: S.vexereurl,
+              title: S.vexere,
             ),
             const SizedBox(height: 12),
             ServiceCard(
-              imageUrl: 'https://employer.jobsgo.vn/uploads/media/img/201911/pictures_library_19108_20191118143305_8696.png', 
-              title: 'Btaskee',
+              imageUrl: S.btaskeeurl, 
+              title: S.btaskee,
             ),
           ],
         ),

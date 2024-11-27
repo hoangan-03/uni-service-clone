@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: "Thông tin tài khoản",
+        title: S.account_info,
         appColors: appColors,
         hasBackButton: true,
       ),
@@ -34,33 +35,33 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    buildInfoField(context, 'Họ tên', user.username ?? '',
-                        appColors, (value) => user.username = value, hintText: 'Nhập họ tên'),
-                    buildInfoField(context, 'CCCD', user.identificationCard ?? '',
-                        appColors, (value) => user.identificationCard = value, hintText: 'Nhập CCCD'),
+                    buildInfoField(context, S.enter_fullname, user.username ?? '',
+                        appColors, (value) => user.username = value, hintText: S.enter_fullname),
+                    buildInfoField(context, S.enter_identity_card, user.identificationCard ?? '',
+                        appColors, (value) => user.identificationCard = value, hintText: S.enter_identity_card),
                     buildDatePickerField(
                       context,
-                      'Ngày sinh',
+                      S.birthday,
                       user.birthdate ?? '',
                       appColors,
                       (value) {
                         user.birthdate = value;
                         controller.user.refresh();
                       },
-                      hintText: 'Chọn ngày sinh',
+                      hintText: S.enter_birthday,
                     ),
-                    buildInfoField(context, 'Trường', user.school ?? '', appColors,
-                        (value) => user.school = value, hintText: 'Nhập trường'),
-                    buildInfoField(context, 'Khoa', user.faculty ?? '', appColors,
-                        (value) => user.faculty = value, hintText: 'Nhập khoa'),
-                    buildInfoField(context, 'Chức vụ', user.position ?? '',
-                        appColors, (value) => user.position = value, hintText: 'Nhập chức vụ'),
-                    buildInfoField(context, 'Loại', user.role ?? '', appColors,
-                        (value) => user.role = value, hintText: 'Nhập loại'),
-                    buildInfoField(context, 'Email', user.email ?? '', appColors,
-                        (value) => user.email = value, hintText: 'Nhập email'),
-                    buildInfoField(context, 'Số điện thoại', user.phone ?? '',
-                        appColors, (value) => user.phone = value, hintText: 'Nhập số điện thoại'),
+                    buildInfoField(context, S.school, user.school ?? '', appColors,
+                        (value) => user.school = value, hintText: S.enter_school),
+                    buildInfoField(context, S.faculty, user.faculty ?? '', appColors,
+                        (value) => user.faculty = value, hintText: S.enter_faculty),
+                    buildInfoField(context, S.position, user.position ?? '',
+                        appColors, (value) => user.position = value, hintText: S.enter_position),
+                    buildInfoField(context, S.role, user.role ?? '', appColors,
+                        (value) => user.role = value, hintText: S.enter_role),
+                    buildInfoField(context, S.email, user.email ?? '', appColors,
+                        (value) => user.email = value, hintText: S.enter_email),
+                    buildInfoField(context, S.phone_number, user.phone ?? '',
+                        appColors, (value) => user.phone = value, hintText: S.enter_phone_number),
                     const SizedBox(height: 80.0), 
                   ],
                 ),
@@ -76,7 +77,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                 final user = controller.user.value;
                 controller.updateProfile(user);
                 Get.back();
-                buildSnackBar("Cập nhật thông tin thành công", true);
+                buildSnackBar(S.update_success, true);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
@@ -86,7 +87,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                 ),
               ),
               child: Text(
-                'Cập nhật thông tin',
+                S.update_info,
                 style: AppTextStyle.bold14().copyWith(
                   color: appColors?.primary,
                 ),

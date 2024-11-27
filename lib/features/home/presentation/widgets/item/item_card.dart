@@ -3,6 +3,7 @@ import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/format_price.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_slider.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -65,7 +66,7 @@ Widget buildItemCard(Menu item, BuildContext context) {
                   ),
                 ),
                 child: Text(
-                  'Chọn món',
+                  S.choose_food,
                   style:
                       AppTextStyle.bold11().copyWith(color: appColors?.primary),
                 ),
