@@ -78,9 +78,10 @@ class AccountController extends BaseController<HomeInput> {
     _localStorage.saveUserRefreshToken('refreshToken123123123');
   }
 
-  // void clearAllData() {
-  //   _localStorage.removeAllData();
-  // }
+    void clearAllData() {
+    _localStorage.removeAllData();
+  }
+
 
   Future<void> getProfile() {
     return _getProfileUseCase.execute(
@@ -130,6 +131,7 @@ class AccountController extends BaseController<HomeInput> {
 
   void logout() {
     Get.find<AuthService>().logout();
+    clearAllData();
   }
 
   void printIcons() async {

@@ -1,4 +1,5 @@
 import 'package:flutter_base_v2/features/authentication/data/args/email_input.dart';
+import 'package:flutter_base_v2/features/authentication/data/args/token_input.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/utils/config/app_route.dart';
@@ -36,8 +37,9 @@ class N {
     type.navigate(name: AppRoute.verifyOTP, arguments: input);
   }
 
-  static void toInitInfo({RouteType type = RouteType.to}) {
-    type.navigate(name: AppRoute.initInfo);
+  static void toInitInfo(
+      {required TokenInput input, RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.initInfo, arguments: input);
   }
 
   static void toDeposit(

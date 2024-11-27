@@ -4,6 +4,7 @@ import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/authentication/data/args/email_input.dart';
+import 'package:flutter_base_v2/features/authentication/data/args/token_input.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/response/token_model.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/request/getOTP_body.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/request/update_info.dart';
@@ -15,14 +16,18 @@ import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:get/get.dart';
+import 'package:flutter_base_v2/base/data/local/local_storage.dart';
+import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 
 class RegisterController extends BaseController {
-  var tokenResponse = TokenModel().obs;
   var registerRequest = GetOTPBody('john12052003@gmail.com').obs;
   var otp = ''.obs;
   var userInitInfo = UpdateInfoBody('', '', '').obs;
   var canResendOtp = false.obs;
   var otpResendTimer = 30.obs;
+  var accessToken = ''.obs;
+
+  final LocalStorage _localStorage = Get.find();
 
   final isHidePassword = true.obs;
   final List<FocusNode> otpFocusNodes = List.generate(6, (_) => FocusNode());
@@ -74,9 +79,9 @@ class RegisterController extends BaseController {
     return _verifyOtpUsecase.execute(
       observer: Observer(
         onSuccess: (TokenModel data) {
-          tokenResponse.value = data;
           buildSnackBar('Xác minh OTP thành công', true);
-          N.toInitInfo();
+          accessToken.value = data.accessToken ?? '';
+          N.toInitInfo(input: TokenInput(data.accessToken ?? ''));
         },
         onError: (AppException e) {
           buildSnackBar('Mã xác minh không đúng, vui lòng thử lại', false);
@@ -138,7 +143,11 @@ class RegisterController extends BaseController {
     N.toRegister();
   }
 
-  Future<void> initProfile(UpdateInfoBody initedUser) {
+  void setAccessToken() {
+    _localStorage.saveAccessToken(accessToken.value);
+  }
+
+  Future<void> initProfile(UpdateInfoBody initedUser) async {
     return _updateInfoUseCase.execute(
         observer: Observer(
           onSuccess: (_) {
