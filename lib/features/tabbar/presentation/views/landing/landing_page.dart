@@ -6,7 +6,7 @@ import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/gen/assets.gen.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
-import 'package:get/get.dart';
+
 
 class LandingPage extends BaseGetView<LandingController> {
   const LandingPage({super.key});

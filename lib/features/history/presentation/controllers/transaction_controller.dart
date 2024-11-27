@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:logger/logger.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';

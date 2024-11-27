@@ -53,7 +53,7 @@ class CustomLogInterceptor extends Interceptor {
   });
 
     static void _customLogPrint(Object object) {
-    final message = object.toString();
+    // final message = object.toString();
     // if (!message.contains('handleWindowFocusChanged')) {
     //   print(message);
     // }

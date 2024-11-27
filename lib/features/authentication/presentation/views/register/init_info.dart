@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
-import 'package:flutter_base_v2/features/authentication/data/args/token_input.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/utils/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
@@ -17,8 +16,6 @@ class InitInfoPage extends BaseGetView<RegisterController> {
   @override
   Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
-    final TokenInput token = Get.arguments as TokenInput;
-
     return GestureDetector(
       onTap: controller.hideKeyboard,
       child: Scaffold(

@@ -133,7 +133,7 @@ class TabbarPage extends GetView {
               onPressed: () {
                 Get.toNamed(AppRoute.qr);
               },
-              backgroundColor: appColors!.primary,
+              backgroundColor: appColors.primary,
               child: SvgPicture.asset(
                 AppSvgUrl.icQR,
                 width: 30,
