@@ -41,16 +41,23 @@ class CustomLogInterceptor extends Interceptor {
   void Function(Object object) logPrint;
 
   CustomLogInterceptor({
-    this.request = true,
+    this.request = false,
     this.requestHeader = false,
     this.requestBody = false,
     this.responseHeader = false,
-    this.responseBody = true,
+    this.responseBody = false,
     this.error = true,
     this.maxWidth = 100,
     this.compact = true,
-    this.logPrint = print,
+    this.logPrint = _customLogPrint,
   });
+
+    static void _customLogPrint(Object object) {
+    final message = object.toString();
+    // if (!message.contains('handleWindowFocusChanged')) {
+    //   print(message);
+    // }
+  }
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

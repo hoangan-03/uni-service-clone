@@ -171,7 +171,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
       return GestureDetector(
         onTap: () {
           controller.updateTransactionType(type);
-          controller.pagingController.refresh();
+          // controller.pagingController.refresh();
         },
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -197,12 +197,12 @@ class HistoryPage extends BaseGetView<TransactionController> {
       children: [
         _buildDatePicker(context, 'Từ', controller.fromDate, (date) {
           controller.updateFromDate(date);
-          controller.pagingController.refresh();
+          // controller.pagingController.refresh();
         }),
         const SizedBox(width: 16),
         _buildDatePicker(context, 'Đến', controller.toDate, (date) {
           controller.updateToDate(date);
-          controller.pagingController.refresh();
+          // controller.pagingController.refresh();
         }),
       ],
     );

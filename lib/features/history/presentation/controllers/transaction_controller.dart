@@ -12,6 +12,7 @@ import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
 class TransactionController extends BaseController {
   final Logger logger = Logger();
 
@@ -23,7 +24,9 @@ class TransactionController extends BaseController {
 
   final PagingController<int, Transaction> pagingController =
       PagingController(firstPageKey: 1);
-  final int pageSize = 20;
+  final int pageSize = 8;
+
+  var isLoading = false.obs;
 
   final fromDate = Rx<DateTime?>(DateTime(2024, 10, 15));
   final toDate = Rx<DateTime?>(DateTime.now());
@@ -32,15 +35,17 @@ class TransactionController extends BaseController {
   @override
   void onInit() async {
     super.onInit();
+    L.info('Adding page request listener');
     pagingController.addPageRequestListener((pageKey) {
+      logger.i('Page request listener triggered for page $pageKey');
       _fetchPage(pageKey);
     });
-    filterTransactions();
   }
 
   @override
   void onClose() {
     _getTransactionsUsecase.dispose();
+    pagingController.dispose();
     super.onClose();
   }
 
@@ -58,13 +63,17 @@ class TransactionController extends BaseController {
       observer: Observer(
         onSubscribe: () {
           getTransactionsState.onLoading();
+          isLoading.value =
+              true; // Set loading to true when data is being fetched
         },
         onSuccess: (List<Transaction>? transactions) {
           getTransactionsState.onSuccess(data: transactions);
+          isLoading.value = false; // Set loading to false once data is loaded
           completer.complete(transactions ?? []);
         },
         onError: (AppException e) {
           getTransactionsState.onError(e.message);
+          isLoading.value = false; // Set loading to false in case of an error
           handleError(e);
           completer.completeError(e);
         },
@@ -77,6 +86,10 @@ class TransactionController extends BaseController {
   }
 
   Future<void> _fetchPage(int pageKey) async {
+    if (isLoading.value) {
+      return;
+    }
+
     try {
       final fromDateString = DateFormat('dd/MM/yyyy').format(fromDate.value!);
       final toDateString = DateFormat('dd/MM/yyyy').format(toDate.value!);
@@ -102,30 +115,16 @@ class TransactionController extends BaseController {
           toDateString,
         );
       }
-
-      // Log some data of the transactions for debugging
-      logger.i('Fetched ${newTransactions.length} transactions for page $pageKey');
-      for (var transaction in newTransactions) {
-        logger.i('Transaction ID: ${transaction.id}, Date: ${transaction.createdAt}');
-      }
-
-      if (newTransactions.isNotEmpty) {
-        final isLastPage = newTransactions.length < pageSize;
-        if (isLastPage) {
-          pagingController.appendLastPage(newTransactions);
-        } else {
-          final nextPageKey = pageKey + 1;
-          pagingController.appendPage(newTransactions, nextPageKey);
-        }
+      final isLastPage = newTransactions.length < pageSize;
+      if (isLastPage) {
+        pagingController.appendLastPage(newTransactions);
       } else {
-        if (pageKey == 1) {
-          pagingController.appendLastPage([]); // Empty list for the first page
-        } else {
-          pagingController.appendLastPage([]); // No more transactions
-        }
+        final nextPageKey = pageKey + newTransactions.length;
+        pagingController.appendPage(newTransactions, nextPageKey);
       }
     } catch (error) {
       pagingController.error = error;
+      isLoading.value = false;
     }
   }
 
@@ -143,13 +142,17 @@ class TransactionController extends BaseController {
       observer: Observer(
         onSubscribe: () {
           getTransactionsState.onLoading();
+          isLoading.value =
+              true; // Set loading to true when data is being fetched
         },
         onSuccess: (List<Transaction>? transactions) {
           getTransactionsState.onSuccess(data: transactions);
+          isLoading.value = false; // Set loading to false once data is loaded
           completer.complete(transactions ?? []);
         },
         onError: (AppException e) {
           getTransactionsState.onError(e.message);
+          isLoading.value = false; // Set loading to false in case of an error
           handleError(e);
           completer.completeError(e);
         },
@@ -162,22 +165,16 @@ class TransactionController extends BaseController {
 
   void updateFromDate(DateTime date) {
     fromDate.value = date;
-    filterTransactions();
+    pagingController.refresh();
   }
 
   void updateToDate(DateTime date) {
     toDate.value = date;
-    filterTransactions();
+    pagingController.refresh();
   }
 
   void updateTransactionType(String? type) {
     selectedTransactionType.value = type;
-    filterTransactions();
-  }
-
-  void filterTransactions() {
-    if (fromDate.value != null && toDate.value != null) {
-      pagingController.refresh();
-    }
+    pagingController.refresh();
   }
 }
