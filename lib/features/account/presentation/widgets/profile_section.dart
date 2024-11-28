@@ -22,7 +22,7 @@ Widget buildProfileSection(BuildContext context) {
                   [
                     buildOptionItem(
                       appColors,
-                      AppSvgUrl.ictakepicture,
+                      AppSvgUrl.icTakepicture,
                       S.camera,
                       () async {
                         await controller.pickImage(ImageSource.camera);
@@ -30,7 +30,7 @@ Widget buildProfileSection(BuildContext context) {
                     ),
                     buildOptionItem(
                       appColors,
-                      AppSvgUrl.icphotogallery,
+                      AppSvgUrl.icPhotogallery,
                       S.gallery,
                       () async {
                         await controller.pickImage(ImageSource.gallery);

@@ -140,7 +140,9 @@ class S {
   static String all = "Tất cả";
   static String buy = "Mua hàng";
   static String deposit_money = "Nạp tiền";
-  static String transfer_money = "Gửi/nhận tiền";
+  static String transfer_or_get_money = "Gửi/nhận tiền";
+  static String transfer_money = "Chuyển tiền";
+
   static String from = "Từ";
   static String to = "Đến";
   static String no_transactions_found = "Không có giao dịch nào";

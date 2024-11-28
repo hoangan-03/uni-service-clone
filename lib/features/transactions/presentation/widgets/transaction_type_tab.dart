@@ -15,7 +15,7 @@ Widget buildTransactionTypeTabs(AppColors appColors) {
           const SizedBox(width: 10),
           buildTabButton(S.deposit_money, 'DEPOSIT', appColors),
           const SizedBox(width: 10),
-          buildTabButton(S.transfer_money, 'TRANSFER', appColors),
+          buildTabButton(S.transfer_or_get_money, 'TRANSFER', appColors),
         ],
       ),
     );

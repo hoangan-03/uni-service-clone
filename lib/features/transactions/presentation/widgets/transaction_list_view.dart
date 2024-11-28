@@ -40,7 +40,7 @@ class TransactionListView extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
                     child: Center(
                       child: Text(
-                        AppConstants.dateTimeFormat.format(transact.createdAt!),
+                        AppConstants.dateFormat.format(transact.createdAt!),
                         style: AppTextStyle.regular14()
                             .copyWith(color: appColors!.gray),
                       ),

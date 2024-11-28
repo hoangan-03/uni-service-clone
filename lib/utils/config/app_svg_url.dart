@@ -23,9 +23,11 @@ class AppSvgUrl {
   static String get icTerms => 'assets/icons/terms.svg';
   static String get icLogout => 'assets/icons/logout.svg';
 
-  static String get icscanqr => 'assets/icons/scanqr.svg';
-  static String get icenterphone => 'assets/icons/enterphone.svg';
-  static String get ictakepicture => 'assets/icons/takepic.svg';
-  static String get icphotogallery => 'assets/icons/photogallery.svg';
-  
+  static String get icScanqr => 'assets/icons/scanqr.svg';
+  static String get icEnterphone => 'assets/icons/enterphone.svg';
+  static String get icTakepicture => 'assets/icons/takepic.svg';
+  static String get icPhotogallery => 'assets/icons/photogallery.svg';
+  static String get icTopup => 'assets/icons/topup.svg';
+  static String get icTransfer => 'assets/icons/transfer.svg';
+
 }

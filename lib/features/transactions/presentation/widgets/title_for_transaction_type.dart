@@ -7,7 +7,7 @@ String getTitleForTransactionType(String transactionType) {
       case 'DEPOSIT':
         return S.deposit_money;
       case 'TRANSFER':
-        return S.transfer_money;
+        return S.transfer_or_get_money;
       default:
         return transactionType;
     }

@@ -1,8 +1,9 @@
 import 'package:intl/intl.dart';
 
 class AppConstants {
-  static final dateTimeFormat = DateFormat('dd/MM/yyyy');
+  static final dateFormat = DateFormat('dd/MM/yyyy');
   static final timeFormat = DateFormat('HH:mm');
+    static final dateTimeFormat =   DateFormat('HH:mm - dd/MM/yyyy');
 }
 
 extension AppLinkConstants on AppConstants {
