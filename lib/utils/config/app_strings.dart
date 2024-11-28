@@ -87,6 +87,7 @@ class S {
   static String add_info = "Bổ sung thông tin";
   static String deposit_success = "Nạp tiền thành công";
   static String zero = "0";
+  static String hidden_star = "********";
   static String fifty_thousand = "50.000";
   static String one_hundred_thousand = "100.000";
   static String two_hundred_thousand = "200.000";

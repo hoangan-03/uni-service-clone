@@ -6,7 +6,7 @@ import 'package:flutter_base_v2/features/home/presentation/widgets/main_page.dar
 import 'package:flutter_base_v2/features/home/presentation/widgets/menu/menu_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/top_nav_button.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_base_v2/utils/config/app_svg_url.dart';
 
 class HomePageContent extends StatelessWidget {
   final String currentMenu;
@@ -51,35 +51,35 @@ class HomePageContent extends StatelessWidget {
               child: Row(
                 children: [
                   TopNavButton(
-                    icon: FontAwesomeIcons.bellConcierge,
+                    svgUrl: AppSvgUrl.icAllfood,
                     label: S.all,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
-                    icon: FontAwesomeIcons.utensils,
+                    svgUrl:  AppSvgUrl.icMainDish,
                     label: S.current_menu,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
-                    icon: FontAwesomeIcons.martiniGlass,
+                    svgUrl: AppSvgUrl.icDrink,
                     label: S.drink,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
-                    icon: FontAwesomeIcons.bowlRice,
+                    svgUrl: AppSvgUrl.icFoodcourt,
                     label: S.foodcourt,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
-                    icon: FontAwesomeIcons.wheatAwn,
+                    svgUrl: AppSvgUrl.icLocalfood,
                     label: S.local_food,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,

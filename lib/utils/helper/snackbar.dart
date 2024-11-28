@@ -23,7 +23,7 @@ void buildSnackBar(String message, bool isSuccess) {
         ],
       ),
       snackPosition: SnackPosition.TOP,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 2),
       backgroundColor: appColors.white,
       borderRadius: 36,
       margin: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),

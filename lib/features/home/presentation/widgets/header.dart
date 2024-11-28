@@ -72,8 +72,12 @@ Widget buildHeader(BuildContext context, Function getCartShipping) {
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.location_on,
-                          color: appColors.secondary, size: 16),
+                      SvgPicture.asset(
+                        AppSvgUrl.icLocation,
+                        width: 16,
+                        height: 16,
+                        color: appColors.secondary,
+                      ),
                       const SizedBox(width: 3),
                       Text(
                         truncateText(branchName, 25),
@@ -92,12 +96,12 @@ Widget buildHeader(BuildContext context, Function getCartShipping) {
         ],
       ),
       IconButton(
-         icon: SvgPicture.asset(
-            AppSvgUrl.icOrder,
-            width: 20,
-            height: 20,
-            color: appColors.secondary,
-          ),
+        icon: SvgPicture.asset(
+          AppSvgUrl.icOrder,
+          width: 20,
+          height: 20,
+          color: appColors.secondary,
+        ),
         onPressed: () {
           getCartShipping();
           Get.toNamed(AppRoute.cartShipping);
