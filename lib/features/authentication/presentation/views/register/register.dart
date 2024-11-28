@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_controller.dart';
+import 'package:flutter_base_v2/features/authentication/presentation/views/widgets/info_field.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -29,7 +30,7 @@ class RegisterPage extends BaseGetView<RegisterController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildInfoField(
+                buildInfoField2(
                   context,
                   S.email_or_phone,
                   appColors ?? AppColors(),
@@ -65,35 +66,4 @@ class RegisterPage extends BaseGetView<RegisterController> {
     );
   }
 
-  Widget buildInfoField(BuildContext context, String label, AppColors appColors,
-      Function(String) onChanged,
-      {IconData? icon}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: AppTextStyle.regular14().copyWith(color: appColors.gray),
-        ),
-        const SizedBox(height: 4.0),
-        TextFormField(
-          initialValue: S.myEmail,
-          onChanged: onChanged,
-          decoration: InputDecoration(
-            hintText: S.enter_email_or_phone,
-            suffixIcon:
-                icon != null ? Icon(icon, color: appColors.secondary) : null,
-            filled: true,
-            fillColor: appColors.lightGray,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide.none,
-            ),
-          ),
-          style: AppTextStyle.regular14().copyWith(color: Colors.black),
-        ),
-        const SizedBox(height: 16.0),
-      ],
-    );
-  }
 }

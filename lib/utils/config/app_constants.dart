@@ -1,6 +1,8 @@
+import 'package:intl/intl.dart';
+
 class AppConstants {
-  static const dateTimeFormat = 'yyyy/MM/dd HH:mm:ss';
-  static const dateFormat = 'yyyy/M/dd';
+  static final dateTimeFormat = DateFormat('dd/MM/yyyy');
+  static final timeFormat = DateFormat('HH:mm');
 }
 
 extension AppLinkConstants on AppConstants {
