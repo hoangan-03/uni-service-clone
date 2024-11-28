@@ -5,7 +5,7 @@ import 'package:flutter_base_v2/features/home/presentation/controllers/home_cont
 import 'package:flutter_base_v2/features/branch/presentation/views/branches_page.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
 import 'package:flutter_base_v2/features/transactions/presentation/views/history.dart';
-import 'package:flutter_base_v2/features/home/presentation/views/home_page_content.dart';
+import 'package:flutter_base_v2/features/home/presentation/widgets/home_page_content.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';

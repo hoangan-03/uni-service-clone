@@ -3,7 +3,7 @@ import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
-import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_qr.dart';
+import 'package:flutter_base_v2/features/order/presentation/views/order_qr.dart';
 import 'package:flutter_base_v2/features/qrcode/domain/entities/menu_qr.dart';
 import 'package:flutter_base_v2/features/qrcode/domain/usecases/get_qr_code.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_controller.dart';

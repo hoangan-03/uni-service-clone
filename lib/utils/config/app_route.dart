@@ -13,7 +13,7 @@ import 'package:flutter_base_v2/features/deposit/presentation/views/deposit.dart
 import 'package:flutter_base_v2/features/transactions/presentation/controllers/transaction_binding.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_binding.dart';
 import 'package:flutter_base_v2/features/home/presentation/views/home_page.dart';
-import 'package:flutter_base_v2/features/home/presentation/views/notifications_page.dart';
+import 'package:flutter_base_v2/features/home/presentation/widgets/notifications_page.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/cart_shipping.dart';
 import 'package:flutter_base_v2/features/qrcode/presentation/controllers/qrcode_binding.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/utils/helper/cancel_button.dart';
 import 'package:flutter_base_v2/utils/helper/format_price.dart';
-import 'package:flutter_base_v2/features/home/presentation/widgets/order/order.dart';
+import 'package:flutter_base_v2/features/order/presentation/views/order.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';

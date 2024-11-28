@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
-import 'package:flutter_base_v2/features/home/presentation/widgets/order/order.dart';
-import 'package:flutter_base_v2/features/home/presentation/widgets/order/order_slider.dart';
+import 'package:flutter_base_v2/features/order/presentation/views/order.dart';
+import 'package:flutter_base_v2/features/order/presentation/views/order_slider.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ Widget buildMenuPage(
   BaseState<List<Menu>?> currentList;
 
   switch (currentMenu) {
-    case "Thực đơn chính":
+    case 'Thực đơn hôm nay':
       currentList = menuTodayState;
       break;
     case "Đồ uống":
