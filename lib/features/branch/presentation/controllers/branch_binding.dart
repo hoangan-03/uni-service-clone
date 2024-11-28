@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class BranchBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => BranchController());
+    Get.lazyPut<BranchController>(() => BranchController());
     Get.lazyPut(() => GetBranchUseCase(Get.find()));
     Get.lazyPut(() => UpdateProfileUseCase(Get.find()));
   }

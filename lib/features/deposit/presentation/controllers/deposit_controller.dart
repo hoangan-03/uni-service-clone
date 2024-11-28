@@ -63,19 +63,6 @@ class DepositController extends BaseController<DepositInput> {
         title: "Demo notifications", body: 'Demo body', payload: 'payload');
   }
 
-  void printFcmToken() async {
-    final fcmToken = await pushNotiService.fcmToken;
-    L.debug(fcmToken);
-  }
-
-  void setAccessToken() {
-    _localStorage.saveAccessToken('accessToken123123123');
-  }
-
-  void setRefreshToken() {
-    _localStorage.saveUserRefreshToken('refreshToken123123123');
-  }
-
   void setAmount(String amount) {
     currentAmount.value = NumberFormat("#,###", "vi_VN")
         .format(int.tryParse(amount.replaceAll('.', '')) ?? 0);

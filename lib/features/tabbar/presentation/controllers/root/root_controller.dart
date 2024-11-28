@@ -34,7 +34,7 @@ class RootController extends BaseController {
     if (selectedBranchJson != null) {
       N.toHome(input: HomeInput(selectedBranchJson));
     } else {
-      N.toBranchPage();
+      N.toLandingPage();
     }
     Future.delayed(
       const Duration(milliseconds: 100),

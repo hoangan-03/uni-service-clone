@@ -5,6 +5,7 @@ import 'package:flutter_base_v2/features/authentication/domain/repositories/auth
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:logger/logger.dart';
 
 enum AuthServiceType { google, apple }
 
@@ -12,6 +13,7 @@ abstract class AuthService extends GetxService {
   Future<bool> isAuthenticated();
   Future<void> logout();
   void onUnauthorized() {}
+    final Logger _logger = Logger();
 }
 
 class AppAuthService extends AuthService {
@@ -19,17 +21,23 @@ class AppAuthService extends AuthService {
 
   @override
   Future<bool> isAuthenticated() async {
-    return await _localStorage.accessToken != null;
+     final accessToken = await _localStorage.accessToken;
+        _logger.i('Access Token: $accessToken');
+    
+    return accessToken != null;
   }
 
+  
   @override
   Future<void> logout() async {
+    final accessToken = await _localStorage.accessToken;
     if (await isAuthenticated()) {
-      await Get.find<AuthRepo>().logout();
+      await Get.find<AuthRepo>().logout(accessToken);
     }
     await _localStorage.removeAllData();
     N.toLandingPage();
   }
+
 
   @override
   void onUnauthorized() async {

@@ -88,7 +88,7 @@ class OrderSliderContentState extends State<OrderSliderContent> {
   @override
   void initState() {
     super.initState();
-    orderQuantity = widget.initialQuantity;
+    orderQuantity = widget.initialQuantity > 0 ? widget.initialQuantity : 1;
     selectedItemIndex = widget.initialIndex;
   }
 

@@ -65,23 +65,9 @@ class AccountController extends BaseController<HomeInput> {
         title: "Demo notifications", body: 'Demo body', payload: 'payload');
   }
 
-  void printFcmToken() async {
-    final fcmToken = await pushNotiService.fcmToken;
-    L.debug(fcmToken);
-  }
-
-  void setAccessToken() {
-    _localStorage.saveAccessToken('accessToken123123123');
-  }
-
-  void setRefreshToken() {
-    _localStorage.saveUserRefreshToken('refreshToken123123123');
-  }
-
-    void clearAllData() {
+  void clearAllData() {
     _localStorage.removeAllData();
   }
-
 
   Future<void> getProfile() {
     return _getProfileUseCase.execute(

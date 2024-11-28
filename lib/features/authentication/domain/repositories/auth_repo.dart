@@ -19,6 +19,6 @@ abstract class AuthRepo {
 
   Future<void> loginWithApple();
 
-  Future<void> logout();
+  Future<void> logout(String? accessToken);
 
 }

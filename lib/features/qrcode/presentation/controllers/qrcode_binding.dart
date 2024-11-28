@@ -8,7 +8,8 @@ class QrcodeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => QrcodeController());
-    Get.lazyPut(TransferController.new);
+
+    Get.lazyPut(() => TransferController());
     Get.lazyPut(() => TransferRequestUseCase(Get.find()));
     Get.lazyPut(() => TransferDetailUseCase(Get.find()));
   }

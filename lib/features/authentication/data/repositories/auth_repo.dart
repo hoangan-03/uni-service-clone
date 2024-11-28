@@ -12,13 +12,14 @@ import 'package:flutter_base_v2/features/authentication/data/models/request/veri
 import 'package:flutter_base_v2/features/authentication/domain/repositories/auth_repo.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:logger/logger.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthRepoImpl extends AuthRepo {
   final LocalStorage _localStorage = Get.find();
   final ApiService _apiService = Get.find();
   final GoogleSignIn _googleSignIn = Get.find();
-
+  final Logger _logger = Logger();
   @override
   Future<void> loginWithEmail(LoginBody request) async {
     TokenResponse response = await _apiService.loginWithEmail(request);
@@ -51,8 +52,21 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<void> logout() async {
-    await _apiService.logout();
+  Future<void> logout(String? accessToken) async {
+    try {
+      final accessTokenBeforeLogout = accessToken;
+      _logger.i('logout - Access Token before API call: $accessTokenBeforeLogout');
+
+      await _apiService.logout();
+
+      final accessTokenAfterLogout = await _localStorage.accessToken;
+      _logger.i('logout - Access Token after API call: $accessTokenAfterLogout');
+    } catch (e) {
+      final accessTokenOnError = await _localStorage.accessToken;
+      _logger.e('logout - Error: $e');
+      _logger.e('logout - Access Token on error: $accessTokenOnError');
+      rethrow;
+    }
   }
 
   @override

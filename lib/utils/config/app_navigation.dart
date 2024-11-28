@@ -26,6 +26,8 @@ class N {
     type.navigate(name: AppRoute.login);
   }
 
+
+
   static void toRegister({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.register);
   }

@@ -110,10 +110,10 @@ class HomeController extends BaseController<HomeInput> {
     itemIndex.value = newIndex;
   }
 
-  void printFcmToken() async {
-    final fcmToken = await pushNotiService.fcmToken;
-    L.debug(fcmToken);
-  }
+  // void printFcmToken() async {
+  //   final fcmToken = await pushNotiService.fcmToken;
+  //   L.debug(fcmToken);
+  // }
 
   // void clearAllData() {
   //   _localStorage.removeAllData();

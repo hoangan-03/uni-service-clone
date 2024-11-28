@@ -94,13 +94,7 @@ class BranchController extends BaseController {
     }
   }
 
-  void setAccessToken() {
-    _localStorage.saveAccessToken('accessToken123123123');
-  }
 
-  void setRefreshToken() {
-    _localStorage.saveUserRefreshToken('refreshToken123123123');
-  }
 
   void logout() {
     Get.find<AuthService>().logout();
