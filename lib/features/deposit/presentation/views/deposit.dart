@@ -30,9 +30,9 @@ class DepositPage extends BaseGetView<DepositController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 20),
-          buildAmountInput(appColors),
+          buildAmountInput(appColors, "deposit"),
           const SizedBox(height: 20),
-          buildPresetAmountButtons(appColors),
+          buildPresetAmountButtons(appColors, "deposit"),
           const SizedBox(height: 20),
           buildContinueButton(appColors),
         ],

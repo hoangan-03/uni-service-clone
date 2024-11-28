@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
+import 'package:flutter_base_v2/features/deposit/presentation/widgets/amount_input.dart';
+import 'package:flutter_base_v2/features/deposit/presentation/widgets/preset_amount_buttons.dart';
+import 'package:flutter_base_v2/features/transfer/presentation/widgets/continue_button_transfer.dart';
 import 'package:flutter_base_v2/utils/helper/format_price.dart';
 import 'package:flutter_base_v2/utils/helper/snackbar.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_controller.dart';
@@ -31,11 +34,14 @@ class TransferPage extends BaseGetView<TransferController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 20),
-          _buildAmountInput(appColors),
+          buildAmountInput(appColors, "transfer"),
           const SizedBox(height: 20),
-          _buildPresetAmountButtons(appColors),
+          buildPresetAmountButtons(appColors, "transfer"),
           const SizedBox(height: 20),
-          _buildContinueButton(appColors),
+          ContinueButton(
+            controller: controller,
+            recipientId: recipientId,
+          ),
         ],
       ),
     );
@@ -65,7 +71,7 @@ class TransferPage extends BaseGetView<TransferController> {
                           style: AppTextStyle.bold18().copyWith(
                             color: appColors?.secondary,
                           ),
-                          decoration:  InputDecoration(
+                          decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: S.zero,
                           ),
@@ -85,7 +91,7 @@ class TransferPage extends BaseGetView<TransferController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-               S.current_money,
+                S.current_money,
                 style: AppTextStyle.bold14().copyWith(
                   color: appColors?.secondary,
                 ),
