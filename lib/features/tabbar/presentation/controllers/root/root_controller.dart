@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
@@ -29,12 +31,14 @@ class RootController extends BaseController {
   }
 
   Future<void> _handleAuthenticated() async {
-    final selectedBranchJson = await _localStorage.getString('selectedBranch');
-    print('Selected branchh: $selectedBranchJson');
-    if (selectedBranchJson != null) {
-      N.toHome(input: HomeInput(selectedBranchJson));
+          final selectedBranchJson =
+          await _localStorage.getString('selectedBranch');
+    print('Selected branch: $selectedBranchJson');
+    if (selectedBranchJson == null) {
+      N.toBranch();
     } else {
-      N.toLandingPage();
+      final branchData = jsonDecode(selectedBranchJson);
+      N.toHome(input: HomeInput(branchData['id']));
     }
     Future.delayed(
       const Duration(milliseconds: 100),

@@ -44,10 +44,11 @@ class BillPage extends BaseGetView<HomeController> {
     );
   }
 
-  Container _buildBody(BuildContext context, AppColors? appColors) {
+  Widget _buildBody(BuildContext context, AppColors? appColors) {
     final String currentTime =
         DateFormat('HH:mm - dd/MM/yyyy').format(DateTime.now());
-    return Container(
+    return SingleChildScrollView(
+      child: Container(
         color: Colors.white,
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -91,7 +92,9 @@ class BillPage extends BaseGetView<HomeController> {
             const SizedBox(height: 12.0),
             _buildReturnHomeButton(appColors),
           ],
-        ));
+        ),
+      ),
+    );
   }
 
   Text _buildExpirationDate(AppColors? appColors) {
@@ -101,7 +104,7 @@ class BillPage extends BaseGetView<HomeController> {
     );
   }
 
-   ElevatedButton _buildOrderStatusButton(AppColors? appColors) {
+  ElevatedButton _buildOrderStatusButton(AppColors? appColors) {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(

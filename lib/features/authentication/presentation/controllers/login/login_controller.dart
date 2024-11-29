@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/data/app_error.dart';
+import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/base/domain/dispose_bag.dart';
@@ -15,11 +18,12 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 
 class LoginController extends BaseController {
-
   final emailTextEditingController = TextEditingController();
   final passwordTextEditingController = TextEditingController();
   final formKey = GlobalKey<FormBuilderState>();
   final loginState = BaseState();
+
+  final LocalStorage _localStorage = Get.find();
 
   final isHidePassword = true.obs;
   final isDisableButton = true.obs;
@@ -118,11 +122,17 @@ class LoginController extends BaseController {
             loginState.onLoading();
             ignoringPointer.value = true;
           },
-          onSuccess: (_) {
+          onSuccess: (_) async {
+            final branchJson = await _localStorage.getString('selectedBranch');
+            if (branchJson != null) {
+              final Map<String, dynamic> branchData = jsonDecode(branchJson);
+              N.toHome(
+                input: HomeInput(branchData['id']),
+              );
+            } else {
+              N.toBranch();
+            }
             loginState.onSuccess();
-            N.toHome(
-              input: HomeInput(""),
-            );
           },
           onError: (AppException e) {
             loginState.onError(e.message);

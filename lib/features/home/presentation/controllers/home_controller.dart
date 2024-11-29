@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_base_v2/base/data/app_error.dart';
+import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/domain/base_state.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
@@ -23,17 +24,18 @@ import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_shipping
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_uc.dart';
 import 'package:flutter_base_v2/features/qrcode/domain/usecases/get_qr_code.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_base_v2/utils/service/push_notification_service.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class HomeController extends BaseController<HomeInput> {
   @override
   final HomeInput input;
   HomeController(this.input);
-  GetCartShippingUseCase get _getCartShippingUsecase => Get.find<GetCartShippingUseCase>();
+  GetCartShippingUseCase get _getCartShippingUsecase =>
+      Get.find<GetCartShippingUseCase>();
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
   GetMenuUseCase get _getMenuUseCase => Get.find<GetMenuUseCase>();
   GetCartUseCase get _getCartUseCase => Get.find<GetCartUseCase>();
@@ -49,6 +51,8 @@ class HomeController extends BaseController<HomeInput> {
   BaseState<List<Menu>?> getMenuNecessityState = BaseState();
   final pushNotiService = Get.find<PushNotificationService>();
 
+    final LocalStorage _localStorage = Get.find();
+
   final user = User().obs;
   final cart = Cart().obs;
   final qrmenu = MenuQR().obs;
@@ -56,6 +60,7 @@ class HomeController extends BaseController<HomeInput> {
 
   var currentMenu = ''.obs;
   final currentBranchID = '5bb72354-7c84-4f24-b889-a05cbda5d45d'.obs;
+  final currentBranchName = ''.obs;
   final currentCategory = 'FOODCOURT'.obs;
   final quantity = 0.obs;
   final itemIndex = 0.obs;
@@ -64,12 +69,14 @@ class HomeController extends BaseController<HomeInput> {
   void onInit() async {
     super.onInit();
     pushNotiService.listenNotification();
-    final GetStorage localStorage = GetStorage();
-    final branchJson = localStorage.read('selectedBranch');
+    final LocalStorage localStorage = Get.find();
+    final branchJson = await localStorage.getString('selectedBranch');
     if (branchJson != null) {
       final Map<String, dynamic> branchData = jsonDecode(branchJson);
-      currentBranchID.value =
-          branchData['id'] ?? '5bb72354-7c84-4f24-b889-a05cbda5d45d';
+      currentBranchID.value = branchData['id'];
+      currentBranchName.value = branchData['name'];
+    } else {
+      N.toBranch();
     }
     getCartShipping();
     getMenuToday("TODAY", currentBranchID.value);
@@ -119,6 +126,15 @@ class HomeController extends BaseController<HomeInput> {
   //   _localStorage.removeAllData();
   // }
 
+    getBranchName() async {
+    final branchJson = await _localStorage.getString('selectedBranch');
+    if (branchJson != null) {
+      final Map<String, dynamic> branchData = jsonDecode(branchJson);
+      return branchData['name'] ?? S.defaultBranchName;
+    }
+    return S.defaultBranchName;
+  }
+
   Future<void> getProfile() {
     return _getProfileUseCase.execute(
         observer: Observer(
@@ -131,6 +147,8 @@ class HomeController extends BaseController<HomeInput> {
         ),
         input: null);
   }
+
+  
 
   Future<void> getMenuToday(String category, String branchId) async {
     return _getMenuUseCase.execute(

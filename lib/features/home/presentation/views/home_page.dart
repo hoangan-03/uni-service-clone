@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
@@ -9,23 +8,13 @@ import 'package:flutter_base_v2/features/home/presentation/widgets/home_page_con
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
-import 'package:get_storage/get_storage.dart';
 
 class HomePage extends BaseGetView<HomeController> {
   const HomePage({super.key});
 
   @override
   Widget myBuild(BuildContext context) {
-    final GetStorage localStorage = GetStorage();
     final appColors = Theme.of(context).extension<AppColors>();
-    final branchJson = localStorage.read('selectedBranch');
-    String branchId = S.default_branch;
-    print("branchId: $branchId");
-
-    if (branchJson != null) {
-      final Map<String, dynamic> branchData = jsonDecode(branchJson);
-      branchId = branchData['id'] ?? S.default_branch;
-    }
     Theme.of(context).extension<AppColors>();
     int selectedIndex = 0;
 
@@ -50,6 +39,7 @@ class HomePage extends BaseGetView<HomeController> {
               menuSpecialityState: controller.getMenuSpecialityState,
               menuNecessityState: controller.getMenuNecessityState,
               branchId: controller.currentBranchID.value,
+              branchName: controller.currentBranchName.value,
               selectedCategory: controller.currentCategory.value,
               currentMenu: currentMenu,
               onMenuSelected: (menu) {

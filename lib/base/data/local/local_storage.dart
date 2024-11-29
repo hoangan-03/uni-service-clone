@@ -1,4 +1,5 @@
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
+import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -23,6 +24,7 @@ class LocalStorage {
   }
 
   Future<void> removeAllData() async {
+    L.info('Remove all data');
     final localStorage = Get.find<LocalStorage>();
     final locale = localStorage.locale;
     final themeMode = localStorage.themeMode;

@@ -11,6 +11,8 @@ import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 class BranchsPage extends BaseGetView<BranchController> {
   const BranchsPage({super.key});
 
+  
+
   @override
   Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
@@ -20,7 +22,7 @@ class BranchsPage extends BaseGetView<BranchController> {
         context: context,
         title: S.choose_branch,
         appColors: appColors,
-        hasBackButton: true,
+        hasBackButton: false,
       ),
       body: Center(
         child: Padding(

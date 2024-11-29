@@ -11,6 +11,7 @@ import 'package:flutter_base_v2/utils/config/app_svg_url.dart';
 class HomePageContent extends StatelessWidget {
   final String currentMenu;
   final String branchId;
+  final String branchName;
   final String selectedCategory;
   final Function(String) onMenuSelected;
   final BaseState<List<Menu>?> menuTodayState;
@@ -24,6 +25,7 @@ class HomePageContent extends StatelessWidget {
   const HomePageContent({
     super.key,
     required this.branchId,
+    required this.branchName,
     required this.currentMenu,
     required this.onMenuSelected,
     required this.menuTodayState,
@@ -44,7 +46,7 @@ class HomePageContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildHeader(context, getCartShipping),
+            buildHeader(context, getCartShipping, branchName),
             const SizedBox(height: 16),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -58,7 +60,7 @@ class HomePageContent extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
-                    svgUrl:  AppSvgUrl.icMainDish,
+                    svgUrl: AppSvgUrl.icMainDish,
                     label: S.current_menu,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,

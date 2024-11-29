@@ -25,8 +25,8 @@ class BranchController extends BaseController {
   @override
   void onInit() async {
     super.onInit();
+    await loadSelectedBranch();
     getBranches();
-    // await loadSelectedBranch();
   }
 
   @override
@@ -93,8 +93,6 @@ class BranchController extends BaseController {
       N.toHome(input: HomeInput(selectedBranch.value!.name));
     }
   }
-
-
 
   void logout() {
     Get.find<AuthService>().logout();

@@ -60,6 +60,10 @@ class N {
     type.navigate(name: AppRoute.tabbar, arguments: 0);
   }
 
+  static void toBranch({RouteType type = RouteType.offAll}) {
+    type.navigate(name: AppRoute.branch);
+  }
+
   static void toQrScanner({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.qr);
   }

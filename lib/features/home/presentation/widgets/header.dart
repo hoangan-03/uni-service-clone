@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/utils/helper/truncate_text.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
@@ -9,22 +8,13 @@ import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:flutter_base_v2/utils/config/app_route.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 
-Widget buildHeader(BuildContext context, Function getCartShipping) {
+Widget buildHeader(
+    BuildContext context, Function getCartShipping, String branchName) {
   final appColors = Theme.of(context).extension<AppColors>();
-  final GetStorage localStorage = GetStorage();
   final AccountController accountController = Get.find<AccountController>();
-
-  final branchJson = localStorage.read('selectedBranch');
-  String branchName = S.defaultBranchName;
-
-  if (branchJson != null) {
-    final Map<String, dynamic> branchData = jsonDecode(branchJson);
-    branchName = branchData['name'] ?? S.defaultBranchName;
-  }
 
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
