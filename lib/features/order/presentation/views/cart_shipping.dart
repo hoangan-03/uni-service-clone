@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
+import 'package:flutter_base_v2/features/order/domain/entities/cart_shipping.dart';
 import 'package:flutter_base_v2/utils/helper/format_price.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -22,7 +23,7 @@ class CartShippingPage extends BaseGetView<HomeController> {
 
   Widget _buildBody(AppColors? appColors) {
     return Container(
-      color: Colors.white,
+      color: appColors?.white,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -52,7 +53,7 @@ class CartShippingPage extends BaseGetView<HomeController> {
 }
 
 class _CartShippingList extends StatelessWidget {
-  final List? cartships;
+  final List<CartShipping>? cartships;
   final AppColors? appColors;
 
   const _CartShippingList({this.cartships, this.appColors});
@@ -62,7 +63,8 @@ class _CartShippingList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (cartships != null && cartships!.isNotEmpty) _buildBranchLocation(),
+        if (cartships != null && cartships!.isNotEmpty)
+          _buildBranchLocation(appColors),
         const SizedBox(height: 8.0),
         Expanded(
           child: ListView.builder(
@@ -80,13 +82,13 @@ class _CartShippingList extends StatelessWidget {
     );
   }
 
-  Row _buildBranchLocation() {
+  Row _buildBranchLocation(AppColors? appColors) {
     return Row(
       children: [
-        const Icon(
+        Icon(
           Icons.location_on,
           size: 16.0,
-          color: Colors.grey,
+          color: appColors?.gray,
         ),
         const SizedBox(width: 4.0),
         Text(
@@ -99,10 +101,10 @@ class _CartShippingList extends StatelessWidget {
 }
 
 class _CartShippingItem extends StatelessWidget {
-  final dynamic cartship;
+  final CartShipping cartship;
   final AppColors? appColors;
 
-  const _CartShippingItem({this.cartship, this.appColors});
+  const _CartShippingItem({required this.cartship, this.appColors});
 
   @override
   Widget build(BuildContext context) {

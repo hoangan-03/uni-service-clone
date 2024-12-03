@@ -52,6 +52,7 @@ class N {
   static void toAccount({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.tabbar, arguments: 4);
   }
+  
 
   static void toHome({
     required HomeInput input,
@@ -70,5 +71,8 @@ class N {
 
   static void toAccountInfo({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.accountInfo);
+  }
+  static void toSettings({RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.settings);
   }
 }

@@ -14,13 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Base v2',
+      title: 'Uni Service Clone',
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoute.root,
       initialBinding: AppBinding(),
       getPages: AppRoute.generateGetPages,
       theme: AppTheme.lightTheme,
-      // darkTheme: AppTheme.darkTheme,
+      darkTheme: AppTheme.darkTheme,
       themeMode: _localStorage.themeMode,
     );
   }

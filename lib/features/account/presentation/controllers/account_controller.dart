@@ -61,6 +61,10 @@ class AccountController extends BaseController<HomeInput> {
     Get.to(() => const AccountInfoPage(), binding: AccountBinding());
   }
 
+    void navigateToSettings() {
+    N.toSettings();
+  }
+
   void selectQrOption() {
     Get.back();
     N.toQrScanner();

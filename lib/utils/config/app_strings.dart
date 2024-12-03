@@ -83,6 +83,22 @@ class S {
   static String update_info = "Cập nhật thông tin";
   static String update_success = "Cập nhật thông tin thành công";
 
+  // Settings
+  static String language = "Ngôn ngữ";
+  static String vietnamese = "Tiếng Việt";
+  static String english = "Tiếng Anh";
+  static String warning = "Cảnh báo";
+  static String face_id = "Face ID";
+   static String pin_number = "Mã PIN";
+  static String dark_mode = "Dark mode";
+
+  static String show_lang = "Hiển thị ngôn ngữ được chọn";
+  static String change_pass = "Thay đổi mật khẩu";
+  static String change_pin = "Thay đổi mã PIN";
+  static String show_selected_lang = "Hiển thị ngôn ngữ được chọn";
+  static String use_face_id = "Sử dụng Face ID để đăng nhập";
+  static String change_dark_mode = "Thay đổi màu sắc sẽ bắt đầu khi bạn mở lên";
+
   // Deposit
   static String add_info = "Bổ sung thông tin";
   static String deposit_success = "Nạp tiền thành công";

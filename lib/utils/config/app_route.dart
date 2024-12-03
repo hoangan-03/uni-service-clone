@@ -1,5 +1,6 @@
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_binding.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
+import 'package:flutter_base_v2/features/account/presentation/views/setting.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/login/login_binding.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_binding.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/register/init_info.dart';
@@ -49,6 +50,7 @@ class AppRoute {
   static String qr = '/qr';
   static String history = '/history';
   static String account = '/account';
+  static String settings = '/settings';
   static String branch = '/branches';
   static String cartShipping = '/cart_shipping';
   static String bill = '/bill';
@@ -121,6 +123,11 @@ class AppRoute {
     GetPage(
         name: accountInfo,
         page: AccountInfoPage.new,
+        binding: AccountBinding(),
+        transition: Transition.noTransition),
+    GetPage(
+        name: settings,
+        page: SettingPage.new,
         binding: AccountBinding(),
         transition: Transition.noTransition),
     GetPage(

@@ -2,15 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/utils/gen/colors.gen.dart';
 import 'package:get/get.dart';
 
-// AppColors colors(context) => Theme.of(context).extension<AppColors>() ?? const AppColors();
-
-// ColorScheme colorScheme(context) => Theme.of(context).colorScheme;
-
 AppColors colors =
     Get.context?.theme.extension<AppColors>() ?? const AppColors();
-
-// ColorScheme colorScheme =
-//     Get.context?.theme.colorScheme ?? const ColorScheme.light();
 
 class AppTheme {
   static final ThemeData lightTheme = ThemeData.light().copyWith(
@@ -28,40 +21,23 @@ class AppTheme {
         onCancel: Color.fromRGBO(255, 59, 48, 1),
       ),
     ],
-    // colorScheme: const ColorScheme(
-    //   brightness: Brightness.light,
-    //   primary: Color.fromRGBO(66, 63, 255, 1),
-    //   onPrimary: Colors.white,
-    //   secondary: ColorName.grayBase,
-    //   onSecondary: ColorName.greenBase,
-    //   error: ColorName.errorBackground,
-    //   onError: ColorName.error,
-    //   surface: Colors.white,
-    //   onSurface: ColorName.grayLow10,
-    // ),
   );
 
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: ColorName.grayBase,
     extensions: const <ThemeExtension<AppColors>>[
       AppColors(
-        primary: Colors.blue,
-        secondary: Colors.orange,
-        gray: Colors.red,
+        primary: Color.fromRGBO(74, 133, 255, 1),
+        secondary: Colors.white,
+        background: Color.fromRGBO(66, 63, 255, 0.24),
+        gray: Color.fromRGBO(172, 172, 176, 1),
+        lightGray: Color.fromRGBO(242, 242, 247, 1),
+        white: Colors.black,
+        transparent: Colors.transparent,
+        onSuccess: Color.fromRGBO(24, 162, 72, 1),
+        onCancel: Color.fromRGBO(255, 59, 48, 1),
       ),
     ],
-    // colorScheme: const ColorScheme(
-    //     brightness: Brightness.light,
-    //     primary: ColorName.greenBase,
-    //     onPrimary: Colors.white,
-    //     secondary: ColorName.grayBase,
-    //     onSecondary: ColorName.greenBase,
-    //     error: ColorName.errorBackground,
-    //     onError: ColorName.error,
-    //     background: ColorName.grayBase,
-    //     onBackground: Colors.white,
-    //     surface: Colors.white,
-    //     onSurface: ColorName.grayLow10),
   );
 }
 
@@ -76,16 +52,17 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color onSuccess;
   final Color onCancel;
 
-  const AppColors(
-      {this.primary = Colors.white,
-      this.secondary = Colors.white,
-      this.gray = Colors.white,
-      this.lightGray = Colors.white,
-      this.background = Colors.white,
-      this.white = Colors.white,
-      this.transparent = Colors.transparent,
-      this.onSuccess = Colors.white,
-      this.onCancel = Colors.white});
+  const AppColors({
+    this.primary = Colors.white,
+    this.secondary = Colors.white,
+    this.gray = Colors.white,
+    this.lightGray = Colors.white,
+    this.background = Colors.white,
+    this.white = Colors.white,
+    this.transparent = Colors.transparent,
+    this.onSuccess = Colors.white,
+    this.onCancel = Colors.white,
+  });
 
   @override
   AppColors copyWith({
@@ -93,16 +70,22 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? secondary,
     Color? gray,
     Color? background,
+    Color? lightGray,
     Color? white,
     Color? transparent,
+    Color? onSuccess,
+    Color? onCancel,
   }) {
     return AppColors(
       primary: primary ?? this.primary,
       secondary: secondary ?? this.secondary,
       gray: gray ?? this.gray,
       background: background ?? this.background,
+      lightGray: lightGray ?? this.lightGray,
       white: white ?? this.white,
       transparent: transparent ?? this.transparent,
+      onSuccess: onSuccess ?? this.onSuccess,
+      onCancel: onCancel ?? this.onCancel,
     );
   }
 
@@ -115,6 +98,12 @@ class AppColors extends ThemeExtension<AppColors> {
       primary: Color.lerp(primary, other.primary, t) ?? primary,
       secondary: Color.lerp(secondary, other.secondary, t) ?? secondary,
       gray: Color.lerp(gray, other.gray, t) ?? gray,
+      background: Color.lerp(background, other.background, t) ?? background,
+      lightGray: Color.lerp(lightGray, other.lightGray, t) ?? lightGray,
+      white: Color.lerp(white, other.white, t) ?? white,
+      transparent: Color.lerp(transparent, other.transparent, t) ?? transparent,
+      onSuccess: Color.lerp(onSuccess, other.onSuccess, t) ?? onSuccess,
+      onCancel: Color.lerp(onCancel, other.onCancel, t) ?? onCancel,
     );
   }
 }

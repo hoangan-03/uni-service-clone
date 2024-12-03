@@ -11,14 +11,10 @@ import 'package:flutter_base_v2/features/order/presentation/widgets/order_status
 import 'package:flutter_base_v2/features/order/presentation/widgets/qr_code_image.dart';
 import 'package:flutter_base_v2/features/order/presentation/widgets/return_home_button.dart';
 import 'package:flutter_base_v2/features/order/presentation/widgets/total_price.dart';
-import 'package:flutter_base_v2/utils/helper/format_price.dart';
-import 'package:flutter_base_v2/features/tabbar/presentation/views/tabbar/tabbar_page.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class BillPage extends BaseGetView<HomeController> {
   final String name;
