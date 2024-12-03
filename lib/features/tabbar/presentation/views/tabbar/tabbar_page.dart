@@ -105,8 +105,7 @@ class TabbarPage extends GetView {
       children: [
         PersistentTabView(
           context,
-          backgroundColor:
-              Get.context?.theme.appBarTheme.backgroundColor ?? Colors.white,
+          backgroundColor: appColors!.white,
           controller: PersistentTabController(initialIndex: initialIndex),
           screens: _buildScreens(),
           items: _navBarsItems(),
@@ -138,7 +137,7 @@ class TabbarPage extends GetView {
                 AppSvgUrl.icQR,
                 width: 30,
                 height: 30,
-                color: appColors.white,
+                color: Colors.white,
               )),
         ),
       ],

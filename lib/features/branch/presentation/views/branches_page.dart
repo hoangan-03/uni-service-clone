@@ -56,7 +56,7 @@ class BranchsPage extends BaseGetView<BranchController> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(branch.name,
-                                                style: AppTextStyle.regular16()),
+                                                style: AppTextStyle.regular16().copyWith(color: appColors?.secondary)),
                                             if (branch.description?.isNotEmpty ==
                                                 true)
                                               Text(
@@ -108,7 +108,7 @@ class BranchsPage extends BaseGetView<BranchController> {
               ),
               child: Text(
                 S.continue_text,
-                style: AppTextStyle.bold18().copyWith(color: appColors?.white),
+                style: AppTextStyle.bold14().copyWith(color: Colors.white),
               ),
             )),
       ),
