@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:get/get.dart';
 
 class SettingPage extends BaseGetView<AccountController> {
   const SettingPage({super.key});
@@ -46,22 +48,28 @@ class SettingPage extends BaseGetView<AccountController> {
                 // Đổi mã PIN
               },
             ),
-            SettingSwitchItem(
-              title: S.face_id,
-              subtitle: S.use_face_id,
-              value: false,
-              onChanged: (bool value) {
-                // Face ID
-              },
-            ),
-            SettingSwitchItem(
-              title: S.dark_mode,
-              subtitle: S.change_dark_mode,
-              value: false,
-              onChanged: (bool value) {
-                // Dark Mode
-              },
-            ),
+            Obx(() {
+              return SettingSwitchItem(
+                title: S.face_id,
+                subtitle: S.use_face_id,
+                value: controller.isFaceIdEnabled.value,
+                onChanged: (bool value) {
+                  controller.isFaceIdEnabled.value = value;
+                  // Face ID
+                },
+              );
+            }),
+            Obx(() {
+              return SettingSwitchItem(
+                title: S.dark_mode,
+                subtitle: S.change_dark_mode,
+                value: controller.isDarkModeEnabled.value,
+                onChanged: (bool value) {
+                  controller.isDarkModeEnabled.value = value;
+                  controller.switchTheme();
+                },
+              );
+            }),
           ],
         ),
       ),
@@ -106,7 +114,7 @@ class SettingListItem extends StatelessWidget {
                 ),
               ],
             ),
-            Icon(Icons.arrow_forward_ios, size: 16),
+            Icon(Icons.arrow_forward_ios, size: 12),
           ],
         ),
       ),
@@ -151,9 +159,11 @@ class SettingSwitchItem extends StatelessWidget {
               ),
             ],
           ),
-          Switch(
+          CupertinoSwitch(
             value: value,
             onChanged: onChanged,
+            activeColor: appColors?.primary,
+            trackColor: appColors?.gray.withOpacity(0.5),
           ),
         ],
       ),

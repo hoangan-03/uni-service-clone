@@ -29,7 +29,7 @@ Widget buildQRSection(BuildContext context) {
     ),
     child: Column(
       children: [
-        buildQRCodeImage(),
+        buildQRCodeImage(appColors),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 12.0),
           margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
@@ -56,7 +56,9 @@ Widget buildQRSection(BuildContext context) {
                       controller.isBalanceVisible.value
                           ? '${formatPrice(user.point ?? 0)} đ'
                           : S.hidden_star,
-                      style: AppTextStyle.bold14(),
+                      style: AppTextStyle.bold14().copyWith(
+                        color: appColors.secondary,
+                      ),
                     );
                   }),
                   const SizedBox(width: 3),

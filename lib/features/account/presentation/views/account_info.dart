@@ -124,7 +124,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
               borderSide: BorderSide.none,
             ),
           ),
-          style: AppTextStyle.regular14().copyWith(color: Colors.black),
+          style: AppTextStyle.regular14().copyWith(color: appColors!.secondary),
         ),
         const SizedBox(height: 16.0),
       ],
@@ -176,9 +176,9 @@ class AccountInfoPage extends BaseGetView<AccountController> {
               children: [
                 Text(
                   value.isNotEmpty ? value : hintText,
-                  style: AppTextStyle.regular14().copyWith(color: Colors.black),
+                  style: AppTextStyle.regular14().copyWith(color: appColors!.secondary),
                 ),
-                Icon(Icons.calendar_today, color: appColors?.secondary),
+                Icon(Icons.calendar_today, color: appColors.secondary),
               ],
             ),
           ),

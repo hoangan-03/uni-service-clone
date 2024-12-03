@@ -11,11 +11,11 @@ Row buildTotalPrice(BuildContext context, int totalPrice) {
       children: [
         Text(
           S.total_price,
-          style: AppTextStyle.bold16().copyWith(color: Colors.black),
+          style: AppTextStyle.bold16().copyWith(color: appColors!.secondary),
         ),
         Text(
           '${formatPrice(totalPrice)} đ',
-          style: AppTextStyle.bold16().copyWith(color: appColors?.primary),
+          style: AppTextStyle.bold16().copyWith(color: appColors.primary),
         ),
       ],
     );

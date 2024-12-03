@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -31,7 +32,7 @@ Widget buildMenuItem(
           Expanded(
             child: Text(
               title,
-              style: AppTextStyle.regular13().copyWith(color: color),
+              style: AppTextStyle.regular13().copyWith(color: title == S.logout ? color : appColors.secondary),
             ),
           ),
           if (showTrailingIcon)

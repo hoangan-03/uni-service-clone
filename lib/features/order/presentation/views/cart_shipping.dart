@@ -93,7 +93,7 @@ class _CartShippingList extends StatelessWidget {
         const SizedBox(width: 4.0),
         Text(
           cartships?.first.branch?.name ?? '',
-          style: AppTextStyle.regular14().copyWith(color: Colors.grey),
+          style: AppTextStyle.regular14().copyWith(color: appColors!.gray),
         ),
       ],
     );
@@ -141,7 +141,7 @@ class _CartShippingItem extends StatelessWidget {
       children: [
         Text(
           cartship.orderDetails![0].productName ?? "",
-          style: AppTextStyle.bold16(),
+          style: AppTextStyle.bold16().copyWith(color: appColors?.secondary),
         ),
         if (cartship.orderDetails![0].productDescription!.isNotEmpty == true)
           Text(

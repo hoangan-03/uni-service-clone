@@ -22,7 +22,7 @@ Widget buildItemList(
             children: [
               Text(
                 getCategoryTitle(category),
-                style: AppTextStyle.bold15(),
+                style: AppTextStyle.bold15().copyWith(color: appColors?.secondary),
               ),
               GestureDetector(
                 child: Row(
@@ -66,7 +66,7 @@ Widget buildItemList(
                   children: [
                     Text(
                       getCategoryTitle(category),
-                      style: AppTextStyle.medium16(),
+                      style: AppTextStyle.medium16().copyWith(color: appColors.secondary),
                     ),
                     GestureDetector(
                       onTap: () {

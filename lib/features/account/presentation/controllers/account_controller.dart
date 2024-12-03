@@ -34,6 +34,8 @@ class AccountController extends BaseController<HomeInput> {
 
   final user = User().obs;
   var isBalanceVisible = false.obs;
+  var isFaceIdEnabled = false.obs;
+  var isDarkModeEnabled = false.obs;
   final ImagePicker _picker = ImagePicker();
 
   final LocalStorage _localStorage = Get.find();
@@ -61,7 +63,7 @@ class AccountController extends BaseController<HomeInput> {
     Get.to(() => const AccountInfoPage(), binding: AccountBinding());
   }
 
-    void navigateToSettings() {
+  void navigateToSettings() {
     N.toSettings();
   }
 
@@ -77,7 +79,7 @@ class AccountController extends BaseController<HomeInput> {
       updateAvatar(formattedFile);
       buildSnackBar("Cập nhật ảnh đại diện thành công", true);
     }
-      Navigator.of(Get.context!).pop();
+    Navigator.of(Get.context!).pop();
   }
 
   @override

@@ -75,7 +75,7 @@ class TransactionListView extends StatelessWidget {
                                     Text(
                                       getTitleForTransactionType(
                                           transact.type ?? ''),
-                                      style: AppTextStyle.bold14(),
+                                      style:  AppTextStyle.bold14().copyWith(color: appColors.secondary),
                                     ),
                                     const SizedBox(height: 2),
                                     Text(

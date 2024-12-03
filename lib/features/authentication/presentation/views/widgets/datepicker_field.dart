@@ -50,9 +50,9 @@ Widget buildDatePickerField(BuildContext context, String label, String value,
               children: [
                 Text(
                   value.isNotEmpty ? value : S.enter_birthday,
-                  style: AppTextStyle.regular14().copyWith(color: Colors.black),
+                  style: AppTextStyle.regular14().copyWith(color: appColors!.secondary),
                 ),
-                Icon(Icons.calendar_today, color: appColors?.secondary),
+                Icon(Icons.calendar_today, color: appColors.secondary),
               ],
             ),
           ),

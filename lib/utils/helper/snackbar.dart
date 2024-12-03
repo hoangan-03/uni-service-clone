@@ -32,7 +32,7 @@ void buildSnackBar(String message, bool isSuccess) {
       borderWidth: 2.0,
       boxShadows: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.2),
+          color: appColors.secondary.withOpacity(0.2),
           spreadRadius: 2,
           blurRadius: 5,
           offset: Offset(0, 3),

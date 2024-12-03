@@ -94,14 +94,14 @@ class OrderSliderContentState extends State<OrderSliderContent> {
 
   @override
   Widget build(BuildContext context) {
-    Theme.of(context).extension<AppColors>();
+    final appColors = Theme.of(context).extension<AppColors>();
     Get.find<HomeController>();
     final selectedItem = widget.item.items?[selectedItemIndex ?? 0];
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: appColors!.white,
         borderRadius: const BorderRadius.all(Radius.circular(16)),
       ),
       child: SingleChildScrollView(
@@ -389,7 +389,7 @@ class _OrderButton extends StatelessWidget {
       ),
       child: Text(
         S.order,
-        style: AppTextStyle.bold14().copyWith(color: appColors?.white),
+        style: AppTextStyle.bold14().copyWith(color: Colors.white),
       ),
     );
   }

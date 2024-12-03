@@ -34,12 +34,12 @@ Widget buildItemCard(Menu item, BuildContext context) {
           children: [
             Text(
               item.product.name,
-              style: AppTextStyle.bold14(),
+              style: AppTextStyle.bold14().copyWith(color: appColors?.secondary),
             ),
             const SizedBox(height: 2),
             Text(
               '${(item.type.price != null && item.type.price != 0) ? formatPrice(item.type.price ?? 0) : formatPrice(item.items![0].price)}đ',
-              style: AppTextStyle.regular12(),
+              style: AppTextStyle.regular12().copyWith(color: appColors?.secondary),
             ),
             const SizedBox(height: 8),
             SizedBox(

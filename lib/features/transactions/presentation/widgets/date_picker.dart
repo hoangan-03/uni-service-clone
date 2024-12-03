@@ -25,7 +25,7 @@ class DatePicker extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: AppTextStyle.bold14()),
+        Text(label, style: AppTextStyle.bold14().copyWith(color: appColors!.secondary)),
         const SizedBox(width: 8),
         GestureDetector(
           onTap: () async {
@@ -43,7 +43,7 @@ class DatePicker extends StatelessWidget {
             width: 125,
             padding: const EdgeInsets.only(left: 8, right: 4, top: 4, bottom: 4),
             decoration: BoxDecoration(
-              border: Border.all(color: appColors!.gray),
+              border: Border.all(color: appColors.gray),
               borderRadius: BorderRadius.circular(24),
             ),
             child: Obx(() {
@@ -54,7 +54,7 @@ class DatePicker extends StatelessWidget {
                     date.value != null
                         ? DateFormat('dd/MM/yyyy').format(date.value!)
                         : DateFormat('dd/MM/yyyy').format(defaultDate ?? DateTime.now()),
-                    style: AppTextStyle.regular12(),
+                    style: AppTextStyle.regular12().copyWith(color: appColors.secondary),
                   ),
                   Icon(Icons.expand_more, size: 20, color: appColors.gray),
                 ],

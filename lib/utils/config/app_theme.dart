@@ -24,14 +24,17 @@ class AppTheme {
   );
 
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: ColorName.grayBase,
+    scaffoldBackgroundColor: ColorName.grayHigh70,
     extensions: const <ThemeExtension<AppColors>>[
       AppColors(
         primary: Color.fromRGBO(74, 133, 255, 1),
         secondary: Colors.white,
         background: Color.fromRGBO(66, 63, 255, 0.24),
-        gray: Color.fromRGBO(172, 172, 176, 1),
-        lightGray: Color.fromRGBO(242, 242, 247, 1),
+        // gray: Color.fromRGBO(172, 172, 176, 1),
+        // gray: Colors.white,
+        // lightGray: Color.fromRGBO(242, 242, 247, 1),
+        gray: Color.fromRGBO(242, 242, 247, 1),
+        lightGray: Color.fromRGBO(172, 172, 176, 1),
         white: Colors.black,
         transparent: Colors.transparent,
         onSuccess: Color.fromRGBO(24, 162, 72, 1),

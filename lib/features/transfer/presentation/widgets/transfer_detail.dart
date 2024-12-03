@@ -43,7 +43,7 @@ class TransferDetails extends StatelessWidget {
           ),
           Text(
             value,
-            style: AppTextStyle.bold15().copyWith(color: Colors.black),
+            style: AppTextStyle.bold15().copyWith(color: appColors!.secondary),
           ),
         ],
       ),

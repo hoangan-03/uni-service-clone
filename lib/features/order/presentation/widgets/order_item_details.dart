@@ -53,7 +53,7 @@ Column _buildOrderItemPriceDetails(
       const SizedBox(height: 4.0),
       Text(
         '${formatPrice(totalPrice)} đ',
-        style: AppTextStyle.bold14().copyWith(color: Colors.black),
+        style: AppTextStyle.bold14().copyWith(color: appColors.secondary),
       ),
     ],
   );

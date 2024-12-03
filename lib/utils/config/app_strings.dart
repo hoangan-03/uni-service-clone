@@ -189,7 +189,7 @@ class S {
 
   // Image Url
   static String scan = "assets/images/scan.png";
-  static String vexereurl = "https://f1e425bd6cd9ac6.cmccloud.com.vn/cms-tool/post/images/314/img_card.png?v=11";
+  static String vexereurl = "https://f1e425bd6cd9ac6.cmccloud.com.vn/cms-tool/post/images/320/en_img_card.png";
   static String btaskeeurl = "https://employer.jobsgo.vn/uploads/media/img/201911/pictures_library_19108_20191118143305_8696.png";
 
 
