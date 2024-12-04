@@ -2,25 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
-import 'package:flutter_base_v2/utils/config/app_text_style.dart';
-import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 
-ElevatedButton buildReturnHomeButton(AppColors? appColors) {
+ElevatedButton buildReturnHomeButton(BuildContext context) {
   return ElevatedButton(
     onPressed: () {
       N.toHome(input: HomeInput("transfer"));
     },
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.white,
-      side: BorderSide(color: appColors?.primary ?? Colors.blue),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      minimumSize: const Size(double.infinity, 40),
-    ),
+    style: elevatedButtonStyle(context),
     child: Text(
       S.back_to_home,
-      style: AppTextStyle.bold14().copyWith(color: appColors?.primary),
+      style:  elevatedButtonTextStyle(context),
     ),
   );
 }

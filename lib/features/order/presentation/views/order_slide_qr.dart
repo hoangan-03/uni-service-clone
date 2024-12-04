@@ -8,6 +8,7 @@ import 'package:flutter_base_v2/features/qrcode/domain/entities/menu_qr.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 import 'package:get/get.dart';
 
 void showOrderQRSlider(
@@ -95,14 +96,14 @@ class OrderSliderContentState extends State<OrderSliderContent> {
 
   @override
   Widget build(BuildContext context) {
-    Theme.of(context).extension<AppColors>();
+    final appColors = Theme.of(context).extension<AppColors>();
     Get.find<HomeController>();
     final selectedItem = widget.item.product;
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: appColors!.white,
         borderRadius: const BorderRadius.all(Radius.circular(16)),
       ),
       child: SingleChildScrollView(
@@ -379,16 +380,10 @@ class _OrderButton extends StatelessWidget {
           controller.updateItemIndex(selectedItemIndex ?? 0);
         }
       },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: appColors?.primary,
-        minimumSize: const Size(double.infinity, 50),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
+      style: elevatedButtonStyle(context),
       child: Text(
         S.order,
-        style: AppTextStyle.bold16().copyWith(color: appColors?.white),
+        style: elevatedButtonTextStyle(context),
       ),
     );
   }

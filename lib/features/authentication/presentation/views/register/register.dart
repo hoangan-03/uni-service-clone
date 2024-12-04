@@ -6,6 +6,7 @@ import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
+import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 
 class RegisterPage extends BaseGetView<RegisterController> {
   const RegisterPage({super.key});
@@ -45,25 +46,17 @@ class RegisterPage extends BaseGetView<RegisterController> {
           padding: const EdgeInsets.all(16.0),
           child: ElevatedButton(
             onPressed: () {
-              controller.getOTP(controller.registerRequest.value.email ??
-                  S.myEmail);
+              controller
+                  .getOTP(controller.registerRequest.value.email ?? S.myEmail);
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: appColors?.primary ?? Colors.blue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
+            style: elevatedButtonStyle(context),
             child: Text(
               S.send_otp,
-              style: AppTextStyle.bold12().copyWith(
-                color: appColors?.white,
-              ),
+              style: elevatedButtonTextStyle(context),
             ),
           ),
         ),
       ),
     );
   }
-
 }

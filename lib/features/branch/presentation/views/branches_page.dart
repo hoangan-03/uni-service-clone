@@ -4,14 +4,13 @@ import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_controller.dart';
 import 'package:flutter_base_v2/features/branch/domain/entities/branch.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 
 class BranchsPage extends BaseGetView<BranchController> {
   const BranchsPage({super.key});
-
-  
 
   @override
   Widget myBuild(BuildContext context) {
@@ -45,7 +44,7 @@ class BranchsPage extends BaseGetView<BranchController> {
                                   controller.selectBranch(branch);
                                 },
                                 child: Container(
-                                  color: Colors.transparent, 
+                                  color: Colors.transparent,
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -56,8 +55,12 @@ class BranchsPage extends BaseGetView<BranchController> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(branch.name,
-                                                style: AppTextStyle.regular16().copyWith(color: appColors?.secondary)),
-                                            if (branch.description?.isNotEmpty ==
+                                                style: AppTextStyle.regular16()
+                                                    .copyWith(
+                                                        color: appColors
+                                                            ?.secondary)),
+                                            if (branch
+                                                    .description?.isNotEmpty ==
                                                 true)
                                               Text(
                                                 branch.description ?? '',
@@ -101,14 +104,10 @@ class BranchsPage extends BaseGetView<BranchController> {
               onPressed: controller.selectedBranch.value != null
                   ? controller.navigateToHome
                   : null,
-              style: ElevatedButton.styleFrom(
-                foregroundColor: appColors?.white,
-                backgroundColor: appColors?.primary,
-                minimumSize: const Size(double.infinity, 48),
-              ),
+              style: elevatedButtonStyle(context),
               child: Text(
                 S.continue_text,
-                style: AppTextStyle.bold14().copyWith(color: Colors.white),
+                style: elevatedButtonTextStyle(context),
               ),
             )),
       ),

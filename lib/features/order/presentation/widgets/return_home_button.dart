@@ -3,28 +3,22 @@ import 'package:flutter_base_v2/features/home/presentation/controllers/home_cont
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
-import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 
 ElevatedButton buildReturnHomeButton(
     BuildContext context, HomeController controller) {
-  final appColors = Theme.of(context).extension<AppColors>();
+  Theme.of(context).extension<AppColors>();
   return ElevatedButton(
     onPressed: () {
       controller.updateQuantity(0);
       controller.updateItemIndex(0);
       N.toHome(input: HomeInput("bill"));
     },
-    style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-        side: BorderSide(color: appColors?.primary ?? Colors.blue),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        minimumSize: const Size(double.infinity, 40)),
+    style: elevatedButtonStyle(context),
     child: Text(
       S.back_to_home,
-      style: AppTextStyle.bold14().copyWith(color: appColors?.primary),
+      style:  elevatedButtonTextStyle(context),
     ),
   );
 }

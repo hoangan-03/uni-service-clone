@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
@@ -87,8 +88,8 @@ class TransactionController extends BaseController {
     }
 
     try {
-      final fromDateString = DateFormat('dd/MM/yyyy').format(fromDate.value!);
-      final toDateString = DateFormat('dd/MM/yyyy').format(toDate.value!);
+      final fromDateString = AppConstants.dateFormat.format(fromDate.value!);
+      final toDateString = AppConstants.dateFormat.format(toDate.value!);
 
       List<Transaction> newTransactions;
       if (selectedTransactionType.value == null) {

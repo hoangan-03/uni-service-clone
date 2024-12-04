@@ -45,7 +45,7 @@ class AccountController extends BaseController<HomeInput> {
     super.onInit();
     pushNotiService.listenNotification();
     getProfile();
-     isDarkModeEnabled.value = Get.isDarkMode;
+    isDarkModeEnabled.value = Get.isDarkMode;
 
     final notificationAppLaunchDetails =
         await pushNotiService.getNotificationAppLaunchDetails();

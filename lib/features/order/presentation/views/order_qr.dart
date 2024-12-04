@@ -7,6 +7,7 @@ import 'package:flutter_base_v2/features/qrcode/domain/entities/menu_qr.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 
@@ -63,7 +64,7 @@ class OrderQRPage extends BaseGetView<HomeController> {
           const Spacer(),
           _buildTotalAmount(appColors),
           const SizedBox(height: 16),
-          _buildCheckoutButton(appColors),
+          _buildCheckoutButton(context),
         ],
       ),
     );
@@ -111,7 +112,7 @@ class OrderQRPage extends BaseGetView<HomeController> {
     );
   }
 
-  SizedBox _buildCheckoutButton(AppColors? appColors) {
+  SizedBox _buildCheckoutButton(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: 50,
@@ -136,15 +137,10 @@ class OrderQRPage extends BaseGetView<HomeController> {
                 branchName: item.branch!.name,
               ));
         },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: appColors?.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
+        style: elevatedButtonStyle(context),
         child: Text(
           S.make_payment,
-          style: AppTextStyle.bold16().copyWith(color: appColors?.white),
+          style: elevatedButtonTextStyle(context),
         ),
       ),
     );

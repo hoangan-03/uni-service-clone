@@ -18,20 +18,25 @@ class ServicesPage extends BaseGetView<HomeController> {
           context: context,
           title: S.services,
           hasBackButton: false),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            ServiceCard(
-              imageUrl: S.vexereurl,
-              title: S.vexere,
-            ),
-            const SizedBox(height: 12),
-            ServiceCard(
-              imageUrl: S.btaskeeurl, 
-              title: S.btaskee,
-            ),
-          ],
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: appColors!.white,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              ServiceCard(
+                imageUrl: S.vexereurl,
+                title: S.vexere,
+              ),
+              const SizedBox(height: 12),
+              ServiceCard(
+                imageUrl: S.btaskeeurl,
+                title: S.btaskee,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -54,7 +59,7 @@ class ServiceCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: appColors!.white,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -101,7 +106,7 @@ class ServiceCard extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'Đặt vé',
+                    S.book_ticket,
                     style: TextStyle(color: appColors.primary),
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -52,8 +53,8 @@ class DatePicker extends StatelessWidget {
                 children: [
                   Text(
                     date.value != null
-                        ? DateFormat('dd/MM/yyyy').format(date.value!)
-                        : DateFormat('dd/MM/yyyy').format(defaultDate ?? DateTime.now()),
+                        ? AppConstants.dateFormat.format(date.value!)
+                        : AppConstants.dateFormat.format(defaultDate ?? DateTime.now()),
                     style: AppTextStyle.regular12().copyWith(color: appColors.secondary),
                   ),
                   Icon(Icons.expand_more, size: 20, color: appColors.gray),

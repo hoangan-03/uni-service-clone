@@ -34,7 +34,7 @@ class DepositPage extends BaseGetView<DepositController> {
           const SizedBox(height: 20),
           buildPresetAmountButtons(appColors, "deposit"),
           const SizedBox(height: 20),
-          buildContinueButton(appColors),
+          buildContinueButton(context),
         ],
       ),
     );

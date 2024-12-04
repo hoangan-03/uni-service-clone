@@ -1,5 +1,6 @@
 
   import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -20,7 +21,7 @@ Widget buildDatePickerField(BuildContext context, String label, String value,
             DateTime? pickedDate;
             try {
               pickedDate = value.isNotEmpty
-                  ? DateFormat('dd/MM/yyyy').parse(value)
+                  ? AppConstants.dateFormat.parse(value)
                   : DateTime.now();
             } catch (e) {
               pickedDate = DateTime.now();
@@ -34,7 +35,7 @@ Widget buildDatePickerField(BuildContext context, String label, String value,
             );
 
             if (selectedDate != null) {
-              onChanged(DateFormat('dd/MM/yyyy').format(selectedDate));
+              onChanged(AppConstants.dateFormat.format(selectedDate));
             }
           },
           child: Container(

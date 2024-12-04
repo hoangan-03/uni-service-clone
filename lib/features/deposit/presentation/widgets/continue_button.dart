@@ -3,9 +3,10 @@ import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposi
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 import 'package:get/get.dart';
 
-Widget buildContinueButton(AppColors? appColors) {
+Widget buildContinueButton(BuildContext context) {
 final controller = Get.find<DepositController>();
   
     return Padding(
@@ -17,16 +18,10 @@ final controller = Get.find<DepositController>();
             final amount = int.tryParse(controller.currentAmount.value.replaceAll('.', '')) ?? 0;
             controller.depositRequest(amount);
           },
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 6),
-            backgroundColor: appColors?.primary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
+          style:elevatedButtonStyle(context),
           child: Text(
-            S.continue_text,
-            style: AppTextStyle.bold12().copyWith(color: appColors?.white),
+            S.continue_text,                          
+            style: elevatedButtonTextStyle(context),
           ),
         ),
       ),

@@ -16,7 +16,7 @@ ElevatedButton buildOrderStatusButton(BuildContext context) {
       ),
       child: Text(
        S.not_delivered,
-        style: AppTextStyle.bold12().copyWith(color: Colors.white),
+        style: AppTextStyle.bold12().copyWith(color: appColors!.constantWhite),
       ),
     );
   }

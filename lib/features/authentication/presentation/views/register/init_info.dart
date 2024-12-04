@@ -7,6 +7,7 @@ import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
+import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 import 'package:get/get.dart';
 
 class InitInfoPage extends BaseGetView<RegisterController> {
@@ -60,26 +61,16 @@ class InitInfoPage extends BaseGetView<RegisterController> {
           padding: const EdgeInsets.all(16.0),
           child: ElevatedButton(
             onPressed: () {
-             controller.handleInit();
+              controller.handleInit();
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white,
-              side: BorderSide(color: appColors!.primary),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
+            style: elevatedButtonStyle(context),
             child: Text(
               S.continue_text,
-              style: AppTextStyle.bold14().copyWith(
-                color: appColors.primary,
-              ),
+              style: elevatedButtonTextStyle(context),
             ),
           ),
         ),
       ),
     );
   }
-
-  
 }

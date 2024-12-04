@@ -15,7 +15,7 @@ AppBar buildAppBar({
       child: Text(
         title ?? '',
         textAlign: TextAlign.center,
-        style: AppTextStyle.bold16().copyWith(color: appColors?.secondary),
+        style: AppTextStyle.bold14().copyWith(color: appColors?.secondary),
       ),
     ),
     centerTitle: true,

@@ -113,7 +113,7 @@ class TabbarPage extends GetView {
           padding: const EdgeInsets.only(top: 10),
           resizeToAvoidBottomInset: true,
           decoration: NavBarDecoration(
-            colorBehindNavBar: appColors!.white,
+            colorBehindNavBar: appColors.white,
             boxShadow: [
               BoxShadow(
                 color: appColors.gray.withOpacity(0.8),

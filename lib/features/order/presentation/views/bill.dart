@@ -11,6 +11,7 @@ import 'package:flutter_base_v2/features/order/presentation/widgets/order_status
 import 'package:flutter_base_v2/features/order/presentation/widgets/qr_code_image.dart';
 import 'package:flutter_base_v2/features/order/presentation/widgets/return_home_button.dart';
 import 'package:flutter_base_v2/features/order/presentation/widgets/total_price.dart';
+import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -51,10 +52,10 @@ class BillPage extends BaseGetView<HomeController> {
 
   Widget _buildBody(BuildContext context, AppColors? appColors) {
     final String currentTime =
-        DateFormat('HH:mm - dd/MM/yyyy').format(DateTime.now());
+       AppConstants.dateTimeFormat.format(DateTime.now());
     return SingleChildScrollView(
       child: Container(
-        color: Colors.white,
+        color: appColors!.white,
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +65,7 @@ class BillPage extends BaseGetView<HomeController> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.location_on,
-                      color: appColors!.secondary, size: 16),
+                      color: appColors.secondary, size: 16),
                   const SizedBox(width: 3.0),
                   Text(
                     branchName,
@@ -79,7 +80,7 @@ class BillPage extends BaseGetView<HomeController> {
             const SizedBox(height: 4.0),
             buildOrderStatusButton(context),
             const SizedBox(height: 4.0),
-            buildQRCodeImage(controller),
+            buildQRCodeImage(controller, appColors),
             const SizedBox(height: 8.0),
             buildBillTimestamp(currentTime, context),
             const SizedBox(height: 8.0),

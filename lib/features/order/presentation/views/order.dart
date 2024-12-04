@@ -8,6 +8,7 @@ import 'package:flutter_base_v2/features/order/presentation/views/order_slider.d
 import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 
@@ -63,7 +64,7 @@ class OrderPage extends BaseGetView<HomeController> {
           _buildProductDetails(appColors),
           const Spacer(),
           _buildTotalAmount(appColors),
-          _buildCheckoutButton(appColors),
+          _buildCheckoutButton(context),
         ],
       ),
     );
@@ -109,23 +110,24 @@ class OrderPage extends BaseGetView<HomeController> {
         children: [
           Text(
             S.total_price,
-            style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
+            style:
+                AppTextStyle.regular16().copyWith(color: appColors?.secondary),
           ),
           if (item.menu == "TODAY") ...[
             Obx(() {
               final currentItem = item.items![controller.itemIndex.value];
               return Text(
                 '${formatPrice(((item.type.price != null && item.type.price != 0) ? item.type.price : currentItem.price)! * controller.quantity.value)}đ',
-                style:
-                    AppTextStyle.medium16().copyWith(color: appColors?.secondary),
+                style: AppTextStyle.medium16()
+                    .copyWith(color: appColors?.secondary),
               );
             }),
           ] else ...[
             Obx(() {
               return Text(
                 '${formatPrice((item.type.price)! * controller.quantity.value)}đ',
-                style:
-                    AppTextStyle.medium18().copyWith(color: appColors?.onSuccess),
+                style: AppTextStyle.medium18()
+                    .copyWith(color: appColors?.onSuccess),
               );
             }),
           ]
@@ -134,7 +136,7 @@ class OrderPage extends BaseGetView<HomeController> {
     );
   }
 
-  SizedBox _buildCheckoutButton(AppColors? appColors) {
+  SizedBox _buildCheckoutButton(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: 40,
@@ -165,16 +167,10 @@ class OrderPage extends BaseGetView<HomeController> {
               ));
           buildSnackBar(S.order_success, true);
         },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: appColors?.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          minimumSize: Size(double.infinity, 16)
-        ),
+        style: elevatedButtonStyle(context),
         child: Text(
-          'Thanh toán',
-          style: AppTextStyle.medium14().copyWith(color: appColors?.white),
+          S.make_payment,
+          style: elevatedButtonTextStyle(context),
         ),
       ),
     );
@@ -304,7 +300,7 @@ class _RegularMenuDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-         S.quantity,
+          S.quantity,
           style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(

@@ -19,6 +19,7 @@ class AppTheme {
         transparent: Colors.transparent,
         onSuccess: Color.fromRGBO(24, 162, 72, 1),
         onCancel: Color.fromRGBO(255, 59, 48, 1),
+        constantWhite: Colors.white,
       ),
     ],
   );
@@ -39,6 +40,7 @@ class AppTheme {
         transparent: Colors.transparent,
         onSuccess: Color.fromRGBO(24, 162, 72, 1),
         onCancel: Color.fromRGBO(255, 59, 48, 1),
+        constantWhite: Colors.white,
       ),
     ],
   );
@@ -54,6 +56,7 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color transparent;
   final Color onSuccess;
   final Color onCancel;
+  final Color constantWhite;
 
   const AppColors({
     this.primary = Colors.white,
@@ -65,6 +68,7 @@ class AppColors extends ThemeExtension<AppColors> {
     this.transparent = Colors.transparent,
     this.onSuccess = Colors.white,
     this.onCancel = Colors.white,
+    this.constantWhite = Colors.white,
   });
 
   @override
@@ -78,6 +82,7 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? transparent,
     Color? onSuccess,
     Color? onCancel,
+    Color? constantWhite,
   }) {
     return AppColors(
       primary: primary ?? this.primary,
@@ -89,6 +94,7 @@ class AppColors extends ThemeExtension<AppColors> {
       transparent: transparent ?? this.transparent,
       onSuccess: onSuccess ?? this.onSuccess,
       onCancel: onCancel ?? this.onCancel,
+      constantWhite: constantWhite ?? this.constantWhite,
     );
   }
 
@@ -107,6 +113,7 @@ class AppColors extends ThemeExtension<AppColors> {
       transparent: Color.lerp(transparent, other.transparent, t) ?? transparent,
       onSuccess: Color.lerp(onSuccess, other.onSuccess, t) ?? onSuccess,
       onCancel: Color.lerp(onCancel, other.onCancel, t) ?? onCancel,
+      constantWhite: Color.lerp(constantWhite, other.constantWhite, t) ?? constantWhite,
     );
   }
 }

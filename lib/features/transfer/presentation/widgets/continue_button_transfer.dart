@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/helper/snackbar.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_controller.dart';
+import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 
 class ContinueButton extends StatelessWidget {
   final TransferController controller;
@@ -12,12 +14,11 @@ class ContinueButton extends StatelessWidget {
     super.key,
     required this.controller,
     required this.recipientId,
-
   });
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).extension<AppColors>();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: SizedBox(
@@ -25,20 +26,15 @@ class ContinueButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             final amount = int.tryParse(
-                    controller.currentAmount.value.replaceAll('.', '')) ?? 0;
+                    controller.currentAmount.value.replaceAll('.', '')) ??
+                0;
             controller.scannedUserQRCode(recipientId, amount);
-            buildSnackBar("Chuyển tiền thành công", true);
+            buildSnackBar(S.transfer_success, true);
           },
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 6),
-            backgroundColor: appColors?.primary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
+          style: elevatedButtonStyle(context),
           child: Text(
-            'Tiếp tục',
-            style: AppTextStyle.bold12().copyWith(color: appColors?.white),
+            S.continue_text,
+            style: elevatedButtonTextStyle(context),
           ),
         ),
       ),

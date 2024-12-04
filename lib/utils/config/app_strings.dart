@@ -102,6 +102,7 @@ class S {
   // Deposit
   static String add_info = "Bổ sung thông tin";
   static String deposit_success = "Nạp tiền thành công";
+  static String transfer_success = "Chuyển tiền thành công";
   static String zero = "0";
   static String hidden_star = "********";
   static String fifty_thousand = "50.000";
@@ -173,7 +174,8 @@ class S {
   static String enter_phone = "Nhập số điện thoại";
   static String status = "Trạng thái: ";
 
-
+  // Services
+  static String book_ticket = "Đặt vé";
 
   // Tab bar
   static String home = "Trang chủ";

@@ -7,6 +7,7 @@ import 'package:flutter_base_v2/features/order/presentation/views/order.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 import 'package:get/get.dart';
 
 void showOrderSlider(
@@ -379,17 +380,10 @@ class _OrderButton extends StatelessWidget {
           controller.updateItemIndex(selectedItemIndex ?? 0);
         }
       },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: appColors?.primary,
-        minimumSize: const Size(double.infinity, 20),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
+      style: elevatedButtonStyle(context),
       child: Text(
         S.order,
-        style: AppTextStyle.bold14().copyWith(color: Colors.white),
+        style: elevatedButtonTextStyle(context),
       ),
     );
   }

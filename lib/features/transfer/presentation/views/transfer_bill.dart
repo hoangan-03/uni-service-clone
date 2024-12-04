@@ -53,7 +53,7 @@ class TransferBillPage extends BaseGetView<TransferController> {
             appColors: appColors,
           ),
           const Spacer(),
-          buildReturnHomeButton(appColors),
+          buildReturnHomeButton(context),
         ],
       ),
     );
