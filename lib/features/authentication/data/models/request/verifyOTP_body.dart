@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class VerifyOTPBody {
   final String email;
   final String otp;

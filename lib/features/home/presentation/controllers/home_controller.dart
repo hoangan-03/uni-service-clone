@@ -235,7 +235,7 @@ class HomeController extends BaseController<HomeInput> {
         await addPaymentRequest(cartId);
       }
     } catch (e) {
-      print("Failed to add product to cart: $e");
+      L.info("Failed to add product to cart: $e");
     }
   }
 
@@ -245,9 +245,9 @@ class HomeController extends BaseController<HomeInput> {
     );
     try {
       await _addPaymentUseCase.build(params);
-      print("Paid successfully.");
+      L.info("Paid successfully.");
     } catch (e) {
-      print("Failed to pay: $e");
+      L.info("Failed to pay: $e");
     }
   }
 

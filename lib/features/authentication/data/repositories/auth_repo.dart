@@ -15,6 +15,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
+import '../../../../utils/service/log_service.dart';
+
 class AuthRepoImpl extends AuthRepo {
   final LocalStorage _localStorage = Get.find();
   final ApiService _apiService = Get.find();
@@ -77,10 +79,10 @@ class AuthRepoImpl extends AuthRepo {
         accessToken: auth.accessToken, idToken: auth.idToken);
     await FirebaseAuth.instance.signInWithCredential(credential);
     final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
-    print('loginWithGoogle idToken $idToken');
+    L.info('loginWithGoogle idToken $idToken');
     // TODO send to BE
-    print('sub1 ${idToken?.substring(0, 1000)}');
-    print('sub2 ${idToken?.substring(995, idToken.length)}');
+    L.info('sub1 ${idToken?.substring(0, 1000)}');
+    L.info('sub2 ${idToken?.substring(995, idToken.length)}');
   }
 
   @override
@@ -105,11 +107,11 @@ class AuthRepoImpl extends AuthRepo {
             idToken: appleCredential.identityToken);
     await FirebaseAuth.instance.signInWithCredential(oAuthCredential);
     final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
-    print('loginWithApple idToken $idToken');
+    L.info('loginWithApple idToken $idToken');
     // Now send the credential (especially `credential.authorizationCode`) to your server to create a session
     // after they have been validated with Apple (see `Integration` section for more information on how to do this)
     final length = idToken!.length;
-    print('sub1 ${idToken.substring(0, 1000)}');
-    print('sub2 ${idToken.substring(995, length)}');
+    L.info('sub1 ${idToken.substring(0, 1000)}');
+    L.info('sub2 ${idToken.substring(995, length)}');
   }
 }

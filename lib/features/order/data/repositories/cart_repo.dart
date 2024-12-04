@@ -10,11 +10,12 @@ class CartRepoImpl extends CartRepo {
   final ApiService _apiService = Get.find();
 
   @override
-  Future<Cart?> getCart(String order) async {
-    final CartResponse response = await _apiService.getCart(order);
+  Future<Cart?> getCart(String category) async {
+    final CartResponse response = await _apiService.getCart(category);
     final CartApiModel? model = response.data;
     return (model != null) ? mappingEntity(model) : null;
   }
+
   @override
   Future<void> addToCart(String idProduct, int quantity) async {
     final request = AddToCartRequest(

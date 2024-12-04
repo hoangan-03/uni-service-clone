@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/utils/config/app_config.dart';
+import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:get/instance_manager.dart';
 import '../../local/local_storage.dart';
 
@@ -23,7 +24,7 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
 
-    print("onRequest TokenInterceptor ${options.uri}");
+    // print("onRequest TokenInterceptor ${options.uri}");
     final localToken = await _localStorage.accessToken ?? '';
     if (localToken.isNotEmpty) {
       options.headers[_authHeaderKey] = '$_bearer $localToken';
@@ -34,7 +35,7 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
   
-    print("onRequest TokenInterceptor ${err.requestOptions.uri}");
+    L.info("onRequest TokenInterceptor ${err.requestOptions.uri}");
     final error = err.error;
     if (error is AppException) {
       handler.next(err);

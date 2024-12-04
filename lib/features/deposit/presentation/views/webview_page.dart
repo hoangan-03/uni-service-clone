@@ -3,6 +3,7 @@ import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/utils/helper/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -29,19 +30,19 @@ class WebViewPageState extends State<WebViewPage> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            print('Loading progress: $progress%');
+            L.info('Loading progress: $progress%');
           },
           onPageStarted: (String url) {
-            print('Page started loading: $url');
+            L.info('Page started loading: $url');
           },
           onPageFinished: (String url) {
-            print('Page finished loading: $url');
+            L.info('Page finished loading: $url');
           },
           onHttpError: (HttpResponseError error) {
-            print('HTTP error:');
+            L.info('HTTP error:');
           },
           onWebResourceError: (WebResourceError error) {
-            print('Web resource error: ${error.description}');
+            L.info('Web resource error: ${error.description}');
           },
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://stg.uniservice.vn')) {

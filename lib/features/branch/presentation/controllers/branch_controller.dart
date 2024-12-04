@@ -78,14 +78,10 @@ class BranchController extends BaseController {
 
     final branchJson = jsonEncode(branchData);
 
-    _localStorage.setString('selectedBranch', branchJson).then((_) async {
-      print('Branch saved to local storage: $branchJson');
-      final selectedBranchJson =
-          await _localStorage.getString('selectedBranch');
-      print('Selected branch: $selectedBranchJson');
-    }).catchError((error) {
-      print('Failed to save branch: $error');
-    });
+    _localStorage
+        .setString('selectedBranch', branchJson)
+        .then((_) async {})
+        .catchError((error) {});
   }
 
   void navigateToHome() {

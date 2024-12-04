@@ -31,9 +31,7 @@ class RootController extends BaseController {
   }
 
   Future<void> _handleAuthenticated() async {
-          final selectedBranchJson =
-          await _localStorage.getString('selectedBranch');
-    print('Selected branch: $selectedBranchJson');
+    final selectedBranchJson = await _localStorage.getString('selectedBranch');
     if (selectedBranchJson == null) {
       N.toBranch();
     } else {

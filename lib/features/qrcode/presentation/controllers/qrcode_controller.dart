@@ -9,6 +9,7 @@ import 'package:flutter_base_v2/features/qrcode/domain/usecases/get_qr_code.dart
 import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_controller.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/views/transfer.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
+import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_base_v2/utils/service/push_notification_service.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -50,7 +51,7 @@ class QrcodeController extends BaseController<HomeInput> {
   void scannedQRCode(String productId) async {
     try {
       final item = await getQrCode(productId);
-      print("something") ;
+      L.info("something") ;
       if (item != null) {
         Get.to(() => OrderQRPage(
               item: item,
@@ -59,7 +60,7 @@ class QrcodeController extends BaseController<HomeInput> {
             ));
       }
     } catch (e) {
-      print("Failed to get item: $e");
+      L.info("Failed to get item: $e");
     }
   }
 

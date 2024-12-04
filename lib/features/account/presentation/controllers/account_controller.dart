@@ -8,8 +8,6 @@ import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
 import 'package:flutter_base_v2/features/account/domain/usecases/update_avatar.dart';
-import 'package:flutter_base_v2/features/account/presentation/controllers/account_binding.dart';
-import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';

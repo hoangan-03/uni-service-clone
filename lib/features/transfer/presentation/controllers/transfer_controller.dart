@@ -72,10 +72,6 @@ class TransferController extends BaseController<TransferInput> {
         title: "Demo notifications", body: 'Demo body', payload: 'payload');
   }
 
-
-
-
-
   void setAmount(String amount) {
     currentAmount.value = NumberFormat("#,###", "vi_VN")
         .format(int.tryParse(amount.replaceAll('.', '')) ?? 0);
@@ -138,11 +134,11 @@ class TransferController extends BaseController<TransferInput> {
   void scannedUserQRCode(String recipientId, int amount) async {
     try {
       final transferResponse = await transferRequest(recipientId, amount);
-      print("scannedUserQrcode");
+      L.info("scannedUserQrcode");
       if (transferResponse != null) {
         final transferDetail =
             await getTransferDetail(transferResponse.txn ?? "");
-        print("transferDetail");
+        L.info("transferDetail");
         if (transferDetail != null) {
           Get.to(() => TransferBillPage(
                 recipientName: transferDetail.recipient.username ?? "",
@@ -152,7 +148,7 @@ class TransferController extends BaseController<TransferInput> {
         }
       }
     } catch (e) {
-      print("Failed to get transfer detail: $e");
+      L.info("Failed to get transfer detail: $e");
     }
   }
 
