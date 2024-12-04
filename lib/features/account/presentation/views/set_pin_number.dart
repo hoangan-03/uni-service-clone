@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_base_v2/features/account/presentation/widgets/pin_number_app_bar.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -31,26 +32,7 @@ class SetPinNumberPageState extends State<SetPinNumberPage> {
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: appColors?.white,
-        title: Obx(() => Padding(
-              padding: const EdgeInsets.all(0.0),
-              child: Text(
-                controller.isReType.value ? S.confirm_pin : S.create_pin,
-                textAlign: TextAlign.center,
-                style:
-                    AppTextStyle.bold14().copyWith(color: appColors?.secondary),
-              ),
-            )),
-        centerTitle: true,
-        automaticallyImplyLeading: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
+      appBar: buildPinNumberAppBar(context, controller),
       body: GetBuilder<AccountController>(
         init: AccountController(),
         builder: (controller) {

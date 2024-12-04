@@ -34,10 +34,10 @@ class InitInfoPage extends BaseGetView<RegisterController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  buildInfoField(context, S.password, user.password, appColors,
-                      (value) => user.password = value,
+                  buildPasswordField(context, controller, user.password,
+                      appColors, (value) => user.password = value,
                       hintText: S.enter_password),
-                  buildInfoField(context, S.expired_date, user.name, appColors,
+                  buildInfoField(context, S.display_name, user.name, appColors,
                       (value) => user.name = value,
                       hintText: S.enter_display_name),
                   buildDatePickerField(

@@ -59,6 +59,23 @@ class RegisterController extends BaseController {
     isHidePassword.value = !isHidePassword.value;
   }
 
+  bool validatePassword(String password) {
+    if (password.length < 8) {
+      buildSnackBar(S.at_least_8_characters, false);
+      return false;
+    }
+    if (password.contains(' ')) {
+      buildSnackBar(S.not_included_space, false);
+      return false;
+    }
+    final regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
+    if (!regex.hasMatch(password)) {
+      buildSnackBar(S.included_uppercase_lowercase_number_special_character, false);
+      return false;
+    }
+    return true;
+  }
+
   Future<void> updateInfo(
       String birthdate, String name, String password) async {
     final params = UpdateInfoBody(birthdate, name, password);
@@ -164,8 +181,10 @@ class RegisterController extends BaseController {
 
   void handleInit() {
     final user = userInitInfo.value;
-    initProfile(user);
-    buildSnackBar(S.success_register, true);
-    N.toBranchPage();
+    if (validatePassword(user.password)) {
+      initProfile(user);
+      buildSnackBar(S.success_register, true);
+      N.toBranchPage();
+    }
   }
 }
