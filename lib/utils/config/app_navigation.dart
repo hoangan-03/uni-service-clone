@@ -74,16 +74,8 @@ class N {
     type.navigate(name: AppRoute.setpinnumber);
   }
 
-  static void toComfirmSetPin({RouteType type = RouteType.to}) {
-    type.navigate(name: AppRoute.confirmsetpinnumber);
-  }
-
   static void toUpdatePin({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.updatepinnumber);
-  }
-
-  static void toConfromUpdatePin({RouteType type = RouteType.to}) {
-    type.navigate(name: AppRoute.confirmupdatepinnumber);
   }
 
   static void toSettings({RouteType type = RouteType.to}) {

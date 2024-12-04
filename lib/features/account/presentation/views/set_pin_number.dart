@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
@@ -24,9 +24,6 @@ class SetPinNumberPageState extends State<SetPinNumberPage> {
 
   @override
   void dispose() {
-    controller.pinController.removeListener(controller.onPinChanged);
-    controller.pinController.dispose();
-    controller.focusNode.dispose();
     super.dispose();
   }
 
@@ -34,53 +31,82 @@ class SetPinNumberPageState extends State<SetPinNumberPage> {
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
-      backgroundColor: appColors!.white,
-      appBar: buildAppBar(
-          appColors: appColors, context: context, title: S.create_pin),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                S.enter_pin,
-                style: TextStyle(fontSize: 20),
+      appBar: AppBar(
+        backgroundColor: appColors?.white,
+        title: Obx(() => Padding(
+              padding: const EdgeInsets.all(0.0),
+              child: Text(
+                controller.isReType.value ? S.confirm_pin : S.create_pin,
+                textAlign: TextAlign.center,
+                style:
+                    AppTextStyle.bold14().copyWith(color: appColors?.secondary),
               ),
-              SizedBox(height: 20),
-              PinInputField(controller: controller.pinController),
-              SizedBox(height: 40),
-              Obx(() => Text('PIN: ${controller.pin.value}',
-                  style: TextStyle(fontSize: 18))),
-            ],
-          ),
+            )),
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
       ),
-    );
-  }
-}
-
-class PinInputField extends StatelessWidget {
-  final TextEditingController controller;
-  const PinInputField({super.key, required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      autofocus: true,
-      obscureText: true,
-      keyboardType: TextInputType.number,
-      maxLength: 4,
-      inputFormatters: [
-        FilteringTextInputFormatter.digitsOnly,
-      ],
-      decoration: InputDecoration(
-        counterText: '',
-        hintText: '****',
-        border: OutlineInputBorder(),
-        contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      body: GetBuilder<AccountController>(
+        init: AccountController(),
+        builder: (controller) {
+          return Container(
+            color: appColors?.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  S.enter_pin,
+                  style: AppTextStyle.regular14()
+                      .copyWith(color: appColors?.secondary),
+                ),
+                const SizedBox(height: 32),
+                Obx(() => Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(4, (index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: Container(
+                            width: 20,
+                            height: 20,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: index < controller.pin.value.length
+                                  ? null
+                                  : Border.all(
+                                      color: appColors!.gray, width: 1),
+                              color: index < controller.pin.value.length
+                                  ? appColors?.primary
+                                  : appColors?.transparent,
+                            ),
+                          ),
+                        );
+                      }),
+                    )),
+                const SizedBox(height: 32),
+                SizedBox(
+                  height: 0,
+                  width: 0,
+                  child: TextField(
+                    controller: controller.pinController,
+                    keyboardType: TextInputType.number,
+                    maxLength: 4,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    autofocus: true,
+                    decoration: const InputDecoration(
+                      counterText: '',
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

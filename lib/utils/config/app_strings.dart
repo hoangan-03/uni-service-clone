@@ -183,6 +183,7 @@ class S {
   static String confirm_pin = "Nhập lại mã PIN để xác nhận";
   static String pin_mismatch = "Sai mã PIN";
   static String enter_current_pin = "Nhập mã PIN hiện tại";
+  static String success_create_pin = "Tạo mã PIN thành công";
   static String success_change_pin = "Cập nhật mã PIN thành công";
 
   // Tab bar

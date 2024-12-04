@@ -100,7 +100,7 @@ class TabbarPage extends GetView {
   @override
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
-    final initialIndex = Get.arguments as int? ?? 0;
+    final initialIndex = Get.arguments as dynamic ?? 0;
     return Stack(
       children: [
         PersistentTabView(

@@ -15,6 +15,7 @@ import 'package:flutter_base_v2/features/home/presentation/controllers/home_inpu
 import 'package:flutter_base_v2/features/account/domain/usecases/get_profile_uc.dart';
 import 'package:flutter_base_v2/features/account/domain/usecases/update_profile_uc.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
+import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/helper/snackbar.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -41,6 +42,8 @@ class AccountController extends BaseController<HomeInput> {
   final pinController = TextEditingController();
   final focusNode = FocusNode();
   var pin = ''.obs;
+  var isReType = false.obs;
+  var initialPin = ''.obs;
 
   @override
   void onInit() async {
@@ -62,17 +65,29 @@ class AccountController extends BaseController<HomeInput> {
   void onPinChanged() {
     pin.value = pinController.text;
     if (pin.value.length == 4) {
-      Future.delayed(Duration(milliseconds: 200), () {
-        N.toHome(input: HomeInput("setPin"));
-      });
+      if (isReType.value) {
+        if (pin.value == initialPin.value) {
+          buildSnackBar(S.success_create_pin, true);
+          pin.value = '';
+          N.toHome(input: HomeInput(""));
+        } else {
+          buildSnackBar(S.pin_mismatch, false);
+          pinController.clear();
+        }
+      } else {
+        initialPin.value = pin.value;
+        pinController.clear();
+        isReType.value = true;
+      }
     }
   }
 
   @override
   void onClose() {
     pinController.removeListener(onPinChanged);
-    pinController.dispose();
+    // pinController.dispose();
     focusNode.dispose();
+    
     pushNotiService.cancelNotification();
     _getProfileUseCase.dispose();
     _updateProfileUseCase.dispose();
