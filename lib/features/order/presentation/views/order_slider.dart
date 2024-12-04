@@ -365,7 +365,6 @@ class _OrderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).extension<AppColors>();
     final controller = Get.find<HomeController>();
     return ElevatedButton(
       onPressed: () {

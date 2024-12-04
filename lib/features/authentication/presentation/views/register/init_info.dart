@@ -4,7 +4,6 @@ import 'package:flutter_base_v2/features/authentication/presentation/controllers
 import 'package:flutter_base_v2/features/authentication/presentation/views/widgets/datepicker_field.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/widgets/info_field.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
-import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/utils/styles/button_styles.dart';

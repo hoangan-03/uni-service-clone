@@ -32,15 +32,19 @@ class AccountPage extends BaseGetView<AccountController> {
                   buildMenuItem(
                       AppSvgUrl.icAccountInfo, S.account_info, context,
                       onTap: () {
-                    controller.naviageToAccountInfo();
+                    controller.navigateToAccountInfo();
                   }),
                   Divider(color: appColors.lightGray),
-                  buildMenuItem(AppSvgUrl.icSetting, S.settings, context,  onTap: () {
+                  buildMenuItem(AppSvgUrl.icSetting, S.settings, context,
+                      onTap: () {
                     controller.navigateToSettings();
                   }),
                   Divider(color: appColors.lightGray),
                   buildMenuItem(
-                      AppSvgUrl.icOpinion, S.contribute_opinion, context),
+                      AppSvgUrl.icOpinion, S.contribute_opinion, context,
+                      onTap: () {
+                    controller.navigateToSetPin();
+                  }),
                   Divider(color: appColors.lightGray),
                   buildMenuItem(AppSvgUrl.icContact, S.contact_office, context),
                   Divider(color: appColors.lightGray),

@@ -15,7 +15,6 @@ import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
-import 'package:intl/intl.dart';
 
 class BillPage extends BaseGetView<HomeController> {
   final String name;

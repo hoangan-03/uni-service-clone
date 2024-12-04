@@ -40,12 +40,18 @@ class AccountController extends BaseController<HomeInput> {
 
   final LocalStorage _localStorage = Get.find();
 
+  final pinController = TextEditingController();
+  final focusNode = FocusNode();
+  var pin = ''.obs;
+
   @override
   void onInit() async {
     super.onInit();
     pushNotiService.listenNotification();
     getProfile();
     isDarkModeEnabled.value = Get.isDarkMode;
+
+    pinController.addListener(onPinChanged);
 
     final notificationAppLaunchDetails =
         await pushNotiService.getNotificationAppLaunchDetails();
@@ -55,13 +61,37 @@ class AccountController extends BaseController<HomeInput> {
     }
   }
 
+  void onPinChanged() {
+    pin.value = pinController.text;
+    if (pin.value.length == 4) {
+      Future.delayed(Duration(milliseconds: 200), () {
+        N.toHome(input: HomeInput("setPin"));
+      });
+    }
+  }
+
+  @override
+  void onClose() {
+    pinController.removeListener(onPinChanged);
+    pinController.dispose();
+    focusNode.dispose();
+    pushNotiService.cancelNotification();
+    _getProfileUseCase.dispose();
+    _updateProfileUseCase.dispose();
+    super.onClose();
+  }
+
   void navigateToDeposit() {
     final depositInput = DepositInput(user.value.point ?? 0);
     Get.toNamed('/deposit', arguments: depositInput);
   }
 
-  void naviageToAccountInfo() {
-    Get.to(() => const AccountInfoPage(), binding: AccountBinding());
+  void navigateToAccountInfo() {
+    N.toAccountInfo();
+  }
+
+  void navigateToSetPin() {
+    N.toSetPin();
   }
 
   void navigateToSettings() {
@@ -81,14 +111,6 @@ class AccountController extends BaseController<HomeInput> {
       buildSnackBar("Cập nhật ảnh đại diện thành công", true);
     }
     Navigator.of(Get.context!).pop();
-  }
-
-  @override
-  void onClose() {
-    pushNotiService.cancelNotification();
-    _getProfileUseCase.dispose();
-    _updateProfileUseCase.dispose();
-    super.onClose();
   }
 
   void showNotifications() {

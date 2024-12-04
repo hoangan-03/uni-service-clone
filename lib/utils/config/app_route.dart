@@ -1,5 +1,6 @@
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_binding.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
+import 'package:flutter_base_v2/features/account/presentation/views/set_pin_number.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/setting.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/login/login_binding.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_binding.dart';
@@ -58,6 +59,10 @@ class AppRoute {
   static String accountInfo = '/info';
   static String deposit = '/deposit';
   static String transfer = '/transfer';
+  static String setpinnumber = '/set_pin_number';
+  static String updatepinnumber = '/update_pin_number';
+  static String confirmsetpinnumber = '/confirm_set_pin_number';
+  static String confirmupdatepinnumber = '/confirm_update_pin_number';
 
   static List<GetPage> generateGetPages = [
     GetPage(name: root, page: RootPage.new, binding: RootBinding()),
@@ -128,6 +133,26 @@ class AppRoute {
     GetPage(
         name: settings,
         page: SettingPage.new,
+        binding: AccountBinding(),
+        transition: Transition.noTransition),
+            GetPage(
+        name: setpinnumber,
+        page: SetPinNumberPage.new,
+        binding: AccountBinding(),
+        transition: Transition.noTransition),
+           GetPage(
+        name: confirmsetpinnumber,
+        page: SetPinNumberPage.new,
+        binding: AccountBinding(),
+        transition: Transition.noTransition),
+           GetPage(
+        name: updatepinnumber,
+        page: SetPinNumberPage.new,
+        binding: AccountBinding(),
+        transition: Transition.noTransition),
+           GetPage(
+        name: confirmupdatepinnumber,
+        page: SetPinNumberPage.new,
         binding: AccountBinding(),
         transition: Transition.noTransition),
     GetPage(

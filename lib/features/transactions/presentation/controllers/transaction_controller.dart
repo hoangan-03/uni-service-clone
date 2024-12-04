@@ -9,7 +9,6 @@ import 'package:flutter_base_v2/features/transactions/domain/entities/transactio
 import 'package:flutter_base_v2/features/transactions/domain/usecases/get_transactions_cate_uc.dart';
 import 'package:flutter_base_v2/features/transactions/domain/usecases/get_transactions_uc.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class TransactionController extends BaseController {

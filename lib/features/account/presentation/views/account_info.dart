@@ -9,7 +9,6 @@ import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
-import 'package:intl/intl.dart';
 
 class AccountInfoPage extends BaseGetView<AccountController> {
   const AccountInfoPage({super.key});

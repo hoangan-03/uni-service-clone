@@ -26,8 +26,6 @@ class N {
     type.navigate(name: AppRoute.login);
   }
 
-
-
   static void toRegister({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.register);
   }
@@ -52,7 +50,6 @@ class N {
   static void toAccount({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.tabbar, arguments: 4);
   }
-  
 
   static void toHome({
     required HomeInput input,
@@ -72,6 +69,23 @@ class N {
   static void toAccountInfo({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.accountInfo);
   }
+
+  static void toSetPin({RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.setpinnumber);
+  }
+
+  static void toComfirmSetPin({RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.confirmsetpinnumber);
+  }
+
+  static void toUpdatePin({RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.updatepinnumber);
+  }
+
+  static void toConfromUpdatePin({RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.confirmupdatepinnumber);
+  }
+
   static void toSettings({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.settings);
   }

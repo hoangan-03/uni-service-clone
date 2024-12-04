@@ -177,6 +177,14 @@ class S {
   // Services
   static String book_ticket = "Đặt vé";
 
+  // Pin number
+  static String create_pin = "Tạo mã PIN";
+  static String enter_pin = "Nhập mã PIN";
+  static String confirm_pin = "Nhập lại mã PIN để xác nhận";
+  static String pin_mismatch = "Sai mã PIN";
+  static String enter_current_pin = "Nhập mã PIN hiện tại";
+  static String success_change_pin = "Cập nhật mã PIN thành công";
+
   // Tab bar
   static String home = "Trang chủ";
   static String services = "Tiện ích";

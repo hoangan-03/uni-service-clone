@@ -4,7 +4,6 @@ import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
-import 'package:intl/intl.dart';
 
 Widget buildDatePickerField(BuildContext context, String label, String value,
       AppColors? appColors, Function(String) onChanged) {

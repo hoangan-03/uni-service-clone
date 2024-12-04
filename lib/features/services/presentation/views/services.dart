@@ -92,14 +92,14 @@ class ServiceCard extends StatelessWidget {
                 Expanded(
                   child: Text(title,
                       style: AppTextStyle.bold16()
-                          .copyWith(color: appColors?.secondary)),
+                          .copyWith(color: appColors.secondary)),
                 ),
                 TextButton(
                   onPressed: () {
                     // Define button action
                   },
                   style: TextButton.styleFrom(
-                    backgroundColor: appColors!.background,
+                    backgroundColor: appColors.background,
                     minimumSize: const Size(80, 36),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
