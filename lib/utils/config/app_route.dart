@@ -1,5 +1,6 @@
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_binding.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
+import 'package:flutter_base_v2/features/account/presentation/views/change_pin_number.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/set_pin_number.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/setting.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/login/login_binding.dart';
@@ -141,10 +142,10 @@ class AppRoute {
         
            GetPage(
         name: updatepinnumber,
-        page: SetPinNumberPage.new,
+        page: ChangePinNumberPage.new,
         binding: AccountBinding(),
         transition: Transition.noTransition),
-        
+
     GetPage(
         name: transferbill,
         page: () => TransferBillPage(

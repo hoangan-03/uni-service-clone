@@ -20,7 +20,7 @@ class SetPinNumberPageState extends State<SetPinNumberPage> {
   @override
   void initState() {
     super.initState();
-    controller.pinController.addListener(controller.onPinChanged);
+    controller.pinController.addListener(controller.onPinCreated);
   }
 
   @override
@@ -32,7 +32,7 @@ class SetPinNumberPageState extends State<SetPinNumberPage> {
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
-      appBar: buildPinNumberAppBar(context, controller),
+      appBar: buildPinNumberAppBar(context, controller,true),
       body: GetBuilder<AccountController>(
         init: AccountController(),
         builder: (controller) {

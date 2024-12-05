@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
+import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -45,7 +46,7 @@ class SettingPage extends BaseGetView<AccountController> {
               title: S.pin_number,
               subtitle: S.change_pin,
               onTap: () {
-                // Đổi mã PIN
+                N.toUpdatePin();
               },
             ),
             Obx(() {

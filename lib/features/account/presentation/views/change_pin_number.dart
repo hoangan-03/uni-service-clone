@@ -32,7 +32,7 @@ class ChangePinNumberPageState extends State<ChangePinNumberPage> {
   Widget build(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
-      appBar: buildPinNumberAppBar(context, controller),
+      appBar: buildPinNumberAppBar(context, controller, false),
       body: GetBuilder<AccountController>(
         init: AccountController(),
         builder: (controller) {
