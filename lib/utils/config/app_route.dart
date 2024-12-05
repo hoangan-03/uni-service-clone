@@ -144,6 +144,7 @@ class AppRoute {
         page: SetPinNumberPage.new,
         binding: AccountBinding(),
         transition: Transition.noTransition),
+        
     GetPage(
         name: transferbill,
         page: () => TransferBillPage(

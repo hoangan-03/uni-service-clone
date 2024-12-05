@@ -26,7 +26,6 @@ class InitInfoPage extends BaseGetView<RegisterController> {
         ),
         backgroundColor: appColors?.white,
         body: Container(
-          color: Colors.white,
           padding: const EdgeInsets.all(16.0),
           child: Obx(() {
             final user = controller.userInitInfo.value;

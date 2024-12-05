@@ -68,8 +68,17 @@ class AccountController extends BaseController<HomeInput> {
       if (isReType.value) {
         if (pin.value == initialPin.value) {
           buildSnackBar(S.success_create_pin, true);
+          final pincodeJson = jsonEncode(pin.value);
+
+          _localStorage
+              .setString('pinNumber', pincodeJson)
+              .then((_) async {})
+              .catchError((error) {});
           pin.value = '';
           N.toHome(input: HomeInput(""));
+          _localStorage.getString('pinNumber').then((value) {
+            L.info('Pin number: $value');
+          });
         } else {
           buildSnackBar(S.pin_mismatch, false);
           pinController.clear();
@@ -82,12 +91,44 @@ class AccountController extends BaseController<HomeInput> {
     }
   }
 
+  void onPinUpdated() async {
+    pin.value = pinController.text;
+    var currentPin = await _localStorage.getString('pinNumber');
+    if (pin.value.length == 4) {
+      if (pin.value == currentPin) {
+        if (isReType.value) {
+          if (pin.value == initialPin.value) {
+            buildSnackBar(S.success_create_pin, true);
+            await _localStorage
+                .setString('pinNumber', jsonEncode(pin.value))
+                .then((_) async {})
+                .catchError((error) {});
+            pin.value = '';
+            N.toAccount();
+          } else {
+            buildSnackBar(S.pin_mismatch, false);
+            pinController.clear();
+          }
+        } else {
+          initialPin.value = pin.value;
+          pinController.clear();
+          isReType.value = true;
+        }
+      } else {
+        buildSnackBar(S.pin_mismatch, false);
+        pinController.clear();
+      }
+    }
+  }
+
   @override
   void onClose() {
     pinController.removeListener(onPinChanged);
+    pinController.removeListener(onPinUpdated);
+
     // pinController.dispose();
     focusNode.dispose();
-    
+
     pushNotiService.cancelNotification();
     _getProfileUseCase.dispose();
     _updateProfileUseCase.dispose();

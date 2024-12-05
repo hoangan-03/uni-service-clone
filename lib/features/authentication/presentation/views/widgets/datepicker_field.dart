@@ -3,15 +3,17 @@ import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:get/get.dart';
 
 Widget buildDatePickerField(BuildContext context, String label, String value,
     AppColors? appColors, Function(String) onChanged) {
+          final bool isDarkMode = Get.isDarkMode;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
         label,
-        style: AppTextStyle.regular14().copyWith(color: Colors.grey),
+        style: AppTextStyle.regular14().copyWith(color: appColors!.gray),
       ),
       const SizedBox(height: 4.0),
       GestureDetector(
@@ -43,7 +45,7 @@ Widget buildDatePickerField(BuildContext context, String label, String value,
           ),
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
           decoration: BoxDecoration(
-            color: Colors.grey[200],
+            color: isDarkMode ? Colors.grey[800] : Colors.grey[200],
             borderRadius: BorderRadius.circular(8.0),
             border: Border.all(color: Colors.transparent),
           ),
@@ -53,7 +55,7 @@ Widget buildDatePickerField(BuildContext context, String label, String value,
               Text(
                 value.isNotEmpty ? value : S.enter_birthday,
                 style: AppTextStyle.regular12()
-                    .copyWith(color: appColors!.secondary),
+                    .copyWith(color: appColors.secondary),
               ),
               Icon(Icons.calendar_today, color: appColors.secondary),
             ],

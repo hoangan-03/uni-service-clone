@@ -8,12 +8,13 @@ import 'package:get/get.dart';
 Widget buildInfoField(BuildContext context, String label, String value,
     AppColors? appColors, Function(String) onChanged,
     {IconData? icon, required String hintText}) {
+          final bool isDarkMode = Get.isDarkMode;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
         label,
-        style: AppTextStyle.regular14().copyWith(color: Colors.grey),
+        style: AppTextStyle.regular14().copyWith(color: appColors!.gray),
       ),
       const SizedBox(height: 4.0),
       TextFormField(
@@ -22,9 +23,9 @@ Widget buildInfoField(BuildContext context, String label, String value,
         decoration: InputDecoration(
           hintText: hintText,
           suffixIcon:
-              icon != null ? Icon(icon, color: appColors?.secondary) : null,
+              icon != null ? Icon(icon, color: appColors.secondary) : null,
           filled: true,
-          fillColor: Colors.grey[200],
+          fillColor:  isDarkMode ? Colors.grey[800] : Colors.grey[200],
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
             borderSide: BorderSide.none,
@@ -36,7 +37,7 @@ Widget buildInfoField(BuildContext context, String label, String value,
             minHeight: 40.0,
           ),
         ),
-        style: AppTextStyle.regular12().copyWith(color: appColors!.secondary),
+        style: AppTextStyle.regular12().copyWith(color: appColors.secondary),
       ),
       const SizedBox(height: 16.0),
     ],
@@ -46,6 +47,7 @@ Widget buildInfoField(BuildContext context, String label, String value,
 Widget buildInfoField2(BuildContext context, String label, AppColors appColors,
     Function(String) onChanged,
     {IconData? icon}) {
+          final bool isDarkMode = Get.isDarkMode;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -62,7 +64,7 @@ Widget buildInfoField2(BuildContext context, String label, AppColors appColors,
           suffixIcon:
               icon != null ? Icon(icon, color: appColors.secondary) : null,
           filled: true,
-          fillColor: appColors.lightGray,
+          fillColor:  isDarkMode ? Colors.grey[800] : Colors.grey[200],
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
             borderSide: BorderSide.none,
@@ -84,6 +86,7 @@ Widget buildInfoField2(BuildContext context, String label, AppColors appColors,
 Widget buildPasswordField(BuildContext context, RegisterController controller,
     String value, AppColors? appColors, Function(String) onChanged,
     {required String hintText}) {
+          final bool isDarkMode = Get.isDarkMode;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -110,7 +113,7 @@ Widget buildPasswordField(BuildContext context, RegisterController controller,
                 onPressed: controller.onTapEye,
               ),
               filled: true,
-              fillColor: Colors.grey[200],
+              fillColor:  isDarkMode ? Colors.grey[800] : Colors.grey[200],
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
                 borderSide: BorderSide.none,

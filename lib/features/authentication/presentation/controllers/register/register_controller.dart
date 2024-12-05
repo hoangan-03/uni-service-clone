@@ -184,7 +184,7 @@ class RegisterController extends BaseController {
     if (validatePassword(user.password)) {
       initProfile(user);
       buildSnackBar(S.success_register, true);
-      N.toBranchPage();
+      N.toSetPin();
     }
   }
 }
