@@ -22,20 +22,24 @@ Widget buildMenuPage(
   final HomeController controller = Get.find<HomeController>();
   BaseState<List<Menu>?> currentList;
 
-  switch (currentMenu) {
+    switch (currentMenu) {
     case 'Thực đơn hôm nay':
+    case "Today's menu":
       currentList = menuTodayState;
       break;
     case "Đồ uống":
+    case "Drinks":
       currentList = menuDrinkState;
       break;
     case "Food Court":
       currentList = menuFoodcourtState;
       break;
     case "Đặc sản địa phương":
+    case "Local delicacies":
       currentList = menuSpecialityState;
       break;
     case "Nhu yếu phẩm":
+    case "Essentials":
       currentList = menuNecessityState;
       break;
     default:

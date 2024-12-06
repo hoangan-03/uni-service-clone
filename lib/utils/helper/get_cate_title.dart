@@ -1,15 +1,20 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
+import 'package:get/get.dart';
+
 String getCategoryTitle(String category) {
+  BuildContext context = Get.context!;
   switch (category) {
     case 'TODAY':
-      return 'Thực đơn hôm nay';
+      return S.of(context).current_menu;
     case 'DRINK':
-      return 'Đồ uống';
+      return S.of(context).drink;
     case 'FOODCOURT':
-      return 'Food Court';
+      return S.of(context).foodcourt;
     case 'SPECIALITY':
-      return 'Đặc sản địa phương';
+      return S.of(context).local_food;
     case 'NECESSITY':
-      return 'Nhu yếu phẩm';
+      return S.of(context).neccessities;
     default:
       return category;
   }

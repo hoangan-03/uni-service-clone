@@ -1,16 +1,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
-import 'package:flutter_base_v2/generated/l10n.dart';
+import 'package:flutter_base_v2/features/account/presentation/widgets/show_language_selection_modal.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_base_v2/generated/l10n.dart';
+import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 class SettingPage extends BaseGetView<AccountController> {
   const SettingPage({super.key});
 
@@ -80,35 +80,7 @@ class SettingPage extends BaseGetView<AccountController> {
     );
   }
 
-  void showLanguageSelectionModal(BuildContext context, LocaleController localeController) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                title: Text('English'),
-                onTap: () {
-                  localeController.changeLocale(Locale('en'));
-                  Navigator.of(context).pop();
-                },
-              ),
-              ListTile(
-                title: Text('Tiếng Việt'),
-                onTap: () {
-                  localeController.changeLocale(Locale('vi'));
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+
 }
 
 class SettingListItem extends StatelessWidget {
@@ -194,7 +166,7 @@ class SettingSwitchItem extends StatelessWidget {
             ],
           ),
           AnimatedSwitcher(
-            duration: const Duration(milliseconds: 100), // Faster animation duration
+            duration: const Duration(milliseconds: 100), 
             transitionBuilder: (Widget child, Animation<double> animation) {
               return ScaleTransition(scale: animation, child: child);
             },

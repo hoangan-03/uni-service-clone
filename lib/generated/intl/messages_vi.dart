@@ -207,6 +207,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "role": MessageLookupByLibrary.simpleMessage("Loại"),
         "scan_qr": MessageLookupByLibrary.simpleMessage("Quét mã QR"),
         "school": MessageLookupByLibrary.simpleMessage("Trường học"),
+        "select_language":
+            MessageLookupByLibrary.simpleMessage("Chọn ngôn ngữ"),
         "send_otp": MessageLookupByLibrary.simpleMessage("Gửi OTP"),
         "services": MessageLookupByLibrary.simpleMessage("Tiện ích"),
         "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),

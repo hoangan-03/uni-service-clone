@@ -100,7 +100,7 @@
   "two_million": "2,000,000",
   "current_menu": "Today's menu",
   "choose_menu_tomorrow": "Choose tomorrow's menu",
-  "drink": "Drink",
+  "drink": "Drinks",
   "foodcourt": "Food Court",
   "local_food": "Local delicacies",
   "neccessities": "Essentials",
@@ -163,5 +163,6 @@
   "retype_current_password": "Retype current password",
   "enter_new_password": "Enter new password",
   "confirm_new_password": "Confirm new password",
-  "success_change_password": "Password changed successfully"
+  "success_change_password": "Password changed successfully",
+  "select_language": "Select language"
 }

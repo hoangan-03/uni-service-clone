@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
+
 class LocalStorage {
   final _getStorage = GetStorage();
   final _secureStorage = const FlutterSecureStorage();
@@ -33,7 +34,7 @@ class LocalStorage {
       _getStorage.erase(),
       _secureStorage.deleteAll(),
     ]);
-    
+
     if (locale != null) {
       await Future.wait([
         localStorage.saveLocale(locale),
@@ -43,9 +44,13 @@ class LocalStorage {
   }
 }
 
-
 class LocaleController extends GetxController {
   final LocalStorage _localStorage = Get.find();
+
+  Locale get currentLocale {
+    final localeCode = _localStorage.locale;
+    return localeCode != null ? Locale(localeCode) : Locale('en');
+  }
 
   void changeLocale(Locale locale) {
     Get.updateLocale(locale);

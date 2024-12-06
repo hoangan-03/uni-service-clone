@@ -76,7 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "display_name": MessageLookupByLibrary.simpleMessage("Display name"),
         "dont_have_account":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
-        "drink": MessageLookupByLibrary.simpleMessage("Drink"),
+        "drink": MessageLookupByLibrary.simpleMessage("Drinks"),
         "edit_order": MessageLookupByLibrary.simpleMessage("Edit order"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_address": MessageLookupByLibrary.simpleMessage("Email address"),
@@ -201,6 +201,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "role": MessageLookupByLibrary.simpleMessage("Role"),
         "scan_qr": MessageLookupByLibrary.simpleMessage("Scan QR code"),
         "school": MessageLookupByLibrary.simpleMessage("School"),
+        "select_language":
+            MessageLookupByLibrary.simpleMessage("Select language"),
         "send_otp": MessageLookupByLibrary.simpleMessage("Send OTP"),
         "services": MessageLookupByLibrary.simpleMessage("Services"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),

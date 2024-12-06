@@ -163,5 +163,6 @@
   "retype_current_password": "Nhập lại mật khẩu hiện tại",
   "enter_new_password": "Nhập mật khẩu mới",
   "confirm_new_password": "Xác nhận mật khẩu mới",
-  "success_change_password": "Thay đổi mật khẩu thành công"
+  "success_change_password": "Thay đổi mật khẩu thành công",
+  "select_language": "Chọn ngôn ngữ"
 }

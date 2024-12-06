@@ -1050,10 +1050,10 @@ class S {
     );
   }
 
-  /// `Drink`
+  /// `Drinks`
   String get drink {
     return Intl.message(
-      'Drink',
+      'Drinks',
       name: 'drink',
       desc: '',
       args: [],
@@ -1685,6 +1685,16 @@ class S {
     return Intl.message(
       'Password changed successfully',
       name: 'success_change_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select language`
+  String get select_language {
+    return Intl.message(
+      'Select language',
+      name: 'select_language',
       desc: '',
       args: [],
     );
