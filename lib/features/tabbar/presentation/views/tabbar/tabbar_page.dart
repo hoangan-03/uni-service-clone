@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/utils/config/app_route.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_svg_url.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_svg/svg.dart';
@@ -42,18 +42,18 @@ extension TabItem on TabType {
     }
   }
 
-  String get title {
+  String title(BuildContext context) {
     switch (this) {
       case TabType.home:
-        return SS.home;
+        return S.of(context).home;
       case TabType.service:
-        return SS.services;
+        return S.of(context).services;
       case TabType.qr:
-        return SS.empty;
+        return S.of(context).empty;
       case TabType.history:
-        return SS.history;
+        return S.of(context).history;
       case TabType.account:
-        return SS.account;
+        return S.of(context).account;
     }
   }
 
@@ -72,11 +72,11 @@ extension TabItem on TabType {
     }
   }
 
-  PersistentBottomNavBarItem get item {
+  PersistentBottomNavBarItem item(BuildContext context) {
     return PersistentBottomNavBarItem(
       icon: icon(CupertinoColors.activeBlue),
       inactiveIcon: icon(CupertinoColors.systemGrey),
-      title: title.isEmpty ? null : title,
+      title: title(context).isEmpty ? null : title(context),
       iconSize: 26,
       contentPadding: 10,
       activeColorPrimary: CupertinoColors.activeBlue,
@@ -93,8 +93,8 @@ class TabbarPage extends GetView {
     return TabType.values.map((e) => e.page).toList();
   }
 
-  List<PersistentBottomNavBarItem> _navBarsItems() {
-    return TabType.values.map((e) => e.item).toList();
+  List<PersistentBottomNavBarItem> _navBarsItems(BuildContext context) {
+    return TabType.values.map((e) => e.item(context)).toList();
   }
 
   @override
@@ -108,7 +108,7 @@ class TabbarPage extends GetView {
           backgroundColor: appColors!.white,
           controller: PersistentTabController(initialIndex: initialIndex),
           screens: _buildScreens(),
-          items: _navBarsItems(),
+          items: _navBarsItems(context),
           confineToSafeArea: true,
           padding: const EdgeInsets.only(top: 10),
           resizeToAvoidBottomInset: true,

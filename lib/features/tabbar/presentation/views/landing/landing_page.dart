@@ -5,7 +5,7 @@ import 'package:flutter_base_v2/features/tabbar/presentation/controllers/landing
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/gen/assets.gen.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 
 
 class LandingPage extends BaseGetView<LandingController> {
@@ -55,7 +55,7 @@ class LandingPage extends BaseGetView<LandingController> {
               fillColor: appColors!.primary,
               borderColor: appColors.primary,
               child: Text(
-                SS.register,
+                S.of(context).register,
                 style: AppTextStyle
                     .bold16()
                     .copyWith(color: appColors.white),
@@ -81,7 +81,7 @@ class LandingPage extends BaseGetView<LandingController> {
               fillColor: appColors.transparent,
               borderColor: appColors.primary,
               child: Text(
-               SS.login,
+               S.of(context).login,
                 style: AppTextStyle
                     .bold16()
                     .copyWith(color: appColors.primary),

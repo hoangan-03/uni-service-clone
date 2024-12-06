@@ -6,7 +6,7 @@ import 'package:flutter_base_v2/utils/helper/format_price.dart';
 import 'package:flutter_base_v2/utils/helper/snackbar.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/order_slider.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 import 'package:get/get.dart';
@@ -35,7 +35,7 @@ class OrderPage extends BaseGetView<HomeController> {
 
   AppBar _buildAppBar(AppColors? appColors, BuildContext context) {
     return AppBar(
-      title: Text(SS.order,
+      title: Text(S.of(context).order,
           style: AppTextStyle.bold16().copyWith(color: appColors?.secondary)),
       centerTitle: true,
       leading: IconButton(
@@ -63,7 +63,7 @@ class OrderPage extends BaseGetView<HomeController> {
           const SizedBox(height: 16),
           _buildProductDetails(appColors),
           const Spacer(),
-          _buildTotalAmount(appColors),
+          _buildTotalAmount(context),
           _buildCheckoutButton(context),
         ],
       ),
@@ -102,14 +102,15 @@ class OrderPage extends BaseGetView<HomeController> {
     }
   }
 
-  Padding _buildTotalAmount(AppColors? appColors) {
+  Padding _buildTotalAmount(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            SS.total_price,
+            S.of(context).total_price,
             style:
                 AppTextStyle.regular16().copyWith(color: appColors?.secondary),
           ),
@@ -165,11 +166,11 @@ class OrderPage extends BaseGetView<HomeController> {
                 branch: branch,
                 branchName: branchName,
               ));
-          buildSnackBar(SS.order_success, true);
+          buildSnackBar(S.of(context).order_success, true);
         },
         style: elevatedButtonStyle(context),
         child: Text(
-          SS.make_payment,
+          S.of(context).make_payment,
           style: elevatedButtonTextStyle(context),
         ),
       ),
@@ -205,19 +206,20 @@ class _TodayMenuDetails extends StatelessWidget {
           style: AppTextStyle.regular16().copyWith(color: appColors?.gray),
         ),
         const SizedBox(height: 16),
-        _buildQuantityDetails(appColors, controller),
+        _buildQuantityDetails(context, controller),
         const SizedBox(height: 8),
         _buildEditButton(appColors, context, controller),
       ],
     );
   }
 
-  Row _buildQuantityDetails(AppColors? appColors, HomeController controller) {
+  Row _buildQuantityDetails(BuildContext context, HomeController controller) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          SS.quantity,
+          S.of(context).quantity,
           style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(
@@ -255,7 +257,7 @@ class _TodayMenuDetails extends StatelessWidget {
         );
       },
       child: Text(
-        SS.edit_order,
+        S.of(context).edit_order,
         style: AppTextStyle.medium14().copyWith(color: appColors?.primary),
       ),
     );
@@ -288,19 +290,20 @@ class _RegularMenuDetails extends StatelessWidget {
           style: AppTextStyle.regular16().copyWith(color: appColors?.gray),
         ),
         const SizedBox(height: 16),
-        _buildQuantityDetails(appColors, controller),
+        _buildQuantityDetails(context, controller),
         const SizedBox(height: 8),
         _buildEditButton(appColors, context, controller),
       ],
     );
   }
 
-  Row _buildQuantityDetails(AppColors? appColors, HomeController controller) {
+  Row _buildQuantityDetails(BuildContext context, HomeController controller) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          SS.quantity,
+          S.of(context).quantity,
           style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(
@@ -338,7 +341,7 @@ class _RegularMenuDetails extends StatelessWidget {
         );
       },
       child: Text(
-        SS.edit_order,
+        S.of(context).edit_order,
         style: AppTextStyle.regular14().copyWith(color: appColors?.primary),
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_controller.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -57,10 +57,10 @@ Widget buildInfoField2(BuildContext context, String label, AppColors appColors,
       ),
       const SizedBox(height: 4.0),
       TextFormField(
-        initialValue: SS.myEmail,
+        initialValue: S.of(context).myEmail,
         onChanged: onChanged,
         decoration: InputDecoration(
-          hintText: SS.enter_email_or_phone,
+          hintText: S.of(context).enter_email_or_phone,
           suffixIcon:
               icon != null ? Icon(icon, color: appColors.secondary) : null,
           filled: true,
@@ -91,7 +91,7 @@ Widget buildPasswordField(BuildContext context, RegisterController controller,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        SS.password,
+        S.of(context).password,
         style: AppTextStyle.regular14().copyWith(color: appColors!.gray),
       ),
       const SizedBox(height: 4.0),

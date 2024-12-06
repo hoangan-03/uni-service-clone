@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_controller.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_controller.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/helper/format_price.dart';
@@ -13,6 +13,7 @@ Widget buildAmountInput(AppColors? appColors, String variant) {
   Get.lazyPut<TransferController>(() => TransferController());
   final transferController = Get.find<TransferController>();
   final depositController = Get.find<DepositController>();
+    BuildContext context = Get.context!;
 
   final accountController = Get.find<AccountController>();
   return Padding(
@@ -41,7 +42,7 @@ Widget buildAmountInput(AppColors? appColors, String variant) {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: SS.zero,
+                          hintText: S.of(context).zero,
                         ),
                         onChanged: variant == 'deposit'
                             ? depositController.onAmountChanged
@@ -63,7 +64,7 @@ Widget buildAmountInput(AppColors? appColors, String variant) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              SS.current_money,
+              S.of(context).current_money,
               style: AppTextStyle.bold14().copyWith(
                 color: appColors?.secondary,
               ),

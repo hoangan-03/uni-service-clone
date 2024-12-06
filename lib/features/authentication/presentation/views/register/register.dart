@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_controller.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/widgets/info_field.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/utils/styles/button_styles.dart';
@@ -19,7 +19,7 @@ class RegisterPage extends BaseGetView<RegisterController> {
       child: Scaffold(
         appBar: buildAppBar(
           context: context,
-          title: SS.register,
+          title: S.of(context).register,
           appColors: appColors,
           hasBackButton: true,
         ),
@@ -32,7 +32,7 @@ class RegisterPage extends BaseGetView<RegisterController> {
               children: [
                 buildInfoField2(
                   context,
-                  SS.email_or_phone,
+                  S.of(context).email_or_phone,
                   appColors ?? AppColors(),
                   (value) => controller.registerRequest.value.email = value,
                 ),
@@ -46,11 +46,11 @@ class RegisterPage extends BaseGetView<RegisterController> {
           child: ElevatedButton(
             onPressed: () {
               controller
-                  .getOTP(controller.registerRequest.value.email ?? SS.myEmail);
+                  .getOTP(controller.registerRequest.value.email ?? S.of(context).myEmail);
             },
             style: elevatedButtonStyle(context),
             child: Text(
-              SS.send_otp,
+              S.of(context).send_otp,
               style: elevatedButtonTextStyle(context),
             ),
           ),

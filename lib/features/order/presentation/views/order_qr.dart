@@ -5,7 +5,7 @@ import 'package:flutter_base_v2/utils/helper/format_price.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/order_slide_qr.dart';
 import 'package:flutter_base_v2/features/qrcode/domain/entities/menu_qr.dart';
 import 'package:flutter_base_v2/features/order/presentation/views/bill.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 import 'package:get/get.dart';
@@ -34,7 +34,7 @@ class OrderQRPage extends BaseGetView<HomeController> {
 
   AppBar _buildAppBar(AppColors? appColors, BuildContext context) {
     return AppBar(
-      title: Text(SS.order,
+      title: Text(S.of(context).order,
           style: AppTextStyle.bold20().copyWith(color: appColors?.secondary)),
       centerTitle: true,
       leading: IconButton(
@@ -62,7 +62,7 @@ class OrderQRPage extends BaseGetView<HomeController> {
           const SizedBox(height: 16),
           _buildProductDetails(appColors),
           const Spacer(),
-          _buildTotalAmount(appColors),
+          _buildTotalAmount(context),
           const SizedBox(height: 16),
           _buildCheckoutButton(context),
         ],
@@ -90,14 +90,15 @@ class OrderQRPage extends BaseGetView<HomeController> {
     );
   }
 
-  Padding _buildTotalAmount(AppColors? appColors) {
+  Padding _buildTotalAmount(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            SS.total_price,
+            S.of(context).total_price,
             style: AppTextStyle.bold20().copyWith(color: appColors?.secondary),
           ),
           Obx(() {
@@ -139,7 +140,7 @@ class OrderQRPage extends BaseGetView<HomeController> {
         },
         style: elevatedButtonStyle(context),
         child: Text(
-          SS.make_payment,
+          S.of(context).make_payment,
           style: elevatedButtonTextStyle(context),
         ),
       ),
@@ -173,19 +174,19 @@ class _RegularMenuDetails extends StatelessWidget {
           style: AppTextStyle.regular16().copyWith(color: appColors?.gray),
         ),
         const SizedBox(height: 16),
-        _buildQuantityDetails(appColors, controller),
+        _buildQuantityDetails(context, controller),
         const SizedBox(height: 8),
         _buildEditButton(appColors, context, controller),
       ],
     );
   }
 
-  Row _buildQuantityDetails(AppColors? appColors, HomeController controller) {
+  Row _buildQuantityDetails(BuildContext context, HomeController controller) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          SS.quantity,
+          S.of(context).quantity,
           style: AppTextStyle.regular18().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(
@@ -223,7 +224,7 @@ class _RegularMenuDetails extends StatelessWidget {
         );
       },
       child: Text(
-        SS.edit_order,
+        S.of(context).edit_order,
         style: AppTextStyle.bold18().copyWith(color: appColors?.primary),
       ),
     );

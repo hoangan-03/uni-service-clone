@@ -5,7 +5,7 @@ import 'package:flutter_base_v2/features/transactions/presentation/controllers/t
 import 'package:flutter_base_v2/features/transactions/presentation/widgets/date_filter.dart';
 import 'package:flutter_base_v2/features/transactions/presentation/widgets/transaction_list_view.dart';
 import 'package:flutter_base_v2/features/transactions/presentation/widgets/transaction_type_tab.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 
 class HistoryPage extends BaseGetView<TransactionController> {
@@ -20,7 +20,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
       appBar: buildAppBar(
         appColors: appColors,
         context: context,
-        title: SS.transaction_history,
+        title: S.of(context).transaction_history,
         hasBackButton: false,
       ),
       body: Center(
@@ -28,7 +28,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
           child: Column(
             children: [
-              buildTransactionTypeTabs(appColors!),
+              buildTransactionTypeTabs(context),
               const SizedBox(height: 16.0),
               const DateFilter(),
               const SizedBox(height: 16.0),

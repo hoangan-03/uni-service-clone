@@ -5,7 +5,7 @@ import 'package:flutter_base_v2/features/home/presentation/widgets/header.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/main_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/menu/menu_page.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/top_nav_button.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_svg_url.dart';
 
 class HomePageContent extends StatelessWidget {
@@ -54,42 +54,42 @@ class HomePageContent extends StatelessWidget {
                 children: [
                   TopNavButton(
                     svgUrl: AppSvgUrl.icAllfood,
-                    label: SS.all,
+                    label: S.of(context).all,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
                     svgUrl: AppSvgUrl.icMainDish,
-                    label: SS.current_menu,
+                    label: S.of(context).current_menu,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
                     svgUrl: AppSvgUrl.icDrink,
-                    label: SS.drink,
+                    label: S.of(context).drink,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
                     svgUrl: AppSvgUrl.icFoodcourt,
-                    label: SS.foodcourt,
+                    label: S.of(context).foodcourt,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
                     svgUrl: AppSvgUrl.icLocalfood,
-                    label: SS.local_food,
+                    label: S.of(context).local_food,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                 ],
               ),
             ),
-            currentMenu == SS.all
+            currentMenu == S.of(context).all
                 ? buildMainPage(
                     context,
                     branchId,

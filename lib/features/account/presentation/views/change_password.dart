@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
@@ -19,7 +20,7 @@ class ChangePasswordPage extends BaseGetView<AccountController> {
       child: Scaffold(
         appBar: buildAppBar(
           context: context,
-          title: SS.change_pass,
+          title: S.of(context).change_pass,
           appColors: appColors,
           hasBackButton: true,
           onBackPressed: () {
@@ -39,7 +40,7 @@ class ChangePasswordPage extends BaseGetView<AccountController> {
                   controller,
                   controller.currentPasswordController,
                   appColors,
-                  hintText: SS.retype_current_password,
+                  hintText: S.of(context).retype_current_password,
                 ),
                 const SizedBox(height: 16.0),
                 buildPasswordField(
@@ -47,7 +48,7 @@ class ChangePasswordPage extends BaseGetView<AccountController> {
                   controller,
                   controller.newPasswordController,
                   appColors,
-                  hintText: SS.enter_new_password,
+                  hintText: S.of(context).enter_new_password,
                 ),
                 const SizedBox(height: 16.0),
                 buildPasswordField(
@@ -55,7 +56,7 @@ class ChangePasswordPage extends BaseGetView<AccountController> {
                   controller,
                   controller.confirmPasswordController,
                   appColors,
-                  hintText: SS.confirm_new_password,
+                  hintText: S.of(context).confirm_new_password,
                 ),
                 const SizedBox(height: 80.0),
               ],
@@ -70,7 +71,7 @@ class ChangePasswordPage extends BaseGetView<AccountController> {
             },
             style: elevatedButtonStyle(context),
             child: Text(
-              SS.continue_text,
+              S.of(context).continue_text,
               style: elevatedButtonTextStyle(context),
             ),
           ),

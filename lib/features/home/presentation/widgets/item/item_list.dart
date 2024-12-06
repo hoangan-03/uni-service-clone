@@ -4,7 +4,7 @@ import 'package:flutter_base_v2/features/home/domain/entities/menu.dart';
 import 'package:flutter_base_v2/utils/helper/get_cate_title.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/menu/menu.dart';
 import 'package:flutter_base_v2/features/home/presentation/widgets/item/item_card.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:get/get.dart';
@@ -29,7 +29,7 @@ Widget buildItemList(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      SS.view_menu,
+                      S.of(context).view_menu,
                       style: AppTextStyle.regular14()
                           .copyWith(color: appColors?.primary),
                     ),
@@ -77,7 +77,7 @@ Widget buildItemList(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                           SS.view_menu,
+                           S.of(context).view_menu,
                             style: AppTextStyle.regular14()
                                 .copyWith(color: appColors.primary),
                           ),

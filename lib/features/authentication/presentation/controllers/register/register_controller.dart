@@ -12,7 +12,7 @@ import 'package:flutter_base_v2/features/authentication/data/models/request/veri
 import 'package:flutter_base_v2/features/authentication/domain/usecases/register/get_otp_uc.dart';
 import 'package:flutter_base_v2/features/authentication/domain/usecases/register/update_info_uc.dart';
 import 'package:flutter_base_v2/features/authentication/domain/usecases/register/verify_otp_uc.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/helper/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -28,6 +28,7 @@ class RegisterController extends BaseController {
   var otpResendTimer = 30.obs;
   var accessToken = ''.obs;
     final isHidePassword = true.obs;
+      BuildContext context = Get.context!;
 
   final LocalStorage _localStorage = Get.find();
 
@@ -61,16 +62,16 @@ class RegisterController extends BaseController {
 
   bool validatePassword(String password) {
     if (password.length < 8) {
-      buildSnackBar(SS.at_least_8_characters, false);
+      buildSnackBar(S.of(context).at_least_8_characters, false);
       return false;
     }
     if (password.contains(' ')) {
-      buildSnackBar(SS.not_included_space, false);
+      buildSnackBar(S.of(context).not_included_space, false);
       return false;
     }
     final regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
     if (!regex.hasMatch(password)) {
-      buildSnackBar(SS.included_uppercase_lowercase_number_special_character, false);
+      buildSnackBar(S.of(context).included_uppercase_lowercase_number_special_character, false);
       return false;
     }
     return true;
@@ -183,7 +184,7 @@ class RegisterController extends BaseController {
     final user = userInitInfo.value;
     if (validatePassword(user.password)) {
       initProfile(user);
-      buildSnackBar(SS.success_register, true);
+      buildSnackBar(S.of(context).success_register, true);
       N.toSetPin();
     }
   }

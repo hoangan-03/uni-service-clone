@@ -3,7 +3,7 @@ import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/generated/l10n.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 
@@ -28,13 +28,13 @@ class ServicesPage extends BaseGetView<HomeController> {
           child: Column(
             children: [
               ServiceCard(
-                imageUrl: SS.vexereurl,
-                title: SS.vexere,
+                imageUrl: S.of(context).vexereurl,
+                title: S.of(context).vexere,
               ),
               const SizedBox(height: 12),
               ServiceCard(
-                imageUrl: SS.btaskeeurl,
-                title: SS.btaskee,
+                imageUrl: S.of(context).btaskeeurl,
+                title: S.of(context).btaskee,
               ),
             ],
           ),
@@ -107,7 +107,7 @@ class ServiceCard extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    SS.book_ticket,
+                    S.of(context).book_ticket,
                     style: TextStyle(color: appColors.primary),
                   ),
                 ),

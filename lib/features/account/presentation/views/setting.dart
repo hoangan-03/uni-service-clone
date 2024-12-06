@@ -5,8 +5,9 @@ import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class SettingPage extends BaseGetView<AccountController> {
       backgroundColor: appColors!.white,
       appBar: buildAppBar(
         context: context,
-        title: SS.settings,
+        title: S.of(context).settings,
         appColors: appColors,
         hasBackButton: true,
       ),
@@ -32,30 +33,30 @@ class SettingPage extends BaseGetView<AccountController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SettingListItem(
-              title: SS.language,
-              subtitle: SS.show_selected_lang,
+              title: S.of(context).language,
+              subtitle: S.of(context).show_selected_lang,
               onTap: () {
                 showLanguageSelectionModal(context, localeController);
               },
             ),
             SettingListItem(
-              title: SS.password,
-              subtitle: SS.change_pass,
+              title: S.of(context).password,
+              subtitle: S.of(context).change_pass,
               onTap: () {
                 N.toChangePassword();
               },
             ),
             SettingListItem(
-              title: SS.pin_number,
-              subtitle: SS.change_pin,
+              title: S.of(context).pin_number,
+              subtitle: S.of(context).change_pin,
               onTap: () {
                 N.toUpdatePin();
               },
             ),
             Obx(() {
               return SettingSwitchItem(
-                title: SS.face_id,
-                subtitle: SS.use_face_id,
+                title: S.of(context).face_id,
+                subtitle: S.of(context).use_face_id,
                 value: controller.isFaceIdEnabled.value,
                 onChanged: (bool value) {
                   controller.isFaceIdEnabled.value = value;
@@ -65,8 +66,8 @@ class SettingPage extends BaseGetView<AccountController> {
             }),
             Obx(() {
               return SettingSwitchItem(
-                title: SS.dark_mode,
-                subtitle: SS.change_dark_mode,
+                title: S.of(context).dark_mode,
+                subtitle: S.of(context).change_dark_mode,
                 value: controller.isDarkModeEnabled.value,
                 onChanged: (bool value) {
                   controller.isDarkModeEnabled.value = value;

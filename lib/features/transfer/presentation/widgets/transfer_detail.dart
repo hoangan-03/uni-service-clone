@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:intl/intl.dart';
 
@@ -23,10 +23,10 @@ class TransferDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildDetailRow(SS.recipient, recipientName),
-        _buildDetailRow(SS.phone, phone),
-        _buildDetailRow(SS.amount, '${NumberFormat('#,##0').format(amount)} đ'),
-        _buildStatusRow(appColors),
+        _buildDetailRow(S.of(context).recipient, recipientName),
+        _buildDetailRow(S.of(context).phone, phone),
+        _buildDetailRow(S.of(context).amount, '${NumberFormat('#,##0').format(amount)} đ'),
+        _buildStatusRow(context),
       ],
     );
   }
@@ -50,14 +50,15 @@ class TransferDetails extends StatelessWidget {
     );
   }
 
-  Padding _buildStatusRow(AppColors? appColors) {
+  Padding _buildStatusRow(  BuildContext context) {
+final appColors = Theme.of(context).extension<AppColors>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            SS.status,
+            S.of(context).status,
             style: AppTextStyle.regular15(),
           ),
           Container(
@@ -67,7 +68,7 @@ class TransferDetails extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: Text(
-              SS.success,
+              S.of(context).success,
               style: AppTextStyle.medium12().copyWith(color: appColors.white),
             ),
           ),

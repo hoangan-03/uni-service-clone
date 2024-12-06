@@ -1,13 +1,14 @@
-  import 'package:flutter_base_v2/utils/config/app_strings.dart';
+  import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 
-String getTitleForTransactionType(String transactionType) {
+String getTitleForTransactionType(String transactionType, BuildContext context) {
     switch (transactionType) {
       case 'BUY':
-        return SS.buy;
+        return S.of(context).buy;
       case 'DEPOSIT':
-        return SS.deposit_money;
+        return S.of(context).deposit_money;
       case 'TRANSFER':
-        return SS.transfer_or_get_money;
+        return S.of(context).transfer_or_get_money;
       default:
         return transactionType;
     }

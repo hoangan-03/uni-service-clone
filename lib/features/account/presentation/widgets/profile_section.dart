@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/account/presentation/widgets/option_item.dart';
 import 'package:flutter_base_v2/features/account/presentation/widgets/qr_code_image.dart';
 import 'package:flutter_base_v2/features/account/presentation/widgets/show_options.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_svg_url.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -18,12 +18,12 @@ Widget buildProfileSection(BuildContext context) {
             GestureDetector(
               onTap: () {
                 showOptions(
-                  SS.change_image_from,
+                  S.of(context).change_image_from,
                   [
                     buildOptionItem(
                       appColors,
                       AppSvgUrl.icTakepicture,
-                      SS.camera,
+                      S.of(context).camera,
                       () async {
                         await controller.pickImage(ImageSource.camera);
                       },
@@ -31,7 +31,7 @@ Widget buildProfileSection(BuildContext context) {
                     buildOptionItem(
                       appColors,
                       AppSvgUrl.icPhotogallery,
-                      SS.gallery,
+                      S.of(context).gallery,
                       () async {
                         await controller.pickImage(ImageSource.gallery);
                       },

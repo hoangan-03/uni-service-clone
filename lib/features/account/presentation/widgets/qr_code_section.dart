@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/account/presentation/widgets/option_item.dart';
 import 'package:flutter_base_v2/features/account/presentation/widgets/qr_code_image.dart';
 import 'package:flutter_base_v2/features/account/presentation/widgets/show_options.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_svg_url.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -42,7 +42,7 @@ Widget buildQRSection(BuildContext context) {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                SS.current_money,
+                S.of(context).current_money,
                 style: AppTextStyle.regular14()
                     .copyWith(color: appColors.secondary),
               ),
@@ -55,7 +55,7 @@ Widget buildQRSection(BuildContext context) {
                     return Text(
                       controller.isBalanceVisible.value
                           ? '${formatPrice(user.point ?? 0)} đ'
-                          : SS.hidden_star,
+                          : S.of(context).hidden_star,
                       style: AppTextStyle.bold14().copyWith(
                         color: appColors.secondary,
                       ),
@@ -90,7 +90,7 @@ Widget buildQRSection(BuildContext context) {
                     color: appColors.primary,
                   ),
                   label: Text(
-                    SS.deposit,
+                    S.of(context).deposit,
                     style: TextStyle(color: appColors.primary),
                   ),
                   style: OutlinedButton.styleFrom(
@@ -106,12 +106,12 @@ Widget buildQRSection(BuildContext context) {
                 child: OutlinedButton.icon(
                   onPressed: () {
                     showOptions(
-                      SS.option,
+                      S.of(context).option,
                       [
                         buildOptionItem(
                           appColors,
                           AppSvgUrl.icScanqr,
-                          SS.scan_qr,
+                          S.of(context).scan_qr,
                           () {
                             controller.selectQrOption();
                           },
@@ -119,7 +119,7 @@ Widget buildQRSection(BuildContext context) {
                         buildOptionItem(
                           appColors,
                           AppSvgUrl.icEnterphone,
-                          SS.enter_phone_number,
+                          S.of(context).enter_phone_number,
                           () {
                             Get.back();
                           },
@@ -134,7 +134,7 @@ Widget buildQRSection(BuildContext context) {
                     color: appColors.primary,
                   ),
                   label: Text(
-                    SS.transfer_money,
+                    S.of(context).transfer_money,
                     style: TextStyle(color: appColors.primary),
                   ),
                   style: OutlinedButton.styleFrom(

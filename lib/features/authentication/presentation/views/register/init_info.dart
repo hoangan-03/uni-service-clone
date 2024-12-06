@@ -3,7 +3,7 @@ import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/register/register_controller.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/widgets/datepicker_field.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/widgets/info_field.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/utils/styles/button_styles.dart';
@@ -20,7 +20,7 @@ class InitInfoPage extends BaseGetView<RegisterController> {
       child: Scaffold(
         appBar: buildAppBar(
           context: context,
-          title: SS.register_info,
+          title: S.of(context).register_info,
           appColors: appColors,
           hasBackButton: true,
         ),
@@ -35,13 +35,13 @@ class InitInfoPage extends BaseGetView<RegisterController> {
                 children: [
                   buildPasswordField(context, controller, user.password,
                       appColors, (value) => user.password = value,
-                      hintText: SS.enter_password),
-                  buildInfoField(context, SS.display_name, user.name, appColors,
+                      hintText: S.of(context).enter_password),
+                  buildInfoField(context, S.of(context).display_name, user.name, appColors,
                       (value) => user.name = value,
-                      hintText: SS.enter_display_name),
+                      hintText: S.of(context).enter_display_name),
                   buildDatePickerField(
                     context,
-                    SS.birthday,
+                    S.of(context).birthday,
                     user.birthdate,
                     appColors,
                     (value) {
@@ -63,7 +63,7 @@ class InitInfoPage extends BaseGetView<RegisterController> {
             },
             style: elevatedButtonStyle(context),
             child: Text(
-              SS.continue_text,
+              S.of(context).continue_text,
               style: elevatedButtonTextStyle(context),
             ),
           ),

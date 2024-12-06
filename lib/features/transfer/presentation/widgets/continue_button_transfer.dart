@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/helper/snackbar.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_controller.dart';
 import 'package:flutter_base_v2/utils/styles/button_styles.dart';
@@ -27,11 +27,11 @@ class ContinueButton extends StatelessWidget {
                     controller.currentAmount.value.replaceAll('.', '')) ??
                 0;
             controller.scannedUserQRCode(recipientId, amount);
-            buildSnackBar(SS.transfer_success, true);
+            buildSnackBar(S.of(context).transfer_success, true);
           },
           style: elevatedButtonStyle(context),
           child: Text(
-            SS.continue_text,
+            S.of(context).continue_text,
             style: elevatedButtonTextStyle(context),
           ),
         ),

@@ -24,7 +24,7 @@ import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_shipping
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_uc.dart';
 import 'package:flutter_base_v2/features/qrcode/domain/usecases/get_qr_code.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_base_v2/utils/service/push_notification_service.dart';
@@ -52,7 +52,7 @@ class HomeController extends BaseController<HomeInput> {
   final pushNotiService = Get.find<PushNotificationService>();
 
     final LocalStorage _localStorage = Get.find();
-
+  BuildContext context = Get.context!;
   final user = User().obs;
   final cart = Cart().obs;
   final qrmenu = MenuQR().obs;
@@ -130,9 +130,9 @@ class HomeController extends BaseController<HomeInput> {
     final branchJson = await _localStorage.getString('selectedBranch');
     if (branchJson != null) {
       final Map<String, dynamic> branchData = jsonDecode(branchJson);
-      return branchData['name'] ?? SS.defaultBranchName;
+      return branchData['name'] ?? S.of(context).defaultBranchName;
     }
-    return SS.defaultBranchName;
+    return S.of(context).defaultBranchName;
   }
 
   Future<void> getProfile() {

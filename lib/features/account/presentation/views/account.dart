@@ -6,7 +6,7 @@ import 'package:flutter_base_v2/features/account/presentation/widgets/profile_se
 import 'package:flutter_base_v2/features/account/presentation/widgets/qr_code_image.dart';
 import 'package:flutter_base_v2/features/account/presentation/widgets/qr_code_section.dart';
 import 'package:flutter_base_v2/utils/config/app_svg_url.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 
 class AccountPage extends BaseGetView<AccountController> {
@@ -30,29 +30,29 @@ class AccountPage extends BaseGetView<AccountController> {
               Column(
                 children: [
                   buildMenuItem(
-                      AppSvgUrl.icAccountInfo, SS.account_info, context,
+                      AppSvgUrl.icAccountInfo, S.of(context).account_info, context,
                       onTap: () {
                     controller.navigateToAccountInfo();
                   }),
                   Divider(color: appColors.lightGray),
-                  buildMenuItem(AppSvgUrl.icSetting, SS.settings, context,
+                  buildMenuItem(AppSvgUrl.icSetting, S.of(context).settings, context,
                       onTap: () {
                     controller.navigateToSettings();
                   }),
                   Divider(color: appColors.lightGray),
                   buildMenuItem(
-                      AppSvgUrl.icOpinion, SS.contribute_opinion, context,
+                      AppSvgUrl.icOpinion, S.of(context).contribute_opinion, context,
                       onTap: () {
                     controller.navigateToSetPin();
                   }),
                   Divider(color: appColors.lightGray),
-                  buildMenuItem(AppSvgUrl.icContact, SS.contact_office, context),
+                  buildMenuItem(AppSvgUrl.icContact, S.of(context).contact_office, context),
                   Divider(color: appColors.lightGray),
-                  buildMenuItem(AppSvgUrl.icPrivacy, SS.privacy_policy, context),
+                  buildMenuItem(AppSvgUrl.icPrivacy, S.of(context).privacy_policy, context),
                   Divider(color: appColors.lightGray),
-                  buildMenuItem(AppSvgUrl.icTerms, SS.terms_of_use, context),
+                  buildMenuItem(AppSvgUrl.icTerms, S.of(context).terms_of_use, context),
                   Divider(color: appColors.lightGray),
-                  buildMenuItem(AppSvgUrl.icLogout, SS.logout, context,
+                  buildMenuItem(AppSvgUrl.icLogout, S.of(context).logout, context,
                       isLogout: true,
                       color: appColors.onCancel,
                       showTrailingIcon: false, onTap: () {

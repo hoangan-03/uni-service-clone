@@ -294,11 +294,11 @@ Widget commonTextField(
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      if (type.labelText.isNotEmpty)
+      if (type.labelText(textFieldContext).isNotEmpty)
         Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(
-            type.labelText,
+            type.labelText(textFieldContext),
             style: AppTextStyle.regular14(),
           ),
         ),
@@ -319,7 +319,7 @@ Widget commonTextField(
           errorMaxLines: 2,
           isDense: true,
           filled: true,
-          hintText: type.hintText,
+          hintText: type.hintText(textFieldContext),
           hintStyle: AppTextStyle.regular14(color: ColorName.grayHigh60),
           errorStyle: AppTextStyle.regular14(color: ColorName.error),
           // contentPadding:
@@ -355,13 +355,13 @@ Widget commonTextField(
                   child: suffixIcon,
                 ),
         ),
-        validator: type.validator(),
-        onTap: formKey?.formBuilderState == null || type.validator() == null
+        validator: type.validator(textFieldContext),
+        onTap: formKey?.formBuilderState == null || type.validator(textFieldContext) == null
             ? null
             : () {
                 final text = ctl.text;
                 final field = type.field(formKey!.formBuilderState!);
-                if (type.validator() != null) {
+                if (type.validator(textFieldContext) != null) {
                   field.validate();
                   field.reset();
                   ctl.value = ctl.value.copyWith(
@@ -371,12 +371,12 @@ Widget commonTextField(
                 }
                 onTap?.call();
               },
-        onChanged: formKey?.formBuilderState == null || type.validator() == null
+        onChanged: formKey?.formBuilderState == null || type.validator(textFieldContext) == null
             ? null
             : (v) {
                 final text = ctl.text;
                 final field = type.field(formKey!.formBuilderState!);
-                if (type.validator() != null && field.hasError) {
+                if (type.validator(textFieldContext) != null && field.hasError) {
                   field.validate();
                   field.reset();
                   ctl.value = ctl.value.copyWith(

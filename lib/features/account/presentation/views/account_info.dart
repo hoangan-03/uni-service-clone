@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:flutter_base_v2/utils/helper/snackbar.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/styles/button_styles.dart';
@@ -21,7 +22,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: SS.account_info,
+        title: S.of(context).account_info,
         appColors: appColors,
         hasBackButton: true,
       ),
@@ -38,47 +39,47 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                   children: [
                     buildInfoField(
                         context,
-                        SS.enter_fullname,
+                        S.of(context).enter_fullname,
                         user.username ?? '',
                         appColors,
                         (value) => user.username = value,
-                        hintText: SS.enter_fullname),
+                        hintText: S.of(context).enter_fullname),
                     buildInfoField(
                         context,
-                        SS.enter_identity_card,
+                        S.of(context).enter_identity_card,
                         user.identificationCard ?? '',
                         appColors,
                         (value) => user.identificationCard = value,
-                        hintText: SS.enter_identity_card),
+                        hintText: S.of(context).enter_identity_card),
                     buildDatePickerField(
                       context,
-                      SS.birthday,
+                      S.of(context).birthday,
                       user.birthdate ?? '',
                       appColors,
                       (value) {
                         user.birthdate = value;
                         controller.user.refresh();
                       },
-                      hintText: SS.enter_birthday,
+                      hintText: S.of(context).enter_birthday,
                     ),
-                    buildInfoField(context, SS.school, user.school ?? '',
+                    buildInfoField(context, S.of(context).school, user.school ?? '',
                         appColors, (value) => user.school = value,
-                        hintText: SS.enter_school),
-                    buildInfoField(context, SS.faculty, user.faculty ?? '',
+                        hintText: S.of(context).enter_school),
+                    buildInfoField(context, S.of(context).faculty, user.faculty ?? '',
                         appColors, (value) => user.faculty = value,
-                        hintText: SS.enter_faculty),
-                    buildInfoField(context, SS.position, user.position ?? '',
+                        hintText: S.of(context).enter_faculty),
+                    buildInfoField(context, S.of(context).position, user.position ?? '',
                         appColors, (value) => user.position = value,
-                        hintText: SS.enter_position),
-                    buildInfoField(context, SS.role, user.role ?? '', appColors,
+                        hintText: S.of(context).enter_position),
+                    buildInfoField(context, S.of(context).role, user.role ?? '', appColors,
                         (value) => user.role = value,
-                        hintText: SS.enter_role),
-                    buildInfoField(context, SS.email, user.email ?? '',
+                        hintText: S.of(context).enter_role),
+                    buildInfoField(context, S.of(context).email, user.email ?? '',
                         appColors, (value) => user.email = value,
-                        hintText: SS.enter_email),
-                    buildInfoField(context, SS.phone_number, user.phone ?? '',
+                        hintText: S.of(context).enter_email),
+                    buildInfoField(context, S.of(context).phone_number, user.phone ?? '',
                         appColors, (value) => user.phone = value,
-                        hintText: SS.enter_phone_number),
+                        hintText: S.of(context).enter_phone_number),
                     const SizedBox(height: 80.0),
                   ],
                 ),
@@ -94,11 +95,11 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                 final user = controller.user.value;
                 controller.updateProfile(user);
                 Get.back();
-                buildSnackBar(SS.update_success, true);
+                buildSnackBar(S.of(context).update_success, true);
               },
               style: elevatedButtonStyle(context),
               child: Text(
-                SS.update_info,
+                S.of(context).update_info,
                 style: elevatedButtonTextStyle(context),
               ),
             ),

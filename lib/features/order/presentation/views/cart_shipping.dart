@@ -4,7 +4,7 @@ import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_base_v2/features/order/domain/entities/cart_shipping.dart';
 import 'package:flutter_base_v2/utils/helper/format_price.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 
@@ -16,12 +16,13 @@ class CartShippingPage extends BaseGetView<HomeController> {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
       appBar: buildAppBar(
-          appColors: appColors, context: context, title: SS.not_received_order),
-      body: _buildBody(appColors),
+          appColors: appColors, context: context, title: S.of(context).not_received_order),
+      body: _buildBody(context),
     );
   }
 
-  Widget _buildBody(AppColors? appColors) {
+  Widget _buildBody(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return Container(
       color: appColors?.white,
       child: Padding(
@@ -30,7 +31,7 @@ class CartShippingPage extends BaseGetView<HomeController> {
           children: [
             const SizedBox(height: 8.0),
             Expanded(
-              child: _buildCartShippingList(appColors),
+              child: _buildCartShippingList(context),
             ),
           ],
         ),
@@ -38,12 +39,13 @@ class CartShippingPage extends BaseGetView<HomeController> {
     );
   }
 
-  Widget _buildCartShippingList(AppColors? appColors) {
+  Widget _buildCartShippingList(BuildContext context) {
+    final appColors = Theme.of(context).extension<AppColors>();
     return controller.getCartShippingState.widget(
       onLoading: const Center(child: CircularProgressIndicator()),
       onSuccess: (cartships) {
         if (cartships == null || cartships.isEmpty) {
-          return Center(child: Text(SS.empty_cart));
+          return Center(child: Text(S.of(context).empty_cart));
         }
         return _CartShippingList(cartships: cartships, appColors: appColors);
       },

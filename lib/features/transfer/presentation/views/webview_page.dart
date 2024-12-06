@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/utils/helper/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -66,7 +66,7 @@ class WebViewPageState extends State<WebViewPage> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: SS.deposit,
+        title: S.of(context).deposit,
         appColors: appColors,
         hasBackButton: true,
       ),

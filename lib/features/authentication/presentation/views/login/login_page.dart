@@ -3,7 +3,7 @@ import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/common.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/controllers/login/login_controller.dart';
 import 'package:flutter_base_v2/features/authentication/presentation/views/widgets/widgets.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/extension/form_builder.dart';
@@ -125,7 +125,7 @@ class LoginPage extends BaseGetView<LoginController> {
                               enabled: !controller.isDisableButton.value,
                               state: controller.loginState,
                               child: Text(
-                                SS.login,
+                                S.of(context).login,
                                 style: AppTextStyle.regular14(
                                     color: appColors.white),
                               )),

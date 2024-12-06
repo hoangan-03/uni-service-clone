@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_controller.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +18,7 @@ final controller = Get.find<DepositController>();
           },
           style:elevatedButtonStyle(context),
           child: Text(
-            SS.continue_text,                          
+            S.of(context).continue_text,                          
             style: elevatedButtonTextStyle(context),
           ),
         ),

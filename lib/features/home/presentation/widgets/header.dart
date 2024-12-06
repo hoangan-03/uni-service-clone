@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/utils/helper/truncate_text.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_svg_url.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
@@ -25,7 +25,7 @@ Widget buildHeader(
             final user = accountController.user.value;
             return ClipOval(
               child: Image.network(
-                user.avatar ?? SS.defaultAvatar,
+                user.avatar ?? S.of(context).defaultAvatar,
                 width: 50,
                 height: 50,
                 fit: BoxFit.cover,
@@ -42,7 +42,7 @@ Widget buildHeader(
               Obx(() {
                 final user = accountController.user.value;
                 return Text(
-                  user.username ?? SS.empty,
+                  user.username ?? S.of(context).empty,
                   style: AppTextStyle.bold16()
                       .copyWith(color: appColors?.secondary),
                 );

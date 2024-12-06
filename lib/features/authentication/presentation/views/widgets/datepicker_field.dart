@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/utils/config/app_constants.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -53,7 +53,7 @@ Widget buildDatePickerField(BuildContext context, String label, String value,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                value.isNotEmpty ? value : SS.enter_birthday,
+                value.isNotEmpty ? value : S.of(context).enter_birthday,
                 style: AppTextStyle.regular12()
                     .copyWith(color: appColors.secondary),
               ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -15,12 +15,12 @@ AppBar buildPinNumberAppBar(
           padding: const EdgeInsets.all(0.0),
           child: Text(
             controller.isReType.value
-                ? SS.confirm_pin
+                ? S.of(context).confirm_pin
                 : (isCreated
-                    ? SS.create_pin
+                    ? S.of(context).create_pin
                     : (controller.isCheckOldPin.value
-                        ? SS.enter_new_pin
-                        : SS.enter_old_pin)),
+                        ? S.of(context).enter_new_pin
+                        : S.of(context).enter_old_pin)),
             textAlign: TextAlign.center,
             style: AppTextStyle.bold14().copyWith(color: appColors?.secondary),
           ),

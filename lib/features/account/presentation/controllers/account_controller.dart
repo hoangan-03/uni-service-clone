@@ -16,8 +16,8 @@ import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposi
 import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/features/account/domain/usecases/get_profile_uc.dart';
 import 'package:flutter_base_v2/features/account/domain/usecases/update_profile_uc.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
 import 'package:flutter_base_v2/utils/helper/snackbar.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
 import 'package:flutter_base_v2/utils/service/log_service.dart';
@@ -41,6 +41,7 @@ class AccountController extends BaseController<HomeInput> {
   var isDarkModeEnabled = false.obs;
   final isHidePassword = true.obs;
   final ImagePicker _picker = ImagePicker();
+  BuildContext context = Get.context!;
 
   final LocalStorage _localStorage = Get.find();
 
@@ -82,7 +83,7 @@ class AccountController extends BaseController<HomeInput> {
     if (pin.value.length == 4) {
       if (isReType.value) {
         if (pin.value == initialPin.value) {
-          buildSnackBar(SS.success_create_pin, true);
+          buildSnackBar(S.of(context).success_create_pin, true);
           final pincodeJson = jsonEncode(pin.value);
           _localStorage
               .setString('pinNumber', pincodeJson)
@@ -94,7 +95,7 @@ class AccountController extends BaseController<HomeInput> {
             L.info('Pin number: $value');
           });
         } else {
-          buildSnackBar(SS.pin_mismatch, false);
+          buildSnackBar(S.of(context).pin_mismatch, false);
           pinController.clear();
         }
       } else {
@@ -140,7 +141,7 @@ class AccountController extends BaseController<HomeInput> {
           isCheckOldPin.value = true;
           pin.value = '';
         } else {
-          buildSnackBar(SS.pin_mismatch, false);
+          buildSnackBar(S.of(context).pin_mismatch, false);
           pinController.clear();
         }
       }
@@ -157,14 +158,14 @@ class AccountController extends BaseController<HomeInput> {
           await _localStorage
               .setString('pinNumber', jsonEncode(pin.value))
               .then((_) {
-            buildSnackBar(SS.success_create_pin, true);
+            buildSnackBar(S.of(context).success_create_pin, true);
             N.toAccount();
             resetAll();
           }).catchError((error) {
-            buildSnackBar(SS.pin_mismatch, false);
+            buildSnackBar(S.of(context).pin_mismatch, false);
           });
         } else {
-          buildSnackBar(SS.pin_mismatch, false);
+          buildSnackBar(S.of(context).pin_mismatch, false);
           pinController.clear();
           isReType.value = false;
           initialPin.value = '';
@@ -175,18 +176,18 @@ class AccountController extends BaseController<HomeInput> {
 
   bool validatePassword(String password) {
     if (password.length < 8) {
-      buildSnackBar(SS.at_least_8_characters, false);
+      buildSnackBar(S.of(context).at_least_8_characters, false);
       return false;
     }
     if (password.contains(' ')) {
-      buildSnackBar(SS.not_included_space, false);
+      buildSnackBar(S.of(context).not_included_space, false);
       return false;
     }
     final regex = RegExp(
         r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
     if (!regex.hasMatch(password)) {
       buildSnackBar(
-          SS.included_uppercase_lowercase_number_special_character, false);
+          S.of(context).included_uppercase_lowercase_number_special_character, false);
       return false;
     }
     return true;
@@ -202,7 +203,7 @@ class AccountController extends BaseController<HomeInput> {
     }
 
     if (newPassword != confirmPassword) {
-      buildSnackBar(SS.password_mismatch, false);
+      buildSnackBar(S.of(context).password_mismatch, false);
       return;
     }
     updatePassword(ChangePasswordRequest(
@@ -305,7 +306,7 @@ class AccountController extends BaseController<HomeInput> {
         observer: Observer(
           onSuccess: (_) {
             L.info("Password updated successfully");
-            buildSnackBar(SS.success_change_password, true);
+            buildSnackBar(S.of(context).success_change_password, true);
             N.toAccount();
           },
           onError: (AppException e) {

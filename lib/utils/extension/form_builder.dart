@@ -1,11 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_base_v2/base/data/app_error.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-typedef MyFormFieldState
-    = FormBuilderFieldState<FormBuilderField<dynamic>, dynamic>;
+typedef MyFormFieldState = FormBuilderFieldState<FormBuilderField<dynamic>, dynamic>;
 
 enum FormFieldType {
   email,
@@ -13,23 +12,23 @@ enum FormFieldType {
 }
 
 extension FormFieldTypeExtension on FormFieldType {
-  String get labelText {
+  String labelText(BuildContext context) {
     switch (this) {
       case FormFieldType.email:
-        return SS.login_info;
+        return S.of(context).login_info;
       case FormFieldType.password:
-        return SS.password;
+        return S.of(context).password;
       default:
         return '';
     }
   }
 
-  String get hintText {
+  String hintText(BuildContext context) {
     switch (this) {
       case FormFieldType.email:
-        return SS.enter_email;
+        return S.of(context).enter_email;
       case FormFieldType.password:
-        return SS.enter_password;
+        return S.of(context).enter_password;
       default:
         return '';
     }
@@ -53,25 +52,20 @@ extension FormFieldTypeExtension on FormFieldType {
     return field;
   }
 
-  FormFieldValidator<String?>? validator() {
+  FormFieldValidator<String?>? validator(BuildContext context) {
     List<FormFieldValidator<String?>> validators = [];
     switch (this) {
       case FormFieldType.email:
         validators = [
-          FormBuilderValidators.required(
-              errorText: SS.enter_email),
-          FormBuilderValidators.email(
-              errorText: SS.invalid_email),
-          FormBuilderValidators.maxLength(128,
-              errorText: SS.invalid_email),
+          FormBuilderValidators.required(errorText: S.of(context).enter_email),
+          FormBuilderValidators.email(errorText: S.of(context).invalid_email),
+          FormBuilderValidators.maxLength(128, errorText: S.of(context).invalid_email),
         ];
         break;
       case FormFieldType.password:
         validators = [
-          FormBuilderValidators.required(
-              errorText: SS.enter_password),
-          FormBuilderValidators.minLength(8,
-              errorText: SS.included_uppercase_lowercase_number_special_character),
+          FormBuilderValidators.required(errorText: S.of(context).enter_password),
+          FormBuilderValidators.minLength(8, errorText: S.of(context).included_uppercase_lowercase_number_special_character),
         ];
         break;
       default:

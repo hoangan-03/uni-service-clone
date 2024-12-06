@@ -6,7 +6,7 @@ import 'package:flutter_base_v2/features/transfer/presentation/widgets/bill_time
 import 'package:flutter_base_v2/features/transfer/presentation/widgets/return_home_button.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/widgets/transfer_detail.dart';
 import 'package:flutter_base_v2/utils/config/app_constants.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 
 class TransferBillPage extends BaseGetView<TransferController> {
@@ -28,7 +28,7 @@ class TransferBillPage extends BaseGetView<TransferController> {
       appBar: buildAppBar(
         appColors: appColors,
         context: context,
-        title: SS.transfer_detail,
+        title: S.of(context).transfer_detail,
         hasBackButton: false,
       ),
       body: _buildBody(context, appColors),

@@ -12,7 +12,7 @@ import 'package:flutter_base_v2/features/order/presentation/widgets/qr_code_imag
 import 'package:flutter_base_v2/features/order/presentation/widgets/return_home_button.dart';
 import 'package:flutter_base_v2/features/order/presentation/widgets/total_price.dart';
 import 'package:flutter_base_v2/utils/config/app_constants.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 
@@ -43,7 +43,7 @@ class BillPage extends BaseGetView<HomeController> {
       appBar: buildAppBar(
           appColors: appColors,
           context: context,
-          title: SS.bill,
+          title: S.of(context).bill,
           hasBackButton: false),
       body: _buildBody(context, appColors),
     );

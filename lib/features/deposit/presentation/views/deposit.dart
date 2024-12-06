@@ -6,7 +6,7 @@ import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposi
 import 'package:flutter_base_v2/features/deposit/presentation/widgets/amount_input.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/widgets/continue_button.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/widgets/preset_amount_buttons.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +21,7 @@ class DepositPage extends BaseGetView<DepositController> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: SS.deposit,
+        title: S.of(context).deposit,
         appColors: appColors,
         hasBackButton: true,
       ),

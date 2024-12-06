@@ -3,7 +3,7 @@ import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/branch/presentation/controllers/branch_controller.dart';
 import 'package:flutter_base_v2/features/branch/domain/entities/branch.dart';
-import 'package:flutter_base_v2/utils/config/app_strings.dart';
+import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/styles/button_styles.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
@@ -19,7 +19,7 @@ class BranchsPage extends BaseGetView<BranchController> {
       backgroundColor: appColors?.white,
       appBar: buildAppBar(
         context: context,
-        title: SS.choose_branch,
+        title: S.of(context).choose_branch,
         appColors: appColors,
         hasBackButton: false,
       ),
@@ -106,7 +106,7 @@ class BranchsPage extends BaseGetView<BranchController> {
                   : null,
               style: elevatedButtonStyle(context),
               child: Text(
-                SS.continue_text,
+                S.of(context).continue_text,
                 style: elevatedButtonTextStyle(context),
               ),
             )),
