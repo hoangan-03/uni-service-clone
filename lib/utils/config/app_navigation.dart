@@ -77,6 +77,9 @@ class N {
   static void toUpdatePin({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.updatepinnumber);
   }
+  static void toChangePassword({RouteType type = RouteType.to}) {
+    type.navigate(name: AppRoute.updatepassword);
+  }
 
   static void toSettings({RouteType type = RouteType.to}) {
     type.navigate(name: AppRoute.settings);

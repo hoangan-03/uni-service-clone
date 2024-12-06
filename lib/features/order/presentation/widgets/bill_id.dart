@@ -10,7 +10,7 @@ Widget buildBillId(HomeController controller, BuildContext context) {
     return Obx(() {
       final billId = controller.qrmenu.value.id;
       return Text(
-        '${S.bill_id}$billId',
+        '${SS.bill_id}$billId',
         style: AppTextStyle.regular14().copyWith(color: appColors!.secondary),
       );
     });

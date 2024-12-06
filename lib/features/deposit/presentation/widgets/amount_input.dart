@@ -41,7 +41,7 @@ Widget buildAmountInput(AppColors? appColors, String variant) {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: S.zero,
+                          hintText: SS.zero,
                         ),
                         onChanged: variant == 'deposit'
                             ? depositController.onAmountChanged
@@ -63,7 +63,7 @@ Widget buildAmountInput(AppColors? appColors, String variant) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              S.current_money,
+              SS.current_money,
               style: AppTextStyle.bold14().copyWith(
                 color: appColors?.secondary,
               ),

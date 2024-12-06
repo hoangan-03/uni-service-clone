@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-class S {
+class SS {
   // common
   static String continue_text = "Tiếp tục";
   static String cancel = "Hủy";

@@ -125,7 +125,7 @@ class LoginPage extends BaseGetView<LoginController> {
                               enabled: !controller.isDisableButton.value,
                               state: controller.loginState,
                               child: Text(
-                                S.login,
+                                SS.login,
                                 style: AppTextStyle.regular14(
                                     color: appColors.white),
                               )),

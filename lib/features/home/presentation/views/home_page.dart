@@ -23,7 +23,7 @@ class HomePage extends BaseGetView<HomeController> {
       body: Obx(() {
         String currentMenu = controller.currentMenu.value.isNotEmpty
             ? controller.currentMenu.value
-            : S.all;
+            : SS.all;
 
         return IndexedStack(
           index: selectedIndex,
@@ -55,3 +55,5 @@ class HomePage extends BaseGetView<HomeController> {
     );
   }
 }
+
+

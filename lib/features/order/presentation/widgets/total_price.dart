@@ -10,7 +10,7 @@ Row buildTotalPrice(BuildContext context, int totalPrice) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          S.total_price,
+          SS.total_price,
           style: AppTextStyle.bold16().copyWith(color: appColors!.secondary),
         ),
         Text(

@@ -16,9 +16,9 @@ extension FormFieldTypeExtension on FormFieldType {
   String get labelText {
     switch (this) {
       case FormFieldType.email:
-        return S.login_info;
+        return SS.login_info;
       case FormFieldType.password:
-        return S.password;
+        return SS.password;
       default:
         return '';
     }
@@ -27,9 +27,9 @@ extension FormFieldTypeExtension on FormFieldType {
   String get hintText {
     switch (this) {
       case FormFieldType.email:
-        return S.enter_email;
+        return SS.enter_email;
       case FormFieldType.password:
-        return S.enter_password;
+        return SS.enter_password;
       default:
         return '';
     }
@@ -59,19 +59,19 @@ extension FormFieldTypeExtension on FormFieldType {
       case FormFieldType.email:
         validators = [
           FormBuilderValidators.required(
-              errorText: S.enter_email),
+              errorText: SS.enter_email),
           FormBuilderValidators.email(
-              errorText: S.invalid_email),
+              errorText: SS.invalid_email),
           FormBuilderValidators.maxLength(128,
-              errorText: S.invalid_email),
+              errorText: SS.invalid_email),
         ];
         break;
       case FormFieldType.password:
         validators = [
           FormBuilderValidators.required(
-              errorText: S.enter_password),
+              errorText: SS.enter_password),
           FormBuilderValidators.minLength(8,
-              errorText: S.included_uppercase_lowercase_number_special_character),
+              errorText: SS.included_uppercase_lowercase_number_special_character),
         ];
         break;
       default:

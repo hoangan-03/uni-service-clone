@@ -18,7 +18,7 @@ final controller = Get.find<DepositController>();
           },
           style:elevatedButtonStyle(context),
           child: Text(
-            S.continue_text,                          
+            SS.continue_text,                          
             style: elevatedButtonTextStyle(context),
           ),
         ),

@@ -381,7 +381,7 @@ class _OrderButton extends StatelessWidget {
       },
       style: elevatedButtonStyle(context),
       child: Text(
-        S.order,
+        SS.order,
         style: elevatedButtonTextStyle(context),
       ),
     );

@@ -61,16 +61,16 @@ class RegisterController extends BaseController {
 
   bool validatePassword(String password) {
     if (password.length < 8) {
-      buildSnackBar(S.at_least_8_characters, false);
+      buildSnackBar(SS.at_least_8_characters, false);
       return false;
     }
     if (password.contains(' ')) {
-      buildSnackBar(S.not_included_space, false);
+      buildSnackBar(SS.not_included_space, false);
       return false;
     }
     final regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
     if (!regex.hasMatch(password)) {
-      buildSnackBar(S.included_uppercase_lowercase_number_special_character, false);
+      buildSnackBar(SS.included_uppercase_lowercase_number_special_character, false);
       return false;
     }
     return true;
@@ -183,7 +183,7 @@ class RegisterController extends BaseController {
     final user = userInitInfo.value;
     if (validatePassword(user.password)) {
       initProfile(user);
-      buildSnackBar(S.success_register, true);
+      buildSnackBar(SS.success_register, true);
       N.toSetPin();
     }
   }

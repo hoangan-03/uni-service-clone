@@ -19,46 +19,48 @@ class ChangePasswordPage extends BaseGetView<AccountController> {
       child: Scaffold(
         appBar: buildAppBar(
           context: context,
-          title: S.change_pass,
+          title: SS.change_pass,
           appColors: appColors,
           hasBackButton: true,
+          onBackPressed: () {
+            controller.clearPassword();
+            Navigator.of(context).pop();
+          },
         ),
         backgroundColor: appColors?.white,
         body: Container(
           padding: const EdgeInsets.all(16.0),
-          child: Obx(() {
-            return SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildPasswordField(
-                    context,
-                    controller,
-                    controller.currentPasswordController,
-                    appColors,
-                    hintText: S.retype_current_password,
-                  ),
-                  const SizedBox(height: 16.0),
-                  buildPasswordField(
-                    context,
-                    controller,
-                    controller.newPasswordController,
-                    appColors,
-                    hintText: S.enter_new_password,
-                  ),
-                  const SizedBox(height: 16.0),
-                  buildPasswordField(
-                    context,
-                    controller,
-                    controller.confirmPasswordController,
-                    appColors,
-                    hintText: S.confirm_new_password,
-                  ),
-                  const SizedBox(height: 80.0),
-                ],
-              ),
-            );
-          }),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                buildPasswordField(
+                  context,
+                  controller,
+                  controller.currentPasswordController,
+                  appColors,
+                  hintText: SS.retype_current_password,
+                ),
+                const SizedBox(height: 16.0),
+                buildPasswordField(
+                  context,
+                  controller,
+                  controller.newPasswordController,
+                  appColors,
+                  hintText: SS.enter_new_password,
+                ),
+                const SizedBox(height: 16.0),
+                buildPasswordField(
+                  context,
+                  controller,
+                  controller.confirmPasswordController,
+                  appColors,
+                  hintText: SS.confirm_new_password,
+                ),
+                const SizedBox(height: 80.0),
+              ],
+            ),
+          ),
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -68,7 +70,7 @@ class ChangePasswordPage extends BaseGetView<AccountController> {
             },
             style: elevatedButtonStyle(context),
             child: Text(
-              S.continue_text,
+              SS.continue_text,
               style: elevatedButtonTextStyle(context),
             ),
           ),
@@ -84,6 +86,7 @@ class ChangePasswordPage extends BaseGetView<AccountController> {
     AppColors? appColors, {
     required String hintText,
   }) {
+    final bool isDarkMode = Get.isDarkMode;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -93,6 +96,8 @@ class ChangePasswordPage extends BaseGetView<AccountController> {
         ),
         const SizedBox(height: 4.0),
         Obx(() => TextFormField(
+              style:
+                  AppTextStyle.regular12().copyWith(color: appColors.secondary),
               controller: textEditingController,
               obscureText: controller.isHidePassword.value,
               decoration: InputDecoration(
@@ -107,13 +112,17 @@ class ChangePasswordPage extends BaseGetView<AccountController> {
                   onPressed: controller.onTapEye,
                 ),
                 filled: true,
-                fillColor: appColors.white,
+                fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
                   borderSide: BorderSide.none,
                 ),
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 2.0, horizontal: 12.0),
+                constraints: BoxConstraints(
+                  maxHeight: 40.0,
+                  minHeight: 40.0,
+                ),
               ),
             )),
       ],

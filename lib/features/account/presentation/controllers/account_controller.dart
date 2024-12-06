@@ -82,7 +82,7 @@ class AccountController extends BaseController<HomeInput> {
     if (pin.value.length == 4) {
       if (isReType.value) {
         if (pin.value == initialPin.value) {
-          buildSnackBar(S.success_create_pin, true);
+          buildSnackBar(SS.success_create_pin, true);
           final pincodeJson = jsonEncode(pin.value);
           _localStorage
               .setString('pinNumber', pincodeJson)
@@ -94,7 +94,7 @@ class AccountController extends BaseController<HomeInput> {
             L.info('Pin number: $value');
           });
         } else {
-          buildSnackBar(S.pin_mismatch, false);
+          buildSnackBar(SS.pin_mismatch, false);
           pinController.clear();
         }
       } else {
@@ -111,6 +111,12 @@ class AccountController extends BaseController<HomeInput> {
     isReType.value = false;
     pinController.clear();
     initialPin.value = '';
+  }
+
+  void clearPassword() {
+    currentPasswordController.clear();
+    newPasswordController.clear();
+    confirmPasswordController.clear();
   }
 
   void onPinModified() async {
@@ -134,7 +140,7 @@ class AccountController extends BaseController<HomeInput> {
           isCheckOldPin.value = true;
           pin.value = '';
         } else {
-          buildSnackBar(S.pin_mismatch, false);
+          buildSnackBar(SS.pin_mismatch, false);
           pinController.clear();
         }
       }
@@ -151,14 +157,14 @@ class AccountController extends BaseController<HomeInput> {
           await _localStorage
               .setString('pinNumber', jsonEncode(pin.value))
               .then((_) {
-            buildSnackBar(S.success_create_pin, true);
+            buildSnackBar(SS.success_create_pin, true);
             N.toAccount();
             resetAll();
           }).catchError((error) {
-            buildSnackBar(S.pin_mismatch, false);
+            buildSnackBar(SS.pin_mismatch, false);
           });
         } else {
-          buildSnackBar(S.pin_mismatch, false);
+          buildSnackBar(SS.pin_mismatch, false);
           pinController.clear();
           isReType.value = false;
           initialPin.value = '';
@@ -169,18 +175,18 @@ class AccountController extends BaseController<HomeInput> {
 
   bool validatePassword(String password) {
     if (password.length < 8) {
-      buildSnackBar(S.at_least_8_characters, false);
+      buildSnackBar(SS.at_least_8_characters, false);
       return false;
     }
     if (password.contains(' ')) {
-      buildSnackBar(S.not_included_space, false);
+      buildSnackBar(SS.not_included_space, false);
       return false;
     }
     final regex = RegExp(
         r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
     if (!regex.hasMatch(password)) {
       buildSnackBar(
-          S.included_uppercase_lowercase_number_special_character, false);
+          SS.included_uppercase_lowercase_number_special_character, false);
       return false;
     }
     return true;
@@ -196,7 +202,7 @@ class AccountController extends BaseController<HomeInput> {
     }
 
     if (newPassword != confirmPassword) {
-      buildSnackBar(S.password_mismatch, false);
+      buildSnackBar(SS.password_mismatch, false);
       return;
     }
     updatePassword(ChangePasswordRequest(
@@ -211,11 +217,18 @@ class AccountController extends BaseController<HomeInput> {
     pinController.removeListener(onPinModified);
 
     // pinController.dispose();
+
     focusNode.dispose();
 
     pushNotiService.cancelNotification();
     _getProfileUseCase.dispose();
     _updateProfileUseCase.dispose();
+    _updatePasswordUseCase.dispose();
+    _updateAvatarUseCase.dispose();
+    pinController.dispose();
+    currentPasswordController.dispose();
+    newPasswordController.dispose();
+    confirmPasswordController.dispose();
     super.onClose();
   }
 
@@ -292,7 +305,7 @@ class AccountController extends BaseController<HomeInput> {
         observer: Observer(
           onSuccess: (_) {
             L.info("Password updated successfully");
-            buildSnackBar(S.success_change_password, true);
+            buildSnackBar(SS.success_change_password, true);
             N.toAccount();
           },
           onError: (AppException e) {

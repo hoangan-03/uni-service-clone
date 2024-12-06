@@ -25,7 +25,7 @@ Widget buildHeader(
             final user = accountController.user.value;
             return ClipOval(
               child: Image.network(
-                user.avatar ?? S.defaultAvatar,
+                user.avatar ?? SS.defaultAvatar,
                 width: 50,
                 height: 50,
                 fit: BoxFit.cover,
@@ -42,7 +42,7 @@ Widget buildHeader(
               Obx(() {
                 final user = accountController.user.value;
                 return Text(
-                  user.username ?? S.empty,
+                  user.username ?? SS.empty,
                   style: AppTextStyle.bold16()
                       .copyWith(color: appColors?.secondary),
                 );

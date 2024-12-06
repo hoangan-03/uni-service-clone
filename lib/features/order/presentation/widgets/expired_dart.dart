@@ -7,7 +7,7 @@ import 'package:flutter_base_v2/utils/config/app_theme.dart';
 Text buildExpirationDate(BuildContext context) {
   final appColors = Theme.of(context).extension<AppColors>();
   return Text(
-    "${S.expired_date}${AppConstants.dateTimeFormat.format(DateTime.now().add(const Duration(hours: 8)))}",
+    "${SS.expired_date}${AppConstants.dateTimeFormat.format(DateTime.now().add(const Duration(hours: 8)))}",
     style: AppTextStyle.bold12().copyWith(color: appColors!.secondary),
   );
 }

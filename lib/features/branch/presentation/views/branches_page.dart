@@ -19,7 +19,7 @@ class BranchsPage extends BaseGetView<BranchController> {
       backgroundColor: appColors?.white,
       appBar: buildAppBar(
         context: context,
-        title: S.choose_branch,
+        title: SS.choose_branch,
         appColors: appColors,
         hasBackButton: false,
       ),
@@ -106,7 +106,7 @@ class BranchsPage extends BaseGetView<BranchController> {
                   : null,
               style: elevatedButtonStyle(context),
               child: Text(
-                S.continue_text,
+                SS.continue_text,
                 style: elevatedButtonTextStyle(context),
               ),
             )),

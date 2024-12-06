@@ -15,12 +15,12 @@ AppBar buildPinNumberAppBar(
           padding: const EdgeInsets.all(0.0),
           child: Text(
             controller.isReType.value
-                ? S.confirm_pin
+                ? SS.confirm_pin
                 : (isCreated
-                    ? S.create_pin
+                    ? SS.create_pin
                     : (controller.isCheckOldPin.value
-                        ? S.enter_new_pin
-                        : S.enter_old_pin)),
+                        ? SS.enter_new_pin
+                        : SS.enter_old_pin)),
             textAlign: TextAlign.center,
             style: AppTextStyle.bold14().copyWith(color: appColors?.secondary),
           ),

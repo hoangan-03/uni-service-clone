@@ -28,7 +28,7 @@ class TransferBillPage extends BaseGetView<TransferController> {
       appBar: buildAppBar(
         appColors: appColors,
         context: context,
-        title: S.transfer_detail,
+        title: SS.transfer_detail,
         hasBackButton: false,
       ),
       body: _buildBody(context, appColors),

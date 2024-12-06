@@ -21,7 +21,7 @@ class AccountInfoPage extends BaseGetView<AccountController> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: S.account_info,
+        title: SS.account_info,
         appColors: appColors,
         hasBackButton: true,
       ),
@@ -38,47 +38,47 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                   children: [
                     buildInfoField(
                         context,
-                        S.enter_fullname,
+                        SS.enter_fullname,
                         user.username ?? '',
                         appColors,
                         (value) => user.username = value,
-                        hintText: S.enter_fullname),
+                        hintText: SS.enter_fullname),
                     buildInfoField(
                         context,
-                        S.enter_identity_card,
+                        SS.enter_identity_card,
                         user.identificationCard ?? '',
                         appColors,
                         (value) => user.identificationCard = value,
-                        hintText: S.enter_identity_card),
+                        hintText: SS.enter_identity_card),
                     buildDatePickerField(
                       context,
-                      S.birthday,
+                      SS.birthday,
                       user.birthdate ?? '',
                       appColors,
                       (value) {
                         user.birthdate = value;
                         controller.user.refresh();
                       },
-                      hintText: S.enter_birthday,
+                      hintText: SS.enter_birthday,
                     ),
-                    buildInfoField(context, S.school, user.school ?? '',
+                    buildInfoField(context, SS.school, user.school ?? '',
                         appColors, (value) => user.school = value,
-                        hintText: S.enter_school),
-                    buildInfoField(context, S.faculty, user.faculty ?? '',
+                        hintText: SS.enter_school),
+                    buildInfoField(context, SS.faculty, user.faculty ?? '',
                         appColors, (value) => user.faculty = value,
-                        hintText: S.enter_faculty),
-                    buildInfoField(context, S.position, user.position ?? '',
+                        hintText: SS.enter_faculty),
+                    buildInfoField(context, SS.position, user.position ?? '',
                         appColors, (value) => user.position = value,
-                        hintText: S.enter_position),
-                    buildInfoField(context, S.role, user.role ?? '', appColors,
+                        hintText: SS.enter_position),
+                    buildInfoField(context, SS.role, user.role ?? '', appColors,
                         (value) => user.role = value,
-                        hintText: S.enter_role),
-                    buildInfoField(context, S.email, user.email ?? '',
+                        hintText: SS.enter_role),
+                    buildInfoField(context, SS.email, user.email ?? '',
                         appColors, (value) => user.email = value,
-                        hintText: S.enter_email),
-                    buildInfoField(context, S.phone_number, user.phone ?? '',
+                        hintText: SS.enter_email),
+                    buildInfoField(context, SS.phone_number, user.phone ?? '',
                         appColors, (value) => user.phone = value,
-                        hintText: S.enter_phone_number),
+                        hintText: SS.enter_phone_number),
                     const SizedBox(height: 80.0),
                   ],
                 ),
@@ -94,11 +94,11 @@ class AccountInfoPage extends BaseGetView<AccountController> {
                 final user = controller.user.value;
                 controller.updateProfile(user);
                 Get.back();
-                buildSnackBar(S.update_success, true);
+                buildSnackBar(SS.update_success, true);
               },
               style: elevatedButtonStyle(context),
               child: Text(
-                S.update_info,
+                SS.update_info,
                 style: elevatedButtonTextStyle(context),
               ),
             ),

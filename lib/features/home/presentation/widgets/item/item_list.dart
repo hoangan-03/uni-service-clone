@@ -29,7 +29,7 @@ Widget buildItemList(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      S.view_menu,
+                      SS.view_menu,
                       style: AppTextStyle.regular14()
                           .copyWith(color: appColors?.primary),
                     ),
@@ -77,7 +77,7 @@ Widget buildItemList(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                           S.view_menu,
+                           SS.view_menu,
                             style: AppTextStyle.regular14()
                                 .copyWith(color: appColors.primary),
                           ),

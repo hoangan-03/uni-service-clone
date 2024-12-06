@@ -15,7 +15,7 @@ ElevatedButton buildOrderStatusButton(BuildContext context) {
         minimumSize: const Size(80, 30), 
       ),
       child: Text(
-       S.not_delivered,
+       SS.not_delivered,
         style: AppTextStyle.bold12().copyWith(color: appColors!.constantWhite),
       ),
     );

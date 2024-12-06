@@ -55,7 +55,7 @@ class LandingPage extends BaseGetView<LandingController> {
               fillColor: appColors!.primary,
               borderColor: appColors.primary,
               child: Text(
-                S.register,
+                SS.register,
                 style: AppTextStyle
                     .bold16()
                     .copyWith(color: appColors.white),
@@ -81,7 +81,7 @@ class LandingPage extends BaseGetView<LandingController> {
               fillColor: appColors.transparent,
               borderColor: appColors.primary,
               child: Text(
-               S.login,
+               SS.login,
                 style: AppTextStyle
                     .bold16()
                     .copyWith(color: appColors.primary),

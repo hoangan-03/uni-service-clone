@@ -19,7 +19,7 @@ class RegisterPage extends BaseGetView<RegisterController> {
       child: Scaffold(
         appBar: buildAppBar(
           context: context,
-          title: S.register,
+          title: SS.register,
           appColors: appColors,
           hasBackButton: true,
         ),
@@ -32,7 +32,7 @@ class RegisterPage extends BaseGetView<RegisterController> {
               children: [
                 buildInfoField2(
                   context,
-                  S.email_or_phone,
+                  SS.email_or_phone,
                   appColors ?? AppColors(),
                   (value) => controller.registerRequest.value.email = value,
                 ),
@@ -46,11 +46,11 @@ class RegisterPage extends BaseGetView<RegisterController> {
           child: ElevatedButton(
             onPressed: () {
               controller
-                  .getOTP(controller.registerRequest.value.email ?? S.myEmail);
+                  .getOTP(controller.registerRequest.value.email ?? SS.myEmail);
             },
             style: elevatedButtonStyle(context),
             child: Text(
-              S.send_otp,
+              SS.send_otp,
               style: elevatedButtonTextStyle(context),
             ),
           ),

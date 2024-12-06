@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
@@ -16,11 +17,12 @@ class SettingPage extends BaseGetView<AccountController> {
   @override
   Widget myBuild(BuildContext context) {
     final appColors = Theme.of(context).extension<AppColors>();
+    final localeController = Get.find<LocaleController>();
     return Scaffold(
       backgroundColor: appColors!.white,
       appBar: buildAppBar(
         context: context,
-        title: S.settings,
+        title: SS.settings,
         appColors: appColors,
         hasBackButton: true,
       ),
@@ -30,30 +32,30 @@ class SettingPage extends BaseGetView<AccountController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SettingListItem(
-              title: S.language,
-              subtitle: S.show_selected_lang,
+              title: SS.language,
+              subtitle: SS.show_selected_lang,
               onTap: () {
-                // Ngôn ngữ
+                showLanguageSelectionModal(context, localeController);
               },
             ),
             SettingListItem(
-              title: S.password,
-              subtitle: S.change_pass,
+              title: SS.password,
+              subtitle: SS.change_pass,
               onTap: () {
-                // Đổi mật khẩu
+                N.toChangePassword();
               },
             ),
             SettingListItem(
-              title: S.pin_number,
-              subtitle: S.change_pin,
+              title: SS.pin_number,
+              subtitle: SS.change_pin,
               onTap: () {
                 N.toUpdatePin();
               },
             ),
             Obx(() {
               return SettingSwitchItem(
-                title: S.face_id,
-                subtitle: S.use_face_id,
+                title: SS.face_id,
+                subtitle: SS.use_face_id,
                 value: controller.isFaceIdEnabled.value,
                 onChanged: (bool value) {
                   controller.isFaceIdEnabled.value = value;
@@ -63,8 +65,8 @@ class SettingPage extends BaseGetView<AccountController> {
             }),
             Obx(() {
               return SettingSwitchItem(
-                title: S.dark_mode,
-                subtitle: S.change_dark_mode,
+                title: SS.dark_mode,
+                subtitle: SS.change_dark_mode,
                 value: controller.isDarkModeEnabled.value,
                 onChanged: (bool value) {
                   controller.isDarkModeEnabled.value = value;
@@ -75,6 +77,36 @@ class SettingPage extends BaseGetView<AccountController> {
           ],
         ),
       ),
+    );
+  }
+
+  void showLanguageSelectionModal(BuildContext context, LocaleController localeController) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                title: Text('English'),
+                onTap: () {
+                  localeController.changeLocale(Locale('en'));
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                title: Text('Tiếng Việt'),
+                onTap: () {
+                  localeController.changeLocale(Locale('vi'));
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

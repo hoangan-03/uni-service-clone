@@ -7,6 +7,7 @@ AppBar buildAppBar({
   required BuildContext context,
   required String? title,
   bool hasBackButton = true,
+  VoidCallback? onBackPressed, 
 }) {
   return AppBar(
     backgroundColor: appColors?.white,
@@ -24,7 +25,11 @@ AppBar buildAppBar({
         ? IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.of(context).pop();
+              if (onBackPressed != null) {
+                onBackPressed();
+              } else {
+                Navigator.of(context).pop();
+              }
             },
           )
         : null,

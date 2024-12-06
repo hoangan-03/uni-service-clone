@@ -3,7 +3,7 @@ import 'package:flutter_base_v2/utils/service/log_service.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
+import 'package:flutter/material.dart';
 class LocalStorage {
   final _getStorage = GetStorage();
   final _secureStorage = const FlutterSecureStorage();
@@ -40,5 +40,15 @@ class LocalStorage {
         localStorage.saveThemeMode(themeMode),
       ]);
     }
+  }
+}
+
+
+class LocaleController extends GetxController {
+  final LocalStorage _localStorage = Get.find();
+
+  void changeLocale(Locale locale) {
+    Get.updateLocale(locale);
+    _localStorage.saveLocale(locale.languageCode);
   }
 }

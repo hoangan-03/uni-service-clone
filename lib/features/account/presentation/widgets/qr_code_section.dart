@@ -42,7 +42,7 @@ Widget buildQRSection(BuildContext context) {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                S.current_money,
+                SS.current_money,
                 style: AppTextStyle.regular14()
                     .copyWith(color: appColors.secondary),
               ),
@@ -55,7 +55,7 @@ Widget buildQRSection(BuildContext context) {
                     return Text(
                       controller.isBalanceVisible.value
                           ? '${formatPrice(user.point ?? 0)} đ'
-                          : S.hidden_star,
+                          : SS.hidden_star,
                       style: AppTextStyle.bold14().copyWith(
                         color: appColors.secondary,
                       ),
@@ -90,7 +90,7 @@ Widget buildQRSection(BuildContext context) {
                     color: appColors.primary,
                   ),
                   label: Text(
-                    S.deposit,
+                    SS.deposit,
                     style: TextStyle(color: appColors.primary),
                   ),
                   style: OutlinedButton.styleFrom(
@@ -106,12 +106,12 @@ Widget buildQRSection(BuildContext context) {
                 child: OutlinedButton.icon(
                   onPressed: () {
                     showOptions(
-                      S.option,
+                      SS.option,
                       [
                         buildOptionItem(
                           appColors,
                           AppSvgUrl.icScanqr,
-                          S.scan_qr,
+                          SS.scan_qr,
                           () {
                             controller.selectQrOption();
                           },
@@ -119,7 +119,7 @@ Widget buildQRSection(BuildContext context) {
                         buildOptionItem(
                           appColors,
                           AppSvgUrl.icEnterphone,
-                          S.enter_phone_number,
+                          SS.enter_phone_number,
                           () {
                             Get.back();
                           },
@@ -134,7 +134,7 @@ Widget buildQRSection(BuildContext context) {
                     color: appColors.primary,
                   ),
                   label: Text(
-                    S.transfer_money,
+                    SS.transfer_money,
                     style: TextStyle(color: appColors.primary),
                   ),
                   style: OutlinedButton.styleFrom(

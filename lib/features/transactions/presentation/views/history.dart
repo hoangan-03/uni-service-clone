@@ -20,7 +20,7 @@ class HistoryPage extends BaseGetView<TransactionController> {
       appBar: buildAppBar(
         appColors: appColors,
         context: context,
-        title: S.transaction_history,
+        title: SS.transaction_history,
         hasBackButton: false,
       ),
       body: Center(

@@ -23,9 +23,9 @@ class TransferDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildDetailRow(S.recipient, recipientName),
-        _buildDetailRow(S.phone, phone),
-        _buildDetailRow(S.amount, '${NumberFormat('#,##0').format(amount)} đ'),
+        _buildDetailRow(SS.recipient, recipientName),
+        _buildDetailRow(SS.phone, phone),
+        _buildDetailRow(SS.amount, '${NumberFormat('#,##0').format(amount)} đ'),
         _buildStatusRow(appColors),
       ],
     );
@@ -57,7 +57,7 @@ class TransferDetails extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            S.status,
+            SS.status,
             style: AppTextStyle.regular15(),
           ),
           Container(
@@ -67,7 +67,7 @@ class TransferDetails extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: Text(
-              S.success,
+              SS.success,
               style: AppTextStyle.medium12().copyWith(color: appColors.white),
             ),
           ),

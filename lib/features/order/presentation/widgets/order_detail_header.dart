@@ -6,7 +6,7 @@ import 'package:flutter_base_v2/utils/config/app_theme.dart';
 Text buildOrderDetailsHeader(BuildContext context) {
   final appColors = Theme.of(context).extension<AppColors>();
   return Text(
-    S.order_detail,
+    SS.order_detail,
     style: AppTextStyle.bold16().copyWith(color: appColors!.secondary),
   );
 }

@@ -15,7 +15,7 @@ class DateFilter extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         DatePicker(
-          label: S.from,
+          label: SS.from,
           date: controller.fromDate,
           onDateSelected: (date) {
             controller.updateFromDate(date);
@@ -23,7 +23,7 @@ class DateFilter extends StatelessWidget {
         ),
         const SizedBox(width: 16),
         DatePicker(
-          label: S.to,
+          label: SS.to,
           date: controller.toDate,
           onDateSelected: (date) {
             controller.updateToDate(date);

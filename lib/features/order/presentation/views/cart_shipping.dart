@@ -16,7 +16,7 @@ class CartShippingPage extends BaseGetView<HomeController> {
     final appColors = Theme.of(context).extension<AppColors>();
     return Scaffold(
       appBar: buildAppBar(
-          appColors: appColors, context: context, title: S.not_received_order),
+          appColors: appColors, context: context, title: SS.not_received_order),
       body: _buildBody(appColors),
     );
   }
@@ -43,7 +43,7 @@ class CartShippingPage extends BaseGetView<HomeController> {
       onLoading: const Center(child: CircularProgressIndicator()),
       onSuccess: (cartships) {
         if (cartships == null || cartships.isEmpty) {
-          return Center(child: Text(S.empty_cart));
+          return Center(child: Text(SS.empty_cart));
         }
         return _CartShippingList(cartships: cartships, appColors: appColors);
       },

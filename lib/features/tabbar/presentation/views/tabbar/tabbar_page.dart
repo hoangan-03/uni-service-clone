@@ -45,15 +45,15 @@ extension TabItem on TabType {
   String get title {
     switch (this) {
       case TabType.home:
-        return S.home;
+        return SS.home;
       case TabType.service:
-        return S.services;
+        return SS.services;
       case TabType.qr:
-        return S.empty;
+        return SS.empty;
       case TabType.history:
-        return S.history;
+        return SS.history;
       case TabType.account:
-        return S.account;
+        return SS.account;
     }
   }
 

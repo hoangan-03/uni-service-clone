@@ -42,7 +42,7 @@ class SetPinNumberPageState extends State<SetPinNumberPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  S.enter_pin,
+                  SS.enter_pin,
                   style: AppTextStyle.regular14()
                       .copyWith(color: appColors?.secondary),
                 ),

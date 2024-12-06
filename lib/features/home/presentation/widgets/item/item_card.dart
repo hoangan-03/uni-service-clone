@@ -66,7 +66,7 @@ Widget buildItemCard(Menu item, BuildContext context) {
                   ),
                 ),
                 child: Text(
-                  S.choose_food,
+                  SS.choose_food,
                   style:
                       AppTextStyle.bold11().copyWith(color: appColors?.primary),
                 ),

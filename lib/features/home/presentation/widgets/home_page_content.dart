@@ -54,42 +54,42 @@ class HomePageContent extends StatelessWidget {
                 children: [
                   TopNavButton(
                     svgUrl: AppSvgUrl.icAllfood,
-                    label: S.all,
+                    label: SS.all,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
                     svgUrl: AppSvgUrl.icMainDish,
-                    label: S.current_menu,
+                    label: SS.current_menu,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
                     svgUrl: AppSvgUrl.icDrink,
-                    label: S.drink,
+                    label: SS.drink,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
                     svgUrl: AppSvgUrl.icFoodcourt,
-                    label: S.foodcourt,
+                    label: SS.foodcourt,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                   const SizedBox(width: 10),
                   TopNavButton(
                     svgUrl: AppSvgUrl.icLocalfood,
-                    label: S.local_food,
+                    label: SS.local_food,
                     currentMenu: currentMenu,
                     onMenuSelected: onMenuSelected,
                   ),
                 ],
               ),
             ),
-            currentMenu == S.all
+            currentMenu == SS.all
                 ? buildMainPage(
                     context,
                     branchId,

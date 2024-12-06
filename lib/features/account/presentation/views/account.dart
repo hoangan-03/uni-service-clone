@@ -30,29 +30,29 @@ class AccountPage extends BaseGetView<AccountController> {
               Column(
                 children: [
                   buildMenuItem(
-                      AppSvgUrl.icAccountInfo, S.account_info, context,
+                      AppSvgUrl.icAccountInfo, SS.account_info, context,
                       onTap: () {
                     controller.navigateToAccountInfo();
                   }),
                   Divider(color: appColors.lightGray),
-                  buildMenuItem(AppSvgUrl.icSetting, S.settings, context,
+                  buildMenuItem(AppSvgUrl.icSetting, SS.settings, context,
                       onTap: () {
                     controller.navigateToSettings();
                   }),
                   Divider(color: appColors.lightGray),
                   buildMenuItem(
-                      AppSvgUrl.icOpinion, S.contribute_opinion, context,
+                      AppSvgUrl.icOpinion, SS.contribute_opinion, context,
                       onTap: () {
                     controller.navigateToSetPin();
                   }),
                   Divider(color: appColors.lightGray),
-                  buildMenuItem(AppSvgUrl.icContact, S.contact_office, context),
+                  buildMenuItem(AppSvgUrl.icContact, SS.contact_office, context),
                   Divider(color: appColors.lightGray),
-                  buildMenuItem(AppSvgUrl.icPrivacy, S.privacy_policy, context),
+                  buildMenuItem(AppSvgUrl.icPrivacy, SS.privacy_policy, context),
                   Divider(color: appColors.lightGray),
-                  buildMenuItem(AppSvgUrl.icTerms, S.terms_of_use, context),
+                  buildMenuItem(AppSvgUrl.icTerms, SS.terms_of_use, context),
                   Divider(color: appColors.lightGray),
-                  buildMenuItem(AppSvgUrl.icLogout, S.logout, context,
+                  buildMenuItem(AppSvgUrl.icLogout, SS.logout, context,
                       isLogout: true,
                       color: appColors.onCancel,
                       showTrailingIcon: false, onTap: () {

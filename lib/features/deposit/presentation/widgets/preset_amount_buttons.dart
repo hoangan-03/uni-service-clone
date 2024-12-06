@@ -13,12 +13,12 @@ Widget buildPresetAmountButtons(AppColors? appColors, String variant) {
       spacing: 10,
       runSpacing: 10,
       children: [
-        _buildPresetAmountButton(appColors, S.fifty_thousand, variant),
-        _buildPresetAmountButton(appColors, S.one_hundred_thousand, variant),
-        _buildPresetAmountButton(appColors, S.two_hundred_thousand, variant),
-        _buildPresetAmountButton(appColors, S.five_hundred_thousand, variant),
-        _buildPresetAmountButton(appColors, S.one_million, variant),
-        _buildPresetAmountButton(appColors, S.two_million, variant),
+        _buildPresetAmountButton(appColors, SS.fifty_thousand, variant),
+        _buildPresetAmountButton(appColors, SS.one_hundred_thousand, variant),
+        _buildPresetAmountButton(appColors, SS.two_hundred_thousand, variant),
+        _buildPresetAmountButton(appColors, SS.five_hundred_thousand, variant),
+        _buildPresetAmountButton(appColors, SS.one_million, variant),
+        _buildPresetAmountButton(appColors, SS.two_million, variant),
       ],
     ),
   );

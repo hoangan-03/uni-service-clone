@@ -9,13 +9,13 @@ Widget buildTransactionTypeTabs(AppColors appColors) {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          buildTabButton(S.all, null, appColors),
+          buildTabButton(SS.all, null, appColors),
           const SizedBox(width: 10),
-          buildTabButton(S.buy, 'BUY', appColors),
+          buildTabButton(SS.buy, 'BUY', appColors),
           const SizedBox(width: 10),
-          buildTabButton(S.deposit_money, 'DEPOSIT', appColors),
+          buildTabButton(SS.deposit_money, 'DEPOSIT', appColors),
           const SizedBox(width: 10),
-          buildTabButton(S.transfer_or_get_money, 'TRANSFER', appColors),
+          buildTabButton(SS.transfer_or_get_money, 'TRANSFER', appColors),
         ],
       ),
     );

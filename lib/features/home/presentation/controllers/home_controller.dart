@@ -130,9 +130,9 @@ class HomeController extends BaseController<HomeInput> {
     final branchJson = await _localStorage.getString('selectedBranch');
     if (branchJson != null) {
       final Map<String, dynamic> branchData = jsonDecode(branchJson);
-      return branchData['name'] ?? S.defaultBranchName;
+      return branchData['name'] ?? SS.defaultBranchName;
     }
-    return S.defaultBranchName;
+    return SS.defaultBranchName;
   }
 
   Future<void> getProfile() {

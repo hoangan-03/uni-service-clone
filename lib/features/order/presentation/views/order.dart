@@ -35,7 +35,7 @@ class OrderPage extends BaseGetView<HomeController> {
 
   AppBar _buildAppBar(AppColors? appColors, BuildContext context) {
     return AppBar(
-      title: Text(S.order,
+      title: Text(SS.order,
           style: AppTextStyle.bold16().copyWith(color: appColors?.secondary)),
       centerTitle: true,
       leading: IconButton(
@@ -109,7 +109,7 @@ class OrderPage extends BaseGetView<HomeController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            S.total_price,
+            SS.total_price,
             style:
                 AppTextStyle.regular16().copyWith(color: appColors?.secondary),
           ),
@@ -165,11 +165,11 @@ class OrderPage extends BaseGetView<HomeController> {
                 branch: branch,
                 branchName: branchName,
               ));
-          buildSnackBar(S.order_success, true);
+          buildSnackBar(SS.order_success, true);
         },
         style: elevatedButtonStyle(context),
         child: Text(
-          S.make_payment,
+          SS.make_payment,
           style: elevatedButtonTextStyle(context),
         ),
       ),
@@ -217,7 +217,7 @@ class _TodayMenuDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          S.quantity,
+          SS.quantity,
           style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(
@@ -255,7 +255,7 @@ class _TodayMenuDetails extends StatelessWidget {
         );
       },
       child: Text(
-        S.edit_order,
+        SS.edit_order,
         style: AppTextStyle.medium14().copyWith(color: appColors?.primary),
       ),
     );
@@ -300,7 +300,7 @@ class _RegularMenuDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          S.quantity,
+          SS.quantity,
           style: AppTextStyle.regular16().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(
@@ -338,7 +338,7 @@ class _RegularMenuDetails extends StatelessWidget {
         );
       },
       child: Text(
-        S.edit_order,
+        SS.edit_order,
         style: AppTextStyle.regular14().copyWith(color: appColors?.primary),
       ),
     );

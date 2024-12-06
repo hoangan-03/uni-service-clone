@@ -66,7 +66,7 @@ class WebViewPageState extends State<WebViewPage> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: S.deposit,
+        title: SS.deposit,
         appColors: appColors,
         hasBackButton: true,
       ),

@@ -27,11 +27,11 @@ class ContinueButton extends StatelessWidget {
                     controller.currentAmount.value.replaceAll('.', '')) ??
                 0;
             controller.scannedUserQRCode(recipientId, amount);
-            buildSnackBar(S.transfer_success, true);
+            buildSnackBar(SS.transfer_success, true);
           },
           style: elevatedButtonStyle(context),
           child: Text(
-            S.continue_text,
+            SS.continue_text,
             style: elevatedButtonTextStyle(context),
           ),
         ),

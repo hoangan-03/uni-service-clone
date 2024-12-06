@@ -3,11 +3,11 @@
 String getTitleForTransactionType(String transactionType) {
     switch (transactionType) {
       case 'BUY':
-        return S.buy;
+        return SS.buy;
       case 'DEPOSIT':
-        return S.deposit_money;
+        return SS.deposit_money;
       case 'TRANSFER':
-        return S.transfer_or_get_money;
+        return SS.transfer_or_get_money;
       default:
         return transactionType;
     }

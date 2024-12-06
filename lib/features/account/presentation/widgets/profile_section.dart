@@ -18,12 +18,12 @@ Widget buildProfileSection(BuildContext context) {
             GestureDetector(
               onTap: () {
                 showOptions(
-                  S.change_image_from,
+                  SS.change_image_from,
                   [
                     buildOptionItem(
                       appColors,
                       AppSvgUrl.icTakepicture,
-                      S.camera,
+                      SS.camera,
                       () async {
                         await controller.pickImage(ImageSource.camera);
                       },
@@ -31,7 +31,7 @@ Widget buildProfileSection(BuildContext context) {
                     buildOptionItem(
                       appColors,
                       AppSvgUrl.icPhotogallery,
-                      S.gallery,
+                      SS.gallery,
                       () async {
                         await controller.pickImage(ImageSource.gallery);
                       },

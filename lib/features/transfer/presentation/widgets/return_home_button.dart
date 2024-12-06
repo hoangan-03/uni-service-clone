@@ -11,7 +11,7 @@ ElevatedButton buildReturnHomeButton(BuildContext context) {
     },
     style: elevatedButtonStyle(context),
     child: Text(
-      S.back_to_home,
+      SS.back_to_home,
       style:  elevatedButtonTextStyle(context),
     ),
   );

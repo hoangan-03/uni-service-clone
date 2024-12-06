@@ -34,7 +34,7 @@ class OrderQRPage extends BaseGetView<HomeController> {
 
   AppBar _buildAppBar(AppColors? appColors, BuildContext context) {
     return AppBar(
-      title: Text(S.order,
+      title: Text(SS.order,
           style: AppTextStyle.bold20().copyWith(color: appColors?.secondary)),
       centerTitle: true,
       leading: IconButton(
@@ -97,7 +97,7 @@ class OrderQRPage extends BaseGetView<HomeController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            S.total_price,
+            SS.total_price,
             style: AppTextStyle.bold20().copyWith(color: appColors?.secondary),
           ),
           Obx(() {
@@ -139,7 +139,7 @@ class OrderQRPage extends BaseGetView<HomeController> {
         },
         style: elevatedButtonStyle(context),
         child: Text(
-          S.make_payment,
+          SS.make_payment,
           style: elevatedButtonTextStyle(context),
         ),
       ),
@@ -185,7 +185,7 @@ class _RegularMenuDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          S.quantity,
+          SS.quantity,
           style: AppTextStyle.regular18().copyWith(color: appColors?.secondary),
         ),
         Obx(() => Text(
@@ -223,7 +223,7 @@ class _RegularMenuDetails extends StatelessWidget {
         );
       },
       child: Text(
-        S.edit_order,
+        SS.edit_order,
         style: AppTextStyle.bold18().copyWith(color: appColors?.primary),
       ),
     );

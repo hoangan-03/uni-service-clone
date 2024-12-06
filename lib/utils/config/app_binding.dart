@@ -81,6 +81,7 @@ class AppBinding extends Bindings {
 
   void injectStorageProvider() {
     Get.put(LocalStorage(), permanent: true);
+
   }
 
   void injectRepository() {

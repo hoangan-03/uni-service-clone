@@ -32,7 +32,7 @@ Widget buildMenuItem(
           Expanded(
             child: Text(
               title,
-              style: AppTextStyle.regular13().copyWith(color: title == S.logout ? color : appColors.secondary),
+              style: AppTextStyle.regular13().copyWith(color: title == SS.logout ? color : appColors.secondary),
             ),
           ),
           if (showTrailingIcon)

@@ -48,7 +48,7 @@ class WebViewPageState extends State<WebViewPage> {
             if (request.url.startsWith('https://stg.uniservice.vn')) {
               accountController.reloadUserInfo();
               N.toAccount();
-              buildSnackBar(S.deposit_success, true);
+              buildSnackBar(SS.deposit_success, true);
               return NavigationDecision.prevent;
             } else {
               return NavigationDecision.navigate;
@@ -66,7 +66,7 @@ class WebViewPageState extends State<WebViewPage> {
     return Scaffold(
       appBar: buildAppBar(
         context: context,
-        title: S.deposit,
+        title: SS.deposit,
         appColors: appColors,
         hasBackButton: true,
       ),

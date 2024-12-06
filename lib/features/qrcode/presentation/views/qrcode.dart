@@ -57,7 +57,7 @@ class QRPage extends BaseGetView<QrcodeController> {
                       ),
                     ),
                     Image.asset(
-                      S.scan,
+                      SS.scan,
                       width: heightScanLine,
                       height: heightScanLine,
                       fit: BoxFit.cover,
@@ -89,7 +89,7 @@ class QRPage extends BaseGetView<QrcodeController> {
                         icon: Icon(Icons.close, color: appColors?.white),
                       ),
                       Text(
-                        S.scan_qr,
+                        SS.scan_qr,
                         textAlign: TextAlign.center,
                         style: AppTextStyle.bold18()
                             .copyWith(color: appColors?.white),

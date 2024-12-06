@@ -43,7 +43,7 @@ class BillPage extends BaseGetView<HomeController> {
       appBar: buildAppBar(
           appColors: appColors,
           context: context,
-          title: S.bill,
+          title: SS.bill,
           hasBackButton: false),
       body: _buildBody(context, appColors),
     );

@@ -53,7 +53,7 @@ Widget buildDatePickerField(BuildContext context, String label, String value,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                value.isNotEmpty ? value : S.enter_birthday,
+                value.isNotEmpty ? value : SS.enter_birthday,
                 style: AppTextStyle.regular12()
                     .copyWith(color: appColors.secondary),
               ),

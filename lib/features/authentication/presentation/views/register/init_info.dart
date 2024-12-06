@@ -20,7 +20,7 @@ class InitInfoPage extends BaseGetView<RegisterController> {
       child: Scaffold(
         appBar: buildAppBar(
           context: context,
-          title: S.register_info,
+          title: SS.register_info,
           appColors: appColors,
           hasBackButton: true,
         ),
@@ -35,13 +35,13 @@ class InitInfoPage extends BaseGetView<RegisterController> {
                 children: [
                   buildPasswordField(context, controller, user.password,
                       appColors, (value) => user.password = value,
-                      hintText: S.enter_password),
-                  buildInfoField(context, S.display_name, user.name, appColors,
+                      hintText: SS.enter_password),
+                  buildInfoField(context, SS.display_name, user.name, appColors,
                       (value) => user.name = value,
-                      hintText: S.enter_display_name),
+                      hintText: SS.enter_display_name),
                   buildDatePickerField(
                     context,
-                    S.birthday,
+                    SS.birthday,
                     user.birthdate,
                     appColors,
                     (value) {
@@ -63,7 +63,7 @@ class InitInfoPage extends BaseGetView<RegisterController> {
             },
             style: elevatedButtonStyle(context),
             child: Text(
-              S.continue_text,
+              SS.continue_text,
               style: elevatedButtonTextStyle(context),
             ),
           ),

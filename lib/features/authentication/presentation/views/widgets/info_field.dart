@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 Widget buildInfoField(BuildContext context, String label, String value,
     AppColors? appColors, Function(String) onChanged,
     {IconData? icon, required String hintText}) {
-          final bool isDarkMode = Get.isDarkMode;
+  final bool isDarkMode = Get.isDarkMode;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -25,7 +25,7 @@ Widget buildInfoField(BuildContext context, String label, String value,
           suffixIcon:
               icon != null ? Icon(icon, color: appColors.secondary) : null,
           filled: true,
-          fillColor:  isDarkMode ? Colors.grey[800] : Colors.grey[200],
+          fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
             borderSide: BorderSide.none,
@@ -47,7 +47,7 @@ Widget buildInfoField(BuildContext context, String label, String value,
 Widget buildInfoField2(BuildContext context, String label, AppColors appColors,
     Function(String) onChanged,
     {IconData? icon}) {
-          final bool isDarkMode = Get.isDarkMode;
+  final bool isDarkMode = Get.isDarkMode;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -57,14 +57,14 @@ Widget buildInfoField2(BuildContext context, String label, AppColors appColors,
       ),
       const SizedBox(height: 4.0),
       TextFormField(
-        initialValue: S.myEmail,
+        initialValue: SS.myEmail,
         onChanged: onChanged,
         decoration: InputDecoration(
-          hintText: S.enter_email_or_phone,
+          hintText: SS.enter_email_or_phone,
           suffixIcon:
               icon != null ? Icon(icon, color: appColors.secondary) : null,
           filled: true,
-          fillColor:  isDarkMode ? Colors.grey[800] : Colors.grey[200],
+          fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
             borderSide: BorderSide.none,
@@ -86,12 +86,12 @@ Widget buildInfoField2(BuildContext context, String label, AppColors appColors,
 Widget buildPasswordField(BuildContext context, RegisterController controller,
     String value, AppColors? appColors, Function(String) onChanged,
     {required String hintText}) {
-          final bool isDarkMode = Get.isDarkMode;
+  final bool isDarkMode = Get.isDarkMode;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        S.password,
+        SS.password,
         style: AppTextStyle.regular14().copyWith(color: appColors!.gray),
       ),
       const SizedBox(height: 4.0),
@@ -113,7 +113,7 @@ Widget buildPasswordField(BuildContext context, RegisterController controller,
                 onPressed: controller.onTapEye,
               ),
               filled: true,
-              fillColor:  isDarkMode ? Colors.grey[800] : Colors.grey[200],
+              fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
                 borderSide: BorderSide.none,
@@ -126,7 +126,7 @@ Widget buildPasswordField(BuildContext context, RegisterController controller,
               ),
             ),
           )),
-                const SizedBox(height: 16.0),
+      const SizedBox(height: 16.0),
     ],
   );
 }

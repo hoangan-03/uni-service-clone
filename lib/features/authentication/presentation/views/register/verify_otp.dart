@@ -38,7 +38,7 @@ class VerifyOtpPage extends BaseGetView<RegisterController> {
               ),
               const SizedBox(height: 24),
               Text(
-                S.otp_has_been_sent,
+                SS.otp_has_been_sent,
                 style: AppTextStyle.regular12()
                     .copyWith(color: appColors?.secondary),
                 textAlign: TextAlign.center,
@@ -53,12 +53,12 @@ class VerifyOtpPage extends BaseGetView<RegisterController> {
               const SizedBox(height: 16),
               RichText(
                 text: TextSpan(
-                  text: S.wrong_email,
+                  text: SS.wrong_email,
                   style: AppTextStyle.regular12()
                       .copyWith(color: appColors?.secondary),
                   children: [
                     TextSpan(
-                      text: S.change_email,
+                      text: SS.change_email,
                       style: AppTextStyle.regular12()
                           .copyWith(color: appColors?.primary),
                       recognizer: TapGestureRecognizer()
@@ -104,8 +104,8 @@ class VerifyOtpPage extends BaseGetView<RegisterController> {
                         : null,
                     child: Text(
                       controller.canResendOtp.value
-                          ? S.resend_otp
-                          : '${S.resend_otp} (${controller.otpResendTimer}s)',
+                          ? SS.resend_otp
+                          : '${SS.resend_otp} (${controller.otpResendTimer}s)',
                       style: AppTextStyle.regular16().copyWith(
                         color: controller.canResendOtp.value
                             ? appColors?.primary
