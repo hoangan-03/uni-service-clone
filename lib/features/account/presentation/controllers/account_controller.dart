@@ -54,6 +54,7 @@ class AccountController extends BaseController<HomeInput> {
     isDarkModeEnabled.value = Get.isDarkMode;
 
     pinController.addListener(onPinCreated);
+    pinController.addListener(onPinModified);
 
     final notificationAppLaunchDetails =
         await pushNotiService.getNotificationAppLaunchDetails();
@@ -74,7 +75,7 @@ class AccountController extends BaseController<HomeInput> {
               .setString('pinNumber', pincodeJson)
               .then((_) async {})
               .catchError((error) {});
-          pin.value = '';
+          resetAll();
           N.toHome(input: HomeInput(""));
           _localStorage.getString('pinNumber').then((value) {
             L.info('Pin number: $value');
@@ -91,99 +92,61 @@ class AccountController extends BaseController<HomeInput> {
     }
   }
 
-  // void onPinUpdated() async {
-  //   pin.value = pinController.text;
-  //   var currentPin = await _localStorage.getString('pinNumber');
-  //   L.info('Current hh: $currentPin');
-  //   L.info('Type: ${pin.value}');
-  //   if (pin.value.length == 4) {
-  //     if (!isCheckOldPin.value) {
-  //       if (pin.value == currentPin) {
-  //         initialPin.value = pin.value;
-  //         pin.value = pinController.text;
-  //         pinController.clear();
-  //         isCheckOldPin.value = true;
-  //         if (pin.value == initialPin.value){
-  //           buildSnackBar(S.success_create_pin, true);
-  //           pinController.clear();
-  //           isReType.value = true;
-  //           isCheckOldPin.value = false;
-  //         }
-  //       } else {
-  //         buildSnackBar(S.pin_mismatch, false);
-  //         pinController.clear();
-  //       }
-  //     } else if (!isReType.value) {
-  //       initialPin.value = pin.value;
-  //       pinController.clear();
-  //       isReType.value = true;
-  //     } else {
-  //       if (pin.value == initialPin.value) {
-  //         buildSnackBar(S.success_create_pin, true);
-  //         await _localStorage
-  //             .setString('pinNumber', jsonEncode(pin.value))
-  //             .then((_) async {})
-  //             .catchError((error) {});
-  //         pin.value = '';
-  //         N.toAccount();
-  //       } else {
-  //         buildSnackBar(S.pin_mismatch, false);
-  //         pinController.clear();
-  //       }
-  //     }
-  //   }
-  // }
+  void resetAll() {
+    pin.value = '';
+    isCheckOldPin.value = false;
+    isReType.value = false;
+    pinController.clear();
+    initialPin.value = '';
+  }
 
-  void onPinUpdated() async {
-    pin.value = pinController.text;
-
-    // Step 1: Verify existing PIN
+  void onPinModified() async {
+    pin.value = pinController.text.trim();
     if (!isCheckOldPin.value) {
-      var currentPin = await _localStorage.getString('pinNumber');
+      var stringResponse = await _localStorage.getString('pinNumber');
+      var currentPin = stringResponse!.substring(1, 5);
+      L.info('Current numberr: $currentPin');
+      L.info('New number: ${pin.value}');
+      L.info('state pf isCheckOldPin: ${isCheckOldPin.value}');
+      L.info('state pf isReType: ${isReType.value}');
+      L.info('state pf pin: ${pin.value}');
+      L.info('state pf initialPin: ${initialPin.value}');
+      L.info('state pf pinController: ${pinController.text}');
+
       if (pin.value.length == 4) {
+        L.info('Current number: $currentPin');
+
         if (pin.value == currentPin) {
-          // Correct old PIN, move to step 2
-          buildSnackBar(S.pin_mismatch, true);
           pinController.clear();
           isCheckOldPin.value = true;
           pin.value = '';
         } else {
-          // Incorrect old PIN
           buildSnackBar(S.pin_mismatch, false);
           pinController.clear();
         }
       }
-    }
-    // Step 2: Create new PIN
-    else if (!isReType.value) {
+    } else if (!isReType.value) {
       if (pin.value.length == 4) {
-        // Store the new PIN
         initialPin.value = pin.value;
         pinController.clear();
         isReType.value = true;
         pin.value = '';
-        buildSnackBar(S.pin_mismatch, true);
       }
-    }
-    // Step 3: Retype and confirm new PIN
-    else {
+    } else {
       if (pin.value.length == 4) {
         if (pin.value == initialPin.value) {
-          // New PIN confirmed
-          buildSnackBar(S.success_create_pin, true);
           await _localStorage
               .setString('pinNumber', jsonEncode(pin.value))
               .then((_) {
-            pin.value = '';
+            buildSnackBar(S.success_create_pin, true);
             N.toAccount();
+            resetAll();
           }).catchError((error) {
             buildSnackBar(S.pin_mismatch, false);
           });
         } else {
-          // Retyped PIN doesn't match
           buildSnackBar(S.pin_mismatch, false);
           pinController.clear();
-          // Reset to step 2
           isReType.value = false;
           initialPin.value = '';
         }
@@ -194,7 +157,7 @@ class AccountController extends BaseController<HomeInput> {
   @override
   void onClose() {
     pinController.removeListener(onPinCreated);
-    pinController.removeListener(onPinUpdated);
+    pinController.removeListener(onPinModified);
 
     // pinController.dispose();
     focusNode.dispose();

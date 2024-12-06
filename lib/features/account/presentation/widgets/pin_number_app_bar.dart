@@ -16,7 +16,11 @@ AppBar buildPinNumberAppBar(
           child: Text(
             controller.isReType.value
                 ? S.confirm_pin
-                : (isCreated ? S.create_pin : S.change_pin),
+                : (isCreated
+                    ? S.create_pin
+                    : (controller.isCheckOldPin.value
+                        ? S.enter_new_pin
+                        : S.enter_old_pin)),
             textAlign: TextAlign.center,
             style: AppTextStyle.bold14().copyWith(color: appColors?.secondary),
           ),
@@ -27,6 +31,7 @@ AppBar buildPinNumberAppBar(
       icon: const Icon(Icons.arrow_back),
       onPressed: () {
         Navigator.of(context).pop();
+        controller.resetAll();
       },
     ),
   );

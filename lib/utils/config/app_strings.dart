@@ -180,6 +180,8 @@ class S {
   // Pin number
   static String create_pin = "Tạo mã PIN";
   static String enter_pin = "Nhập mã PIN";
+  static String enter_old_pin = "Nhập mã PIN cũ";
+  static String enter_new_pin = "Nhập mã PIN mới";
   static String confirm_pin = "Nhập lại mã PIN để xác nhận";
   static String pin_mismatch = "Sai mã PIN";
   static String enter_current_pin = "Nhập mã PIN hiện tại";

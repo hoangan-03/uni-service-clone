@@ -20,7 +20,7 @@ class ChangePinNumberPageState extends State<ChangePinNumberPage> {
   @override
   void initState() {
     super.initState();
-    controller.pinController.addListener(controller.onPinUpdated);
+    controller.pinController.addListener(controller.onPinModified);
   }
 
   @override
