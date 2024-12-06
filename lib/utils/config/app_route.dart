@@ -1,5 +1,6 @@
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_binding.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account_info.dart';
+import 'package:flutter_base_v2/features/account/presentation/views/change_password.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/change_pin_number.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/set_pin_number.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/setting.dart';
@@ -30,6 +31,7 @@ import 'package:flutter_base_v2/features/tabbar/presentation/views/tabbar/tabbar
 import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_binding.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/views/transfer.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/views/transfer_bill.dart';
+import 'package:flutter_base_v2/utils/extension/transition.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
 import 'package:flutter_base_v2/features/qrcode/presentation/views/qrcode.dart';
@@ -62,90 +64,101 @@ class AppRoute {
   static String transfer = '/transfer';
   static String setpinnumber = '/set_pin_number';
   static String updatepinnumber = '/update_pin_number';
+  static String updatepassword = '/update_password';
 
   static List<GetPage> generateGetPages = [
-    GetPage(name: root, page: RootPage.new, binding: RootBinding()),
-    GetPage(name: notifications, page: NotificationsPage.new),
+    GetPage(
+        name: root,
+        page: RootPage.new,
+        binding: RootBinding(),
+        transition: Transition.fade),
+    GetPage(
+        name: notifications,
+        page: NotificationsPage.new,
+        transition: Transition.rightToLeft),
     GetPage(
       name: landing,
       page: LandingPage.new,
       binding: LandingBinding(),
-      transition: Transition.noTransition,
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: login,
       page: LoginPage.new,
       binding: LoginBinding(),
-      transition: Transition.noTransition,
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: register,
       page: RegisterPage.new,
       binding: RegisterBinding(),
-      transition: Transition.noTransition,
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: initInfo,
       page: InitInfoPage.new,
       binding: RegisterBinding(),
-      transition: Transition.noTransition,
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: verifyOTP,
       page: VerifyOtpPage.new,
       binding: RegisterBinding(),
-      transition: Transition.noTransition,
+      transition: Transition.rightToLeft,
     ),
     GetPage(
       name: home,
       page: HomePage.new,
       binding: HomeBinding(),
-      transition: Transition.noTransition,
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: tabbar,
       page: TabbarPage.new,
       binding: TabbarBinding(),
-      transition: Transition.noTransition,
+      transition: Transition.fadeIn,
     ),
     GetPage(
       name: uniLogin,
       page: LoginPage.new,
       binding: LoginBinding(),
-      transition: Transition.noTransition,
+      transition: Transition.rightToLeft,
     ),
     GetPage(
         name: branch,
         page: BranchsPage.new,
         binding: BranchBinding(),
-        transition: Transition.noTransition),
+        transition: Transition.rightToLeft),
     GetPage(
         name: cartShipping,
         page: CartShippingPage.new,
         binding: HomeBinding(),
-        transition: Transition.noTransition),
+        transition: Transition.rightToLeft),
     GetPage(
         name: accountInfo,
         page: AccountInfoPage.new,
         binding: AccountBinding(),
-        transition: Transition.noTransition),
+        customTransition: CustomPageTransition()),
     GetPage(
         name: settings,
         page: SettingPage.new,
         binding: AccountBinding(),
-        transition: Transition.noTransition),
-            GetPage(
+        transition: Transition.rightToLeft),
+    GetPage(
         name: setpinnumber,
         page: SetPinNumberPage.new,
         binding: AccountBinding(),
-        transition: Transition.noTransition),
-        
-           GetPage(
+        transition: Transition.rightToLeft),
+    GetPage(
         name: updatepinnumber,
         page: ChangePinNumberPage.new,
         binding: AccountBinding(),
-        transition: Transition.noTransition),
-
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: updatepassword,
+        page: ChangePasswordPage.new,
+        binding: AccountBinding(),
+        transition: Transition.rightToLeft),
     GetPage(
         name: transferbill,
         page: () => TransferBillPage(
@@ -154,7 +167,7 @@ class AppRoute {
               amount: 0,
             ),
         binding: TransferBinding(),
-        transition: Transition.noTransition),
+        transition: Transition.rightToLeft),
     GetPage(
         name: bill,
         page: () => BillPage(
@@ -167,33 +180,36 @@ class AppRoute {
               branchName: 'defaultBranchName',
             ),
         binding: HomeBinding(),
-        transition: Transition.noTransition),
-    GetPage(name: service, page: ServicesPage.new),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: service,
+        page: ServicesPage.new,
+        transition: Transition.rightToLeft),
     GetPage(
         name: qr,
         page: QRPage.new,
         binding: QrcodeBinding(),
-        transition: Transition.noTransition),
+        transition: Transition.rightToLeft),
     GetPage(
         name: history,
         page: HistoryPage.new,
         binding: TransactionBinding(),
-        transition: Transition.noTransition),
+        transition: Transition.rightToLeft),
     GetPage(
         name: deposit,
         page: DepositPage.new,
         binding: DepositBinding(),
-        transition: Transition.noTransition),
+        transition: Transition.rightToLeft),
     GetPage(
         name: transfer,
         page: () => TransferPage(recipientId: 'defaultRecipientId'),
         binding: TransferBinding(),
-        transition: Transition.noTransition),
+        transition: Transition.rightToLeft),
     GetPage(
         name: account,
         page: AccountPage.new,
         binding: AccountBinding(),
-        transition: Transition.noTransition),
+        transition: Transition.rightToLeft),
   ];
 
   static GetPage? getPage(String name) {

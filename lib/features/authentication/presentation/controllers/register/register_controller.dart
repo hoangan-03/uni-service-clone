@@ -27,10 +27,10 @@ class RegisterController extends BaseController {
   var canResendOtp = false.obs;
   var otpResendTimer = 30.obs;
   var accessToken = ''.obs;
+    final isHidePassword = true.obs;
 
   final LocalStorage _localStorage = Get.find();
 
-  final isHidePassword = true.obs;
   final List<FocusNode> otpFocusNodes = List.generate(6, (_) => FocusNode());
 
   UpdateInfoUsecase get _updateInfoUseCase => Get.find<UpdateInfoUsecase>();

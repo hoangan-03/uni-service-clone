@@ -77,6 +77,9 @@ dependencies:
   device_info_plus: ^11.1.1
   webview_flutter: ^4.10.0
   persistent_bottom_nav_bar_v2: ^5.3.1
+  flutter_animate: ^4.5.2
+  animations: ^2.0.11
+  animate_do: ^3.3.4
 
 dev_dependencies:
   flutter_test:

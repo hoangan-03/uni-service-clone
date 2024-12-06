@@ -206,5 +206,13 @@ class S {
   static String btaskeeurl = "https://employer.jobsgo.vn/uploads/media/img/201911/pictures_library_19108_20191118143305_8696.png";
 
 
+  // Change password
+  static String incorrect_current_password = "Mật khẩu hiện tại không đúng";
+  static String retype_current_password = "Nhập lại mật khẩu hiện tại";
+  static String enter_new_password = "Nhập mật khẩu mới";
+  static String confirm_new_password = "Xác nhận mật khẩu mới";
+
+
+
 
 }

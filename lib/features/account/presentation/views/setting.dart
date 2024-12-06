@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
@@ -160,11 +161,26 @@ class SettingSwitchItem extends StatelessWidget {
               ),
             ],
           ),
-          CupertinoSwitch(
-            value: value,
-            onChanged: onChanged,
-            activeColor: appColors?.primary,
-            trackColor: appColors?.gray.withOpacity(0.5),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 100), // Faster animation duration
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return ScaleTransition(scale: animation, child: child);
+            },
+            child: Platform.isIOS
+                ? CupertinoSwitch(
+                    key: ValueKey<bool>(value),
+                    value: value,
+                    onChanged: onChanged,
+                    activeColor: appColors?.primary,
+                    trackColor: appColors?.gray.withOpacity(0.5),
+                  )
+                : Switch(
+                    key: ValueKey<bool>(value),
+                    value: value,
+                    onChanged: onChanged,
+                    activeColor: appColors?.primary,
+                    inactiveTrackColor: appColors?.gray.withOpacity(0.5),
+                  ),
           ),
         ],
       ),

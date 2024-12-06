@@ -35,6 +35,7 @@ class AccountController extends BaseController<HomeInput> {
   var isBalanceVisible = false.obs;
   var isFaceIdEnabled = false.obs;
   var isDarkModeEnabled = false.obs;
+  final isHidePassword = true.obs;
   final ImagePicker _picker = ImagePicker();
 
   final LocalStorage _localStorage = Get.find();
@@ -45,6 +46,10 @@ class AccountController extends BaseController<HomeInput> {
   var isReType = false.obs;
   var isCheckOldPin = false.obs;
   var initialPin = ''.obs;
+
+  final currentPasswordController = TextEditingController();
+  final newPasswordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   void onInit() async {
@@ -62,6 +67,10 @@ class AccountController extends BaseController<HomeInput> {
     if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
       N.toNotifications();
     }
+  }
+
+  void onTapEye() {
+    isHidePassword.value = !isHidePassword.value;
   }
 
   void onPinCreated() {
@@ -152,6 +161,40 @@ class AccountController extends BaseController<HomeInput> {
         }
       }
     }
+  }
+
+  bool validatePassword(String password) {
+    if (password.length < 8) {
+      buildSnackBar(S.at_least_8_characters, false);
+      return false;
+    }
+    if (password.contains(' ')) {
+      buildSnackBar(S.not_included_space, false);
+      return false;
+    }
+    final regex = RegExp(
+        r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
+    if (!regex.hasMatch(password)) {
+      buildSnackBar(
+          S.included_uppercase_lowercase_number_special_character, false);
+      return false;
+    }
+    return true;
+  }
+
+  void handleChangePassword() {
+    final newPassword = newPasswordController.text.trim();
+    final confirmPassword = confirmPasswordController.text.trim();
+
+    if (!validatePassword(newPassword)) {
+      return;
+    }
+
+    if (newPassword != confirmPassword) {
+      buildSnackBar(S.password_mismatch, false);
+      return;
+    }
+    updateProfile(user.value);
   }
 
   @override
