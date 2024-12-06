@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:flutter_base_v2/utils/helper/truncate_text.dart';
 import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_svg_url.dart';
@@ -25,7 +26,7 @@ Widget buildHeader(
             final user = accountController.user.value;
             return ClipOval(
               child: Image.network(
-                user.avatar ?? S.of(context).defaultAvatar,
+                user.avatar ?? AppImageConstants.defaultAvatar,
                 width: 50,
                 height: 50,
                 fit: BoxFit.cover,

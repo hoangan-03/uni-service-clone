@@ -23,6 +23,7 @@ import 'package:flutter_base_v2/features/order/domain/usecases/add_payment_uc.da
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_shipping_uc.dart';
 import 'package:flutter_base_v2/features/order/domain/usecases/get_cart_uc.dart';
 import 'package:flutter_base_v2/features/qrcode/domain/usecases/get_qr_code.dart';
+import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
 import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/service/auth_service.dart';
@@ -130,9 +131,9 @@ class HomeController extends BaseController<HomeInput> {
     final branchJson = await _localStorage.getString('selectedBranch');
     if (branchJson != null) {
       final Map<String, dynamic> branchData = jsonDecode(branchJson);
-      return branchData['name'] ?? S.of(context).defaultBranchName;
+      return branchData['name'] ?? DefaultConstants.defaultBranchName;
     }
-    return S.of(context).defaultBranchName;
+    return DefaultConstants.defaultBranchName;
   }
 
   Future<void> getProfile() {

@@ -37,8 +37,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "birthday": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "book_ticket": MessageLookupByLibrary.simpleMessage("Đặt vé"),
         "btaskee": MessageLookupByLibrary.simpleMessage("Btaskee"),
-        "btaskeeurl": MessageLookupByLibrary.simpleMessage(
-            "https://employer.jobsgo.vn/uploads/media/img/201911/pictures_library_19108_20191118143305_8696.png"),
         "buy": MessageLookupByLibrary.simpleMessage("Mua hàng"),
         "camera": MessageLookupByLibrary.simpleMessage("Chụp ảnh"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
@@ -71,10 +69,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thực đơn hôm nay"),
         "current_money": MessageLookupByLibrary.simpleMessage("Số dư hiện tại"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark mode"),
-        "defaultAvatar": MessageLookupByLibrary.simpleMessage(
-            "https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360"),
-        "defaultBranchName":
-            MessageLookupByLibrary.simpleMessage("Uni Service BK"),
         "default_branch": MessageLookupByLibrary.simpleMessage(
             "6134edff-d5cc-4dbc-be51-4c914bfded16"),
         "deposit": MessageLookupByLibrary.simpleMessage("Nạp tiền"),
@@ -211,7 +205,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "retype_current_password":
             MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu hiện tại"),
         "role": MessageLookupByLibrary.simpleMessage("Loại"),
-        "scan": MessageLookupByLibrary.simpleMessage("assets/images/scan.png"),
         "scan_qr": MessageLookupByLibrary.simpleMessage("Quét mã QR"),
         "school": MessageLookupByLibrary.simpleMessage("Trường học"),
         "send_otp": MessageLookupByLibrary.simpleMessage("Gửi OTP"),
@@ -255,8 +248,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "use_face_id": MessageLookupByLibrary.simpleMessage(
             "Sử dụng Face ID để đăng nhập"),
         "vexere": MessageLookupByLibrary.simpleMessage("Vé xe rẻ"),
-        "vexereurl": MessageLookupByLibrary.simpleMessage(
-            "https://storage.googleapis.com/blogvxr-uploads/2022/08/PO-6.png"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "view_menu": MessageLookupByLibrary.simpleMessage("Xem menu"),
         "warning": MessageLookupByLibrary.simpleMessage("Cảnh báo"),

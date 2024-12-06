@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/base/presentation/base_get_view.dart';
 import 'package:flutter_base_v2/features/account/presentation/controllers/account_controller.dart';
 import 'package:flutter_base_v2/generated/l10n.dart';
-import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:flutter_base_v2/base/presentation/widgets/app_bar.dart';

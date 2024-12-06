@@ -31,6 +31,7 @@ import 'package:flutter_base_v2/features/tabbar/presentation/views/tabbar/tabbar
 import 'package:flutter_base_v2/features/transfer/presentation/controllers/transfer_binding.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/views/transfer.dart';
 import 'package:flutter_base_v2/features/transfer/presentation/views/transfer_bill.dart';
+import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:flutter_base_v2/utils/extension/transition.dart';
 import 'package:get/get.dart';
 import 'package:flutter_base_v2/features/account/presentation/views/account.dart';
@@ -162,8 +163,8 @@ class AppRoute {
     GetPage(
         name: transferbill,
         page: () => TransferBillPage(
-              recipientName: 'defaultRecipientName',
-              phone: 'defaultPhone',
+              recipientName: DefaultConstants.defaultRecipientName,
+              phone: DefaultConstants.defaultPhone,
               amount: 0,
             ),
         binding: TransferBinding(),
@@ -171,13 +172,13 @@ class AppRoute {
     GetPage(
         name: bill,
         page: () => BillPage(
-              imageUrl: 'defaultImageUrl',
-              branch: 'defaultBranch',
-              description: 'defaultDescription',
-              name: 'defaultName',
+              imageUrl: DefaultConstants.defaultImageUrl,
+              branch: DefaultConstants.defaultBranch,
+              description: DefaultConstants.defaultDescription,
+              name: DefaultConstants.defaultName,
               quantity: 1,
               totalPrice: 0,
-              branchName: 'defaultBranchName',
+              branchName: DefaultConstants.defaultBranchName,
             ),
         binding: HomeBinding(),
         transition: Transition.rightToLeft),
@@ -202,7 +203,8 @@ class AppRoute {
         transition: Transition.rightToLeft),
     GetPage(
         name: transfer,
-        page: () => TransferPage(recipientId: 'defaultRecipientId'),
+        page: () =>
+            TransferPage(recipientId: DefaultConstants.defaultRecipientId),
         binding: TransferBinding(),
         transition: Transition.rightToLeft),
     GetPage(

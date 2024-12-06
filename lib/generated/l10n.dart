@@ -1640,56 +1640,6 @@ class S {
     );
   }
 
-  /// `Uni Service BK`
-  String get defaultBranchName {
-    return Intl.message(
-      'Uni Service BK',
-      name: 'defaultBranchName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360`
-  String get defaultAvatar {
-    return Intl.message(
-      'https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360',
-      name: 'defaultAvatar',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `assets/images/scan.png`
-  String get scan {
-    return Intl.message(
-      'assets/images/scan.png',
-      name: 'scan',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `https://storage.googleapis.com/blogvxr-uploads/2022/08/PO-6.png`
-  String get vexereurl {
-    return Intl.message(
-      'https://storage.googleapis.com/blogvxr-uploads/2022/08/PO-6.png',
-      name: 'vexereurl',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `https://employer.jobsgo.vn/uploads/media/img/201911/pictures_library_19108_20191118143305_8696.png`
-  String get btaskeeurl {
-    return Intl.message(
-      'https://employer.jobsgo.vn/uploads/media/img/201911/pictures_library_19108_20191118143305_8696.png',
-      name: 'btaskeeurl',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Incorrect current password`
   String get incorrect_current_password {
     return Intl.message(

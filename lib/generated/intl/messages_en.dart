@@ -36,8 +36,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "birthday": MessageLookupByLibrary.simpleMessage("Birthday"),
         "book_ticket": MessageLookupByLibrary.simpleMessage("Book ticket"),
         "btaskee": MessageLookupByLibrary.simpleMessage("Btaskee"),
-        "btaskeeurl": MessageLookupByLibrary.simpleMessage(
-            "https://employer.jobsgo.vn/uploads/media/img/201911/pictures_library_19108_20191118143305_8696.png"),
         "buy": MessageLookupByLibrary.simpleMessage("Buy"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -69,10 +67,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "current_money":
             MessageLookupByLibrary.simpleMessage("Current balance"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark mode"),
-        "defaultAvatar": MessageLookupByLibrary.simpleMessage(
-            "https://img.freepik.com/free-vector/young-man-orange-hoodie_1308-175788.jpg?t=st=1729744242~exp=1729747842~hmac=5c6a50bb08d559044f0891ec88a4086c66abaa381f0922a63d75773caf9a534a&w=360"),
-        "defaultBranchName":
-            MessageLookupByLibrary.simpleMessage("Uni Service BK"),
         "default_branch": MessageLookupByLibrary.simpleMessage(
             "6134edff-d5cc-4dbc-be51-4c914bfded16"),
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
@@ -205,7 +199,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "retype_current_password":
             MessageLookupByLibrary.simpleMessage("Retype current password"),
         "role": MessageLookupByLibrary.simpleMessage("Role"),
-        "scan": MessageLookupByLibrary.simpleMessage("assets/images/scan.png"),
         "scan_qr": MessageLookupByLibrary.simpleMessage("Scan QR code"),
         "school": MessageLookupByLibrary.simpleMessage("School"),
         "send_otp": MessageLookupByLibrary.simpleMessage("Send OTP"),
@@ -250,8 +243,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "use_face_id":
             MessageLookupByLibrary.simpleMessage("Use Face ID to log in"),
         "vexere": MessageLookupByLibrary.simpleMessage("Cheap bus tickets"),
-        "vexereurl": MessageLookupByLibrary.simpleMessage(
-            "https://storage.googleapis.com/blogvxr-uploads/2022/08/PO-6.png"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "view_menu": MessageLookupByLibrary.simpleMessage("View menu"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),

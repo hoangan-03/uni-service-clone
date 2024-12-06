@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_v2/generated/l10n.dart';
+import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
 import 'package:get/get.dart';
@@ -57,7 +58,7 @@ class QRPage extends BaseGetView<QrcodeController> {
                       ),
                     ),
                     Image.asset(
-                      S.of(context).scan,
+                      AppImageConstants.scan,
                       width: heightScanLine,
                       height: heightScanLine,
                       fit: BoxFit.cover,
