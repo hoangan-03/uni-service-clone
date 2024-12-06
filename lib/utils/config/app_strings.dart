@@ -211,6 +211,7 @@ class S {
   static String retype_current_password = "Nhập lại mật khẩu hiện tại";
   static String enter_new_password = "Nhập mật khẩu mới";
   static String confirm_new_password = "Xác nhận mật khẩu mới";
+  static String success_change_password = "Thay đổi mật khẩu thành công";
 
 
 

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter_base_v2/features/account/data/models/request/change_password_request.dart';
 import 'package:flutter_base_v2/features/account/data/models/response/user.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/request/getOTP_body.dart';
 import 'package:flutter_base_v2/features/authentication/data/models/request/update_info.dart';
@@ -64,6 +65,11 @@ abstract class ApiService {
   Future<void> updateAvatar(
       @Part(name: "avatar", contentType: "image/*", fileName: "avatar1.jpeg")
       File avatar);
+
+  @POST('/auth/change-password')
+  Future<void> updatePassword(
+    @Body() ChangePasswordRequest body,
+  );
 
   /// BRANCH API
 

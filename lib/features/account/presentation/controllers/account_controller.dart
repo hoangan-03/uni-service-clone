@@ -7,7 +7,9 @@ import 'package:flutter_base_v2/base/data/app_error.dart';
 import 'package:flutter_base_v2/base/data/local/local_storage.dart';
 import 'package:flutter_base_v2/base/domain/base_observer.dart';
 import 'package:flutter_base_v2/base/presentation/base_controller.dart';
+import 'package:flutter_base_v2/features/account/data/models/request/change_password_request.dart';
 import 'package:flutter_base_v2/features/account/domain/usecases/update_avatar.dart';
+import 'package:flutter_base_v2/features/account/domain/usecases/update_password_uc.dart';
 import 'package:flutter_base_v2/features/authentication/data/providers/local/local_storage_ex.dart';
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';
@@ -27,6 +29,8 @@ class AccountController extends BaseController<HomeInput> {
   GetProfileUseCase get _getProfileUseCase => Get.find<GetProfileUseCase>();
   UpdateProfileUseCase get _updateProfileUseCase =>
       Get.find<UpdateProfileUseCase>();
+  UpdatePasswordUseCase get _updatePasswordUseCase =>
+      Get.find<UpdatePasswordUseCase>();
   UpdateAvatarUseCase get _updateAvatarUseCase =>
       Get.find<UpdateAvatarUseCase>();
   final pushNotiService = Get.find<PushNotificationService>();
@@ -183,6 +187,7 @@ class AccountController extends BaseController<HomeInput> {
   }
 
   void handleChangePassword() {
+    final currentPassword = currentPasswordController.text.trim();
     final newPassword = newPasswordController.text.trim();
     final confirmPassword = confirmPasswordController.text.trim();
 
@@ -194,7 +199,10 @@ class AccountController extends BaseController<HomeInput> {
       buildSnackBar(S.password_mismatch, false);
       return;
     }
-    updateProfile(user.value);
+    updatePassword(ChangePasswordRequest(
+      oldPassword: currentPassword,
+      newPassword: newPassword,
+    ));
   }
 
   @override
@@ -277,6 +285,21 @@ class AccountController extends BaseController<HomeInput> {
           },
         ),
         input: updatedUser);
+  }
+
+  Future<void> updatePassword(ChangePasswordRequest changePasswordRequest) {
+    return _updatePasswordUseCase.execute(
+        observer: Observer(
+          onSuccess: (_) {
+            L.info("Password updated successfully");
+            buildSnackBar(S.success_change_password, true);
+            N.toAccount();
+          },
+          onError: (AppException e) {
+            handleError(e);
+          },
+        ),
+        input: changePasswordRequest);
   }
 
   Future<void> updateAvatar(File avatar) {

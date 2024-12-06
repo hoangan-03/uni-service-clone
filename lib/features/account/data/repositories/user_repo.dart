@@ -1,6 +1,7 @@
 
 import 'dart:io';
 import 'package:flutter_base_v2/base/data/remote/api/api_service.dart';
+import 'package:flutter_base_v2/features/account/data/models/request/change_password_request.dart';
 import 'package:flutter_base_v2/features/account/data/models/response/user.dart';
 import 'package:flutter_base_v2/features/account/data/models/response/user_response.dart';
 import 'package:flutter_base_v2/features/account/domain/entities/user.dart';
@@ -35,5 +36,10 @@ class UserRepoImpl extends UserRepo {
   @override
   Future<void> updateAvatar(File avatar) async {
     await _apiService.updateAvatar(avatar);
+  }
+
+    @override
+  Future<void> updatePassword(ChangePasswordRequest request) async {
+    await _apiService.updatePassword(request);
   }
 }
