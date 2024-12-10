@@ -11,6 +11,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 class MyApp extends StatelessWidget {
   const MyApp(this._localStorage, {super.key});
 
+
   final LocalStorage _localStorage;
 
   @override

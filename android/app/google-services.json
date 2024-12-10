@@ -2,12 +2,12 @@
   "project_info": {
     "project_number": "685036270636",
     "project_id": "uni-prod-5db52",
-    "storage_bucket": "uni-prod-5db52.appspot.com"
+    "storage_bucket": "uni-prod-5db52.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:685036270636:android:781fcd507bf52e2c02cd89",
+        "mobilesdk_app_id": "1:685036270636:android:6228364f96e2f1e402cd89",
         "android_client_info": {
           "package_name": "com.example.flutter_base_v2"
         }
@@ -26,9 +26,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:685036270636:android:71945c5537d1f98402cd89",
+        "mobilesdk_app_id": "1:685036270636:android:bbe561fec049861702cd89",
         "android_client_info": {
-          "package_name": "com.example.flutter_base_v2.stg"
+          "package_name": "com.example.flutter_base_v2.dev"
         }
       },
       "oauth_client": [],
@@ -64,9 +64,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:685036270636:android:bbe561fec049861702cd89",
+        "mobilesdk_app_id": "1:685036270636:android:71945c5537d1f98402cd89",
         "android_client_info": {
-          "package_name": "com.example.flutter_base_v2.dev"
+          "package_name": "com.example.flutter_base_v2.stg"
         }
       },
       "oauth_client": [],

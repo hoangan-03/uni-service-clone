@@ -14,6 +14,7 @@ import 'package:flutter_base_v2/features/deposit/domain/entities/deposit.dart';
 import 'package:flutter_base_v2/features/deposit/domain/usecases/deposit_uc.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/controllers/deposit_input.dart';
 import 'package:flutter_base_v2/features/deposit/presentation/views/webview_page.dart';
+import 'package:flutter_base_v2/features/home/presentation/controllers/home_input.dart';
 import 'package:flutter_base_v2/utils/helper/format_price.dart';
 import 'package:flutter_base_v2/utils/helper/snackbar.dart';
 import 'package:flutter_base_v2/utils/config/app_navigation.dart';
@@ -47,7 +48,8 @@ class DepositController extends BaseController<DepositInput> {
         await pushNotiService.getNotificationAppLaunchDetails();
 
     if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
-      N.toNotifications();
+      // N.toNotifications();
+      N.toHome(input: HomeInput("From notification"));
     }
   }
 

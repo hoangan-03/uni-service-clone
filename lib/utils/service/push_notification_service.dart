@@ -62,7 +62,7 @@ class PushNotificationService extends GetxService {
 
   void onDidReceiveNotificationResponse(NotificationResponse response) async {
     L.debug('onDidReceiveNotificationResponse $response');
-    N.toNotifications();
+    // N.toNotifications();
   }
 
   Future<void> showLocalNotification({
@@ -95,13 +95,13 @@ class PushNotificationService extends GetxService {
 
   void handleNotificationOnTerminal() {
     _firebaseMessaging.getInitialMessage().then((message) {});
-    N.toNotifications();
+    // N.toNotifications();
   }
 
   void _handleNotificationOnBackground(RemoteMessage message) {
     L.debug('Got a message in the background!');
     L.debug('Message data: ${message.data}');
-    N.toNotifications();
+    // N.toNotifications();
   }
 
   void _handleNotificationOnForeground(RemoteMessage message) {
