@@ -16,13 +16,7 @@ class MainActivity : FlutterActivity() {
         Log.w(TAG, "handleWindowFocusChanged - Warning level log")  // Warning log
         Log.e(TAG, "onCreate() called - Error level log")   // Error log
 
-        // Conditional logging based on build type (Release or Debug)
-        if (BuildConfig.DEBUG) {
-            Log.v(TAG, "Verbose log in DEBUG build")  // Only log in Debug mode
-        } else {
-            // In Release mode, suppress verbose and debug logs
-            Log.w(TAG, "Release build - Suppressing verbose and debug logs")
-        }
+     
     }
 
     // Override the onWindowFocusChanged method

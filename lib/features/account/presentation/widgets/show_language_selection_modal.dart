@@ -9,17 +9,23 @@ void showLanguageSelectionModal(
     BuildContext context, LocaleController localeController) {
   final currentLocale = localeController.currentLocale;
   showModalBottomSheet(
+    backgroundColor: Colors.transparent,
     context: context,
     builder: (BuildContext context) {
       final appColors = Theme.of(context).extension<AppColors>();
       return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          color: appColors!.white,
+        ),
         padding: const EdgeInsets.all(16.0),
-        color: appColors!.white,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               S.of(context).select_language,
+              textAlign: TextAlign.center,
               style:
                   AppTextStyle.medium14().copyWith(color: appColors.secondary),
             ),
@@ -27,7 +33,7 @@ void showLanguageSelectionModal(
             ListTile(
               title: Text(S.of(context).english),
               trailing: currentLocale.languageCode == 'en'
-                  ? Icon(Icons.check, color: Theme.of(context).primaryColor)
+                  ? Icon(Icons.check, color: appColors.primary)
                   : null,
               onTap: () {
                 localeController.changeLocale(Locale('en'));
@@ -37,7 +43,7 @@ void showLanguageSelectionModal(
             ListTile(
               title: Text(S.of(context).vietnamese),
               trailing: currentLocale.languageCode == 'vi'
-                  ? Icon(Icons.check, color: Theme.of(context).primaryColor)
+                  ? Icon(Icons.check, color: appColors.primary)
                   : null,
               onTap: () {
                 localeController.changeLocale(Locale('vi'));

@@ -6,6 +6,7 @@ import 'package:flutter_base_v2/generated/l10n.dart';
 import 'package:flutter_base_v2/utils/config/app_constants.dart';
 import 'package:flutter_base_v2/utils/config/app_text_style.dart';
 import 'package:flutter_base_v2/utils/config/app_theme.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class ServicesPage extends BaseGetView<HomeController> {
   const ServicesPage({super.key});
@@ -35,6 +36,18 @@ class ServicesPage extends BaseGetView<HomeController> {
               ServiceCard(
                 imageUrl: AppImageConstants.btaskeeurl,
                 title: S.of(context).btaskee,
+              ),
+              const SizedBox(height: 12),
+              ElevatedButton(
+                onPressed: () async {
+                  String? token = await FirebaseMessaging.instance.getToken();
+                  if (token != null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('FCM Token: $token')),
+                    );
+                  }
+                },
+                child: Text('Get FCM Token'),
               ),
             ],
           ),

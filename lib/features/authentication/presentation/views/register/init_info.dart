@@ -63,7 +63,7 @@ class InitInfoPage extends BaseGetView<RegisterController> {
             },
             style: elevatedButtonStyle(context),
             child: Text(
-              S.of(context).continue_text,
+              "Pk",
               style: elevatedButtonTextStyle(context),
             ),
           ),
