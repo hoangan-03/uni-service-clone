@@ -46,7 +46,6 @@ Widget buildMenuPage(
       currentList = BaseState();
       break;
   }
-
   return currentList.widget(
     onLoading: const Center(child: CircularProgressIndicator()),
     onSuccess: (menus) {
